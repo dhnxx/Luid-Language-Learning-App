@@ -1,0 +1,20 @@
+<resources>
+
+    <!--Main components -->
+
+    <string name="app_name">LUID</string>
+    <string name="action_settings">Settings</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="info">Info</string>
+    <string name="settings">Settings</string>
+    <string name="levels">Levels</string>
+    <string name="dictionary">Dictionary</string>
+
+    <!--About-->
+
+    <string name="card_title1">Luid</string>
+    <string name="card_desc1">Discover the purpose of LUID, the Kapampangan language learning app, and learn how it promotes language conservation and prolongation.</string>
+    <string name="card_title2">Quinta</string>
+    <string name="card_desc2">Learn more about the dedicated team behind LUID, their passion for Kapampangan and language preservation, and the expertise they bring to the table to create an innovative language learning app.</string>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    /* Custom Indicator for NavBar */
+
+    <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:height">60dp </item>
+        <item name="android:width">75dp </item>
+    </style>
+
+</resources>
