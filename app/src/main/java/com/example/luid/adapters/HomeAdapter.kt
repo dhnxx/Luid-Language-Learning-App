@@ -1,33 +1,26 @@
-package com.example.luid.adapters
-
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
-import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
 
-// This is the adapter for the HomeFragment
+class HomeAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
 
-class HomeAdapter(fm : FragmentManager) : FragmentStatePagerAdapter(fm,
-    BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+    private val fragmentList = mutableListOf<Fragment>()
+    private val fragmentTitleList = mutableListOf<String>()
 
-    var fragmentList : ArrayList<Fragment> = ArrayList()
-    var fragmenttitle : ArrayList<String> = ArrayList()
-
-
-    override fun getCount(): Int {
+    override fun getItemCount(): Int {
         return fragmentList.size
     }
 
-    override fun getItem(position: Int): Fragment {
+    override fun createFragment(position: Int): Fragment {
         return fragmentList[position]
     }
 
-    override fun getPageTitle(position: Int): CharSequence? {
-        return fragmenttitle[position]
+    fun addFragment(fragment: Fragment, title: String) {
+        fragmentList.add(fragment)
+        fragmentTitleList.add(title)
     }
 
-    fun addFragment(fragment: Fragment,title : String){
-        fragmentList.add(fragment)
-        fragmenttitle.add(title)
+    fun getPageTitle(position: Int): CharSequence {
+        return fragmentTitleList[position]
     }
 }
