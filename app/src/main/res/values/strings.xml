@@ -17,4 +17,15 @@
     <string name="card_desc1">Discover the purpose of LUID, the Kapampangan language learning app, and learn how it promotes language conservation and prolongation.</string>
     <string name="card_title2">Quinta</string>
     <string name="card_desc2">Learn more about the dedicated team behind LUID, their passion for Kapampangan and language preservation, and the expertise they bring to the table to create an innovative language learning app.</string>
+
+    <!-- lorem ipsum -->
+
+
+    <string name="lorem">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu congue justo. Vivamus blandit odio a nisi ultricies ultricies. Nunc maximus quis orci in rhoncus. Aliquam id efficitur tellus, id rhoncus libero. Vivamus vestibulum vitae elit sit amet egestas. Maecenas bibendum enim eget libero congue dapibus. In et velit malesuada, malesuada massa id, fermentum turpis. Nullam sit amet interdum nibh. Nunc vel leo ut sem facilisis malesuada. Integer sit amet sodales lacus. Nunc ac accumsan massa. Donec blandit tellus non enim pharetra elementum.
+    </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 </resources>
