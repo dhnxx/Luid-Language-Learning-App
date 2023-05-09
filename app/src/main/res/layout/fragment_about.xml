@@ -4,21 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InfoFragment">
+    tools:context=".AboutFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_luid"
@@ -26,7 +17,8 @@
             android:layout_height="300dp"
             android:layout_marginTop="30dp"
             app:layout_constraintHeight_max="300dp"
-            app:layout_constraintWidth_percent="0.88"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
             android:clickable="true"
             android:focusable="true"
             app:cardCornerRadius="12dp"
@@ -36,8 +28,6 @@
             app:layout_constraintHorizontal_bias="0.506"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -81,18 +71,19 @@
             android:id="@+id/card_quinta"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
             android:clickable="true"
             android:focusable="true"
             app:cardCornerRadius="12dp"
-            app:layout_constraintHeight_max="300dp"
-            app:layout_constraintWidth_percent="0.88"
             app:cardElevation="1dp"
-            app:strokeWidth="0dp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_max="300dp"
             app:layout_constraintHorizontal_bias="0.506"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/card_luid">
+            app:layout_constraintTop_toBottomOf="@+id/card_luid"
+            app:strokeWidth="0dp">
 
 
             <LinearLayout
