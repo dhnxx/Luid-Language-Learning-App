@@ -27,7 +27,6 @@ class HomeFragment : Fragment() {
         levelRecyclerView.adapter = LevelAdapter(getLevelList())
         val snapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(levelRecyclerView)
-        levelRecyclerView.scrollToPosition(0) // Scroll to the first position
         return view
     }
 

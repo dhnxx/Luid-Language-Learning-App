@@ -53,7 +53,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardView"
                 android:layout_width="0dp"
-                android:layout_height="180dp"
+                android:layout_height="200dp"
                 android:layout_marginTop="20dp"
                 app:cardBackgroundColor="?attr/colorSurface"
                 app:cardCornerRadius="0dp"
@@ -70,8 +70,8 @@
 
                     <ImageView
                         android:id="@+id/imageView"
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
                         android:layout_marginTop="10dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/imageplaceholder"
@@ -84,16 +84,14 @@
                         android:id="@+id/textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="20dp"
                         android:text="Juan Dela Cruz"
                         android:textColor="?attr/colorOnSurface"
-                        android:textSize="28sp"
+                        android:textSize="32sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -105,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="35dp"
                 android:text="Statistics"
                 android:textColor="?attr/colorOnSurface"
                 android:textSize="20sp"

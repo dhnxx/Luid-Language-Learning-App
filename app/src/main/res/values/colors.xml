@@ -67,4 +67,5 @@
     <color name="md_theme_dark_surfaceTint">#FFB4AB</color>
     <color name="md_theme_dark_outlineVariant">#534341</color>
     <color name="md_theme_dark_scrim">#000000</color>
+    <color name="navbar_theme_light">#F6EBEE</color>
 </resources>
