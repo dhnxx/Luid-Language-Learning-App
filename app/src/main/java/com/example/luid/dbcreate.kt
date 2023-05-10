@@ -16,7 +16,7 @@ class Helper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, DB_V) 
 
         // question table
         db.execSQL("CREATE TABLE IF NOT EXISTS questions (_id INTEGER PRIMARY KEY AUTOINCREMENT, level INTEGER, phase FLOAT, " +
-                "question TEXT, tagalog TEXT, english TEXT, kapampangan TEXT, translation TEXT, game_session INTEGER, " +
+                "question TEXT, kapampangan TEXT, english TEXT, tagalog TEXT, translation TEXT, game_session INTEGER, " +
                 "easiness_factor FLOAT, interval INTEGER, difficulty_level INTEGER, times_viewed INTEGER, visibility BOOLEAN)" )
 
 
