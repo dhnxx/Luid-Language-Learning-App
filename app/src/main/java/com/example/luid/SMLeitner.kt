@@ -12,11 +12,11 @@ class SMLeitner(context : Context) {
     private val TAchievements = "achievements"
 
     // Declaration of Database connection and cursors for each table
-    private var dbHelper = DBConnect(context)
-    private var db = dbHelper.writableDatabase
-    private var rsAchievements = db.rawQuery("SELECT * FROM $TAchievements", null)
-    private var rsGameSession = db.rawQuery("SELECT * FROM $TGameSession", null)
-    private var rsSmLeit = db.rawQuery("SELECT * FROM $TSmLeit", null)
+    var dbHelper = DBConnect(context)
+    var db = dbHelper.writableDatabase
+    var rsAchievements = db.rawQuery("SELECT * FROM $TAchievements", null)
+    var rsGameSession = db.rawQuery("SELECT * FROM $TGameSession", null)
+    var rsSmLeit = db.rawQuery("SELECT * FROM $TSmLeit", null)
 
     private var currentGameSession = 0
 
