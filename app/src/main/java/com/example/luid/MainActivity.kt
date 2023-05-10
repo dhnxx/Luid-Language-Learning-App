@@ -14,6 +14,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.fragment_home)
+        var helper = Helper(applicationContext)
+        var db = helper.readableDatabase
 
         setContentView(binding.root)
         replaceFragment(HomeFragment())
