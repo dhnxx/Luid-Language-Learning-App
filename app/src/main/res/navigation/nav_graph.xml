@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="com.example.luid.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_tabPhaseReview"
+            app:destination="@id/tabPhaseReview" />
+    </fragment>
 
     <fragment
         android:id="@+id/profileFragment"
@@ -25,6 +29,9 @@
         <action
             android:id="@+id/action_aboutFragment_to_about_luid2"
             app:destination="@id/about_luid2" />
+        <action
+            android:id="@+id/action_aboutFragment_to_about_quinta"
+            app:destination="@id/about_quinta" />
     </fragment>
 
     <fragment
@@ -37,5 +44,15 @@
         android:name="com.example.luid.about_luid"
         android:label="fragment_about_luid"
         tools:layout="@layout/fragment_about_luid" />
+    <fragment
+        android:id="@+id/about_quinta"
+        android:name="com.example.luid.about_quinta"
+        android:label="fragment_about_quinta"
+        tools:layout="@layout/fragment_about_quinta" />
+    <fragment
+        android:id="@+id/tabPhaseReview"
+        android:name="com.example.luid.TabPhaseReview"
+        android:label="fragment_tab_phase_review"
+        tools:layout="@layout/fragment_tab_phase_review" />
 
 </navigation>

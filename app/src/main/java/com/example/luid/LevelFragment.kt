@@ -7,14 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 
 
-class home_dictionary : Fragment() {
+class LevelFragment : Fragment() {
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_dictionary, container, false)
+
+        val bottomNav = activity?.findViewById<View>(R.id.bottomNavigationView)
+
+
+        return inflater.inflate(R.layout.fragment_level, container, false)
     }
+
 
 }
