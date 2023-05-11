@@ -33,6 +33,14 @@ class AboutFragment : Fragment() {
             bottomNav?.visibility = View.GONE
         }
 
+        cardquinta.setOnClickListener()
+        {
+
+            findNavController().navigate(R.id.action_aboutFragment_to_about_quinta)
+            bottomNav?.isEnabled = false
+            bottomNav?.visibility = View.GONE
+        }
+
 
         return view
 
