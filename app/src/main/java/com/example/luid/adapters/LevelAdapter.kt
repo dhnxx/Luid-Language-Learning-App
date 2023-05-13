@@ -4,15 +4,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.navigation.NavController
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.luid.LevelSelection
+import com.example.luid.classes.LevelSelection
 import com.example.luid.R
 
-class  LevelAdapter(private val levelList: List<LevelSelection>,) :
+class  LevelAdapter(private val levelList: List<LevelSelection>) :
     RecyclerView.Adapter<LevelAdapter.LevelViewHolder>() {
 
     // var for listeners to be used in home fragment
@@ -28,9 +24,6 @@ class  LevelAdapter(private val levelList: List<LevelSelection>,) :
 
     }
 
-
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LevelViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.eachlevelview, parent, false)
         return LevelViewHolder(view)
@@ -40,7 +33,6 @@ class  LevelAdapter(private val levelList: List<LevelSelection>,) :
 
     override fun onBindViewHolder(holder: LevelViewHolder, position: Int) {
         val level = levelList[position]
-        val text = level.levelID
         holder.levelId.text = level.levelID
         holder.levelTitle.text = level.levelTitle
         holder.levelImage.setImageResource(level.levelImage)
