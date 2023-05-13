@@ -5,24 +5,24 @@
 
     <item
         android:title="@string/home"
-        android:id="@+id/home"
+        android:id="@+id/homeFragment"
         android:icon="@drawable/bnav_home"
         />
 
     <item android:title="@string/profile"
         android:icon="@drawable/bnav_profile"
-        android:id="@+id/profile"
+        android:id="@+id/profileFragment"
 
         />
 
     <item android:title="@string/info"
         android:icon="@drawable/bnav_info"
-        android:id="@+id/info"
+        android:id="@+id/aboutFragment"
         />
 
     <item android:title="@string/settings"
         android:icon="@drawable/bnav_settings"
-        android:id="@+id/settings"
+        android:id="@+id/settingsFragment"
         />
 
 

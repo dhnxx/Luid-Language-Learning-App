@@ -5,11 +5,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.luid.LevelSelection
+import com.example.luid.classes.LevelSelection
 import com.example.luid.R
 
 class  LevelAdapter(private val levelList: List<LevelSelection>) :
     RecyclerView.Adapter<LevelAdapter.LevelViewHolder>() {
+
+    // var for listeners to be used in home fragment
+    private var onItemClick : ((LevelSelection) -> Unit)? = null
 
     class LevelViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -29,19 +32,24 @@ class  LevelAdapter(private val levelList: List<LevelSelection>) :
 
 
     override fun onBindViewHolder(holder: LevelViewHolder, position: Int) {
-
         val level = levelList[position]
-
         holder.levelId.text = level.levelID
         holder.levelTitle.text = level.levelTitle
         holder.levelImage.setImageResource(level.levelImage)
         holder.levelDescription.text = level.levelDescription
 
-
+        holder.itemView.setOnClickListener {
+            onItemClick?.invoke(level)
+        }
     }
 
-override fun getItemCount(): Int {
+    override fun getItemCount(): Int {
         return levelList.size
+    }
+
+    //function to be passed to the HomeFragment
+    fun setOnItemClickListener(listener: (LevelSelection) -> Unit) {
+        onItemClick = listener
     }
 }
 
