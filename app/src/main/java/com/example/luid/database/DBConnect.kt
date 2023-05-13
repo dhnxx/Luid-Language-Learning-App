@@ -1,4 +1,4 @@
-package com.example.luid
+package com.example.luid.database
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
