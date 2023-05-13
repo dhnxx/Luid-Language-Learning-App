@@ -1,8 +1,9 @@
-package com.example.luid
+package com.example.luid.classes
 
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
+import com.example.luid.database.DBConnect
 
 
 class SMLeitner(context : Context) {

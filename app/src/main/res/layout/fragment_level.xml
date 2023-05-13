@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LevelFragment">
+    tools:context=".fragments.mainmenu.LevelFragment">
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView"
         android:layout_width="300dp"
