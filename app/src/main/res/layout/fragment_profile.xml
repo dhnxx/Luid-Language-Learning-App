@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileFragment">
+    tools:context=".fragments.mainmenu.ProfileFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -37,14 +36,16 @@
     </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
-        android:layout_width="match_parent"
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="47dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="-16dp">
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -53,26 +54,26 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardView"
                 android:layout_width="0dp"
-                android:layout_height="180dp"
-                android:layout_marginTop="20dp"
+                android:layout_height="200dp"
                 app:cardBackgroundColor="?attr/colorSurface"
                 app:cardCornerRadius="0dp"
                 app:cardElevation="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@id/toolbar"
                 app:strokeWidth="0dp">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    app:layout_constraintTop_toBottomOf="@id/toolbar">
 
                     <ImageView
                         android:id="@+id/imageView"
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_marginTop="20dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/imageplaceholder"
                         app:cornerRadius="60dp"
@@ -84,16 +85,14 @@
                         android:id="@+id/textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="20dp"
                         android:text="Juan Dela Cruz"
                         android:textColor="?attr/colorOnSurface"
-                        android:textSize="28sp"
+                        android:textSize="32sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -105,7 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="35dp"
                 android:text="Statistics"
                 android:textColor="?attr/colorOnSurface"
                 android:textSize="20sp"
@@ -126,20 +125,19 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView4"
-                app:strokeWidth="0dp" >
+                app:strokeWidth="0dp">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    >
+                    android:layout_height="match_parent">
 
 
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="165dp"
                         android:layout_height="75dp"
-                        android:layout_marginTop="20dp"
                         android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
                         app:cardBackgroundColor="?attr/colorSurface"
                         app:cardElevation="1dp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -173,15 +171,15 @@
                                     android:layout_height="wrap_content"
                                     android:paddingTop="6dp"
                                     android:text="1"
-                                    android:textStyle="bold"
-                                    android:textSize="18sp"/>
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/textStats1Desc"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:textColor="?attr/colorOutline"
                                     android:text="Current Level"
+                                    android:textColor="?attr/colorOutline"
                                     android:textSize="14sp" />
 
                             </LinearLayout>
@@ -200,7 +198,7 @@
                         app:cardElevation="1dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:strokeWidth="0dp" >
+                        app:strokeWidth="0dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -229,15 +227,15 @@
                                     android:layout_height="wrap_content"
                                     android:paddingTop="6dp"
                                     android:text="1"
-                                    android:textStyle="bold"
-                                    android:textSize="18sp"/>
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/textStats2Desc"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:textColor="?attr/colorOutline"
                                     android:text="Accuracy"
+                                    android:textColor="?attr/colorOutline"
                                     android:textSize="14sp" />
 
                             </LinearLayout>
@@ -294,8 +292,8 @@
                                     android:id="@+id/textStats3Desc"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:textColor="?attr/colorOutline"
                                     android:text="Day Streak"
+                                    android:textColor="?attr/colorOutline"
                                     android:textSize="14sp" />
 
                             </LinearLayout>
@@ -344,7 +342,6 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:orientation="horizontal">
-
 
 
                     </LinearLayout>

@@ -5,37 +5,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
-
-   <!-- <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        app:tabBackground="?attr/colorPrimary"
-        app:tabIndicatorColor="?attr/colorOnPrimary"
-        app:tabTextColor="?attr/colorOnPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tabGravity="fill"
-        app:tabIndicatorFullWidth="true"
-        app:tabMaxWidth="0dp"
-        app:tabMode="fixed"
-        app:tabTextAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
-
-    </com.google.android.material.tabs.TabLayout>
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tab_layout" /> -->
+    tools:context=".fragments.mainmenu.HomeFragment">
 
    <androidx.appcompat.widget.Toolbar
        android:id="@+id/toolbar"
@@ -69,8 +39,9 @@
        android:layout_width="0dp"
        android:layout_height="520dp"
        android:clipToPadding="false"
-       android:paddingStart="35dp"
-       android:paddingEnd="35dp"
+       android:orientation="horizontal"
+       android:paddingStart="30dp"
+       android:paddingEnd="30dp"
        app:layout_constraintBottom_toBottomOf="parent"
        app:layout_constraintEnd_toEndOf="parent"
        app:layout_constraintStart_toStartOf="parent"
