@@ -11,7 +11,7 @@ import com.example.luid.R
 import com.example.luid.adapters.ParentPhaseAdapter
 import com.example.luid.adapters.SwitchStateViewModel
 import com.example.luid.classes.ParentPhase
-import com.example.luid.database.DBHelper
+import com.example.luid.database.DBConnect
 
 class ReviewFragment : Fragment() {
 
@@ -37,12 +37,6 @@ class ReviewFragment : Fragment() {
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         //Database initialization
-        val db = DBHelper(requireContext())
-
-
-
-
-
 
         return view
     }

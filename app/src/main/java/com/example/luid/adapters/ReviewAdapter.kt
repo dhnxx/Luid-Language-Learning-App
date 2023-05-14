@@ -17,7 +17,6 @@ class ReviewAdapter (private val reviewList: List<Review>) : RecyclerView.Adapte
         val engWord: TextView = itemView.findViewById(R.id.engWord)
         val tagWord: TextView = itemView.findViewById(R.id.tagWord)
 
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewViewHolder {
