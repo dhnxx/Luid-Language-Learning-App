@@ -24,6 +24,7 @@ class DBConnect(context: Context?) : SQLiteOpenHelper(context, DB_NAME, null, DB
         const val tagWord = "tagalog"
         const val vsbty = "visibility"
         const val diffs = "difficulty_level"
+
     }
 
     override fun onCreate(db: SQLiteDatabase){
