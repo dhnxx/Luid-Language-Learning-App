@@ -53,6 +53,15 @@
         android:id="@+id/tabPhaseReview"
         android:name="com.example.luid.fragments.mainmenu.TabPhaseReview"
         android:label="fragment_tab_phase_review"
-        tools:layout="@layout/fragment_tab_phase_review" />
+        tools:layout="@layout/fragment_tab_phase_review" >
+        <action
+            android:id="@+id/action_tabPhaseReview_to_wordAssociation2"
+            app:destination="@id/wordAssociation" />
+    </fragment>
+    <activity
+        android:id="@+id/wordAssociation"
+        android:name="com.example.luid.fragments.gamemodes.WordAssociation"
+        android:label="activity_word_association"
+        tools:layout="@layout/activity_word_association" />
 
 </navigation>
