@@ -12,6 +12,9 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
+            android:name="com.example.luid.fragments.gamemodes.WordAssociation"
+            android:exported="false" />
+        <activity
             android:name=".fragments.mainmenu.MainActivity"
             android:exported="true"
             android:label="@string/app_name"

@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.luid.R
@@ -26,6 +28,8 @@ class PhaseFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private val phaseList = ArrayList<ParentPhase>()
     private val adapter = ParentPhaseAdapter(phaseList)
+
+
 
 
     override fun onCreateView(
@@ -65,15 +69,24 @@ class PhaseFragment : Fragment() {
                     childPhase0.add(
                         ChildPhase(
                             "Phase 1.1",
-                            "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.settings
+                            "Integer eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
+                            R.drawable.settings,
+                            View.OnClickListener {
+                                val context = it.context
+                                Toast.makeText(context, "Button clicked for Phase 1.1", Toast.LENGTH_SHORT).show()
+                                findNavController().navigate(R.id.action_tabPhaseReview_to_wordAssociation2)
+                            }
                         )
                     )
                     childPhase0.add(
                         ChildPhase(
                             "Phase 1.2",
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.settings
+                            R.drawable.settings,
+                            View.OnClickListener {
+                                val context = it.context
+                                Toast.makeText(context, "Button clicked for Phase 1.2", Toast.LENGTH_SHORT).show()
+                            }
                         )
                     )
 
@@ -81,7 +94,11 @@ class PhaseFragment : Fragment() {
                         ChildPhase(
                             "Phase 1.3",
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.settings
+                            R.drawable.settings,
+                            View.OnClickListener {
+                                val context = it.context
+                                Toast.makeText(context, "Button clicked for Phase 1.3", Toast.LENGTH_SHORT).show()
+                            }
                         )
                     )
 
@@ -93,7 +110,11 @@ class PhaseFragment : Fragment() {
                         ChildPhase(
                             "Phase 2",
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.settings
+                            R.drawable.settings,
+                            View.OnClickListener {
+                                val context = it.context
+                                Toast.makeText(context, "Button clicked for Phase 2", Toast.LENGTH_SHORT).show()
+                            }
                         )
                     )
                     phaseList.add(ParentPhase("Phase 2: Sentence Fragments", childPhase1))
@@ -104,7 +125,11 @@ class PhaseFragment : Fragment() {
                         ChildPhase(
                             "Phase 3",
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.settings
+                            R.drawable.settings,
+                            View.OnClickListener {
+                                val context = it.context
+                                Toast.makeText(context, "Button clicked for Phase 3", Toast.LENGTH_SHORT).show()
+                            }
                         )
                     )
                     phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2))
@@ -117,14 +142,22 @@ class PhaseFragment : Fragment() {
                         ChildPhase(
                             "Phase 1.1",
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.settings
+                            R.drawable.settings,
+                            View.OnClickListener {
+                                val context = it.context
+                                Toast.makeText(context, "Button clicked for Phase 1.1", Toast.LENGTH_SHORT).show()
+                            }
                         )
                     )
                     childPhase0.add(
                         ChildPhase(
                             "Phase 1.2",
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.settings
+                            R.drawable.settings,
+                            View.OnClickListener {
+                                val context = it.context
+                                Toast.makeText(context, "Button clicked for Phase 1.2", Toast.LENGTH_SHORT).show()
+                            }
                         )
                     )
                     phaseList.add(ParentPhase("Phase 1: Word Association", childPhase0))
@@ -133,7 +166,11 @@ class PhaseFragment : Fragment() {
                         ChildPhase(
                             "Phase 2",
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.settings
+                            R.drawable.settings,
+                            View.OnClickListener {
+                                val context = it.context
+                                Toast.makeText(context, "Button clicked for Phase 2", Toast.LENGTH_SHORT).show()
+                            }
                         )
                     )
                     phaseList.add(ParentPhase("Phase 2: Sentence Fragments", childPhase1))
@@ -143,7 +180,11 @@ class PhaseFragment : Fragment() {
                         ChildPhase(
                             "Phase 3",
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.settings
+                            R.drawable.settings,
+                            View.OnClickListener {
+                                val context = it.context
+                                Toast.makeText(context, "Button clicked for Phase 3", Toast.LENGTH_SHORT).show()
+                            }
                         )
                     )
                     phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2))
@@ -156,7 +197,11 @@ class PhaseFragment : Fragment() {
                         ChildPhase(
                             "Phase 1",
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.settings
+                            R.drawable.settings,
+                            View.OnClickListener {
+                                val context = it.context
+                                Toast.makeText(context, "Button clicked for Phase 1", Toast.LENGTH_SHORT).show()
+                            }
                         )
                     )
                     phaseList.add(ParentPhase("Phase 1: Word Association", childPhase0))
@@ -165,7 +210,11 @@ class PhaseFragment : Fragment() {
                         ChildPhase(
                             "Phase 2",
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.settings
+                            R.drawable.settings,
+                            View.OnClickListener {
+                                val context = it.context
+                                Toast.makeText(context, "Button clicked for Phase 2", Toast.LENGTH_SHORT).show()
+                            }
                         )
                     )
                     phaseList.add(ParentPhase("Phase 2: Sentence Fragments", childPhase1))
@@ -175,7 +224,11 @@ class PhaseFragment : Fragment() {
                         ChildPhase(
                             "Phase 3",
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.settings
+                            R.drawable.settings,
+                            View.OnClickListener {
+                                val context = it.context
+                                Toast.makeText(context, "Button clicked for Phase 3", Toast.LENGTH_SHORT).show()
+                            }
                         )
                     )
                     phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2))
@@ -190,7 +243,11 @@ class PhaseFragment : Fragment() {
                         ChildPhase(
                             "Phase 1",
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.settings
+                            R.drawable.settings,
+                            View.OnClickListener {
+                                val context = it.context
+                                Toast.makeText(context, "Button clicked for Phase 1", Toast.LENGTH_SHORT).show()
+                            }
                         )
                     )
                     phaseList.add(ParentPhase("Phase 1: Word Association", childPhase0))
@@ -199,7 +256,11 @@ class PhaseFragment : Fragment() {
                         ChildPhase(
                             "Phase 2",
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.settings
+                            R.drawable.settings,
+                            View.OnClickListener {
+                                val context = it.context
+                                Toast.makeText(context, "Button clicked for Phase 2", Toast.LENGTH_SHORT).show()
+                            }
                         )
                     )
                     phaseList.add(ParentPhase("Phase 2: Sentence Fragments", childPhase1))
@@ -209,7 +270,11 @@ class PhaseFragment : Fragment() {
                         ChildPhase(
                             "Phase 3",
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.settings
+                            R.drawable.settings,
+                            View.OnClickListener {
+                                val context = it.context
+                                Toast.makeText(context, "Button clicked for Phase 3", Toast.LENGTH_SHORT).show()
+                            }
                         )
                     )
                     phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2))
