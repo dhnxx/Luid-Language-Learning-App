@@ -101,4 +101,26 @@ class SMLeitner(context : Context) {
         }
     }
 
+    fun updAchWF(){
+
+    }
+    fun updAchSS(){
+
+    }
+    fun updAchPH(){
+
+    }
+    fun updAchCL(){
+
+    }
+    fun getReward(){
+
+    }
+    fun getScore(){
+
+    }
+    fun updUserTable(){
+
+    }
+
 }
