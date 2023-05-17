@@ -40,12 +40,12 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        ////////////////////////LEVEL SELECTION/////////////////////////////
-
         val bottomNav = activity?.findViewById<View>(R.id.bottomNavigationView)
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         bottomNav?.isEnabled = true
         bottomNav?.visibility = View.VISIBLE
+
+        ////////////////////////LEVEL SELECTION/////////////////////////////
 
         levelRecyclerView = view.findViewById(R.id.recyclerView)
 
