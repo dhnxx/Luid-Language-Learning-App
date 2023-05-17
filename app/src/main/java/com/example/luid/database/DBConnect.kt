@@ -15,7 +15,7 @@ class DBConnect(context: Context?) : SQLiteOpenHelper(context, DB_NAME, null, DB
     companion object {
 
         const val DB_V = 1
-        const val DB_NAME = "LuidDB"
+        const val DB_NAME = "LuidDB.db"
         const val questions_tb = "questions"
         const val user_records_tb = "user_records"
         const val achievements_tb = "achievements"
