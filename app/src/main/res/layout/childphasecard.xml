@@ -17,7 +17,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="20dp">
+        android:padding="10dp">
 
         <ImageView
             android:id="@+id/childImage"
@@ -30,7 +30,7 @@
 
         <LinearLayout
             android:layout_width="188dp"
-            android:layout_height="117dp"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start"
-                android:paddingLeft="8dp"
+                android:paddingStart="8dp"
                 android:text="Connectors/Articles"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -50,21 +50,21 @@
             <TextView
                 android:id="@+id/childDescription"
                 android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:padding="8dp"
+                android:paddingLeft="8dp"
+                android:layout_height="60dp"
                 android:text="@string/lorem"
                 android:textAlignment="textStart"
                 android:textSize="12sp" />
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyleHorizontal"
+            <Button
+                android:id="@+id/childButton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:progress="60"
-                android:progressBackgroundTint="@color/md_theme_dark_outline"
-                android:progressTint="?attr/colorPrimary" />
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:text="Play">
+
+
+            </Button>
 
 
         </LinearLayout>
