@@ -38,12 +38,40 @@ class ProfileFragment : Fragment() {
 
             when (i) {
                 0 -> {
-                    titleTextView.text = "${achContent[1].achName}"
+                    titleTextView.text = achContent[0].currLevel
+                    //progressBar
+                    progressTextView.text = "${achContent[0].currLevel}/${achContent[0].maxValue}"
+                    achTitleTextView.text = achContent[0].achName
+                    descriptionTextView.text = achContent[0].description
                 }
-                1 -> titleTextView.text = "Card 2 Title"
-                2 -> titleTextView.text = "Card 3 Title"
-                3 -> titleTextView.text = "Card 4 Title"
-                4 -> titleTextView.text = "Card 5 Title"
+                1 -> {
+                    titleTextView.text = achContent[1].currLevel
+                    //progressBar
+                    progressTextView.text = "${achContent[1].currLevel}/${achContent[1].maxValue}"
+                    achTitleTextView.text = achContent[1].achName
+                    descriptionTextView.text = achContent[1].description
+                }
+                2 -> {
+                    titleTextView.text = achContent[2].currLevel
+                    //progressBar
+                    progressTextView.text = "${achContent[2].currLevel}/${achContent[2].maxValue}"
+                    achTitleTextView.text = achContent[2].achName
+                    descriptionTextView.text = achContent[2].description
+                }
+                3 -> {
+                    titleTextView.text = achContent[3].currLevel
+                    //progressBar
+                    progressTextView.text = "${achContent[3].currLevel}/${achContent[3].maxValue}"
+                    achTitleTextView.text = achContent[3].achName
+                    descriptionTextView.text = achContent[3].description
+                }
+                4 -> {
+                    titleTextView.text = achContent[4].currLevel
+                    //progressBar
+                    progressTextView.text = "${achContent[4].currLevel}/${achContent[4].maxValue}"
+                    achTitleTextView.text = achContent[4].achName
+                    descriptionTextView.text = achContent[4].description
+                }
             }
             achvLinearLayout.addView(cardView)
         }
@@ -53,7 +81,7 @@ class ProfileFragment : Fragment() {
     fun getAchContent(): List<Achievement>{
         val list = mutableListOf<Achievement>()
         val selectQuery = "SELECT * FROM achievements"
-        val db = DBConnect(requireContext()).readableDatabase
+        val db = DBConnect(requireContext()).writableDatabase
         val cursor : Cursor = db.rawQuery(selectQuery, null)
 
         try{

@@ -1,10 +1,11 @@
 package com.example.luid.classes
 
-import android.content.AsyncQueryHandler
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
+import androidx.core.graphics.toColorLong
 import com.example.luid.database.DBConnect
+import java.util.Calendar
 
 
 class SMLeitner(context : Context) {
@@ -13,9 +14,6 @@ class SMLeitner(context : Context) {
     private val tUserRecords = "user_records"
     private val tAchievements = "achievements"
 
-    // Declaration of Database connection and cursors for each table
-    var dbHelper = DBConnect(context)
-    var db = dbHelper.writableDatabase
 //    var rsAchievements = db.rawQuery("SELECT * FROM $TAchievements", null)
 //    var rsGameSession = db.rawQuery("SELECT * FROM $TGameSession", null)
 //    var rsSmLeit = db.rawQuery("SELECT * FROM $TSmLeit", null)
@@ -23,32 +21,39 @@ class SMLeitner(context : Context) {
     private var currentGameSession = 0
 
     init {
+        var dbHelper = DBConnect(context)
+        var db = dbHelper.writableDatabase
         // Initializing of total game sessions done by the user
         var rsUserRecords = db.rawQuery("SELECT * FROM $tUserRecords", null)
         currentGameSession = rsUserRecords.count
         rsUserRecords.close()
+        db.close()
     }
 
-    fun getQuality(
-        cursor: Cursor,
-        answerKey : String,
-        userAnswer : String,
-        timeTotal : Long) : Int{
+    fun getQuality(cursor: Cursor, answerKey : String, userAnswer : String, timeTotal : Long) : Int{
         if(userAnswer != answerKey){
-            return if (timeTotal <= 180){
-                2
-            }else if (timeTotal in 181..300){
-                1
-            }else{
-                0
+            return when {
+                timeTotal <= 180 -> {
+                    2
+                }
+                timeTotal in 181..300 -> {
+                    1
+                }
+                else -> {
+                    0
+                }
             }
         }else{
-            return if(timeTotal in 0..29){
-                5
-            }else if(timeTotal in 30..60){
-                4
-            }else{
-                3
+            return when (timeTotal) {
+                in 0..29 -> {
+                    5
+                }
+                in 30..60 -> {
+                    4
+                }
+                else -> {
+                    3
+                }
             }
         }
     }
@@ -70,10 +75,7 @@ class SMLeitner(context : Context) {
         }
     }
 
-    fun getNewInterval(
-        EF : Double,
-        difficultyLevel : Int,
-        timesViewed : Int) : Int
+    fun getNewInterval(EF : Double, difficultyLevel : Int, timesViewed : Int) : Int
     {
         var interval = (EF * (difficultyLevel + timesViewed - 1)).toInt()
         var newInterval : Int = 0
@@ -82,9 +84,7 @@ class SMLeitner(context : Context) {
         return newInterval
     }
 
-    fun getNewGameSession(
-        newInterval : Int,
-        prevGameSession : Int) : Int
+    fun getNewGameSession(newInterval : Int, prevGameSession : Int) : Int
     {
         return newInterval + prevGameSession
     }
@@ -101,26 +101,131 @@ class SMLeitner(context : Context) {
         }
     }
 
-    fun updAchWF(){
+    // Methods for Achievements
 
+    fun updAchWF(context: Context){
+        val dbHelper = DBConnect(context)
+        val ldb = dbHelper.writableDatabase
+        val columnName = "date_played"
+        val lCursor = ldb.rawQuery("SELECT $columnName FROM $tUserRecords ORDER BY _id DESC LIMIT 1", null)
+        var dbDate : String
+        var dbDateParts : List<String>
+        var dbDay : Int = 0
+        var dbMonth : Int = 0
+        var dbYear : Int = 0
+        var currProg: Int = 0
+
+        val today = Calendar.getInstance()
+        var day = today.get(Calendar.DAY_OF_MONTH)
+        val month = today.get(Calendar.MONTH) + 1
+        val year = today.get(Calendar.YEAR)
+
+        if (lCursor.count <= 1){
+            ldb.close()
+            currProg = 1
+        }
+
+        if (lCursor.moveToFirst()){
+            dbDate = lCursor.getString(2)
+            dbDateParts = dbDate.split("/")
+            dbDay = dbDateParts[0].toInt()
+            dbMonth = dbDateParts[1].toInt()
+            dbYear = dbDateParts[2].toInt()
+        }
+
+        if (((dbYear - year) == 0) && ((dbMonth - month) == 0) && (dbDay - day == 0)) {
+            val cursorCurProg = ldb.rawQuery("SELECT * FROM $tAchievements", null)
+            val dbCurrProg = cursorCurProg.getColumnIndex("current_progress")
+
+            if (cursorCurProg.moveToFirst()) {
+                currProg = cursorCurProg.getInt(dbCurrProg)
+            }
+
+            currProg += 1
+            cursorCurProg.close()
+        } else {
+            ldb.close()
+            currProg = 1
+        }
+
+        val cv = ContentValues()
+        cv.put("current_progress", "${currProg + 1}")
+        ldb.update("$tAchievements", cv, "_id = 1", null)
+
+        cv.clear()
+        lCursor.close()
+        ldb.close()
     }
-    fun updAchSS(){
 
+    // Method to update Sharp Shooter Achievement in achievements table
+    fun updAchSS(context: Context){
+        var colName = "score"
+        var dbHelper = DBConnect(context)
+        var ldb = dbHelper.writableDatabase
+        var lCursor = ldb.rawQuery("SELECT $colName FROM $tUserRecords WHERE score = 100.00", null)
+        var totalCount = lCursor.count
+        var currLevel = 0
+
+        if (totalCount == 0) {
+            return
+        }
+
+        when (totalCount){
+            1 -> currLevel = 1
+            in 2 .. 3 -> currLevel = 2
+            in 4 .. 5 -> currLevel = 3
+            in 6 .. 7 -> currLevel = 4
+            in 10 .. 8 -> currLevel = 5
+
+        }
+
+        val cv = ContentValues()
+        cv.put("current_level", currLevel)
+        cv.put("current_progress", totalCount)
+        ldb.update("$tAchievements", cv, "_id = 2", null)
+
+        cv.clear()
+        lCursor.close()
+        ldb.close()
     }
-    fun updAchPH(){
+    fun updAchPH(context: Context){
+        var dbHelper = DBConnect(context)
+        var ldb = dbHelper.writableDatabase
+        var colName = "time_spent"
+        val lCursor = ldb.rawQuery("SELECT SUM($colName) FROM $tUserRecords", null)
+        val dbcurrtime = lCursor.getColumnIndex("$colName")
+        var totalMinutes = 0
 
+        if (lCursor.moveToFirst()){
+            totalMinutes = lCursor.getInt(dbcurrtime)
+        }
+
+
+
+
+
+        lCursor.close()
+        ldb.close()
     }
-    fun updAchCL(){
-
+    fun updAchCL(context: Context){
+        var dbHelper = DBConnect(context)
+        var ldb = dbHelper.writableDatabase
+        ldb.close()
     }
-    fun getReward(){
-
+    fun getReward(context: Context){
+        var dbHelper = DBConnect(context)
+        var ldb = dbHelper.writableDatabase
+        ldb.close()
     }
-    fun getScore(){
-
+    fun getScore(context: Context){
+        var dbHelper = DBConnect(context)
+        var ldb = dbHelper.writableDatabase
+        ldb.close()
     }
-    fun updUserTable(){
-
+    fun updUserTable(context: Context){
+        var dbHelper = DBConnect(context)
+        var ldb = dbHelper.writableDatabase
+        ldb.close()
     }
 
 }
