@@ -15,4 +15,11 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="NoRippleCardView" parent="Widget.MaterialComponents.CardView">
+        <item name="android:clickable">true</item>
+        <item name="android:foreground">@null</item>
+        <item name="android:foregroundTint">@android:color/transparent</item>
+    </style>
+
+
 </resources>
