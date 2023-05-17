@@ -64,4 +64,10 @@
         android:label="activity_word_association"
         tools:layout="@layout/activity_word_association" />
 
+
+
+
+
+
+
 </navigation>

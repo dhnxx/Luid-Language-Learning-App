@@ -1,0 +1,9 @@
+<resources>
+
+
+    <attr name="colorCorrect" format="color" />
+    <attr name="colorOnCorrect" format="color" />
+    <attr name="colorCorrectContainer" format="color"  />
+    <attr name="colorOnCorrectContainer" format="color" />
+    <attr name="harmonizeCorrectColor1" format="color"  />
+</resources>
