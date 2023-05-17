@@ -103,6 +103,7 @@ class SMLeitner(context : Context) {
 
     // Methods for Achievements
 
+    //Revise to update current_progress and current_level
     fun updAchWF(context: Context){
         val dbHelper = DBConnect(context)
         val ldb = dbHelper.writableDatabase
@@ -188,22 +189,39 @@ class SMLeitner(context : Context) {
         lCursor.close()
         ldb.close()
     }
-    fun updAchPH(context: Context){
+    fun updAchTS(context: Context){
         var dbHelper = DBConnect(context)
         var ldb = dbHelper.writableDatabase
-        var colName = "time_spent"
-        val lCursor = ldb.rawQuery("SELECT SUM($colName) FROM $tUserRecords", null)
-        val dbcurrtime = lCursor.getColumnIndex("$colName")
+        val colTime = "time_spent"
+        val colCurrProg =  "current_progress"
+        val colCurrLevel = "current_level"
+        val lCursor = ldb.rawQuery("SELECT SUM($colTime) FROM $tUserRecords", null)
+        val dbCurrTime = lCursor.getColumnIndex("$colTime")
+        val dbCurrProg = lCursor.getColumnIndex("$colCurrProg")
+        val dbCurrlevel = lCursor.getColumnIndex("$colCurrLevel")
         var totalMinutes = 0
+        var currProg = 0
+        var currLevel = 0
 
         if (lCursor.moveToFirst()){
-            totalMinutes = lCursor.getInt(dbcurrtime)
+            totalMinutes = lCursor.getInt(dbCurrTime)
+            currProg = totalMinutes
         }
 
+        currLevel = when (totalMinutes){
+            in 0 .. 100 -> 1
+            in 101 .. 200 -> 2
+            in 201 .. 300 -> 3
+            in 301 .. 400 -> 4
+            else -> 4
+        }
 
+        var cv = ContentValues()
+        cv.put("current_progress", currProg)
+        cv.put("current_level", currLevel)
+        ldb.update("$tAchievements", cv, "id = 4",null)
 
-
-
+        cv.clear()
         lCursor.close()
         ldb.close()
     }
@@ -212,15 +230,25 @@ class SMLeitner(context : Context) {
         var ldb = dbHelper.writableDatabase
         ldb.close()
     }
-    fun getReward(context: Context){
+
+
+    // Get the latest score
+    fun getScore(context: Context) : Double{
         var dbHelper = DBConnect(context)
         var ldb = dbHelper.writableDatabase
+        var colScore = "score"
+        var lCursor = ldb.rawQuery("SELECT $colScore FROM $tUserRecords ORDER BY _id DESC LIMIT 1", null)
+        var colScoreInd = lCursor.getColumnIndex("$colScore")
+        var latestScore = 0.0
+
+        if (lCursor.moveToFirst()){
+            latestScore = lCursor.getDouble(colScoreInd)
+        }
+
+        lCursor.close()
         ldb.close()
-    }
-    fun getScore(context: Context){
-        var dbHelper = DBConnect(context)
-        var ldb = dbHelper.writableDatabase
-        ldb.close()
+
+        return latestScore
     }
     fun updUserTable(context: Context){
         var dbHelper = DBConnect(context)

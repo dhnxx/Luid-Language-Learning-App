@@ -12,8 +12,7 @@ import android.widget.TextView
 import com.example.luid.R
 import com.example.luid.classes.Achievement
 import com.example.luid.database.DBConnect
-import com.example.luid.database.DBConnect.Companion.achievements_tb
-
+import java.io.File.separator
 
 class ProfileFragment : Fragment() {
 
@@ -38,36 +37,41 @@ class ProfileFragment : Fragment() {
 
             when (i) {
                 0 -> {
-                    titleTextView.text = achContent[0].currLevel
-                    //progressBar
+                    titleTextView.text = "Level ${achContent[0].currLevel}"
+                    progressBar.progress = achContent[0].currLevel.toInt()
+                    progressBar.max = achContent[0].maxValue.toInt()
                     progressTextView.text = "${achContent[0].currLevel}/${achContent[0].maxValue}"
                     achTitleTextView.text = achContent[0].achName
                     descriptionTextView.text = achContent[0].description
                 }
                 1 -> {
-                    titleTextView.text = achContent[1].currLevel
-                    //progressBar
+                    titleTextView.text = "Level ${achContent[1].currLevel}"
+                    progressBar.progress = achContent[1].currLevel.toInt()
+                    progressBar.max = achContent[1].maxValue.toInt()
                     progressTextView.text = "${achContent[1].currLevel}/${achContent[1].maxValue}"
                     achTitleTextView.text = achContent[1].achName
                     descriptionTextView.text = achContent[1].description
                 }
                 2 -> {
-                    titleTextView.text = achContent[2].currLevel
-                    //progressBar
+                    titleTextView.text = "Level ${achContent[2].currLevel}"
+                    progressBar.progress = achContent[2].currLevel.toInt()
+                    progressBar.max = achContent[2].maxValue.toInt()
                     progressTextView.text = "${achContent[2].currLevel}/${achContent[2].maxValue}"
                     achTitleTextView.text = achContent[2].achName
                     descriptionTextView.text = achContent[2].description
                 }
                 3 -> {
-                    titleTextView.text = achContent[3].currLevel
-                    //progressBar
+                    titleTextView.text = "Level ${achContent[3].currLevel}"
+                    progressBar.progress = achContent[3].currLevel.toInt()
+                    progressBar.max = achContent[3].maxValue.toInt()
                     progressTextView.text = "${achContent[3].currLevel}/${achContent[3].maxValue}"
                     achTitleTextView.text = achContent[3].achName
                     descriptionTextView.text = achContent[3].description
                 }
                 4 -> {
-                    titleTextView.text = achContent[4].currLevel
-                    //progressBar
+                    titleTextView.text = "Level ${achContent[4].currLevel}"
+                    progressBar.progress = achContent[4].currLevel.toInt()
+                    progressBar.max = achContent[4].maxValue.toInt()
                     progressTextView.text = "${achContent[4].currLevel}/${achContent[4].maxValue}"
                     achTitleTextView.text = achContent[4].achName
                     descriptionTextView.text = achContent[4].description
@@ -88,15 +92,23 @@ class ProfileFragment : Fragment() {
             val achName = cursor.getColumnIndex("achievement_name")
             val description = cursor.getColumnIndex("description")
             val currLevel = cursor.getColumnIndex("current_level")
+            val currProg = cursor.getColumnIndex("current_progress")
             val maxValue = cursor.getColumnIndex("maximum_value")
 
             while (cursor.moveToNext()){
                 val name = cursor.getString(achName)
-                val desc = cursor.getString(description)
-                val clevel = cursor.getInt(currLevel).toString()
+                var desc = cursor.getString(description)
+                var clevel = cursor.getInt(currLevel).toString()
+                val cProg = cursor.getInt(currProg).toString()
                 val mxval = cursor.getInt(maxValue).toString()
 
-                val content = Achievement(name, desc, clevel, mxval)
+                if (clevel.toInt() == 0) clevel = 1.toString()
+
+                var parts = desc.split("=")
+                var upddesc = "${parts[0]} $clevel ${parts[1]} $cProg ${parts[2]}"
+
+
+                val content = Achievement(name, upddesc, clevel, mxval)
                 list.add(content)
             }
 
