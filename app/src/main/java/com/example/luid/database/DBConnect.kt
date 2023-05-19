@@ -25,6 +25,7 @@ class DBConnect(context: Context?) : SQLiteOpenHelper(context, DB_NAME, null, DB
         const val temp_qstion = "questiontable_tmp"
         const val temp_userrec = "user_records_tmp"
         const val temp_achvmnts = "achievements_tmp"
+        const val level = "level"
 
     }
 
