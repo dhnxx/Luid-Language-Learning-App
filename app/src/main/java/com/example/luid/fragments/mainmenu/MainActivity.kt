@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         checkAndCopyDatabase(applicationContext)
     }
-    @SuppressLint("SuspiciousIndentation")
+
     private fun checkAndCopyDatabase(context: Context) {
         val databasePath = context.getDatabasePath("LuidDB.db")
 
@@ -55,6 +55,8 @@ class MainActivity : AppCompatActivity() {
             } catch (e: IOException) {
 
                 e.printStackTrace()
+
+
             }
         }
     }
