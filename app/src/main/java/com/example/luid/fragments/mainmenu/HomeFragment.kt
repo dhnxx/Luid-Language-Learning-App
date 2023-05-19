@@ -14,9 +14,7 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.luid.R
 import com.example.luid.adapters.*
-import com.example.luid.classes.ChildPhase
 import com.example.luid.classes.LevelSelection
-import com.example.luid.classes.ParentPhase
 
 
 class HomeFragment : Fragment() {
@@ -25,13 +23,14 @@ class HomeFragment : Fragment() {
     private lateinit var levelRecyclerView: RecyclerView
 
     //view model to store switch state
-    private lateinit var switchStateViewModel: SwitchStateViewModel
+    private lateinit var levelSwitchStateViewModel: LevelSwitchStateViewModel
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        // Initialize the SwitchStateViewModel instance
-        switchStateViewModel = ViewModelProvider(requireActivity()).get(SwitchStateViewModel::class.java)
+        // Initialize the LevelSwitchStateViewModel instance
+        levelSwitchStateViewModel = ViewModelProvider(requireActivity()).get(LevelSwitchStateViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -62,7 +61,7 @@ class HomeFragment : Fragment() {
             setOnItemClickListener { levelSelection ->
 
                 // Store the selected switch state in the ViewModel
-                switchStateViewModel.setSwitchState(levelSelection.levelID)
+                levelSwitchStateViewModel.setSwitchState(levelSelection.levelID)
 
                 // Edit recyclerview's data here based on the level selected
                 when (levelSelection.levelID) {
