@@ -62,18 +62,16 @@ class ReviewFragment : Fragment() {
                 val kapIndex = cursor.getColumnIndex(kapWord)
                 val engIndex = cursor.getColumnIndex(engWord)
                 val tagIndex = cursor.getColumnIndex(tagWord)
-                val vsbtyIndex = cursor.getColumnIndex(vsbty)
 
                  do{
                     val kap = cursor.getString(kapIndex)
                     val eng = cursor.getString(engIndex)
                     val tag = cursor.getString(tagIndex)
-                    val vsbty = cursor.getInt(vsbtyIndex)
 
-                    if (vsbty == 1) {
+
                         val review = Review(kap, eng, tag)
                         list.add(review)
-                    }
+
                 }while (cursor.moveToNext())
             }
         } catch (e: Exception) {

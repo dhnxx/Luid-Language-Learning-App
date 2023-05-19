@@ -1,4 +1,4 @@
-package com.example.luid.fragments.gamemodes
+package com.example.luid.fragments.mainmenu.gamemodes
 
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity

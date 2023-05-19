@@ -32,7 +32,7 @@ class ProfileFragment : Fragment() {
             val titleTextView = cardView.findViewById<TextView>(R.id.achvcurrlvl)
             val progressBar = cardView.findViewById<ProgressBar>(R.id.achvprogressBar)
             val progressTextView = cardView.findViewById<TextView>(R.id.achvprogresstxt)
-            val achTitleTextView = cardView.findViewById<TextView>(R.id.achvtitle)
+            val achTitleTextView = cardView.findViewById<TextView>  (R.id.achvtitle)
             val descriptionTextView = cardView.findViewById<TextView>(R.id.achvdesc)
 
             when (i) {

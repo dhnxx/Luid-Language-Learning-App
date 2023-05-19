@@ -60,7 +60,7 @@
     </fragment>
     <activity
         android:id="@+id/wordAssociation"
-        android:name="com.example.luid.fragments.gamemodes.WordAssociation"
+        android:name="com.example.luid.fragments.mainmenu.gamemodes.WordAssociation"
         android:label="activity_word_association"
         tools:layout="@layout/activity_word_association" />
 
