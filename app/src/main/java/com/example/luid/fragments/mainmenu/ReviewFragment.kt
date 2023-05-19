@@ -90,7 +90,7 @@ class ReviewFragment : Fragment() {
                     }
                 }
 
-            }
+
         } catch (e: Exception) {
             e.printStackTrace()
         } finally {
