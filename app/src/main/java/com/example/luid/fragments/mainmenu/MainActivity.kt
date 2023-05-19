@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         val databasePath = context.getDatabasePath("LuidDB.db")
 
 
+        if (!databasePath.exists()) {
             // Database file doesn't exist, so copy the template to the user's phone
             try {
                 val inputStream = context.assets.open("LuidDB.db")
@@ -52,11 +53,11 @@ class MainActivity : AppCompatActivity() {
                 outputStream.close()
                 inputStream.close()
             } catch (e: IOException) {
+
                 e.printStackTrace()
             }
-
+        }
     }
-
 
 
     }
