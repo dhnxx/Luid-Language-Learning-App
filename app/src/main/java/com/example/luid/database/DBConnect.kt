@@ -31,6 +31,9 @@ class DBConnect(context: Context?) : SQLiteOpenHelper(context, DB_NAME, null, DB
 
     override fun onCreate(db: SQLiteDatabase) {
 
+
+
+
         // question table
         db.execSQL(
             "CREATE TABLE IF NOT EXISTS $questions_tb (_id INTEGER PRIMARY KEY AUTOINCREMENT, level INTEGER, phase FLOAT, " +
