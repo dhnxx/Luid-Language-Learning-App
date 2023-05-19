@@ -72,7 +72,6 @@ class ReviewFragment : Fragment() {
 
         try {
             cursor = db.rawQuery(selectQuery, null)
-
             cursor?.let {
                 val kapIndex = it.getColumnIndex(kapWord)
                 val engIndex = it.getColumnIndex(engWord)
@@ -85,11 +84,12 @@ class ReviewFragment : Fragment() {
                     val tag = it.getString(tagIndex)
                     val vsbty = it.getInt(vsbtyIndex)
 
-                    if (vsbty == 1) {
                         val review = Review(kap, eng, tag)
                         list.add(review)
+
                     }
                 }
+
             }
         } catch (e: Exception) {
             e.printStackTrace()
