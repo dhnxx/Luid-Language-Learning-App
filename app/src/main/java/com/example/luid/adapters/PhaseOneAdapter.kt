@@ -1,5 +1,6 @@
 package com.example.luid.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,19 +14,14 @@ import android.content.Context
 import android.graphics.Color
 import android.widget.Button
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.luid.classes.WordAssociationClass
-import com.google.android.material.color.MaterialColors
 import java.util.*
-import java.util.Collections.shuffle
 
-class PhaseOneAdapter(private val recyclerView: RecyclerView, private val questionlist: List<WordAssociationClass>) :
+
+class PhaseOneAdapter(
+    private val recyclerView: RecyclerView,
+    private val questionlist: ArrayList<WordAssociationClass>
+) :
     RecyclerView.Adapter<PhaseOneAdapter.QuestionViewHolder>() {
     private var tempAns: String = ""
     private var correctAns: String = ""
@@ -46,7 +42,8 @@ class PhaseOneAdapter(private val recyclerView: RecyclerView, private val questi
         val choice4Text: TextView = itemView.findViewById(R.id.choice4Text)
         val choice4Image: ImageView = itemView.findViewById(R.id.choice4Image)
         val submitButton: Button = itemView.findViewById(R.id.submitButton)
-
+        val usrtxt: TextView = itemView.findViewById(R.id.usrtxt)
+        val anstxt: TextView = itemView.findViewById(R.id.anstxt)
 
 
     }
@@ -61,13 +58,21 @@ class PhaseOneAdapter(private val recyclerView: RecyclerView, private val questi
         return questionlist.size
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {
         val question = questionlist[position]
         holder.question.text = question.question
 
-
-
         correctAns = question.correct
+        holder.anstxt.text = correctAns
+        holder.usrtxt.text = tempAns
+        // Create a list of choices and shuffle them
+
+        holder.usrtxt.visibility = View.GONE
+        holder.anstxt.visibility = View.GONE
+
+        //disable recyclerview manual scrolling (only scrollable by buttons)
+
 
 
 
@@ -82,7 +87,6 @@ class PhaseOneAdapter(private val recyclerView: RecyclerView, private val questi
         )
 
         choices.shuffle()
-
         holder.choice1Text.text = choices[0].text
         holder.choice1Image.setImageResource(choices[0].imageResId)
         holder.choice2Text.text = choices[1].text
@@ -93,99 +97,89 @@ class PhaseOneAdapter(private val recyclerView: RecyclerView, private val questi
         holder.choice4Image.setImageResource(choices[3].imageResId)
 
 
-
-        // Set click listeners or perform other operations as needed for the choices
-        holder.choice1.setOnClickListener {
-            // Handle choice 1 selection
-            setCardElevation(holder.choice1, 3f, holder.choice1.context)
-            setCardElevation(holder.choice2, 1f, holder.choice2.context)
-            setCardElevation(holder.choice3, 1f, holder.choice3.context)
-            setCardElevation(holder.choice4, 1f, holder.choice4.context)
-
-            //change also the background color of the card
-            holder.choice1.setCardBackgroundColor(Color.parseColor("#E9DDFF"))
+        fun cardReset() {
+            holder.choice1.setCardBackgroundColor(Color.parseColor("#FFFBFF"))
             holder.choice2.setCardBackgroundColor(Color.parseColor("#FFFBFF"))
             holder.choice3.setCardBackgroundColor(Color.parseColor("#FFFBFF"))
             holder.choice4.setCardBackgroundColor(Color.parseColor("#FFFBFF"))
+            setCardElevation(holder.choice1, 1f, holder.choice1.context)
+            setCardElevation(holder.choice2, 1f, holder.choice2.context)
+            setCardElevation(holder.choice3, 1f, holder.choice3.context)
+            setCardElevation(holder.choice4, 1f, holder.choice4.context)
+        }
 
+        // Set click listeners or perform other operations as needed for the choices
+        holder.choice1.setOnClickListener {
 
+            cardReset()
+            setCardElevation(holder.choice1, 3f, holder.choice1.context)
+            holder.choice1.setCardBackgroundColor(Color.parseColor("#E9DDFF"))
             tempAns = holder.choice1Text.text.toString()
+            holder.usrtxt.text = tempAns
         }
 
         holder.choice2.setOnClickListener {
-            // Handle choice 2 selection
-            setCardElevation(holder.choice1, 1f, holder.choice1.context)
+            cardReset()
+
             setCardElevation(holder.choice2, 3f, holder.choice2.context)
-            setCardElevation(holder.choice3, 1f, holder.choice3.context)
-            setCardElevation(holder.choice4, 1f, holder.choice4.context)
-
-            holder.choice1.setCardBackgroundColor(Color.parseColor("#FFFBFF"))
             holder.choice2.setCardBackgroundColor(Color.parseColor("#E9DDFF"))
-            holder.choice3.setCardBackgroundColor(Color.parseColor("#FFFBFF"))
-            holder.choice4.setCardBackgroundColor(Color.parseColor("#FFFBFF"))
-
             tempAns = holder.choice2Text.text.toString()
+            holder.usrtxt.text = tempAns
 
         }
 
         holder.choice3.setOnClickListener {
-            // Handle choice 3 selection
-            setCardElevation(holder.choice1, 1f, holder.choice1.context)
-            setCardElevation(holder.choice2, 1f, holder.choice2.context)
+            cardReset()
             setCardElevation(holder.choice3, 3f, holder.choice3.context)
-            setCardElevation(holder.choice4, 1f, holder.choice4.context)
-
-
-            holder.choice1.setCardBackgroundColor(Color.parseColor("#FFFBFF"))
-            holder.choice2.setCardBackgroundColor(Color.parseColor("#FFFBFF"))
             holder.choice3.setCardBackgroundColor(Color.parseColor("#E9DDFF"))
-            holder.choice4.setCardBackgroundColor(Color.parseColor("#FFFBFF"))
-
             tempAns = holder.choice3Text.text.toString()
+            holder.usrtxt.text = tempAns
         }
 
         holder.choice4.setOnClickListener {
-            // Handle choice 4 selection
-            setCardElevation(holder.choice1, 1f, holder.choice1.context)
-            setCardElevation(holder.choice2, 1f, holder.choice2.context)
-            setCardElevation(holder.choice3, 1f, holder.choice3.context)
+            cardReset()
             setCardElevation(holder.choice4, 3f, holder.choice4.context)
-
-            holder.choice1.setCardBackgroundColor(Color.parseColor("#FFFBFF"))
-            holder.choice2.setCardBackgroundColor(Color.parseColor("#FFFBFF"))
-            holder.choice3.setCardBackgroundColor(Color.parseColor("#FFFBFF"))
             holder.choice4.setCardBackgroundColor(Color.parseColor("#E9DDFF"))
-
             tempAns = holder.choice4Text.text.toString()
+            holder.usrtxt.text = tempAns
         }
 
         holder.submitButton.setOnClickListener {
-            // Handle submit button click
-            // Check if the correct choice is selected
-            // If correct, show success message
-            // If incorrect, show failure message
-
-            if (tempAns == correctAns) {
+            if (holder.usrtxt.text == holder.anstxt.text) {
                 Toast.makeText(holder.submitButton.context, "Correct!", Toast.LENGTH_SHORT).show()
+                //change color of card to green if correct
+                if (holder.choice1Text.text == holder.usrtxt.text) {
+                    holder.choice1.setCardBackgroundColor(Color.parseColor("#C8FFC8"))
+                } else if (holder.choice2Text.text == holder.usrtxt.text) {
+                    holder.choice2.setCardBackgroundColor(Color.parseColor("#C8FFC8"))
+                } else if (holder.choice3Text.text == holder.usrtxt.text) {
+                    holder.choice3.setCardBackgroundColor(Color.parseColor("#C8FFC8"))
+                } else if (holder.choice4Text.text == holder.usrtxt.text) {
+                    holder.choice4.setCardBackgroundColor(Color.parseColor("#C8FFC8"))
+                }
+
             } else {
                 Toast.makeText(holder.submitButton.context, "Incorrect!", Toast.LENGTH_SHORT)
                     .show()
+
+
             }
+
 
             if (position < questionlist.size - 1) {
                 // proceed to the next question using snapHelper
                 recyclerView.smoothScrollToPosition(position + 1)
 
 
-
-
             } else {
-               // navController.navigate(R.id.action_wordAssociation_to_tabPhaseReview)
+                // navController.navigate(R.id.action_wordAssociation_to_tabPhaseReview)
             }
-
+            tempAns = "" // reset tempAns
+            correctAns = "" // reset correctAns
         }
 
     }
+
 
     data class Choice(val text: String, @DrawableRes val imageResId: Int)
 
