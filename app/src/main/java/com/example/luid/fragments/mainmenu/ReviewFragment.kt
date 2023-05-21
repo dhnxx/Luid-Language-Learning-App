@@ -91,7 +91,7 @@ class ReviewFragment : Fragment() {
                 }
 
             }
-        } catch (e: Exception) {
+        catch (e: Exception) {
             e.printStackTrace()
         } finally {
             cursor?.close()
@@ -109,5 +109,5 @@ class ReviewFragment : Fragment() {
             "Level 4" -> "SELECT * FROM $questions_tb WHERE $level = 4 AND $vsbty = 1"
             else -> ""
         }
+
     }
-}
