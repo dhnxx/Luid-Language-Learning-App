@@ -2,7 +2,7 @@ package com.example.luid.classes
 
 import android.database.Cursor
 
-class PhaseOneClass () {
+class PhaseOneClass {
 
     fun getTagalog(cursor: Cursor) : ArrayList<String>{
         var tagalog = ArrayList<String>()
@@ -60,8 +60,8 @@ class PhaseOneClass () {
         answer : String, question : String, decoy : ArrayList<String>,
         correctImage : Int, decoyImage : ArrayList<Int>) : ArrayList<WordAssociationClass>{
 
-        decoy.removeAll(listOf(answer))
-        decoyImage.removeAll(listOf(correctImage))
+        decoy.removeAll(listOf(answer).toSet())
+        decoyImage.removeAll(listOf(correctImage).toSet())
 
         var randInd = ArrayList<Int>()
         var temp = ArrayList<WordAssociationClass>()
