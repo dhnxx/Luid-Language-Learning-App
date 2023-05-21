@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.luid.R
 import com.example.luid.adapters.ParentPhaseAdapter
 import com.example.luid.adapters.ReviewAdapter
-import com.example.luid.adapters.SwitchStateViewModel
+import com.example.luid.adapters.LevelSwitchStateViewModel
 import com.example.luid.classes.ParentPhase
 import com.example.luid.classes.Review
 import com.example.luid.database.DBConnect
@@ -34,7 +34,7 @@ class ReviewFragment : Fragment() {
     private lateinit var data: List<Review>
 
     //view model to store switch state
-    private lateinit var switchStateViewModel: SwitchStateViewModel
+    private lateinit var levelSwitchStateViewModel: LevelSwitchStateViewModel
 
 
     override fun onCreateView(
@@ -48,8 +48,8 @@ class ReviewFragment : Fragment() {
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         // Retrieve ViewModel
-        switchStateViewModel =
-            ViewModelProvider(requireActivity())[SwitchStateViewModel::class.java]
+        levelSwitchStateViewModel =
+            ViewModelProvider(requireActivity())[LevelSwitchStateViewModel::class.java]
 
 
         val reviewList = getWord()
@@ -63,7 +63,7 @@ class ReviewFragment : Fragment() {
     private fun getWord(): List<Review> {
         val list = mutableListOf<Review>()
 
-        val switchState = switchStateViewModel.getSwitchState().value
+        val switchState = levelSwitchStateViewModel.getSwitchState().value
 
         val selectQuery = generateSelectQuery(switchState)
 
@@ -90,8 +90,10 @@ class ReviewFragment : Fragment() {
                     }
                 }
 
+
             }
         catch (e: Exception) {
+
             e.printStackTrace()
         } finally {
             cursor?.close()

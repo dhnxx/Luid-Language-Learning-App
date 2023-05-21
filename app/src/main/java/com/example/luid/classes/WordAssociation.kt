@@ -11,6 +11,3 @@ data class WordAssociationClass(
     val decoy3: String,
     val decoy3Img: Int,
 )
-{
-
-}

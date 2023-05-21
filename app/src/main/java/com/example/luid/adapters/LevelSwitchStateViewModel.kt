@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class SwitchStateViewModel : ViewModel() {
+class LevelSwitchStateViewModel : ViewModel() {
 
-    private val _switchState = MutableLiveData<String>().apply { value = "0" }
+    private val _switchState = MutableLiveData<String>()
 
     fun setSwitchState(state: String) {
         _switchState.value = state

@@ -1,5 +1,6 @@
 package com.example.luid.fragments.mainmenu
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,25 +12,23 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.luid.R
-import com.example.luid.adapters.SwitchStateViewModel
+import com.example.luid.adapters.LevelSwitchStateViewModel
 import com.example.luid.adapters.*
 import com.example.luid.classes.ChildPhase
 import com.example.luid.classes.ParentPhase
+import com.example.luid.fragments.mainmenu.gamemodes.WordAssociation
 
 
 class PhaseFragment : Fragment() {
 
 
-
     //view model to store switch state
-    private lateinit var switchStateViewModel: SwitchStateViewModel
+    private lateinit var levelSwitchStateViewModel: LevelSwitchStateViewModel
 
     // for Phase Selection
     private lateinit var recyclerView: RecyclerView
     private val phaseList = ArrayList<ParentPhase>()
     private val adapter = ParentPhaseAdapter(phaseList)
-
-
 
 
     override fun onCreateView(
@@ -50,10 +49,12 @@ class PhaseFragment : Fragment() {
 
         ///////////////////////////////////////////////////////////////////
 
+        // Retrieve ViewModel using the activity as the parameter
+
 
         // Retrieve ViewModel
-        switchStateViewModel =
-            ViewModelProvider(requireActivity())[SwitchStateViewModel::class.java]
+        levelSwitchStateViewModel =
+            ViewModelProvider(requireActivity())[LevelSwitchStateViewModel::class.java]
 
         // Populating data for each switch/phase
 
@@ -61,8 +62,9 @@ class PhaseFragment : Fragment() {
         val childPhase1 = ArrayList<ChildPhase>()
         val childPhase2 = ArrayList<ChildPhase>()
 
+
         // Observe switch state LiveData
-        switchStateViewModel.getSwitchState().observe(viewLifecycleOwner) { switchState ->
+        levelSwitchStateViewModel.getSwitchState().observe(viewLifecycleOwner) { switchState ->
             when (switchState) {
                 "Level 1" -> {
 
@@ -72,9 +74,9 @@ class PhaseFragment : Fragment() {
                             "Integer eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
                             R.drawable.settings,
                             View.OnClickListener {
-                                val context = it.context
-                                Toast.makeText(context, "Button clicked for Phase 1.1", Toast.LENGTH_SHORT).show()
-                                findNavController().navigate(R.id.action_tabPhaseReview_to_wordAssociation2)
+                                val intent = Intent(context, WordAssociation::class.java)
+                                intent.putExtra("Phase", "Phase 1.1")
+                                startActivity(intent)
                             }
                         )
                     )
@@ -84,8 +86,11 @@ class PhaseFragment : Fragment() {
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
                             R.drawable.settings,
                             View.OnClickListener {
-                                val context = it.context
-                                Toast.makeText(context, "Button clicked for Phase 1.2", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    "Button clicked for Phase 1.2",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         )
                     )
@@ -96,8 +101,11 @@ class PhaseFragment : Fragment() {
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
                             R.drawable.settings,
                             View.OnClickListener {
-                                val context = it.context
-                                Toast.makeText(context, "Button clicked for Phase 1.3", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    "Button clicked for Phase 1.3",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         )
                     )
@@ -112,8 +120,11 @@ class PhaseFragment : Fragment() {
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
                             R.drawable.settings,
                             View.OnClickListener {
-                                val context = it.context
-                                Toast.makeText(context, "Button clicked for Phase 2", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    "Button clicked for Phase 2",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         )
                     )
@@ -127,8 +138,11 @@ class PhaseFragment : Fragment() {
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
                             R.drawable.settings,
                             View.OnClickListener {
-                                val context = it.context
-                                Toast.makeText(context, "Button clicked for Phase 3", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    "Button clicked for Phase 3",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         )
                     )
@@ -144,8 +158,11 @@ class PhaseFragment : Fragment() {
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
                             R.drawable.settings,
                             View.OnClickListener {
-                                val context = it.context
-                                Toast.makeText(context, "Button clicked for Phase 1.1", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    "Button clicked for Phase 1.1",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         )
                     )
@@ -155,8 +172,11 @@ class PhaseFragment : Fragment() {
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
                             R.drawable.settings,
                             View.OnClickListener {
-                                val context = it.context
-                                Toast.makeText(context, "Button clicked for Phase 1.2", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    "Button clicked for Phase 1.2",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         )
                     )
@@ -168,8 +188,11 @@ class PhaseFragment : Fragment() {
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
                             R.drawable.settings,
                             View.OnClickListener {
-                                val context = it.context
-                                Toast.makeText(context, "Button clicked for Phase 2", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    "Button clicked for Phase 2",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         )
                     )
@@ -182,8 +205,11 @@ class PhaseFragment : Fragment() {
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
                             R.drawable.settings,
                             View.OnClickListener {
-                                val context = it.context
-                                Toast.makeText(context, "Button clicked for Phase 3", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    "Button clicked for Phase 3",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         )
                     )
@@ -199,8 +225,11 @@ class PhaseFragment : Fragment() {
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
                             R.drawable.settings,
                             View.OnClickListener {
-                                val context = it.context
-                                Toast.makeText(context, "Button clicked for Phase 1", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    "Button clicked for Phase 1",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         )
                     )
@@ -212,8 +241,11 @@ class PhaseFragment : Fragment() {
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
                             R.drawable.settings,
                             View.OnClickListener {
-                                val context = it.context
-                                Toast.makeText(context, "Button clicked for Phase 2", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    "Button clicked for Phase 2",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         )
                     )
@@ -226,14 +258,15 @@ class PhaseFragment : Fragment() {
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
                             R.drawable.settings,
                             View.OnClickListener {
-                                val context = it.context
-                                Toast.makeText(context, "Button clicked for Phase 3", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    "Button clicked for Phase 3",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         )
                     )
                     phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2))
-
-
 
 
                 }
@@ -245,8 +278,11 @@ class PhaseFragment : Fragment() {
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
                             R.drawable.settings,
                             View.OnClickListener {
-                                val context = it.context
-                                Toast.makeText(context, "Button clicked for Phase 1", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    "Button clicked for Phase 1",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         )
                     )
@@ -258,8 +294,11 @@ class PhaseFragment : Fragment() {
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
                             R.drawable.settings,
                             View.OnClickListener {
-                                val context = it.context
-                                Toast.makeText(context, "Button clicked for Phase 2", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    "Button clicked for Phase 2",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         )
                     )
@@ -272,14 +311,15 @@ class PhaseFragment : Fragment() {
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
                             R.drawable.settings,
                             View.OnClickListener {
-                                val context = it.context
-                                Toast.makeText(context, "Button clicked for Phase 3", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    "Button clicked for Phase 3",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         )
                     )
                     phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2))
-
-
 
 
                 }
