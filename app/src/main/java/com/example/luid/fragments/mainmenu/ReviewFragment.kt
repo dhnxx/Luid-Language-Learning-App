@@ -67,7 +67,7 @@ class ReviewFragment : Fragment() {
 
         val selectQuery = generateSelectQuery(switchState)
 
-        val db = DBConnect(requireContext()).readableDatabase
+        var db = DBConnect(requireContext()).readableDatabase
         var cursor: Cursor? = null
 
         try {

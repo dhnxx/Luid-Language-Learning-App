@@ -13,6 +13,8 @@ class LevelSwitchStateViewModel : ViewModel() {
     }
 
     fun getSwitchState(): LiveData<String> {
+
         return _switchState
+
     }
 }

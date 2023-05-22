@@ -1,5 +1,8 @@
 package com.example.luid.fragments.mainmenu.gamemodes
 
+import android.annotation.SuppressLint
+import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -7,6 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.luid.R
 import com.example.luid.adapters.PhaseOneAdapter
 import com.example.luid.classes.WordAssociationClass
+import com.example.luid.database.DBConnect
+import com.example.luid.database.DBConnect.Companion.engWord
+import com.example.luid.database.DBConnect.Companion.kapWord
+import com.example.luid.database.DBConnect.Companion.questions_tb
+import com.example.luid.database.DBConnect.Companion.tagWord
 
 
 class WordAssociation : AppCompatActivity() {
@@ -70,50 +78,38 @@ class WordAssociation : AppCompatActivity() {
             }
         }
     */
+
+    @SuppressLint("Range")
     private fun hello() {
-        val question = ArrayList<String>()
-        // Add questions to the list
-        // mag loloop yung query dito na mag aadd ng question sa list
-
-        question.add("What the dog doing")
-        question.add("Milo Dino QUESTION?")
-        question.add("TEST TEST")
-
+        val questions = ArrayList<String>()
         val answers = ArrayList<String>()
-        // Add answers to the list
-        // connected ang query dito sa questions
-        answers.add("Bork")
-        answers.add("Milo Dino")
-        answers.add("Test Test")
-
         val decoy = ArrayList<String>()
-        // Add decoys to the list
 
-        // ang query dito is lahat ng words (ang problema dito is yung different choices based sa question
-        // ex. what is tagalog of ebun? dapat ang choices is tagalog din
-        // baka magkaroon tayo ng when case dito depende sa questions
-        decoy.add("Bork")
-        decoy.add("Milo Dino")
-        decoy.add("Test Test")
-        decoy.add("random1")
-        decoy.add("random2")
-        decoy.add("random3")
-        decoy.add("random4")
-        decoy.add("random5")
-        decoy.add("random6")
 
-        // Remove any decoy that matches an answer,
-        // eto matic na matatanggal yung mga sagot sa choices, para walang duplicate sa choices
+        val selectQuery = "SELECT * FROM $questions_tb"
+        val cursor: Cursor?
+
+        try {
+            var helper = DBConnect(applicationContext)
+            var db = helper.readableDatabase
+            cursor = db.rawQuery(selectQuery, null)
+
+            cursor?.close()
+            db.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
 
         decoy.removeAll(answers.toSet())
         decoy.shuffle()
 
 
         // Use the exclusive range operator until to avoid index out of bounds
-        for (i in 0 until question.size) {
+        for (i in 0 until questions.size) {
             questionList.add(
                 WordAssociationClass(
-                    question[i],
+                    questions[i],
                     answers[i],
                     R.drawable.home,
                     decoy[0],
@@ -127,3 +123,47 @@ class WordAssociation : AppCompatActivity() {
         }
     }
 }
+// Add questions to the list
+// mag loloop yung query dito na mag aadd ng question sa list
+// question.add("What the dog doing")
+// Add answers to the list
+// connected ang query dito sa questions
+// answers.add("Bork")
+// Add decoys to the list
+// ang query dito is lahat ng words (ang problema dito is yung different choices based sa question
+// ex. what is tagalog of ebun? dapat ang choices is tagalog din
+// baka magkaroon tayo ng when case dito depende sa questions
+//   decoy.add("Bork")
+//addtolist.add(WordAssociationClass(questions, correct, correctImg, decoy1, decoy1Img, decoy2, decoy2Img, decoy3, decoy3Img))
+// Remove any decoy that matches an answer,
+// eto matic na matatanggal yung mga sagot sa choices, para walang duplicate sa choices
+/*   if (cursor.moveToFirst()) {
+               do {
+                   val tagword = cursor.getString(cursor.getColumnIndex("$tagWord"))
+                   val kapword = cursor.getString(cursor.getColumnIndex("$kapWord"))
+                   val engword = cursor.getString(cursor.getColumnIndex("$engWord"))
+                   val randquestiontype = (1..2).random()
+                   when(randquestiontype) {
+                       1 -> {
+                           when(randquestiontype) {
+                               1 -> {questions.add("What is " + kapword + " in " + tagword)
+
+
+                               }
+                               2 -> {questions.add("What is " + kapword + " in " + engword)}
+                           }
+                       }
+                       2 -> {
+                           when(randquestiontype){
+                               1 -> {questions.add("What is " + kapword + " in " + tagword)}
+                               2 -> {questions.add("What is "+ tagword +" in "+ kapword)}
+                           }
+                       }
+                   }
+
+
+
+                   answers.add(engword)
+                   decoy.add(kapword)
+               } while (cursor.moveToNext())
+           } */

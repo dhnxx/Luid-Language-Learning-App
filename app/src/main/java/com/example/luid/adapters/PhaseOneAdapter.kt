@@ -63,7 +63,7 @@ class PhaseOneAdapter(private val recyclerView: RecyclerView, private val questi
 
     override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {
         val question = questionlist[position]
-        holder.question.text = question.question
+        holder.question.text = question.questions
 
 
 
