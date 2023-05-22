@@ -25,6 +25,12 @@
         <item name="android:height">10dp</item> <!-- Set the desired height here -->
     </style>
 
+    <style name="CustomTextView1" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:background">@drawable/rounded_corner2</item>
+        <item name="android:padding">10dp</item>
+
+    </style>
+
 
 
 </resources>
