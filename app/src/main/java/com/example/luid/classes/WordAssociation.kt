@@ -9,5 +9,5 @@ data class WordAssociationClass(
     val decoy2: String,
     val decoy2Img: Int,
     val decoy3: String,
-    val decoy3Img: Int,
+    val decoy3Img: Int
 )

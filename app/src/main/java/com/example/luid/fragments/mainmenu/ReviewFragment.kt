@@ -77,22 +77,20 @@ class ReviewFragment : Fragment() {
                 val engIndex = it.getColumnIndex(engWord)
                 val tagIndex = it.getColumnIndex(tagWord)
                 val vsbtyIndex = it.getColumnIndex(vsbty)
-
                 while (it.moveToNext()) {
                     val kap = it.getString(kapIndex)
                     val eng = it.getString(engIndex)
                     val tag = it.getString(tagIndex)
                     val vsbty = it.getInt(vsbtyIndex)
 
-                        val review = Review(kap, eng, tag)
-                        list.add(review)
+                    val review = Review(kap, eng, tag)
+                    list.add(review)
 
-                    }
                 }
-
-
             }
-        catch (e: Exception) {
+
+
+        } catch (e: Exception) {
 
             e.printStackTrace()
         } finally {
@@ -113,3 +111,4 @@ class ReviewFragment : Fragment() {
         }
 
     }
+}

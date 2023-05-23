@@ -76,7 +76,6 @@ class DBConnect(context: Context?) : SQLiteOpenHelper(context, DB_NAME, null, DB
             "CREATE TABLE IF NOT EXISTS $temp_achvmnts (_id INTEGER PRIMARY KEY AUTOINCREMENT, achievements_abbreviation TEXT, achievement_name TEXT, " +
                     "description TEXT, current_progress INTEGER DEFAULT 0, current_level INTEGER DEFAULT 0, maximum_value INTEGER )"
         )
-
     }
 
 
