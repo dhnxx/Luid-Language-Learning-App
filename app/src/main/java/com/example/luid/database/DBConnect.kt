@@ -32,13 +32,13 @@ class DBConnect(context: Context?) : SQLiteOpenHelper(context, DB_NAME, null, DB
     override fun onCreate(db: SQLiteDatabase) {
 
 
-
-
         // question table
+        // ADDED drawble - STRING 19/5/2023
         db.execSQL(
             "CREATE TABLE IF NOT EXISTS $questions_tb (_id INTEGER PRIMARY KEY AUTOINCREMENT, level INTEGER, phase FLOAT, " +
                     "question TEXT, $kapWord TEXT, $engWord TEXT, $tagWord TEXT, translation TEXT, game_session INTEGER DEFAULT 0, " +
-                    "easiness_factor FLOAT DEFAULT 0, interval INTEGER DEFAULT 0, $diffs INTEGER DEFAULT 2, times_viewed INTEGER DEFAULT 0, $vsbty int DEFAULT 0)"
+                    "easiness_factor FLOAT DEFAULT 0, interval INTEGER DEFAULT 0, $diffs INTEGER DEFAULT 2, times_viewed INTEGER DEFAULT 0, $vsbty int DEFAULT 0, " +
+                    "drawable STRING )"
         )
 
 
@@ -76,7 +76,6 @@ class DBConnect(context: Context?) : SQLiteOpenHelper(context, DB_NAME, null, DB
             "CREATE TABLE IF NOT EXISTS $temp_achvmnts (_id INTEGER PRIMARY KEY AUTOINCREMENT, achievements_abbreviation TEXT, achievement_name TEXT, " +
                     "description TEXT, current_progress INTEGER DEFAULT 0, current_level INTEGER DEFAULT 0, maximum_value INTEGER )"
         )
-
     }
 
 
@@ -88,6 +87,8 @@ class DBConnect(context: Context?) : SQLiteOpenHelper(context, DB_NAME, null, DB
         onCreate(db)
 
     }
+
+
 
 }
 
