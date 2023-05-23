@@ -61,7 +61,7 @@ class PhaseOneAdapter(
     @SuppressLint("ClickableViewAccessibility")
     override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {
         val question = questionlist[position]
-        holder.question.text = question.question
+        holder.question.text = question.questions
 
         correctAns = question.correct
         holder.anstxt.text = correctAns
