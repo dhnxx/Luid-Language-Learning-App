@@ -34,7 +34,7 @@ class ReviewFragment : Fragment() {
     private lateinit var data: List<Review>
 
     //view model to store switch state
-    private lateinit var levelSwitchStateViewModel: LevelSwitchStateViewModel
+    private lateinit var switchStateViewModel: LevelSwitchStateViewModel
 
 
     override fun onCreateView(
@@ -48,7 +48,7 @@ class ReviewFragment : Fragment() {
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         // Retrieve ViewModel
-        levelSwitchStateViewModel =
+        switchStateViewModel =
             ViewModelProvider(requireActivity())[LevelSwitchStateViewModel::class.java]
 
 
@@ -63,7 +63,7 @@ class ReviewFragment : Fragment() {
     private fun getWord(): List<Review> {
         val list = mutableListOf<Review>()
 
-        val switchState = levelSwitchStateViewModel.getSwitchState().value
+        val switchState = switchStateViewModel.getSwitchState().value
 
         val selectQuery = generateSelectQuery(switchState)
 
@@ -84,16 +84,14 @@ class ReviewFragment : Fragment() {
                     val tag = it.getString(tagIndex)
                     val vsbty = it.getInt(vsbtyIndex)
 
-                        val review = Review(kap, eng, tag)
-                        list.add(review)
+                    val review = Review(kap, eng, tag)
+                    list.add(review)
 
-                    }
                 }
-
-
             }
-        catch (e: Exception) {
 
+
+        } catch (e: Exception) {
             e.printStackTrace()
         } finally {
             cursor?.close()
@@ -113,3 +111,4 @@ class ReviewFragment : Fragment() {
         }
 
     }
+}
