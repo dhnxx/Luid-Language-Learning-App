@@ -15,7 +15,7 @@ import com.example.luid.adapters.LevelSwitchStateViewModel
 import com.example.luid.adapters.*
 import com.example.luid.classes.ChildPhase
 import com.example.luid.classes.ParentPhase
-import com.example.luid.fragments.mainmenu.gamemodes.SentenceActivity
+import com.example.luid.fragments.mainmenu.gamemodes.SentenceFragment
 import com.example.luid.fragments.mainmenu.gamemodes.WordAssociation
 
 
@@ -38,7 +38,7 @@ class PhaseFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_phase, container, false)
 
         val intent1 = Intent(context, WordAssociation::class.java)
-        val intent2 = Intent(context, SentenceActivity::class.java)
+        val intent2 = Intent(context, SentenceFragment::class.java)
         ////////////////////////PHASE SELECTION/////////////////////////////
 
         recyclerView = view.findViewById(R.id.phaseRecyclerView)
