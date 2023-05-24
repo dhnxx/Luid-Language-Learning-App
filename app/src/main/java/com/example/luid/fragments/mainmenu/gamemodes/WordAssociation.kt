@@ -20,6 +20,7 @@ class WordAssociation : AppCompatActivity() {
     private lateinit var questionList: ArrayList<WordAssociationClass>
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: PhaseOneAdapter
+    private lateinit var decoy: ArrayList<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -101,77 +102,42 @@ class WordAssociation : AppCompatActivity() {
         var tag = PhaseOneClass().getTagalog(cursorans)
         var img = PhaseOneClass().getImg(cursorans)
         var prompt = PhaseOneClass().getPrompt((cursorans))
-        val decoy = ArrayList<String>()
         val decoyImage = ArrayList<String>()
         val answers = ArrayList <String>()
         var question = ArrayList<String>()
-
+        decoy.clear()
         for (i in 0 until prompt.size) {
+            decoy = ArrayList()
             decoy.clear()
             when ((1..4).random()) {
                 1 -> {
-                  question.add("What is " + kap[i] + " in tagalog?")
+                    question.add("What is " + tag[i] + " in Tagalog?")
                     answers.add(tag[i])
-                    decoy.clear()
-                    if (decoy.size < prompt.size){
-                        for(i in 0 until prompt.size) {
-                            decoy.add(tag[i])
-                            decoy.removeAll(answers.toSet())
-                            decoy.removeAll(eng)
-                            decoy.removeAll(kap)
-                        }
-                    }
+                    decoy.addAll(tag)
                 }
 
                 2 -> {
-                   question.add("What is " + kap[i] + " in english?")
+                    question.add("What is " + kap[i] + " in English?")
                     answers.add(eng[i])
-                    decoy.clear()
-                    if (decoy.size < prompt.size){
-                        for(i in 0 until prompt.size) {
-                            decoy.add(eng[i])
-                            decoy.removeAll(answers.toSet())
-                            decoy.removeAll(kap)
-                            decoy.removeAll(tag)
-                        }
-                    }
-
+                    decoy.addAll(eng)
                 }
 
                 3 -> {
-                  question.add("What is " + eng[i] + " in kapampangan?")
+                    question.add("What is " + eng[i] + " in kapampangan?")
                     answers.add(kap[i])
-                    decoy.clear()
-                    if (decoy.size < prompt.size){
-                        for(i in 0 until prompt.size) {
-                            decoy.add(kap[i])
-                            decoy.removeAll(answers.toSet())
-                            decoy.removeAll(eng)
-                            decoy.removeAll(tag)
-                        }
-                    }
-
+                    decoy.addAll(kap)
                 }
 
                 4 -> {
                     question.add("What is " + tag[i] + " in kapampangan?")
                     answers.add(kap[i])
-                    decoy.clear()
-                    if (decoy.size < prompt.size){
-                        for(i in 0 until prompt.size) {
-                            decoy.add(kap[i])
-                            decoy.removeAll(answers.toSet())
-                            decoy.removeAll(eng)
-                            decoy.removeAll(tag)
-                        }
-                    }
+                    decoy.addAll(kap)
                 }
 
             }
 
         }
-
-
+        decoy.removeAll(answers.toSet())
 
         for (j in 0 until question.size) {
 
