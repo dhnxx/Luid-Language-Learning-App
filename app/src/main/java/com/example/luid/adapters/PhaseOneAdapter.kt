@@ -62,7 +62,7 @@ class PhaseOneAdapter(
     override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {
 
         val question = questionList[position]
-        holder.question.text = question.question
+        holder.question.text = question.questions
 
 
         correctAns = question.correct
