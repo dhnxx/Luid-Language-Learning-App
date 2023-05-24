@@ -103,43 +103,96 @@ class WordAssociation : AppCompatActivity() {
         var img = PhaseOneClass().getImg(cursorans)
         var prompt = PhaseOneClass().getPrompt((cursorans))
         val decoyImage = ArrayList<String>()
-        val answers = ArrayList <String>()
+        val answers = ArrayList<String>()
         var question = ArrayList<String>()
-        decoy.clear()
-        for (i in 0 until prompt.size) {
-            decoy = ArrayList()
+        decoy = ArrayList()
+        for (i in 0 until 10) {
+
+
             decoy.clear()
-            when ((1..4).random()) {
-                1 -> {
-                    question.add("What is " + tag[i] + " in Tagalog?")
-                    answers.add(tag[i])
-                    decoy.addAll(tag)
-                }
 
-                2 -> {
-                    question.add("What is " + kap[i] + " in English?")
-                    answers.add(eng[i])
-                    decoy.addAll(eng)
-                }
 
-                3 -> {
-                    question.add("What is " + eng[i] + " in kapampangan?")
-                    answers.add(kap[i])
-                    decoy.addAll(kap)
-                }
+            if (decoy.isNotEmpty()) {
 
-                4 -> {
-                    question.add("What is " + tag[i] + " in kapampangan?")
-                    answers.add(kap[i])
-                    decoy.addAll(kap)
-                }
 
+                throw IllegalStateException("Decoy ArrayList is not empty.")
+
+
+            } else {
+
+                when ((1..4).random()) {
+
+                    1 -> {
+                        decoy.clear()
+
+                        question.add("What is " + kap[i] + " in Tagalog?")
+                        answers.add(tag[i])
+                        decoy.removeAll(kap)
+                        decoy.removeAll(eng)
+                        decoy.addAll(tag)
+                        decoy.removeAll(answers)
+
+                    }
+
+                    2 -> {
+                        decoy.clear()
+
+                        question.add("What is " + kap[i] + " in English?")
+                        answers.add(eng[i])
+                        decoy.removeAll(kap)
+                        decoy.removeAll(tag)
+                        decoy.addAll(eng)
+                        decoy.removeAll(answers)
+
+                    }
+
+                    3 -> {
+                        decoy.clear()
+
+                        question.add("What is " + tag[i] + " in Kapampangan?")
+                        answers.add(kap[i])
+                        decoy.removeAll(tag)
+                        decoy.removeAll(eng)
+                        decoy.addAll(kap)
+                        decoy.removeAll(answers)
+
+                    }
+
+                    4 -> {
+                        decoy.clear()
+                        question.add("What is " + eng[i] + " in Kapampangan?")
+                        answers.add(kap[i])
+                        decoy.removeAll(kap)
+                        decoy.removeAll(tag)
+                        decoy.addAll(kap)
+                        decoy.removeAll(answers)
+                    }
+                }
             }
-
+            decoy.shuffle()
+            var randInd = ArrayList<Int>()
+            for (k in 1 .. decoy.size){
+                randInd.add(k)
+            }
+            questionList.add(
+                WordAssociationClass(
+                    question[i],
+                    answers[i],
+                    R.drawable.home,
+                    decoy[randInd[0]],
+                    R.drawable.home,
+                    decoy[randInd[1]],
+                    R.drawable.home,
+                    decoy[randInd[2]],
+                    R.drawable.home
+                )
+            )
         }
-        decoy.removeAll(answers.toSet())
 
-        for (j in 0 until question.size) {
+
+
+
+       /* for (j in 0 until question.size) {
 
             decoy.shuffle()
             var randInd = ArrayList<Int>()
@@ -159,13 +212,15 @@ class WordAssociation : AppCompatActivity() {
                     R.drawable.home
                 )
             )
-        }
+        } */
         // clear question temp table after
         db.execSQL("DELETE FROM $temp_qstion")
 
     }
 
-}
+    }
+
+
 
 
 
