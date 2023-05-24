@@ -20,7 +20,7 @@ import java.util.*
 
 class PhaseOneAdapter(
     private val recyclerView: RecyclerView,
-    private val questionlist: ArrayList<WordAssociationClass>
+    private val questionList: ArrayList<WordAssociationClass>
 ) :
     RecyclerView.Adapter<PhaseOneAdapter.QuestionViewHolder>() {
     private var tempAns: String = ""
@@ -55,13 +55,15 @@ class PhaseOneAdapter(
     }
 
     override fun getItemCount(): Int {
-        return questionlist.size
+        return questionList.size
     }
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {
-        val question = questionlist[position]
-        holder.question.text = question.questions
+
+        val question = questionList[position]
+        holder.question.text = question.question
+
 
         correctAns = question.correct
         holder.anstxt.text = correctAns
@@ -70,13 +72,6 @@ class PhaseOneAdapter(
 
         holder.usrtxt.visibility = View.GONE
         holder.anstxt.visibility = View.GONE
-
-        //disable recyclerview manual scrolling (only scrollable by buttons)
-
-
-
-
-
 
 
         val choices = mutableListOf(
@@ -166,7 +161,7 @@ class PhaseOneAdapter(
             }
 
 
-            if (position < questionlist.size - 1) {
+            if (position < questionList.size - 1) {
                 // proceed to the next question using snapHelper
                 recyclerView.smoothScrollToPosition(position + 1)
 
