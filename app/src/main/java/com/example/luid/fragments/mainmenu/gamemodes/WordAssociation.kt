@@ -178,14 +178,13 @@ fun questionListAdd(answer : String, question : String, decoy : ArrayList<String
     decoyImage.removeAll(listOf(correctImage).toSet())
 
     var randInd = ArrayList<Int>()
-    var temp = ArrayList<WordAssociationClass>()
+    var temp : WordAssociationClass
     for (i in 1 .. decoy.size){
         randInd.add(i)
     }
     randInd.shuffle()
 
-    temp.add(
-        WordAssociationClass(
+    temp = WordAssociationClass(
             question,
             answer,
             correctImage,
@@ -196,7 +195,6 @@ fun questionListAdd(answer : String, question : String, decoy : ArrayList<String
             decoy[randInd[2]],
             decoyImage[randInd[2]]
         )
-    )
 
     return temp
 

@@ -22,7 +22,9 @@ class SMLeitner(context : Context) {
         var db = dbHelper.writableDatabase
 
         var rsUserRecords = db.rawQuery("SELECT * FROM $tUserRecords", null)
-        currentGameSession = rsUserRecords.count
+        rsUserRecords.moveToLast()
+        var ind = rsUserRecords.getColumnIndex("game_session_number")
+        currentGameSession = rsUserRecords.getInt(ind)
 
         rsUserRecords.close()
         db.close()
