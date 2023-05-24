@@ -67,7 +67,7 @@ class ReviewFragment : Fragment() {
 
         val selectQuery = generateSelectQuery(switchState)
 
-        val db = DBConnect(requireContext()).readableDatabase
+        var db = DBConnect(requireContext()).readableDatabase
         var cursor: Cursor? = null
 
         try {
@@ -77,7 +77,6 @@ class ReviewFragment : Fragment() {
                 val engIndex = it.getColumnIndex(engWord)
                 val tagIndex = it.getColumnIndex(tagWord)
                 val vsbtyIndex = it.getColumnIndex(vsbty)
-
                 while (it.moveToNext()) {
                     val kap = it.getString(kapIndex)
                     val eng = it.getString(engIndex)

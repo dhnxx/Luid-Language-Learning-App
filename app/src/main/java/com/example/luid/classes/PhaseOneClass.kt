@@ -55,10 +55,21 @@ class PhaseOneClass {
 
         return decoy
     }
+    fun getImg(cursor: Cursor) : ArrayList<Int>{
+        var img = ArrayList<Int>()
+        var index = cursor.getColumnIndex("drawable")
+        if(cursor.moveToFirst()){
+            while(cursor.moveToNext()){
+                img.add(cursor.getInt(index))
+            }
+        }
+        return img
+    }
 
     fun questionListAdd(
         answer : String, question : String, decoy : ArrayList<String>,
         correctImage : Int, decoyImage : ArrayList<Int>) : ArrayList<WordAssociationClass>{
+
 
         decoy.removeAll(listOf(answer).toSet())
         decoyImage.removeAll(listOf(correctImage).toSet())
