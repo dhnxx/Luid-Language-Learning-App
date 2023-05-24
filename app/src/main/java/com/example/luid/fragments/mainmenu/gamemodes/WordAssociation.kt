@@ -131,7 +131,7 @@ class WordAssociation : AppCompatActivity() {
                         decoy.removeAll(eng)
                         decoy.addAll(tag)
                         decoy.removeAll(answers)
-
+//he
                     }
 
                     2 -> {
