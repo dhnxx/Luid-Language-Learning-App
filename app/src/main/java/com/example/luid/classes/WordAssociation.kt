@@ -1,7 +1,7 @@
 package com.example.luid.classes
 
 data class WordAssociationClass(
-    val question: String,
+    val questions: String,
     val correct: String,
     val correctImg: Int,
     val decoy1: String,
@@ -9,5 +9,5 @@ data class WordAssociationClass(
     val decoy2: String,
     val decoy2Img: Int,
     val decoy3: String,
-    val decoy3Img: Int,
+    val decoy3Img: Int
 )
