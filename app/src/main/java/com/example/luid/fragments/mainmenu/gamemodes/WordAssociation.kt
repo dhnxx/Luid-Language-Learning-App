@@ -40,7 +40,6 @@ class WordAssociation : AppCompatActivity() {
 
     }
 
-    @SuppressLint("Range")
     private fun phaseone() {
 
         var level = 1
@@ -51,6 +50,170 @@ class WordAssociation : AppCompatActivity() {
         cursorte = db.rawQuery(selectQuery, null)
         val cv = ContentValues()
 
+
+        try {
+            if (cursorte.moveToFirst()) {
+                do {
+
+                    var levelDB = cursorte.getString(1)
+                    var phaseDB = cursorte.getString(2)
+                    var questions = cursorte.getString(3)
+                    var kapampanganDB = cursorte.getString(4)
+                    var englishDB = cursorte.getString(5)
+                    var tagalogDB = cursorte.getString(6)
+                    var translationDB = cursorte.getString(7)
+                    var game_sessionDB = cursorte.getString(8)
+                    var easiness_factorDB = cursorte.getString(9)
+                    var intervalDB = cursorte.getString(10)
+                    var diff_lvlDB = cursorte.getString(11)
+                    var times_reviewedDB = cursorte.getString(12)
+                    var visibility = cursorte.getString(13)
+                    var drawable = cursorte.getString(14)
+
+                    cv.put("level", levelDB)
+                    cv.put("phase", phaseDB)
+                    cv.put("question", questions)
+                    cv.put("kapampangan", kapampanganDB)
+                    cv.put("english", englishDB)
+                    cv.put("tagalog", tagalogDB)
+                    cv.put("translation", translationDB)
+                    cv.put("game_session", game_sessionDB)
+                    cv.put("easiness_factor", easiness_factorDB)
+                    cv.put("interval", intervalDB)
+                    cv.put("difficulty_level", diff_lvlDB)
+                    cv.put("times_viewed", times_reviewedDB)
+                    cv.put("visibility", visibility)
+                    cv.put("drawable", drawable)
+                    db.insert(temp_qstion, null, cv)
+                } while (cursorte.moveToNext())
+            }
+
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        val queryans = "SELECT * FROM $temp_qstion "
+        val cursorans: Cursor
+        cursorans = db.rawQuery(queryans, null)
+        var kap = PhaseOneClass().getKapampangan(cursorans)
+        var eng = PhaseOneClass().getEnglish(cursorans)
+        var tag = PhaseOneClass().getTagalog(cursorans)
+        var img = PhaseOneClass().getImg(cursorans)
+        var prompt = PhaseOneClass().getPrompt((cursorans))
+        val decoy = ArrayList<String>()
+        val decoyImage = ArrayList<String>()
+        val answers = ArrayList <String>()
+        var question = ArrayList<String>()
+
+        for (i in 0 until prompt.size) {
+            decoy.clear()
+            when ((1..4).random()) {
+                1 -> {
+                  question.add("What is " + kap[i] + " in tagalog?")
+                    answers.add(tag[i])
+                    decoy.clear()
+                    if (decoy.size < prompt.size){
+                        for(i in 0 until prompt.size) {
+                            decoy.add(tag[i])
+                            decoy.removeAll(answers.toSet())
+                            decoy.removeAll(eng)
+                            decoy.removeAll(kap)
+                        }
+                    }
+                }
+
+                2 -> {
+                   question.add("What is " + kap[i] + " in english?")
+                    answers.add(eng[i])
+                    decoy.clear()
+                    if (decoy.size < prompt.size){
+                        for(i in 0 until prompt.size) {
+                            decoy.add(eng[i])
+                            decoy.removeAll(answers.toSet())
+                            decoy.removeAll(kap)
+                            decoy.removeAll(tag)
+                        }
+                    }
+
+                }
+
+                3 -> {
+                  question.add("What is " + eng[i] + " in kapampangan?")
+                    answers.add(kap[i])
+                    decoy.clear()
+                    if (decoy.size < prompt.size){
+                        for(i in 0 until prompt.size) {
+                            decoy.add(kap[i])
+                            decoy.removeAll(answers.toSet())
+                            decoy.removeAll(eng)
+                            decoy.removeAll(tag)
+                        }
+                    }
+
+                }
+
+                4 -> {
+                    question.add("What is " + tag[i] + " in kapampangan?")
+                    answers.add(kap[i])
+                    decoy.clear()
+                    if (decoy.size < prompt.size){
+                        for(i in 0 until prompt.size) {
+                            decoy.add(kap[i])
+                            decoy.removeAll(answers.toSet())
+                            decoy.removeAll(eng)
+                            decoy.removeAll(tag)
+                        }
+                    }
+                }
+
+            }
+
+        }
+
+
+
+        for (j in 0 until question.size) {
+
+            decoy.shuffle()
+            var randInd = ArrayList<Int>()
+            for (k in 1 .. decoy.size){
+                randInd.add(k)
+            }
+            questionList.add(
+                WordAssociationClass(
+                    question[j],
+                    answers[j],
+                    R.drawable.home,
+                    decoy[randInd[0]],
+                    R.drawable.home,
+                    decoy[randInd[1]],
+                    R.drawable.home,
+                    decoy[randInd[2]],
+                    R.drawable.home
+                )
+            )
+        }
+        // clear question temp table after
+        db.execSQL("DELETE FROM $temp_qstion")
+
+    }
+
+}
+
+
+
+
+  /* private fun phaseone() {
+
+        var level = 1
+        var phase = 1
+        var db = DBConnect(applicationContext).readableDatabase
+        val selectQuery = "SELECT * FROM $questions_tb WHERE level = $level AND phase = $phase"
+        val cursorte: Cursor
+        cursorte = db.rawQuery(selectQuery, null)
+        val cv = ContentValues()
+        db.execSQL("DELETE FROM $temp_qstion")
 
         try {
             if (cursorte.moveToFirst()) {
@@ -69,6 +232,7 @@ class WordAssociation : AppCompatActivity() {
                     var diff_lvlDB = cursorte.getString(11)
                     var times_reviewedDB = cursorte.getString(12)
                     var visibility = cursorte.getString(13)
+                    var drawable = cursorte.getString(14)
 
 
                     cv.put("_id", idDB)
@@ -85,28 +249,17 @@ class WordAssociation : AppCompatActivity() {
                     cv.put("difficulty_level", diff_lvlDB)
                     cv.put("times_viewed", times_reviewedDB)
                     cv.put("visibility", visibility)
+                    cv.put("drawable", drawable)
 
-                    db.insert(DBConnect.temp_qstion, null, cv)
+                    db.insert(temp_qstion, null, cv)
 
                 } while (cursorte.moveToNext())
             }
-            cursorte?.close()
+
 
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        /*
-
-
-        val answers = ArrayList<String>()
-        val decoy = ArrayList<String>()
-
-
-        val tagdecoy = PhaseOneClass().getTagalog(cursorans)
-        val correctImage= PhaseOneClass().getImg(cursorans)
-
-        val decoyImage = PhaseOneClass().getImg(cursorans)
-*/
 
         val queryans = "SELECT * FROM $temp_qstion "
         val cursorans: Cursor
@@ -115,61 +268,67 @@ class WordAssociation : AppCompatActivity() {
         var prompt = PhaseOneClass().getPrompt(cursorans)
         var eng = PhaseOneClass().getEnglish(cursorans)
         var tag = PhaseOneClass().getTagalog(cursorans)
-        var question = ArrayList<String>()
+        var questions = ArrayList<String>()
         var img = PhaseOneClass().getImg(cursorans)
         val decoy = ArrayList<String>()
         val decoyImage = ArrayList<String>()
-        val answer = ArrayList <String>()
+        val answers = ArrayList <String>()
 
-        val correctImage = ArrayList<Int>()
-
-                for (i in 0 until prompt.size) {
+                for (i in 0 until questions.size) {
+                    decoy.clear()
                     when ((1..4).random()) {
                         1 -> {
-                            questionList.add(questionListAdd(kap[i], prompt[i], tag, img[i], img))
-
-
-
-
-
+                            questions.add("What is" + kap[i] + " in tagalog?")
+                            answers.add(tag[i])
+                            decoy.add(tag[i])
                         }
 
                         2 -> {
-                            question.add("What is " + kap[i] + " in English?")
-                            answer.add(eng[i])
+                            questions.add("What is" + kap[i] + " in english?")
+                            answers.add(eng[i])
                             decoy.add(eng[i])
-
 
                         }
 
                         3 -> {
-                            question.add("What is " + eng[i] + " in Kapampangan?")
-                            answer.add(kap[i])
+                            questions.add("What is" + eng[i] + " in kapampangan?")
+                            answers.add(kap[i])
                             decoy.add(kap[i])
-
-
                         }
 
                         4 -> {
-                            question.add("What is " + tag[i] + " in Kapampangan?")
-                            answer.add(kap[i])
+                            questions.add("What is" + tag[i] + " in kapampangan?")
+                            answers.add(kap[i])
                             decoy.add(kap[i])
-
-
-
-
                         }
 
                     }
                 }
 
+        for (i in 0 until questions.size) {
+            decoy.shuffle()
+            questionList.add(
+                WordAssociationClass(
+                    questions[i],
+                    answers[i],
+                    R.drawable.home,
+                    decoy[0],
+                    R.drawable.home,
+                    decoy[1],
+                    R.drawable.home,
+                    decoy[2],
+                    R.drawable.home
+                )
+            )
+        }
+
+    }*/
+
+     // phase1 end parenthesis
 
 
-    }
 
-    } // phase1 end parenthesis
-
-
+/*
 fun questionListAdd(answer : String, question : String, decoy : ArrayList<String>,
                     correctImage : Int, decoyImage : ArrayList<Int>) : WordAssociationClass {
 
@@ -178,33 +337,60 @@ fun questionListAdd(answer : String, question : String, decoy : ArrayList<String
     decoyImage.removeAll(listOf(correctImage).toSet())
 
     var randInd = ArrayList<Int>()
-    var temp = ArrayList<WordAssociationClass>()
+    var temp : WordAssociationClass
     for (i in 1 .. decoy.size){
         randInd.add(i)
     }
     randInd.shuffle()
 
-    temp.add(
-        WordAssociationClass(
+    temp = WordAssociationClass(
             question,
             answer,
             correctImage,
             decoy[randInd[0]],
-            decoyImage[randInd[0]],
+            R.drawable.home,
             decoy[randInd[1]],
-            decoyImage[randInd[1]],
+            R.drawable.home,
             decoy[randInd[2]],
-            decoyImage[randInd[2]]
+            R.drawable.home
         )
+
+    return temp
+
+} */
+
+
+
+/*
+fun questionListAdd(answer : String, question : String, decoy : ArrayList<String>,
+                    correctImage : Int, decoyImage : ArrayList<Int>) : WordAssociationClass {
+
+
+    decoy.removeAll(listOf(answer).toSet())
+    decoyImage.removeAll(listOf(correctImage).toSet())
+
+    var randInd = ArrayList<Int>()
+    var temp : WordAssociationClass
+    for (i in 1 .. decoy.size){
+        randInd.add(i)
+    }
+    randInd.shuffle()
+
+    temp = WordAssociationClass(
+        question,
+        answer,
+        correctImage,
+        decoy[randInd[0]],
+        decoyImage[randInd[0]],
+        decoy[randInd[1]],
+        decoyImage[randInd[1]],
+        decoy[randInd[2]],
+        decoyImage[randInd[2]]
     )
 
     return temp
 
-}
-
-
-
-
+} */
 
 //////////////
 
