@@ -56,7 +56,7 @@ class PhaseTwoAdapter(
         val deconstructedWords = question.getDeconstructedSentence()
 
 
-        holder.question.text = question.sentence
+        holder.question.text = question.question
         holder.questionImage.setImageResource(question.sentenceImage)
 
 
@@ -87,7 +87,7 @@ class PhaseTwoAdapter(
 
 
 
-
+            // submit button listener
             holder.submitButton.setOnClickListener {
 
 
@@ -99,6 +99,15 @@ class PhaseTwoAdapter(
                 }
                 println(holder.answerLabel.text.replace("\\s+".toRegex(), ""))
                 println(question.sentence.replace("\\s+".toRegex(), ""))
+
+                if (position < questionList.size - 1) {
+                    // proceed to the next question using snapHelper
+                    recyclerView.smoothScrollToPosition(position + 1)
+
+
+                } else {
+                    // navController.navigate(R.id.action_wordAssociation_to_tabPhaseReview)
+                }
             }
 
         }

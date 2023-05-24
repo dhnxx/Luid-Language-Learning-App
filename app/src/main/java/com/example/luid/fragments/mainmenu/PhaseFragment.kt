@@ -15,6 +15,7 @@ import com.example.luid.adapters.LevelSwitchStateViewModel
 import com.example.luid.adapters.*
 import com.example.luid.classes.ChildPhase
 import com.example.luid.classes.ParentPhase
+import com.example.luid.fragments.mainmenu.gamemodes.SentenceConstruction
 import com.example.luid.fragments.mainmenu.gamemodes.SentenceFragment
 import com.example.luid.fragments.mainmenu.gamemodes.WordAssociation
 
@@ -39,6 +40,7 @@ class PhaseFragment : Fragment() {
 
         val intent1 = Intent(context, WordAssociation::class.java)
         val intent2 = Intent(context, SentenceFragment::class.java)
+        val intent3 = Intent(context, SentenceConstruction::class.java)
         ////////////////////////PHASE SELECTION/////////////////////////////
 
         recyclerView = view.findViewById(R.id.phaseRecyclerView)
@@ -95,6 +97,7 @@ class PhaseFragment : Fragment() {
                             R.drawable.settings,
                             View.OnClickListener {
                                 intent2.putExtra("Level", "1")
+                                intent2.putExtra("Phase","2")
                                 startActivity(intent2)
                             }
                         )
@@ -109,11 +112,10 @@ class PhaseFragment : Fragment() {
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
                             R.drawable.settings,
                             View.OnClickListener {
-                                Toast.makeText(
-                                    context,
-                                    "Button clicked for Phase 3",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                intent3.putExtra("Level", "1")
+                                intent3.putExtra("Phase","3")
+                                startActivity(intent3)
+
                             }
                         )
                     )
