@@ -105,6 +105,7 @@ class WordAssociation : AppCompatActivity() {
         val decoyImage = ArrayList<String>()
         val answers = ArrayList<String>()
         var question = ArrayList<String>()
+        val decoynoans = ArrayList<String>()
         decoy = ArrayList()
         for (i in 0 until 10) {
 
@@ -120,32 +121,47 @@ class WordAssociation : AppCompatActivity() {
 
             } else {
 
+
+
                 when ((1..4).random()) {
 
                     1 -> {
                         decoy.clear()
-
                         question.add("What is " + kap[i] + " in Tagalog?")
                         answers.add(tag[i])
                         decoy.removeAll(kap)
                         decoy.removeAll(eng)
                         decoy.addAll(tag)
-                        decoy.removeAll(answers)
-//he
+                        for(i in answers){
+                            for(j in kap) {
+                                if (decoy.contains(i)) {
+                                    decoy.remove(i)
+                                    if(answers.contains(j)){
+                                        decoy.add(j)
+                                    }
+                                }
+                            }
+                        }
                     }
 
                     2 -> {
                         decoy.clear()
-
                         question.add("What is " + kap[i] + " in English?")
                         answers.add(eng[i])
                         decoy.removeAll(kap)
                         decoy.removeAll(tag)
                         decoy.addAll(eng)
-                        decoy.removeAll(answers)
-
+                        for(i in answers){
+                            for(j in kap) {
+                                if (decoy.contains(i)) {
+                                    decoy.remove(i)
+                                    if(answers.contains(j)){
+                                        decoy.add(j)
+                                    }
+                                }
+                            }
+                        }
                     }
-
                     3 -> {
                         decoy.clear()
 
@@ -154,20 +170,38 @@ class WordAssociation : AppCompatActivity() {
                         decoy.removeAll(tag)
                         decoy.removeAll(eng)
                         decoy.addAll(kap)
-                        decoy.removeAll(answers)
-
+                        for(i in answers){
+                            for(j in kap) {
+                                if (decoy.contains(i)) {
+                                    decoy.remove(i)
+                                    if(answers.contains(j)){
+                                        decoy.add(j)
+                                    }
+                                }
+                            }
+                        }
                     }
 
                     4 -> {
                         decoy.clear()
                         question.add("What is " + eng[i] + " in Kapampangan?")
                         answers.add(kap[i])
-                        decoy.removeAll(kap)
+                        decoy.removeAll(eng)
                         decoy.removeAll(tag)
                         decoy.addAll(kap)
-                        decoy.removeAll(answers)
+                        for(i in answers){
+                            for(j in kap) {
+                                if (decoy.contains(i)) {
+                                    decoy.remove(i)
+                                    if(answers.contains(j)){
+                                        decoy.add(j)
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
+
             }
             decoy.shuffle()
             var randInd = ArrayList<Int>()
@@ -215,7 +249,6 @@ class WordAssociation : AppCompatActivity() {
         } */
         // clear question temp table after
         db.execSQL("DELETE FROM $temp_qstion")
-
     }
 
     }
