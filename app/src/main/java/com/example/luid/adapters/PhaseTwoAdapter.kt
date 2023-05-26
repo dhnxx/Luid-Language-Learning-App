@@ -1,22 +1,25 @@
 package com.example.luid.adaptersQ
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Color
+import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.example.luid.R
 import com.example.luid.classes.SentenceFragment
 import java.util.ArrayList
+import com.example.luid.classes.SMLeitner
 
 class PhaseTwoAdapter(
     private val recyclerView: RecyclerView,
-    private val questionList: ArrayList<SentenceFragment>
+    private val questionList: ArrayList<SentenceFragment>,
+    private val progressBar: ProgressBar
+
+
 ) :
     RecyclerView.Adapter<PhaseTwoAdapter.QuestionViewHolder>() {
 
@@ -30,7 +33,6 @@ class PhaseTwoAdapter(
         val clearButton = itemView.findViewById(R.id.clearButton) as Button
         val submitButton = itemView.findViewById(R.id.submitButton) as Button
 
-
     }
 
 
@@ -40,6 +42,7 @@ class PhaseTwoAdapter(
     ): QuestionViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.sentencefragmentview, parent, false)
+
 
         return QuestionViewHolder(view)
 
@@ -52,9 +55,12 @@ class PhaseTwoAdapter(
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {
+
+
+
+
         val question = questionList[position]
         val deconstructedWords = question.getDeconstructedSentence()
-
 
         holder.question.text = question.question
         holder.questionImage.setImageResource(question.sentenceImage)
@@ -103,6 +109,12 @@ class PhaseTwoAdapter(
                 if (position < questionList.size - 1) {
                     // proceed to the next question using snapHelper
                     recyclerView.smoothScrollToPosition(position + 1)
+                    progressBar.progress +=1
+
+
+
+
+
 
 
                 } else {
