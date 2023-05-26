@@ -13,20 +13,27 @@ import com.example.luid.R
 import android.content.Context
 import android.graphics.Color
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.Toast
+import com.example.luid.classes.SMLeitner
 import com.example.luid.classes.WordAssociationClass
 import java.util.*
 
 
 class PhaseOneAdapter(
     private val recyclerView: RecyclerView,
-    private val questionList: ArrayList<WordAssociationClass>
+    private val questionList: ArrayList<WordAssociationClass>,
+   private val progressBar: ProgressBar,
+   private val context: Context
 ) :
     RecyclerView.Adapter<PhaseOneAdapter.QuestionViewHolder>() {
     private var tempAns: String = ""
     private var correctAns: String = ""
+    private var correctAnswer = 0
+    private var score = 0.0
 
-    inner class QuestionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+    inner class QuestionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
         val question: TextView = itemView.findViewById(R.id.question)
         val choice1: CardView = itemView.findViewById(R.id.choice1)
@@ -44,8 +51,6 @@ class PhaseOneAdapter(
         val submitButton: Button = itemView.findViewById(R.id.submitButton)
         val usrtxt: TextView = itemView.findViewById(R.id.usrtxt)
         val anstxt: TextView = itemView.findViewById(R.id.anstxt)
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionViewHolder {
@@ -61,7 +66,11 @@ class PhaseOneAdapter(
     @SuppressLint("ClickableViewAccessibility")
     override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {
 
+
         val question = questionList[position]
+
+        recyclerView.isNestedScrollingEnabled = false
+
         holder.question.text = question.questions
 
 
@@ -152,6 +161,8 @@ class PhaseOneAdapter(
                 } else if (holder.choice4Text.text == holder.usrtxt.text) {
                     holder.choice4.setCardBackgroundColor(Color.parseColor("#C8FFC8"))
                 }
+                correctAnswer += 1
+
 
             } else {
                 Toast.makeText(holder.submitButton.context, "Incorrect!", Toast.LENGTH_SHORT)
@@ -164,14 +175,33 @@ class PhaseOneAdapter(
             if (position < questionList.size - 1) {
                 // proceed to the next question using snapHelper
                 recyclerView.smoothScrollToPosition(position + 1)
-
+          progressBar.progress +=  1
 
             } else {
+
+
                 // navController.navigate(R.id.action_wordAssociation_to_tabPhaseReview)
+
+                // dialog appear
+                // merge temp table to main table
+                // show score/stats etc...
+
+
             }
+            var sm = SMLeitner(context)
+            score =  sm.score(correctAnswer,questionList.size)
+
+            println(questionList.size)
+            println(correctAnswer)
+            println(score)
+
             tempAns = "" // reset tempAns
             correctAns = "" // reset correctAns
         }
+
+
+        // update temptable
+
 
     }
 
