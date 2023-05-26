@@ -23,7 +23,7 @@ class PhaseThreeAdapter(
             itemView.findViewById(R.id.flexboxLayout) as com.google.android.flexbox.FlexboxLayout
         val clearButton = itemView.findViewById(R.id.clearButton) as Button
         val submitButton = itemView.findViewById(R.id.submitButton) as Button
-
+        var progressbar: ProgressBar = itemView.findViewById(R.id.progressBar)
 
     }
 
@@ -41,6 +41,11 @@ class PhaseThreeAdapter(
 
     override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {
         val question = questionList[position]
+
+        recyclerView.isNestedScrollingEnabled = false
+
+        holder.progressbar.progress = 1
+        holder.progressbar.max = questionList.size
 
 
         holder.question.text = question.question
@@ -64,7 +69,7 @@ class PhaseThreeAdapter(
             if (position < questionList.size - 1) {
                 // proceed to the next question using snapHelper
                 recyclerView.smoothScrollToPosition(position + 1)
-
+                holder.progressbar.progress = holder.progressbar.progress + 1
 
             } else {
                 // navController.navigate(R.id.action_wordAssociation_to_tabPhaseReview)

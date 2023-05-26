@@ -10,11 +10,13 @@ import java.util.Calendar
 
 class SMLeitner(context : Context) {
     // Table name declarations
+
+
     private val tQuestions = "questions"
     private val tUserRecords = "user_records"
     private val tAchievements = "achievements"
-
     private var currentGameSession = 0
+
 
     init {
         // Initialization of total game sessions done by the user
@@ -125,7 +127,8 @@ class SMLeitner(context : Context) {
 
     // Calculate and return the score
     fun score(totalCorrectAnswers : Int, totalItems : Int) : Double{
-        return ((totalCorrectAnswers / totalItems)*100).toDouble()
+        var score = ((totalCorrectAnswers.toDouble() / totalItems.toDouble())*100)
+        return score
     }
 
     // Calculate and Returns the rewards for gameSession
