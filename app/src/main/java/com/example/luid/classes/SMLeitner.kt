@@ -30,31 +30,64 @@ class SMLeitner(context : Context) {
         db.close()
     }
 
+    //FORMULA for Leitner
+    //# EF'= EF+(0.1-((5-q)*0.08)-((5-q)0.02))
+    //FORMULA for Interval
+    //# I = EF * (d + n - 1)
+    fun smLeitnerCalc(context: Context, qId : Int, level : Int, phase: Int, answerColumn : String, status : Boolean, timeSpent : Int){
+        var dbHelper = DBConnect(context)
+        var ldb = dbHelper.writableDatabase
+        var tempTable = "questions"
+        var cursor = ldb.rawQuery("SELECT * FROM $tempTable WHERE _id = $qId AND level = $level AND phase = $phase",null)
+
+        // Old Algorithm Values
+        var indID = cursor.getColumnIndex("_id")
+        var indGameSession = cursor.getColumnIndex("game_session")
+        var indEF = cursor.getColumnIndex("easiness_factor")
+        var indInterval = cursor.getColumnIndex("interval")
+        var indDF = cursor.getColumnIndex("difficulty_level")
+        var indTimesViewed = cursor.getColumnIndex("times_viewed")
+
+        cursor.moveToFirst()
+        var id = cursor.getInt(indID)
+        var oldGameSession = cursor.getInt(indGameSession)
+        var oldEF = cursor.getFloat(indEF)
+        var oldInterval = cursor.getInt(indInterval)
+        var oldDF = cursor.getInt(indDF)
+        var oldTimesViewed = cursor.getInt(indTimesViewed)
+
+        //FORMULA for Leitner
+        //# EF'= EF+(0.1-((5-q)*0.08)-((5-q)0.02))
+        var newQuality = getNewQuality(status, timeSpent)
+        var newEF = getEF(newQuality, oldEF.toDouble())
+        var newDF = getNewDifficultyLevel(newEF)
+        var newInterval = getNewInterval(newEF, newDF, oldTimesViewed+1)
+        var newGameSession = oldGameSession + newInterval
+
+        var cv = ContentValues()
+
+        cv.put("easiness_factor", "$newEF")
+        cv.put("interval", "$newInterval")
+        cv.put("game_session", "$newGameSession")
+        cv.put("difficulty_level", "$newDF")
+        cv.put("times_viewed", "${oldTimesViewed + 1}")
+
+        ldb.update("$tempTable", cv, "_id = $id", null)
+    }
+
     // New Calculated quality value for algorithm
-    fun getQuality(answerKey : String, userAnswer : String, timeTotal : Long) : Int{
-        if(userAnswer != answerKey){
-            return when {
-                timeTotal <= 180 -> {
-                    2
-                }
-                timeTotal in 181..300 -> {
-                    1
-                }
-                else -> {
-                    0
-                }
+    fun getNewQuality(status: Boolean, timeSpent : Int) : Int{
+        return if(!status){
+            when {
+                timeSpent <= 180 -> 2
+                timeSpent in 181..300 -> 1
+                else -> 0
             }
         }else{
-            return when (timeTotal) {
-                in 0..29 -> {
-                    5
-                }
-                in 30..60 -> {
-                    4
-                }
-                else -> {
-                    3
-                }
+            when (timeSpent) {
+                in 0..29 -> 5
+                in 30..60 -> 4
+                else -> 3
             }
         }
     }
@@ -70,26 +103,24 @@ class SMLeitner(context : Context) {
     }
 
     // New Calculated difficulty level value for algorithm
-    fun getDifficultyLevel(EF : Double) : Int{
-        return when(EF){
-            in 1.55 .. 1.3 -> 0
-            in 2.14 .. 1.5 -> 1
-            else -> 2
+    fun getNewDifficultyLevel(EF : Double) : Int{
+        return when{
+            EF < 1.30 -> 2
+            EF in 1.30 .. 1.50 -> 2
+            EF in 1.51 .. 2.14 -> 1
+            else -> 0
         }
     }
 
     // New Calculated interval value for algorithm
     fun getNewInterval(EF : Double, difficultyLevel : Int, timesViewed : Int) : Int {
         var interval = (EF * (difficultyLevel + timesViewed - 1)).toInt()
-        var newInterval : Int = 0
+        var newInterval = 0
+
         if (interval <= 0) newInterval = 1
+        else newInterval = interval
 
         return newInterval
-    }
-
-    // New Calculated game session value for algorithm
-    fun getNewGameSession(newInterval : Int, prevGameSession : Int) : Int {
-        return newInterval + prevGameSession
     }
 
     // Calculate and return the score
