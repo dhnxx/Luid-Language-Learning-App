@@ -23,8 +23,8 @@ import java.util.*
 class PhaseOneAdapter(
     private val recyclerView: RecyclerView,
     private val questionList: ArrayList<WordAssociationClass>,
-   private val progressBar: ProgressBar,
-   private val context: Context
+    private val progressBar: ProgressBar,
+    private val context: Context
 ) :
     RecyclerView.Adapter<PhaseOneAdapter.QuestionViewHolder>() {
     private var tempAns: String = ""
@@ -33,7 +33,7 @@ class PhaseOneAdapter(
     private var score = 0.0
 
 
-    inner class QuestionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    inner class QuestionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val question: TextView = itemView.findViewById(R.id.question)
         val choice1: CardView = itemView.findViewById(R.id.choice1)
@@ -69,7 +69,12 @@ class PhaseOneAdapter(
 
         val question = questionList[position]
 
-        recyclerView.isNestedScrollingEnabled = false
+       //disable reyclerview scrolling but enable cardview click
+        holder.choice1.setOnTouchListener { _, _ ->
+            holder.choice1.performClick()
+            true
+        }
+
 
         holder.question.text = question.questions
 
@@ -150,7 +155,6 @@ class PhaseOneAdapter(
 
         holder.submitButton.setOnClickListener {
             if (holder.usrtxt.text == holder.anstxt.text) {
-                Toast.makeText(holder.submitButton.context, "Correct!", Toast.LENGTH_SHORT).show()
                 //change color of card to green if correct
                 if (holder.choice1Text.text == holder.usrtxt.text) {
                     holder.choice1.setCardBackgroundColor(Color.parseColor("#C8FFC8"))
@@ -165,40 +169,80 @@ class PhaseOneAdapter(
 
 
             } else {
-                Toast.makeText(holder.submitButton.context, "Incorrect!", Toast.LENGTH_SHORT)
-                    .show()
 
+
+                //change color of card to red if incorrect
+                if (holder.choice1Text.text == holder.usrtxt.text) {
+                    holder.choice1.setCardBackgroundColor(Color.parseColor("#FFC8C8"))
+                } else if (holder.choice2Text.text == holder.usrtxt.text) {
+                    holder.choice2.setCardBackgroundColor(Color.parseColor("#FFC8C8"))
+                } else if (holder.choice3Text.text == holder.usrtxt.text) {
+                    holder.choice3.setCardBackgroundColor(Color.parseColor("#FFC8C8"))
+                } else if (holder.choice4Text.text == holder.usrtxt.text) {
+                    holder.choice4.setCardBackgroundColor(Color.parseColor("#FFC8C8"))
+                }
+
+                //find the correct answer and change its color to green
+                if (holder.choice1Text.text == holder.anstxt.text) {
+                    holder.choice1.setCardBackgroundColor(Color.parseColor("#C8FFC8"))
+                } else if (holder.choice2Text.text == holder.anstxt.text) {
+                    holder.choice2.setCardBackgroundColor(Color.parseColor("#C8FFC8"))
+                } else if (holder.choice3Text.text == holder.anstxt.text) {
+                    holder.choice3.setCardBackgroundColor(Color.parseColor("#C8FFC8"))
+                } else if (holder.choice4Text.text == holder.anstxt.text) {
+                    holder.choice4.setCardBackgroundColor(Color.parseColor("#C8FFC8"))
+                }
 
             }
 
 
-            if (position < questionList.size - 1) {
-                // proceed to the next question using snapHelper
-                recyclerView.smoothScrollToPosition(position + 1)
-          progressBar.progress +=  1
-
-            } else {
+            // change submit button to next button
 
 
-                // navController.navigate(R.id.action_wordAssociation_to_tabPhaseReview)
+            holder.submitButton.text = "Next"
+            holder.submitButton.setOnClickListener {
+                // reset submit button
+                holder.submitButton.text = "Submit"
+                // reset card color
+                cardReset()
+                // reset user answer
+                holder.usrtxt.text = ""
+                // reset correct answer
+                holder.anstxt.text = ""
+                // reset tempAns
+                tempAns = ""
+                // reset correctAns
+                correctAns = ""
+                // proceed to next question
 
-                // dialog appear
-                // merge temp table to main table
-                // show score/stats etc...
+
+                if (position < questionList.size - 1) {
+                    // proceed to the next question using snapHelper
+                    recyclerView.smoothScrollToPosition(position + 1)
+                    progressBar.progress += 1
+
+                } else {
 
 
+                    // navController.navigate(R.id.action_wordAssociation_to_tabPhaseReview)
+
+                    // dialog appear
+                    // merge temp table to main table
+                    // show score/stats etc...
+
+
+                }
+                var sm = SMLeitner(context)
+                score = sm.score(correctAnswer, questionList.size)
+
+                println(questionList.size)
+                println(correctAnswer)
+                println(score)
+
+                tempAns = "" // reset tempAns
+                correctAns = "" // reset correctAns
             }
-            var sm = SMLeitner(context)
-            score =  sm.score(correctAnswer,questionList.size)
-
-            println(questionList.size)
-            println(correctAnswer)
-            println(score)
-
-            tempAns = "" // reset tempAns
-            correctAns = "" // reset correctAns
         }
-
 
         // update temptable
 

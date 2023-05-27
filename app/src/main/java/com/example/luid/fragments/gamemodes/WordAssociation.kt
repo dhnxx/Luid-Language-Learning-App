@@ -1,6 +1,5 @@
-package com.example.luid.fragments.mainmenu.gamemodes
+package com.example.luid.fragments.gamemodes
 
-import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
@@ -24,14 +23,19 @@ class WordAssociation : AppCompatActivity() {
     private lateinit var adapter: PhaseOneAdapter
     private lateinit var decoy: ArrayList<String>
     private lateinit var progressbar: ProgressBar
-    var contextphaseone: Context = this
+    private var contextphaseone: Context = this
+
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_word_association)
 
-        // intent is used for communicating between fragments to separate activities
-        val selectPhase = intent.getStringExtra("Phase")
+
+
+
 
         progressbar = findViewById(R.id.progressBar)
         progressbar.progress = 1
@@ -53,7 +57,10 @@ class WordAssociation : AppCompatActivity() {
 
     private fun phaseone() {
 
-        var level = 1
+
+
+
+        var level = intent.getIntExtra("Level",0)
         var phase = 1
         var db = DBConnect(applicationContext).readableDatabase
         val selectQuery = "SELECT * FROM $questions_tb WHERE level = $level AND phase = $phase"
@@ -153,6 +160,7 @@ class WordAssociation : AppCompatActivity() {
 
                     2 -> {
                         decoy.clear()
+
 
                         question.add("What is " + kap[i] + " in English?")
                         answers.add(eng[i])
