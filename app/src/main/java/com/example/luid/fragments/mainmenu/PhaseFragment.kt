@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.luid.R
@@ -15,9 +16,9 @@ import com.example.luid.adapters.LevelSwitchStateViewModel
 import com.example.luid.adapters.*
 import com.example.luid.classes.ChildPhase
 import com.example.luid.classes.ParentPhase
-import com.example.luid.fragments.mainmenu.gamemodes.SentenceConstruction
-import com.example.luid.fragments.mainmenu.gamemodes.SentenceFragment
-import com.example.luid.fragments.mainmenu.gamemodes.WordAssociation
+import com.example.luid.fragments.gamemodes.SentenceConstruction
+import com.example.luid.fragments.gamemodes.SentenceFragment
+import com.example.luid.fragments.gamemodes.WordAssociation
 
 
 class PhaseFragment : Fragment() {
@@ -52,8 +53,6 @@ class PhaseFragment : Fragment() {
 
         ///////////////////////////////////////////////////////////////////
 
-        // Retrieve ViewModel using the activity as the parameter
-
 
         // Retrieve ViewModel
         levelSwitchStateViewModel =
@@ -61,15 +60,21 @@ class PhaseFragment : Fragment() {
 
         // Populating data for each switch/phase
 
+
         val childPhase0 = ArrayList<ChildPhase>()
         val childPhase1 = ArrayList<ChildPhase>()
         val childPhase2 = ArrayList<ChildPhase>()
 
 
+        phaseList.clear()
+
         // Observe switch state LiveData
         levelSwitchStateViewModel.getSwitchState().observe(viewLifecycleOwner) { switchState ->
             when (switchState) {
                 "Level 1" -> {
+
+
+
 
                     childPhase0.add(
                         ChildPhase(
@@ -78,9 +83,12 @@ class PhaseFragment : Fragment() {
                             R.drawable.settings,
                             View.OnClickListener {
 
-                                intent1.putExtra("Level", "1")
-                                intent1.putExtra("Phase","1")
-                                startActivity(intent1)
+                                //intent1.putExtra("Level", 1)
+                                //startActivity(intent1)
+
+                                findNavController().navigate(R.id.action_tabPhaseReview_to_storyFragment)
+
+
                             }
                         )
                     )
@@ -96,8 +104,7 @@ class PhaseFragment : Fragment() {
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
                             R.drawable.settings,
                             View.OnClickListener {
-                                intent2.putExtra("Level", "1")
-                                intent2.putExtra("Phase","2")
+                                intent2.putExtra("Level", 1)
                                 startActivity(intent2)
                             }
                         )
@@ -112,8 +119,7 @@ class PhaseFragment : Fragment() {
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
                             R.drawable.settings,
                             View.OnClickListener {
-                                intent3.putExtra("Level", "1")
-                                intent3.putExtra("Phase","3")
+                                intent3.putExtra("Level", 1)
                                 startActivity(intent3)
 
                             }
