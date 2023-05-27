@@ -73,6 +73,8 @@ class PhaseThreeAdapter(
 
             } else {
                 // navController.navigate(R.id.action_wordAssociation_to_tabPhaseReview)
+
+
             }
         }
 
