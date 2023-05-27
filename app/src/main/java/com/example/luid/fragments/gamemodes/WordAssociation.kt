@@ -60,7 +60,7 @@ class WordAssociation : AppCompatActivity() {
 
 
 
-        var level = intent.getIntExtra("Level",0)
+        var level = 1
         var phase = 1
         var db = DBConnect(applicationContext).readableDatabase
         val selectQuery = "SELECT * FROM $questions_tb WHERE level = $level AND phase = $phase"
