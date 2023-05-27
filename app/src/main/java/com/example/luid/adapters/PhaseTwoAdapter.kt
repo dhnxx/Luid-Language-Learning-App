@@ -91,13 +91,8 @@ class PhaseTwoAdapter(
             holder.flexboxLayout.addView(wordView)
 
 
-
-
             // submit button listener
             holder.submitButton.setOnClickListener {
-
-
-
                 if (holder.answerLabel.text.replace("\\s+".toRegex(), "") == question.sentence.replace("\\s+".toRegex(), "")) {
                     holder.answerLabel.setTextColor(Color.parseColor("#037d50"))
                 } else {
