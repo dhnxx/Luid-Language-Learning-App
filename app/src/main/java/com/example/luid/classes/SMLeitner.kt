@@ -15,6 +15,7 @@ class SMLeitner(context : Context) {
     private val tQuestions = "questions"
     private val tUserRecords = "user_records"
     private val tAchievements = "achievements"
+    private val tTempQuestions = "questiontable_tmp"
     private var currentGameSession = 0
 
 

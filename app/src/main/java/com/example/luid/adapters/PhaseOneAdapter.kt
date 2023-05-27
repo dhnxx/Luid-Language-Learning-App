@@ -17,6 +17,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.luid.classes.SMLeitner
 import com.example.luid.classes.WordAssociationClass
+import com.example.luid.database.DBConnect
 import java.util.*
 
 
@@ -31,6 +32,7 @@ class PhaseOneAdapter(
     private var correctAns: String = ""
     private var correctAnswer = 0
     private var score = 0.0
+    private var sm = SMLeitner(context)
 
 
     inner class QuestionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -149,11 +151,16 @@ class PhaseOneAdapter(
         }
 
         holder.submitButton.setOnClickListener {
+            var db = DBConnect(context).readableDatabase
+            var cursor = db.rawQuery("SELECT _id FROM questiontable_tmp WHERE kapampangan = $correctAns OR tagalog = $correctAns OR english = $correctAns", null)
+            var id = cursor.getInt(0)
+
             if (holder.usrtxt.text == holder.anstxt.text) {
                 Toast.makeText(holder.submitButton.context, "Correct!", Toast.LENGTH_SHORT).show()
                 //change color of card to green if correct
                 if (holder.choice1Text.text == holder.usrtxt.text) {
                     holder.choice1.setCardBackgroundColor(Color.parseColor("#C8FFC8"))
+                    //sm.smLeitnerCalc(context, id, level)
                 } else if (holder.choice2Text.text == holder.usrtxt.text) {
                     holder.choice2.setCardBackgroundColor(Color.parseColor("#C8FFC8"))
                 } else if (holder.choice3Text.text == holder.usrtxt.text) {
@@ -188,7 +195,6 @@ class PhaseOneAdapter(
 
 
             }
-            var sm = SMLeitner(context)
             score =  sm.score(correctAnswer,questionList.size)
 
             println(questionList.size)
