@@ -45,7 +45,7 @@ class DBConnect(context: Context?) : SQLiteOpenHelper(context, DB_NAME, null, DB
         //user_records table
         db.execSQL(
             "CREATE TABLE IF NOT EXISTS $user_records_tb (_id INTEGER PRIMARY KEY AUTOINCREMENT, game_session_number INTEGER, date_played TEXT, " +
-                    "score FLOAT, time_spent INTEGER, replenished INTEGER)"
+                    "score FLOAT, time_spent INTEGER, replenished INTEGER, currency FLOAT DEFAULT 0)"
         )
 
 
@@ -67,10 +67,6 @@ class DBConnect(context: Context?) : SQLiteOpenHelper(context, DB_NAME, null, DB
                     "drawable STRING)"
         )
         // USER_RECORD TEMP
-        db.execSQL(
-            "CREATE TABLE IF NOT EXISTS $temp_userrec (_id INTEGER PRIMARY KEY AUTOINCREMENT, game_session_number INTEGER, date_played TEXT, " +
-                    "score FLOAT, time_spent INTEGER, replenished INTEGER)"
-        )
 
         // ACHIEVEMENTS TEMP
         db.execSQL(
