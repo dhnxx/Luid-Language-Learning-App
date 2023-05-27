@@ -1,6 +1,7 @@
 package com.example.luid.adapters
 
 import android.annotation.SuppressLint
+import android.content.ContentValues
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +12,16 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.luid.R
 import android.content.Context
+import android.database.Cursor
 import android.graphics.Color
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.luid.classes.SMLeitner
 import com.example.luid.classes.WordAssociationClass
+import com.example.luid.database.DBConnect
+import com.example.luid.database.DBConnect.Companion.questions_tb
+import com.example.luid.database.DBConnect.Companion.temp_qstion
 import java.util.*
 
 
@@ -63,15 +68,16 @@ class PhaseOneAdapter(
         return questionList.size
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint("ClickableViewAccessibility", "Range")
     override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {
 
 
         val question = questionList[position]
 
         recyclerView.isNestedScrollingEnabled = false
-
+        var db = DBConnect(context).readableDatabase
         holder.question.text = question.questions
+
 
 
         correctAns = question.correct
@@ -179,15 +185,53 @@ class PhaseOneAdapter(
 
             } else {
 
-
                 // navController.navigate(R.id.action_wordAssociation_to_tabPhaseReview)
 
                 // dialog appear
                 // merge temp table to main table
                 // show score/stats etc...
 
+              //  db.execSQL("INSERT OR REPLACE INTO $questions_tb SELECT * FROM $temp_qstion")
+
+
+
+                var cursor: Cursor
+
+                cursor = db.rawQuery("SELECT * FROM $temp_qstion WHERE level = 1 AND phase = 1", null)
+
+                if(cursor.moveToNext()){
+
+                    val cv = ContentValues()
+
+                    do {
+
+                        val id = cursor.getLong(cursor.getColumnIndex("_id"))
+
+                        val gamesession = cursor.getInt(cursor.getColumnIndex("game_session"))
+
+                        val EaFa = cursor.getDouble(cursor.getColumnIndex("easiness_factor"))
+
+                        val interval = cursor.getInt(cursor.getColumnIndex("interval"))
+
+                        val difflevel = cursor.getInt(cursor.getColumnIndex("difficulty_level"))
+
+                        val timviewed = cursor.getInt(cursor.getColumnIndex("times_viewed"))
+
+                        cv.put("game_session", gamesession)
+                        cv.put("easiness_factor", EaFa)
+                        cv.put("interval", interval)
+                        cv.put("difficulty_level", difflevel)
+                        cv.put("times_viewed", timviewed)
+
+                        db.update("$questions_tb", cv, "_id = $id", null)
+
+                    } while(cursor.moveToNext())
+                }
+
+                db.execSQL("DROP TABLE IF EXISTS $temp_qstion")
 
             }
+
             var sm = SMLeitner(context)
             score =  sm.score(correctAnswer,questionList.size)
 
@@ -197,12 +241,33 @@ class PhaseOneAdapter(
 
             tempAns = "" // reset tempAns
             correctAns = "" // reset correctAns
+
         }
-
-
         // update temptable
-
-
+        var cursor: Cursor
+        cursor = db.rawQuery("SELECT * FROM $temp_qstion WHERE level = 1 AND phase = 1", null)
+        val gs = 11
+        val ef = 12
+        val inter = 3
+        val difflvl = 4
+        val tv = 5
+        if(cursor.moveToFirst()){
+            do {
+                val cv = ContentValues()
+                val id = cursor.getLong(cursor.getColumnIndex("_id"))
+               // val gamesession = cursor.getInt(cursor.getColumnIndex("game_session"))
+                cv.put("game_session", gs)
+               // val EaFa = cursor.getDouble(cursor.getColumnIndex("easiness_factor"))
+                cv.put("easiness_factor", ef)
+               // val interval = cursor.getInt(cursor.getColumnIndex("interval"))
+                cv.put("interval", inter)
+               // val difflevel = cursor.getInt(cursor.getColumnIndex("difficulty_level"))
+                cv.put("difficulty_level", difflvl)
+               // val timviewed = cursor.getInt(cursor.getColumnIndex("times_viewed"))
+                cv.put("times_viewed", tv)
+                db.update("$temp_qstion", cv, "_id = $id", null)
+            } while(cursor.moveToNext())
+        }
     }
 
 
@@ -218,8 +283,6 @@ class PhaseOneAdapter(
         val density = context.resources.displayMetrics.density
         return dp * density
     }
-
-
 }
 
 
