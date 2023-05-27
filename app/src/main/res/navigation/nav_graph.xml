@@ -56,12 +56,19 @@
         tools:layout="@layout/fragment_tab_phase_review" >
         <action
             android:id="@+id/action_tabPhaseReview_to_storyFragment"
-            app:destination="@id/storyFragment" />
+            app:destination="@id/StoryFragment" />
     </fragment>
     <fragment
-        android:id="@+id/storyFragment"
-        android:name="com.example.luid.fragments.mainmenu.storyFragment"
-        android:label="storyFragment" />
+        android:id="@+id/StoryFragment"
+        android:name="com.example.luid.fragments.mainmenu.StoryFragment"
+        android:label="storyFragment" >
+        <argument
+            android:name="phase"
+            app:argType="integer" />
+        <argument
+            android:name="level"
+            app:argType="integer"/>
+    </fragment>
 
 
 </navigation>
