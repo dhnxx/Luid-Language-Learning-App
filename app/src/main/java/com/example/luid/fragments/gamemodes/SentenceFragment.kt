@@ -1,4 +1,4 @@
-package com.example.luid.fragments.mainmenu.gamemodes
+package com.example.luid.fragments.gamemodes
 
 import android.os.Bundle
 import android.widget.ProgressBar
@@ -20,7 +20,10 @@ class SentenceFragment : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sentencefragment)
+
+
         progressBar = findViewById(R.id.progressBar)
+
         progressBar.progress = 1
 
         recyclerView = findViewById(R.id.recyclerView)

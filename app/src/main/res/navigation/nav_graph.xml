@@ -55,19 +55,13 @@
         android:label="fragment_tab_phase_review"
         tools:layout="@layout/fragment_tab_phase_review" >
         <action
-            android:id="@+id/action_tabPhaseReview_to_wordAssociation2"
-            app:destination="@id/wordAssociation" />
+            android:id="@+id/action_tabPhaseReview_to_storyFragment"
+            app:destination="@id/storyFragment" />
     </fragment>
-    <activity
-        android:id="@+id/wordAssociation"
-        android:name="com.example.luid.fragments.mainmenu.gamemodes.WordAssociation"
-        android:label="activity_word_association"
-        tools:layout="@layout/activity_word_association" />
-
-
-
-
-
+    <fragment
+        android:id="@+id/storyFragment"
+        android:name="com.example.luid.fragments.mainmenu.storyFragment"
+        android:label="storyFragment" />
 
 
 </navigation>

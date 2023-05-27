@@ -22,6 +22,10 @@ class TabPhaseReview : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_tab_phase_review, container, false)
 
+        val bottomNav = activity?.findViewById<View>(R.id.bottomNavigationView)
+        bottomNav?.isEnabled = false
+        bottomNav?.visibility = View.GONE
+
         tabLayout = view.findViewById(R.id.tabLayout)
         viewPager = view.findViewById(R.id.viewPager2)
         adapter = TabPRAdapter(childFragmentManager, lifecycle)
