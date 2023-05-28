@@ -1,4 +1,4 @@
-package com.example.luid.fragments.mainmenu.gamemodes
+package com.example.luid.fragments.gamemodes
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -23,7 +23,11 @@ class WordAssociation : AppCompatActivity() {
     private lateinit var decoy: ArrayList<String>
     private lateinit var progressbar: ProgressBar
     private lateinit var answers: ArrayList<String>
-    var contextphaseone: Context = this
+    private var context: Context = this
+    private var level = 0
+    private var phase = 0
+    private var timeSpent = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +46,7 @@ class WordAssociation : AppCompatActivity() {
         questionList = ArrayList()
         // getQuestionList(selectPhase)
         phaseone()
-        adapter = PhaseOneAdapter(recyclerView, questionList, progressbar, contextphaseone)
+        adapter = PhaseOneAdapter(recyclerView, questionList, progressbar, context, level, phase, timeSpent)
         recyclerView.adapter = adapter
 
         progressbar.max = questionList.size
@@ -187,6 +191,5 @@ class WordAssociation : AppCompatActivity() {
         cursor.close()
     }
 }
-
 
 

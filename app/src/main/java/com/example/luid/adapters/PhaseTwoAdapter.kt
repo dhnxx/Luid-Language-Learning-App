@@ -13,15 +13,19 @@ import com.example.luid.R
 import com.example.luid.classes.SentenceFragment
 import java.util.ArrayList
 import com.example.luid.classes.SMLeitner
+import com.example.luid.database.DBConnect
 
 class PhaseTwoAdapter(
     private val recyclerView: RecyclerView,
     private val questionList: ArrayList<SentenceFragment>,
-    private val progressBar: ProgressBar
-
-
+    private val progressBar: ProgressBar,
+    private val context: Context,
+    private val level: Int,
+    private val phase: Int,
+    private val timeSpent: Int
 ) :
     RecyclerView.Adapter<PhaseTwoAdapter.QuestionViewHolder>() {
+    private var sm = SMLeitner(context)
 
     inner class QuestionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -91,12 +95,19 @@ class PhaseTwoAdapter(
             holder.flexboxLayout.addView(wordView)
 
 
-
-
             // submit button listener
             holder.submitButton.setOnClickListener {
 
-
+              var correctAns = ""
+                var db = DBConnect(context).readableDatabase
+                var cursor = db.rawQuery(
+                    "SELECT * FROM questiontable_tmp WHERE kapampangan = ?  OR tagalog = ? OR english = ?",
+                    arrayOf("$correctAns","$correctAns","$correctAns")
+                )
+                cursor.moveToFirst()
+                var id = cursor.getInt(0)
+                cursor.close()
+                db.close()
 
                 if (holder.answerLabel.text.replace("\\s+".toRegex(), "") == question.sentence.replace("\\s+".toRegex(), "")) {
                     holder.answerLabel.setTextColor(Color.parseColor("#037d50"))
@@ -111,7 +122,7 @@ class PhaseTwoAdapter(
                     recyclerView.smoothScrollToPosition(position + 1)
                     progressBar.progress +=1
 
-
+                    sm.smLeitnerCalc(context, id, level, phase, true, timeSpent)
 
 
 
@@ -119,6 +130,7 @@ class PhaseTwoAdapter(
 
                 } else {
                     // navController.navigate(R.id.action_wordAssociation_to_tabPhaseReview)
+                    sm.smLeitnerCalc(context, id, level, phase, false, timeSpent)
                 }
             }
 
