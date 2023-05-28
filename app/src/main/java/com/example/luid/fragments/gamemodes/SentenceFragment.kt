@@ -1,6 +1,7 @@
-package com.example.luid.fragments.mainmenu.gamemodes
+package com.example.luid.fragments.gamemodes
 
 import android.content.ContentValues
+import android.content.Context
 import android.os.Bundle
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
@@ -21,12 +22,19 @@ class SentenceFragment : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: PhaseTwoAdapter
     private lateinit var progressBar: ProgressBar
+    private var context: Context = this
+    private var level = 0
+    private var phase = 0
+    private var timeSpent = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sentencefragment)
+
+
         progressBar = findViewById(R.id.progressBar)
+
         progressBar.progress = 1
 
         recyclerView = findViewById(R.id.recyclerView)
@@ -35,7 +43,7 @@ class SentenceFragment : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         questionList = ArrayList()
         getQuestionList()
-        adapter = PhaseTwoAdapter(recyclerView, questionList, progressBar)
+        adapter = PhaseTwoAdapter(recyclerView, questionList, progressBar,context,level,phase,timeSpent)
         recyclerView.adapter = adapter
 
         progressBar.max = questionList.size
