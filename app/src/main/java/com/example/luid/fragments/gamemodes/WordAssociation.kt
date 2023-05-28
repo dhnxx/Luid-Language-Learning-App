@@ -63,6 +63,7 @@ class WordAssociation : AppCompatActivity() {
         val cursor: Cursor
         cursor = db.rawQuery(selectQuery, null)
         // CREATE TEMP TABLE QUESTION
+        db.execSQL("DROP TABLE IF EXISTS $temp_qstion")
         db.execSQL("CREATE TABLE IF NOT EXISTS $temp_qstion AS SELECT * FROM $questions_tb WHERE level = level AND phase = phase")
         var kap = ArrayList<String>()
         var eng = ArrayList<String>()
@@ -98,7 +99,7 @@ class WordAssociation : AppCompatActivity() {
                         for(j in tag) {
                             if (decoy.contains(i)) {
                                 decoy.remove(i)
-                                if(answers.contains(j)){
+                                if(!answers.contains(j)){
                                     decoy.add(j)
                                 }
                             }
@@ -117,7 +118,7 @@ class WordAssociation : AppCompatActivity() {
                         for(j in eng) {
                             if (decoy.contains(i)) {
                                 decoy.remove(i)
-                                if(answers.contains(j)){
+                                if(!answers.contains(j)){
                                     decoy.add(j)
                                 }
                             }
@@ -136,7 +137,7 @@ class WordAssociation : AppCompatActivity() {
                         for(j in kap) {
                             if (decoy.contains(i)) {
                                 decoy.remove(i)
-                                if(answers.contains(j)){
+                                if(!answers.contains(j)){
                                     decoy.add(j)
                                 }
                             }
@@ -155,7 +156,7 @@ class WordAssociation : AppCompatActivity() {
                         for(j in kap) {
                             if (decoy.contains(i)) {
                                 decoy.remove(i)
-                                if(answers.contains(j)){
+                                if(!answers.contains(j)){
                                     decoy.add(j)
                                 }
                             }

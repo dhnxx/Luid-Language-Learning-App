@@ -5,6 +5,8 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import com.example.luid.database.DBConnect
+import com.example.luid.database.DBConnect.Companion.questions_tb
+import com.example.luid.database.DBConnect.Companion.temp_qstion
 import java.util.Calendar
 
 
@@ -42,12 +44,14 @@ class SMLeitner(context : Context) {
     //# EF'= EF+(0.1-((5-q)*0.08)-((5-q)0.02))
     //FORMULA for Interval
     //# I = EF * (d + n - 1)
-    fun smLeitnerCalc(context: Context, qId : Int, level : Int, phase: Int, status : Boolean, timeSpent : Int){
+    fun smLeitnerCalc(context: Context, qId : Int, level : Int, phase: Int, status : Boolean, timeSpent : Int) {
         var dbHelper = DBConnect(context)
         var ldb = dbHelper.writableDatabase
         var tempTable = "questions"
-        var cursor = ldb.rawQuery("SELECT * FROM $tempTable WHERE _id = $qId AND level = $level AND phase = $phase",null)
-
+        var cursor = ldb.rawQuery(
+            "SELECT * FROM $temp_qstion WHERE _id = $qId AND level = 1 AND phase = 1",
+            null
+        )
         // Old Algorithm Values
         var indID = cursor.getColumnIndex("_id")
         var indGameSession = cursor.getColumnIndex("game_session")
@@ -57,29 +61,30 @@ class SMLeitner(context : Context) {
         var indTimesViewed = cursor.getColumnIndex("times_viewed")
 
         cursor.moveToFirst()
-        var id = cursor.getInt(indID)
-        var oldGameSession = cursor.getInt(indGameSession)
-        var oldEF = cursor.getFloat(indEF)
-        var oldTimesViewed = cursor.getInt(indTimesViewed)
+            var id = cursor.getInt(indID)
+            var oldGameSession = cursor.getInt(indGameSession)
+            var oldEF = cursor.getFloat(indEF)
+            var oldTimesViewed = cursor.getInt(indTimesViewed)
 
-        //FORMULA for Leitner
-        //# EF'= EF+(0.1-((5-q)*0.08)-((5-q)0.02))
-        var newQuality = getNewQuality(status, timeSpent)
-        var newEF = getEF(newQuality, oldEF.toDouble())
-        var newDF = getNewDifficultyLevel(newEF)
-        var newInterval = getNewInterval(newEF, newDF, oldTimesViewed+1)
-        var newGameSession = oldGameSession + newInterval
+            //FORMULA for Leitner
+            //# EF'= EF+(0.1-((5-q)*0.08)-((5-q)0.02))
+            var newQuality = getNewQuality(status, timeSpent)
+            var newEF = getEF(newQuality, oldEF.toDouble())
+            var newDF = getNewDifficultyLevel(newEF)
+            var newInterval = getNewInterval(newEF, newDF, oldTimesViewed + 1)
+            var newGameSession = oldGameSession + newInterval
 
-        var cv = ContentValues()
+            var cv = ContentValues()
 
-        cv.put("easiness_factor", "$newEF")
-        cv.put("interval", "$newInterval")
-        cv.put("game_session", "$newGameSession")
-        cv.put("difficulty_level", "$newDF")
-        cv.put("times_viewed", "${oldTimesViewed + 1}")
+            cv.put("easiness_factor", "$newEF")
+            cv.put("interval", "$newInterval")
+            cv.put("game_session", "$newGameSession")
+            cv.put("difficulty_level", "$newDF")
+            cv.put("times_viewed", "${oldTimesViewed + 1}")
 
-        ldb.update("$tempTable", cv, "_id = $id", null)
-    }
+            ldb.update("$temp_qstion", cv, "_id = $id", null)
+        }
+
 
     // New Calculated quality value for algorithm
     fun getNewQuality(status: Boolean, timeSpent : Int) : Int{
