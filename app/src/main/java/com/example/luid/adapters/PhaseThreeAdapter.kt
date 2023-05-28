@@ -1,26 +1,23 @@
 package com.example.luid.adapters
 
-import android.content.Context
+import android.annotation.SuppressLint
+import android.content.ContentValues
+import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.example.luid.R
-import com.example.luid.classes.SMLeitner
 import com.example.luid.database.DBConnect
 import kotlin.collections.ArrayList
 
 class PhaseThreeAdapter(
     private val recyclerView: RecyclerView,
     private val questionList: ArrayList<com.example.luid.classes.SentenceConstruction>,
-    private val context: Context,
-    private val level: Int,
-    private val phase: Int,
-    private val timeSpent: Int
 ) :
     RecyclerView.Adapter<PhaseThreeAdapter.QuestionViewHolder>() {
-    private var sm = SMLeitner(context)
 
     inner class QuestionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -47,9 +44,9 @@ class PhaseThreeAdapter(
 
     }
 
+    @SuppressLint("Range")
     override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {
         val question = questionList[position]
-
         recyclerView.isNestedScrollingEnabled = false
 
         holder.progressbar.progress = 1
@@ -62,21 +59,10 @@ class PhaseThreeAdapter(
         holder.answerLabel.hint = "Enter your answer here"
 
         holder.submitButton.setOnClickListener {
-
             val answer = holder.answerLabel.text.toString()
-            val correctAns = question.sentence
 
-            var db = DBConnect(context).readableDatabase
-            var cursor = db.rawQuery(
-                "SELECT * FROM questiontable_tmp WHERE kapampangan = ?  OR tagalog = ? OR english = ?",
-                arrayOf("$correctAns","$correctAns","$correctAns")
-            )
-            cursor.moveToFirst()
-            var id = cursor.getInt(0)
-            cursor.close()
-            db.close()
 
-            println(correctAns)
+
             if (answer == question.sentence) {
 
                 Toast.makeText(holder.itemView.context, "Correct!", Toast.LENGTH_SHORT).show()
@@ -89,12 +75,47 @@ class PhaseThreeAdapter(
                 // proceed to the next question using snapHelper
                 recyclerView.smoothScrollToPosition(position + 1)
                 holder.progressbar.progress = holder.progressbar.progress + 1
-                sm.smLeitnerCalc(context, id, level, phase, true, timeSpent)
 
             } else {
                 // navController.navigate(R.id.action_wordAssociation_to_tabPhaseReview)
-                sm.smLeitnerCalc(context, id, level, phase, false, timeSpent)
 
+                var db = DBConnect(holder.itemView.context).readableDatabase
+
+                var cursor: Cursor
+
+                cursor = db.rawQuery("SELECT * FROM ${DBConnect.temp_qstion} WHERE level = 3 AND phase = 3", null)
+
+                if(cursor.moveToNext()){
+
+                    val cv = ContentValues()
+
+                    do {
+
+                        val id = cursor.getLong(cursor.getColumnIndex("_id"))
+
+                        val gamesession = cursor.getInt(cursor.getColumnIndex("game_session"))
+
+                        val EaFa = cursor.getDouble(cursor.getColumnIndex("easiness_factor"))
+
+                        val interval = cursor.getInt(cursor.getColumnIndex("interval"))
+
+                        val difflevel = cursor.getInt(cursor.getColumnIndex("difficulty_level"))
+
+                        val timviewed = cursor.getInt(cursor.getColumnIndex("times_viewed"))
+
+                        cv.put("game_session", gamesession)
+                        cv.put("easiness_factor", EaFa)
+                        cv.put("interval", interval)
+                        cv.put("difficulty_level", difflevel)
+                        cv.put("times_viewed", timviewed)
+
+                        db.update("${DBConnect.questions_tb}", cv, "_id = $id", null)
+
+                    } while(cursor.moveToNext())
+                }
+                db.execSQL("DROP TABLE IF EXISTS ${DBConnect.temp_qstion}")
+                db.close()
+                cursor.close()
 
             }
         }
@@ -102,7 +123,34 @@ class PhaseThreeAdapter(
         holder.clearButton.setOnClickListener {
             holder.answerLabel.text.clear()
         }
-
+        var db = DBConnect(holder.itemView.context).readableDatabase
+        var cursor: Cursor
+        cursor = db.rawQuery("SELECT * FROM ${DBConnect.temp_qstion} WHERE level = 3 AND phase = 3", null)
+        val gs = 0
+        val ef = 0
+        val inter = 0
+        val difflvl = 0
+        val tv = 0
+        if(cursor.moveToFirst()){
+            do {
+                val cv = ContentValues()
+                val id = cursor.getLong(cursor.getColumnIndex("_id"))
+                // val gamesession = cursor.getInt(cursor.getColumnIndex("game_session"))
+                cv.put("game_session", gs)
+                // val EaFa = cursor.getDouble(cursor.getColumnIndex("easiness_factor"))
+                cv.put("easiness_factor", ef)
+                // val interval = cursor.getInt(cursor.getColumnIndex("interval"))
+                cv.put("interval", inter)
+                // val difflevel = cursor.getInt(cursor.getColumnIndex("difficulty_level"))
+                cv.put("difficulty_level", difflvl)
+                // val timviewed = cursor.getInt(cursor.getColumnIndex("times_viewed"))
+                cv.put("times_viewed", tv)
+                db.update("${DBConnect.temp_qstion}", cv, "_id = $id", null)
+            } while(cursor.moveToNext())
+            cursor.close()
+        }
 
     }
+    // Inside your class, preferably in the constructor or an initialization method
+
 }
