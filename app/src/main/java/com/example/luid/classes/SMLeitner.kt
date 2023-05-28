@@ -26,8 +26,13 @@ class SMLeitner(context : Context) {
 
         var rsUserRecords = db.rawQuery("SELECT * FROM $tUserRecords", null)
         rsUserRecords.moveToLast()
-        var ind = rsUserRecords.getColumnIndex("game_session_number")
-        currentGameSession = rsUserRecords.getInt(ind)
+
+        if(rsUserRecords.count != 0){
+            var ind = rsUserRecords.getColumnIndex("game_session_number")
+            currentGameSession = rsUserRecords.getInt(ind)
+        }else{
+            currentGameSession = 0
+        }
 
         rsUserRecords.close()
         db.close()
@@ -37,7 +42,7 @@ class SMLeitner(context : Context) {
     //# EF'= EF+(0.1-((5-q)*0.08)-((5-q)0.02))
     //FORMULA for Interval
     //# I = EF * (d + n - 1)
-    fun smLeitnerCalc(context: Context, qId : Int, level : Int, phase: Int, answerColumn : String, status : Boolean, timeSpent : Int){
+    fun smLeitnerCalc(context: Context, qId : Int, level : Int, phase: Int, status : Boolean, timeSpent : Int){
         var dbHelper = DBConnect(context)
         var ldb = dbHelper.writableDatabase
         var tempTable = "questions"
@@ -55,8 +60,6 @@ class SMLeitner(context : Context) {
         var id = cursor.getInt(indID)
         var oldGameSession = cursor.getInt(indGameSession)
         var oldEF = cursor.getFloat(indEF)
-        var oldInterval = cursor.getInt(indInterval)
-        var oldDF = cursor.getInt(indDF)
         var oldTimesViewed = cursor.getInt(indTimesViewed)
 
         //FORMULA for Leitner
