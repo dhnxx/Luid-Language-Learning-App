@@ -36,6 +36,7 @@ class PhaseOneAdapter(
     private var correctAns: String = ""
     private var correctAnswer = 0
     private var score = 0.0
+    private var sm = SMLeitner(context)
 
 
     inner class QuestionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -155,6 +156,12 @@ class PhaseOneAdapter(
         }
 
         holder.submitButton.setOnClickListener {
+            var db = DBConnect(context).readableDatabase
+            var cursor = db.rawQuery("SELECT * FROM questiontable_tmp WHERE $correctAns = kapampangan OR $correctAns = tagalog OR $correctAns = english", null)
+            var id = cursor.getInt(0)
+            cursor.close()
+            db.close()
+
             if (holder.usrtxt.text == holder.anstxt.text) {
                 Toast.makeText(holder.submitButton.context, "Correct!", Toast.LENGTH_SHORT).show()
                 //change color of card to green if correct
@@ -169,12 +176,16 @@ class PhaseOneAdapter(
                 }
                 correctAnswer += 1
 
+                sm.smLeitnerCalc(context, id, level, phase, true, timeSpent)
+
+
+
 
             } else {
                 Toast.makeText(holder.submitButton.context, "Incorrect!", Toast.LENGTH_SHORT)
                     .show()
 
-
+                sm.smLeitnerCalc(context, id, level, phase, false, timeSpent)
             }
 
 

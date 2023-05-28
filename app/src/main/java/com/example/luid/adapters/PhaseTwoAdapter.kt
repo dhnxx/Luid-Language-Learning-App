@@ -13,15 +13,16 @@ import com.example.luid.R
 import com.example.luid.classes.SentenceFragment
 import java.util.ArrayList
 import com.example.luid.classes.SMLeitner
+import com.example.luid.database.DBConnect
 
 class PhaseTwoAdapter(
     private val recyclerView: RecyclerView,
     private val questionList: ArrayList<SentenceFragment>,
-    private val progressBar: ProgressBar
-
-
+    private val progressBar: ProgressBar,
+    private val context: Context
 ) :
     RecyclerView.Adapter<PhaseTwoAdapter.QuestionViewHolder>() {
+    private var sm = SMLeitner(context)
 
     inner class QuestionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -93,6 +94,12 @@ class PhaseTwoAdapter(
 
             // submit button listener
             holder.submitButton.setOnClickListener {
+                var db = DBConnect(context).readableDatabase
+                var cursor = db.rawQuery("SELECT * FROM questiontable_tmp WHERE $correctAns = kapampangan OR $correctAns = tagalog OR $correctAns = english", null)
+                var id = cursor.getInt(0)
+                cursor.close()
+                db.close()
+
                 if (holder.answerLabel.text.replace("\\s+".toRegex(), "") == question.sentence.replace("\\s+".toRegex(), "")) {
                     holder.answerLabel.setTextColor(Color.parseColor("#037d50"))
                 } else {
@@ -106,7 +113,7 @@ class PhaseTwoAdapter(
                     recyclerView.smoothScrollToPosition(position + 1)
                     progressBar.progress +=1
 
-
+                    sm.smLeitnerCalc(context, id, level, phase, true, timeSpent)
 
 
 
@@ -114,6 +121,7 @@ class PhaseTwoAdapter(
 
                 } else {
                     // navController.navigate(R.id.action_wordAssociation_to_tabPhaseReview)
+                    sm.smLeitnerCalc(context, id, level, phase, false, timeSpent)
                 }
             }
 
