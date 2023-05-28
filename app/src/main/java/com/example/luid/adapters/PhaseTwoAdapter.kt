@@ -19,7 +19,10 @@ class PhaseTwoAdapter(
     private val recyclerView: RecyclerView,
     private val questionList: ArrayList<SentenceFragment>,
     private val progressBar: ProgressBar,
-    private val context: Context
+    private val context: Context,
+    private val level: Int,
+    private val phase: Int,
+    private val timeSpent: Int
 ) :
     RecyclerView.Adapter<PhaseTwoAdapter.QuestionViewHolder>() {
     private var sm = SMLeitner(context)
@@ -94,6 +97,8 @@ class PhaseTwoAdapter(
 
             // submit button listener
             holder.submitButton.setOnClickListener {
+
+              var correctAns = ""
                 var db = DBConnect(context).readableDatabase
                 var cursor = db.rawQuery("SELECT * FROM questiontable_tmp WHERE $correctAns = kapampangan OR $correctAns = tagalog OR $correctAns = english", null)
                 var id = cursor.getInt(0)

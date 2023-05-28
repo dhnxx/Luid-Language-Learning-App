@@ -29,7 +29,10 @@ class PhaseOneAdapter(
     private val recyclerView: RecyclerView,
     private val questionList: ArrayList<WordAssociationClass>,
     private val progressBar: ProgressBar,
-    private val context: Context
+    private val context: Context,
+    private val level: Int,
+    private val phase: Int,
+    private val timeSpent: Int = 0
 ) :
     RecyclerView.Adapter<PhaseOneAdapter.QuestionViewHolder>() {
     private var tempAns: String = ""
@@ -156,14 +159,21 @@ class PhaseOneAdapter(
         }
 
         holder.submitButton.setOnClickListener {
+
+
             var db = DBConnect(context).readableDatabase
             var cursor = db.rawQuery(
-                "SELECT * FROM questiontable_tmp WHERE $correctAns = kapampangan OR $correctAns = tagalog OR $correctAns = english",
+                "SELECT * FROM questiontable_tmp WHERE kapampangan = $correctAns  OR tagalog = $correctAns OR english = $correctAns ",
                 null
             )
             var id = cursor.getInt(0)
             cursor.close()
             db.close()
+
+
+            //
+
+            println("Correct Answer: $correctAns")
 
             if (holder.usrtxt.text == holder.anstxt.text) {
                 Toast.makeText(holder.submitButton.context, "Correct!", Toast.LENGTH_SHORT).show()
@@ -299,7 +309,7 @@ class PhaseOneAdapter(
 
             }
             // update temptable
-            var cursor: Cursor
+
             cursor = db.rawQuery("SELECT * FROM $temp_qstion WHERE level = 1 AND phase = 1", null)
             val gs = 11
             val ef = 12
