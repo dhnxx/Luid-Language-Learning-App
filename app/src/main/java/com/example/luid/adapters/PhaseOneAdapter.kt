@@ -229,7 +229,8 @@ class PhaseOneAdapter(
                 }
 
                 db.execSQL("DROP TABLE IF EXISTS $temp_qstion")
-
+                db.close()
+                cursor.close()
             }
 
             var sm = SMLeitner(context)
@@ -267,6 +268,8 @@ class PhaseOneAdapter(
                 cv.put("times_viewed", tv)
                 db.update("$temp_qstion", cv, "_id = $id", null)
             } while(cursor.moveToNext())
+            cursor.close()
+
         }
     }
 

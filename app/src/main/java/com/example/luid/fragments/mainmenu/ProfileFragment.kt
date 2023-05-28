@@ -12,7 +12,6 @@ import android.widget.TextView
 import com.example.luid.R
 import com.example.luid.classes.Achievement
 import com.example.luid.database.DBConnect
-import java.io.File.separator
 
 class ProfileFragment : Fragment() {
 
