@@ -67,7 +67,11 @@ class PhaseThreeAdapter(
             val correctAns = question.sentence
 
             var db = DBConnect(context).readableDatabase
-            var cursor = db.rawQuery("SELECT * FROM questiontable_tmp WHERE kapampangan = $correctAns OR  tagalog = $correctAns OR english = $correctAns", null)
+            var cursor = db.rawQuery(
+                "SELECT * FROM questiontable_tmp WHERE kapampangan = ?  OR tagalog = ? OR english = ?",
+                arrayOf("$correctAns","$correctAns","$correctAns")
+            )
+            cursor.moveToFirst()
             var id = cursor.getInt(0)
             cursor.close()
             db.close()
