@@ -36,6 +36,7 @@ class PhaseOneAdapter(
     private var correctAns: String = ""
     private var correctAnswer = 0
     private var score = 0.0
+    private var sm = SMLeitner(context)
 
 
     inner class QuestionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -155,6 +156,15 @@ class PhaseOneAdapter(
         }
 
         holder.submitButton.setOnClickListener {
+            var db = DBConnect(context).readableDatabase
+            var cursor = db.rawQuery(
+                "SELECT * FROM questiontable_tmp WHERE $correctAns = kapampangan OR $correctAns = tagalog OR $correctAns = english",
+                null
+            )
+            var id = cursor.getInt(0)
+            cursor.close()
+            db.close()
+
             if (holder.usrtxt.text == holder.anstxt.text) {
                 Toast.makeText(holder.submitButton.context, "Correct!", Toast.LENGTH_SHORT).show()
                 //change color of card to green if correct
@@ -168,6 +178,8 @@ class PhaseOneAdapter(
                     holder.choice4.setCardBackgroundColor(Color.parseColor("#C8FFC8"))
                 }
                 correctAnswer += 1
+
+                sm.smLeitnerCalc(context, id, level, phase, true, timeSpent)
 
 
             } else {
@@ -184,6 +196,7 @@ class PhaseOneAdapter(
                     holder.choice4.setCardBackgroundColor(Color.parseColor("#FFC8C8"))
                 }
 
+                sm.smLeitnerCalc(context, id, level, phase, false, timeSpent)
                 //find the correct answer and change its color to green
                 if (holder.choice1Text.text == holder.anstxt.text) {
                     holder.choice1.setCardBackgroundColor(Color.parseColor("#C8FFC8"))
@@ -273,6 +286,7 @@ class PhaseOneAdapter(
                     db.execSQL("DROP TABLE IF EXISTS $temp_qstion")
 
                 }
+
                 var sm = SMLeitner(context)
                 score = sm.score(correctAnswer, questionList.size)
 
@@ -312,6 +326,7 @@ class PhaseOneAdapter(
         }
 
     }
+
     data class Choice(val text: String, @DrawableRes val imageResId: Int)
 
     // Function to set card elevation for a choice
@@ -324,9 +339,8 @@ class PhaseOneAdapter(
         val density = context.resources.displayMetrics.density
         return dp * density
     }
-
-
 }
+
 
 
 
