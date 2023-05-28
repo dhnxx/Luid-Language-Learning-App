@@ -61,7 +61,7 @@ class PhaseThreeAdapter(
         holder.submitButton.setOnClickListener {
             val answer = holder.answerLabel.text.toString()
             var db = DBConnect(context).readableDatabase
-            var cursor = db.rawQuery("SELECT * FROM questiontable_tmp WHERE $correctAns = kapampangan OR $correctAns = tagalog OR $correctAns = english", null)
+            var cursor = db.rawQuery("SELECT * FROM questiontable_tmp WHERE kapampangan = $correctAns OR  tagalog = $correctAns OR english = $correctAns", null)
             var id = cursor.getInt(0)
             cursor.close()
             db.close()
