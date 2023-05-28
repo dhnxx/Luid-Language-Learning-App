@@ -28,8 +28,11 @@ import java.util.*
 class PhaseOneAdapter(
     private val recyclerView: RecyclerView,
     private val questionList: ArrayList<WordAssociationClass>,
-   private val progressBar: ProgressBar,
-   private val context: Context
+    private val progressBar: ProgressBar,
+    private val context: Context
+    private val level : Int,
+    private val phase : Int,
+    private val timeSpent : Int
 ) :
     RecyclerView.Adapter<PhaseOneAdapter.QuestionViewHolder>() {
     private var tempAns: String = ""
