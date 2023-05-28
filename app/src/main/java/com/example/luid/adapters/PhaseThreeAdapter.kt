@@ -14,7 +14,10 @@ import kotlin.collections.ArrayList
 class PhaseThreeAdapter(
     private val recyclerView: RecyclerView,
     private val questionList: ArrayList<com.example.luid.classes.SentenceConstruction>,
-    private val context: Context
+    private val context: Context,
+    private val level: Int,
+    private val phase: Int,
+    private val timeSpent: Int
 ) :
     RecyclerView.Adapter<PhaseThreeAdapter.QuestionViewHolder>() {
     private var sm = SMLeitner(context)
@@ -59,14 +62,17 @@ class PhaseThreeAdapter(
         holder.answerLabel.hint = "Enter your answer here"
 
         holder.submitButton.setOnClickListener {
+
             val answer = holder.answerLabel.text.toString()
+            val correctAns = question.sentence
+
             var db = DBConnect(context).readableDatabase
             var cursor = db.rawQuery("SELECT * FROM questiontable_tmp WHERE kapampangan = $correctAns OR  tagalog = $correctAns OR english = $correctAns", null)
             var id = cursor.getInt(0)
             cursor.close()
             db.close()
 
-
+            println(correctAns)
             if (answer == question.sentence) {
 
                 Toast.makeText(holder.itemView.context, "Correct!", Toast.LENGTH_SHORT).show()
