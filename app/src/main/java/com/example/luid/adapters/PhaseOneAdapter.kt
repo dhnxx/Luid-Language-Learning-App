@@ -28,17 +28,21 @@ import java.util.*
 class PhaseOneAdapter(
     private val recyclerView: RecyclerView,
     private val questionList: ArrayList<WordAssociationClass>,
-   private val progressBar: ProgressBar,
-   private val context: Context
+    private val progressBar: ProgressBar,
+    private val context: Context,
+    private val level: Int,
+    private val phase: Int,
+    private val timeSpent: Int = 0
 ) :
     RecyclerView.Adapter<PhaseOneAdapter.QuestionViewHolder>() {
     private var tempAns: String = ""
     private var correctAns: String = ""
     private var correctAnswer = 0
     private var score = 0.0
+    private var sm = SMLeitner(context)
 
 
-    inner class QuestionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    inner class QuestionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val question: TextView = itemView.findViewById(R.id.question)
         val choice1: CardView = itemView.findViewById(R.id.choice1)
@@ -155,6 +159,24 @@ class PhaseOneAdapter(
         }
 
         holder.submitButton.setOnClickListener {
+
+            println("CORRECT ANSWER : $correctAns")
+            println("CORRECT ANSWER : $correctAnswer")
+            var db = DBConnect(context).readableDatabase
+            var cursor = db.rawQuery(
+                "SELECT * FROM questiontable_tmp WHERE kapampangan = ?  OR tagalog = ? OR english = ?",
+                arrayOf("$correctAns","$correctAns","$correctAns")
+            )
+            cursor.moveToFirst()
+            var id = cursor.getInt(0)
+            cursor.close()
+            db.close()
+
+
+            //
+
+            println("Correct Answer: $correctAns")
+
             if (holder.usrtxt.text == holder.anstxt.text) {
                 Toast.makeText(holder.submitButton.context, "Correct!", Toast.LENGTH_SHORT).show()
                 //change color of card to green if correct
@@ -169,107 +191,153 @@ class PhaseOneAdapter(
                 }
                 correctAnswer += 1
 
+                sm.smLeitnerCalc(context, id, level, phase, true, timeSpent)
 
-            } else {
-                Toast.makeText(holder.submitButton.context, "Incorrect!", Toast.LENGTH_SHORT)
-                    .show()
-
-
-            }
-
-
-            if (position < questionList.size - 1) {
-                // proceed to the next question using snapHelper
-                recyclerView.smoothScrollToPosition(position + 1)
-          progressBar.progress +=  1
 
             } else {
 
-                // navController.navigate(R.id.action_wordAssociation_to_tabPhaseReview)
 
-                // dialog appear
-                // merge temp table to main table
-                // show score/stats etc...
-
-              //  db.execSQL("INSERT OR REPLACE INTO $questions_tb SELECT * FROM $temp_qstion")
-
-
-
-                var cursor: Cursor
-
-                cursor = db.rawQuery("SELECT * FROM $temp_qstion WHERE level = 1 AND phase = 1", null)
-
-                if(cursor.moveToNext()){
-
-                    val cv = ContentValues()
-
-                    do {
-
-                        val id = cursor.getLong(cursor.getColumnIndex("_id"))
-
-                        val gamesession = cursor.getInt(cursor.getColumnIndex("game_session"))
-
-                        val EaFa = cursor.getDouble(cursor.getColumnIndex("easiness_factor"))
-
-                        val interval = cursor.getInt(cursor.getColumnIndex("interval"))
-
-                        val difflevel = cursor.getInt(cursor.getColumnIndex("difficulty_level"))
-
-                        val timviewed = cursor.getInt(cursor.getColumnIndex("times_viewed"))
-
-                        cv.put("game_session", gamesession)
-                        cv.put("easiness_factor", EaFa)
-                        cv.put("interval", interval)
-                        cv.put("difficulty_level", difflevel)
-                        cv.put("times_viewed", timviewed)
-
-                        db.update("$questions_tb", cv, "_id = $id", null)
-
-                    } while(cursor.moveToNext())
+                //change color of card to red if incorrect
+                if (holder.choice1Text.text == holder.usrtxt.text) {
+                    holder.choice1.setCardBackgroundColor(Color.parseColor("#FFC8C8"))
+                } else if (holder.choice2Text.text == holder.usrtxt.text) {
+                    holder.choice2.setCardBackgroundColor(Color.parseColor("#FFC8C8"))
+                } else if (holder.choice3Text.text == holder.usrtxt.text) {
+                    holder.choice3.setCardBackgroundColor(Color.parseColor("#FFC8C8"))
+                } else if (holder.choice4Text.text == holder.usrtxt.text) {
+                    holder.choice4.setCardBackgroundColor(Color.parseColor("#FFC8C8"))
                 }
 
-                db.execSQL("DROP TABLE IF EXISTS $temp_qstion")
+                sm.smLeitnerCalc(context, id, level, phase, false, timeSpent)
+                //find the correct answer and change its color to green
+                if (holder.choice1Text.text == holder.anstxt.text) {
+                    holder.choice1.setCardBackgroundColor(Color.parseColor("#C8FFC8"))
+                } else if (holder.choice2Text.text == holder.anstxt.text) {
+                    holder.choice2.setCardBackgroundColor(Color.parseColor("#C8FFC8"))
+                } else if (holder.choice3Text.text == holder.anstxt.text) {
+                    holder.choice3.setCardBackgroundColor(Color.parseColor("#C8FFC8"))
+                } else if (holder.choice4Text.text == holder.anstxt.text) {
+                    holder.choice4.setCardBackgroundColor(Color.parseColor("#C8FFC8"))
+                }
 
             }
 
-            var sm = SMLeitner(context)
-            score =  sm.score(correctAnswer,questionList.size)
 
-            println(questionList.size)
-            println(correctAnswer)
-            println(score)
+            // change submit button to next button
 
-            tempAns = "" // reset tempAns
-            correctAns = "" // reset correctAns
 
+            holder.submitButton.text = "Next"
+            holder.submitButton.setOnClickListener {
+                // reset submit button
+                holder.submitButton.text = "Submit"
+                // reset card color
+                cardReset()
+                // reset user answer
+                holder.usrtxt.text = ""
+                // reset correct answer
+                holder.anstxt.text = ""
+                // reset tempAns
+                tempAns = ""
+                // reset correctAns
+                correctAns = ""
+                // proceed to next question
+
+
+                if (position < questionList.size - 1) {
+                    // proceed to the next question using snapHelper
+                    recyclerView.smoothScrollToPosition(position + 1)
+                    progressBar.progress += 1
+
+                } else {
+
+                    // navController.navigate(R.id.action_wordAssociation_to_tabPhaseReview)
+
+                    // dialog appear
+                    // merge temp table to main table
+                    // show score/stats etc...
+
+                    //  db.execSQL("INSERT OR REPLACE INTO $questions_tb SELECT * FROM $temp_qstion")
+
+
+                    var cursor: Cursor
+
+                    cursor = db.rawQuery(
+                        "SELECT * FROM $temp_qstion WHERE level = 1 AND phase = 1",
+                        null
+                    )
+
+                    if (cursor.moveToNext()) {
+
+                        val cv = ContentValues()
+
+                        do {
+
+                            val id = cursor.getLong(cursor.getColumnIndex("_id"))
+
+                            val gamesession = cursor.getInt(cursor.getColumnIndex("game_session"))
+
+                            val EaFa = cursor.getDouble(cursor.getColumnIndex("easiness_factor"))
+
+                            val interval = cursor.getInt(cursor.getColumnIndex("interval"))
+
+                            val difflevel = cursor.getInt(cursor.getColumnIndex("difficulty_level"))
+
+                            val timviewed = cursor.getInt(cursor.getColumnIndex("times_viewed"))
+
+                            cv.put("game_session", gamesession)
+                            cv.put("easiness_factor", EaFa)
+                            cv.put("interval", interval)
+                            cv.put("difficulty_level", difflevel)
+                            cv.put("times_viewed", timviewed)
+
+                            db.update("$questions_tb", cv, "_id = $id", null)
+
+                        } while (cursor.moveToNext())
+                    }
+
+                    db.execSQL("DROP TABLE IF EXISTS $temp_qstion")
+
+                }
+
+                var sm = SMLeitner(context)
+                score = sm.score(correctAnswer, questionList.size)
+
+                println(questionList.size)
+                println(correctAnswer)
+                println(score)
+
+                tempAns = "" // reset tempAns
+                correctAns = "" // reset correctAns
+
+            }
+            // update temptable
+
+            cursor = db.rawQuery("SELECT * FROM $temp_qstion WHERE level = 1 AND phase = 1", null)
+            val gs = 11
+            val ef = 12
+            val inter = 3
+            val difflvl = 4
+            val tv = 5
+            if (cursor.moveToFirst()) {
+                do {
+                    val cv = ContentValues()
+                    val id = cursor.getLong(cursor.getColumnIndex("_id"))
+                    // val gamesession = cursor.getInt(cursor.getColumnIndex("game_session"))
+                    cv.put("game_session", gs)
+                    // val EaFa = cursor.getDouble(cursor.getColumnIndex("easiness_factor"))
+                    cv.put("easiness_factor", ef)
+                    // val interval = cursor.getInt(cursor.getColumnIndex("interval"))
+                    cv.put("interval", inter)
+                    // val difflevel = cursor.getInt(cursor.getColumnIndex("difficulty_level"))
+                    cv.put("difficulty_level", difflvl)
+                    // val timviewed = cursor.getInt(cursor.getColumnIndex("times_viewed"))
+                    cv.put("times_viewed", tv)
+                    db.update("$temp_qstion", cv, "_id = $id", null)
+                } while (cursor.moveToNext())
+            }
         }
-        // update temptable
-        var cursor: Cursor
-        cursor = db.rawQuery("SELECT * FROM $temp_qstion WHERE level = 1 AND phase = 1", null)
-        val gs = 11
-        val ef = 12
-        val inter = 3
-        val difflvl = 4
-        val tv = 5
-        if(cursor.moveToFirst()){
-            do {
-                val cv = ContentValues()
-                val id = cursor.getLong(cursor.getColumnIndex("_id"))
-               // val gamesession = cursor.getInt(cursor.getColumnIndex("game_session"))
-                cv.put("game_session", gs)
-               // val EaFa = cursor.getDouble(cursor.getColumnIndex("easiness_factor"))
-                cv.put("easiness_factor", ef)
-               // val interval = cursor.getInt(cursor.getColumnIndex("interval"))
-                cv.put("interval", inter)
-               // val difflevel = cursor.getInt(cursor.getColumnIndex("difficulty_level"))
-                cv.put("difficulty_level", difflvl)
-               // val timviewed = cursor.getInt(cursor.getColumnIndex("times_viewed"))
-                cv.put("times_viewed", tv)
-                db.update("$temp_qstion", cv, "_id = $id", null)
-            } while(cursor.moveToNext())
-        }
+
     }
-
 
     data class Choice(val text: String, @DrawableRes val imageResId: Int)
 
@@ -284,6 +352,7 @@ class PhaseOneAdapter(
         return dp * density
     }
 }
+
 
 
 
