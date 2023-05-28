@@ -159,18 +159,41 @@ class PhaseOneAdapter(
         }
 
         holder.submitButton.setOnClickListener {
+/*
+            var cursort: Cursor
+            cursort = db.rawQuery("SELECT * FROM $temp_qstion WHERE level = 1 AND phase = 1", null)
+            val gs = 33
+            val ef = 133
+            val inter = 333
+            val difflvl = 43
+            val tv = 53
+            cursort.moveToFirst()
+                    val cv = ContentValues()
+                    val id1 = cursort.getLong(cursort.getColumnIndex("_id"))
+                    // val gamesession = cursor.getInt(cursor.getColumnIndex("game_session"))
+                    cv.put("game_session", gs)
+                    // val EaFa = cursor.getDouble(cursor.getColumnIndex("easiness_factor"))
+                    cv.put("easiness_factor", ef)
+                    // val interval = cursor.getInt(cursor.getColumnIndex("interval"))
+                    cv.put("interval", inter)
+                    // val difflevel = cursor.getInt(cursor.getColumnIndex("difficulty_level"))
+                    cv.put("difficulty_level", difflvl)
+                    // val timviewed = cursor.getInt(cursor.getColumnIndex("times_viewed"))
+                    cv.put("times_viewed", tv)
+                    db.update("$temp_qstion", cv, "_id = $id1", null)
 
+*/
             println("CORRECT ANSWER : $correctAns")
             println("CORRECT ANSWER : $correctAnswer")
             var db = DBConnect(context).readableDatabase
             var cursor = db.rawQuery(
-                "SELECT * FROM questiontable_tmp WHERE kapampangan = ?  OR tagalog = ? OR english = ?",
+                "SELECT * FROM $questions_tb WHERE kapampangan = ?  OR tagalog = ? OR english = ?",
                 arrayOf("$correctAns","$correctAns","$correctAns")
             )
             cursor.moveToFirst()
-            var id = cursor.getInt(0)
+            var id = cursor.getInt(cursor.getColumnIndex("_id"))
             cursor.close()
-            db.close()
+           // db.close()      remove muna
 
 
             //
@@ -295,8 +318,6 @@ class PhaseOneAdapter(
                         } while (cursor.moveToNext())
                     }
 
-                    db.execSQL("DROP TABLE IF EXISTS $temp_qstion")
-
                 }
 
                 var sm = SMLeitner(context)
@@ -312,29 +333,7 @@ class PhaseOneAdapter(
             }
             // update temptable
 
-            cursor = db.rawQuery("SELECT * FROM $temp_qstion WHERE level = 1 AND phase = 1", null)
-            val gs = 11
-            val ef = 12
-            val inter = 3
-            val difflvl = 4
-            val tv = 5
-            if (cursor.moveToFirst()) {
-                do {
-                    val cv = ContentValues()
-                    val id = cursor.getLong(cursor.getColumnIndex("_id"))
-                    // val gamesession = cursor.getInt(cursor.getColumnIndex("game_session"))
-                    cv.put("game_session", gs)
-                    // val EaFa = cursor.getDouble(cursor.getColumnIndex("easiness_factor"))
-                    cv.put("easiness_factor", ef)
-                    // val interval = cursor.getInt(cursor.getColumnIndex("interval"))
-                    cv.put("interval", inter)
-                    // val difflevel = cursor.getInt(cursor.getColumnIndex("difficulty_level"))
-                    cv.put("difficulty_level", difflvl)
-                    // val timviewed = cursor.getInt(cursor.getColumnIndex("times_viewed"))
-                    cv.put("times_viewed", tv)
-                    db.update("$temp_qstion", cv, "_id = $id", null)
-                } while (cursor.moveToNext())
-            }
+
         }
 
     }
