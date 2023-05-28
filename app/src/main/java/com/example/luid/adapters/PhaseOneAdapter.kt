@@ -295,7 +295,7 @@ class PhaseOneAdapter(
                         } while (cursor.moveToNext())
                     }
 
-                    db.execSQL("DROP TABLE IF EXISTS $temp_qstion")
+                   // db.execSQL("DROP TABLE IF EXISTS $temp_qstion")
 
                 }
 
