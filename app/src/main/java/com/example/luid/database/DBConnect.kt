@@ -3,7 +3,8 @@ package com.example.luid.database
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-class DBConnect(context: Context?) : SQLiteOpenHelper(context, DB_NAME, null, DB_V) {
+
+class DBConnect(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, DB_V) {
 
     companion object {
 
