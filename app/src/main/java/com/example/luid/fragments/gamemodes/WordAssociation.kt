@@ -1,4 +1,4 @@
-package com.example.luid.fragments.mainmenu.gamemodes
+package com.example.luid.fragments.gamemodes
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -23,7 +23,7 @@ class WordAssociation : AppCompatActivity() {
     private lateinit var decoy: ArrayList<String>
     private lateinit var progressbar: ProgressBar
     private lateinit var answers: ArrayList<String>
-    var contextphaseone: Context = this
+    private var contextphaseone: Context = this
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -187,6 +187,5 @@ class WordAssociation : AppCompatActivity() {
         cursor.close()
     }
 }
-
 
 

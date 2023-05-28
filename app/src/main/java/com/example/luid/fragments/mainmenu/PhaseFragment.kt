@@ -16,10 +16,7 @@ import com.example.luid.adapters.LevelSwitchStateViewModel
 import com.example.luid.adapters.*
 import com.example.luid.classes.ChildPhase
 import com.example.luid.classes.ParentPhase
-import com.example.luid.fragments.gamemodes.SentenceConstruction
-import com.example.luid.fragments.gamemodes.SentenceFragment
-import com.example.luid.fragments.gamemodes.WordAssociation
-import com.example.luid.fragments.mainmenu.TabPhaseReviewDirections
+
 
 
 class PhaseFragment : Fragment() {
@@ -165,7 +162,7 @@ class PhaseFragment : Fragment() {
                             View.OnClickListener {
                                 findNavController().navigate(
                                     TabPhaseReviewDirections.actionTabPhaseReviewToStoryFragment(
-                                        phase = 1,
+                                        phase = 2,
                                         level = 2
                                     )
                                 )
@@ -183,7 +180,7 @@ class PhaseFragment : Fragment() {
                             View.OnClickListener {
                                 findNavController().navigate(
                                     TabPhaseReviewDirections.actionTabPhaseReviewToStoryFragment(
-                                        phase = 2,
+                                        phase = 3,
                                         level = 2
                                     )
                                 )
@@ -204,8 +201,8 @@ class PhaseFragment : Fragment() {
                             View.OnClickListener {
                                 findNavController().navigate(
                                     TabPhaseReviewDirections.actionTabPhaseReviewToStoryFragment(
-                                        phase = 3,
-                                        level = 2
+                                        phase = 1,
+                                        level = 3
                                     )
                                 )
                             }
@@ -219,11 +216,12 @@ class PhaseFragment : Fragment() {
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
                             R.drawable.settings,
                             View.OnClickListener {
-                                Toast.makeText(
-                                    context,
-                                    "Button clicked for Phase 2",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                findNavController().navigate(
+                                    TabPhaseReviewDirections.actionTabPhaseReviewToStoryFragment(
+                                        phase = 2,
+                                        level = 3
+                                    )
+                                )
                             }
                         )
                     )
@@ -236,11 +234,12 @@ class PhaseFragment : Fragment() {
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
                             R.drawable.settings,
                             View.OnClickListener {
-                                Toast.makeText(
-                                    context,
-                                    "Button clicked for Phase 3",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                findNavController().navigate(
+                                    TabPhaseReviewDirections.actionTabPhaseReviewToStoryFragment(
+                                        phase = 3,
+                                        level = 3
+                                    )
+                                )
                             }
                         )
                     )
@@ -256,11 +255,12 @@ class PhaseFragment : Fragment() {
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
                             R.drawable.settings,
                             View.OnClickListener {
-                                Toast.makeText(
-                                    context,
-                                    "Button clicked for Phase 1",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                findNavController().navigate(
+                                    TabPhaseReviewDirections.actionTabPhaseReviewToStoryFragment(
+                                        phase = 1,
+                                        level = 4
+                                    )
+                                )
                             }
                         )
                     )
@@ -272,11 +272,12 @@ class PhaseFragment : Fragment() {
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
                             R.drawable.settings,
                             View.OnClickListener {
-                                Toast.makeText(
-                                    context,
-                                    "Button clicked for Phase 2",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                findNavController().navigate(
+                                    TabPhaseReviewDirections.actionTabPhaseReviewToStoryFragment(
+                                        phase = 2,
+                                        level = 4
+                                    )
+                                )
                             }
                         )
                     )
@@ -289,11 +290,12 @@ class PhaseFragment : Fragment() {
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
                             R.drawable.settings,
                             View.OnClickListener {
-                                Toast.makeText(
-                                    context,
-                                    "Button clicked for Phase 3",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                findNavController().navigate(
+                                    TabPhaseReviewDirections.actionTabPhaseReviewToStoryFragment(
+                                        phase = 3,
+                                        level = 4
+                                    )
+                                )
                             }
                         )
                     )
