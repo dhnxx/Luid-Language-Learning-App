@@ -1,0 +1,94 @@
+[
+    {
+        "merged": "com.example.luid.app-mergeDebugResources-47:/layout/fragment_level.xml",
+        "source": "com.example.luid.app-main-50:/layout/fragment_level.xml"
+    },
+    {
+        "merged": "com.example.luid.app-mergeDebugResources-47:/layout/reviewcard.xml",
+        "source": "com.example.luid.app-main-50:/layout/reviewcard.xml"
+    },
+    {
+        "merged": "com.example.luid.app-mergeDebugResources-47:/layout/fragment_settings.xml",
+        "source": "com.example.luid.app-main-50:/layout/fragment_settings.xml"
+    },
+    {
+        "merged": "com.example.luid.app-mergeDebugResources-47:/layout/sentencecontruction_view.xml",
+        "source": "com.example.luid.app-main-50:/layout/sentencecontruction_view.xml"
+    },
+    {
+        "merged": "com.example.luid.app-mergeDebugResources-47:/layout/activity_word_association.xml",
+        "source": "com.example.luid.app-main-50:/layout/activity_word_association.xml"
+    },
+    {
+        "merged": "com.example.luid.app-mergeDebugResources-47:/layout/childphasecard.xml",
+        "source": "com.example.luid.app-main-50:/layout/childphasecard.xml"
+    },
+    {
+        "merged": "com.example.luid.app-mergeDebugResources-47:/layout/fragment_about_luid.xml",
+        "source": "com.example.luid.app-main-50:/layout/fragment_about_luid.xml"
+    },
+    {
+        "merged": "com.example.luid.app-mergeDebugResources-47:/layout/fragment_home.xml",
+        "source": "com.example.luid.app-main-50:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "com.example.luid.app-mergeDebugResources-47:/layout/fragment_review.xml",
+        "source": "com.example.luid.app-main-50:/layout/fragment_review.xml"
+    },
+    {
+        "merged": "com.example.luid.app-mergeDebugResources-47:/layout/activity_sentence_construction.xml",
+        "source": "com.example.luid.app-main-50:/layout/activity_sentence_construction.xml"
+    },
+    {
+        "merged": "com.example.luid.app-mergeDebugResources-47:/layout/achvcardview.xml",
+        "source": "com.example.luid.app-main-50:/layout/achvcardview.xml"
+    },
+    {
+        "merged": "com.example.luid.app-mergeDebugResources-47:/layout/fragment_about_quinta.xml",
+        "source": "com.example.luid.app-main-50:/layout/fragment_about_quinta.xml"
+    },
+    {
+        "merged": "com.example.luid.app-mergeDebugResources-47:/layout/activity_sentencefragment.xml",
+        "source": "com.example.luid.app-main-50:/layout/activity_sentencefragment.xml"
+    },
+    {
+        "merged": "com.example.luid.app-mergeDebugResources-47:/layout/sentencefragmentview.xml",
+        "source": "com.example.luid.app-main-50:/layout/sentencefragmentview.xml"
+    },
+    {
+        "merged": "com.example.luid.app-mergeDebugResources-47:/layout/activity_main.xml",
+        "source": "com.example.luid.app-main-50:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.luid.app-mergeDebugResources-47:/layout/word_association_view.xml",
+        "source": "com.example.luid.app-main-50:/layout/word_association_view.xml"
+    },
+    {
+        "merged": "com.example.luid.app-mergeDebugResources-47:/layout/fragment_story.xml",
+        "source": "com.example.luid.app-main-50:/layout/fragment_story.xml"
+    },
+    {
+        "merged": "com.example.luid.app-mergeDebugResources-47:/layout/parentphasecard.xml",
+        "source": "com.example.luid.app-main-50:/layout/parentphasecard.xml"
+    },
+    {
+        "merged": "com.example.luid.app-mergeDebugResources-47:/layout/fragment_tab_phase_review.xml",
+        "source": "com.example.luid.app-main-50:/layout/fragment_tab_phase_review.xml"
+    },
+    {
+        "merged": "com.example.luid.app-mergeDebugResources-47:/layout/fragment_phase.xml",
+        "source": "com.example.luid.app-main-50:/layout/fragment_phase.xml"
+    },
+    {
+        "merged": "com.example.luid.app-mergeDebugResources-47:/layout/eachlevelview.xml",
+        "source": "com.example.luid.app-main-50:/layout/eachlevelview.xml"
+    },
+    {
+        "merged": "com.example.luid.app-mergeDebugResources-47:/layout/fragment_about.xml",
+        "source": "com.example.luid.app-main-50:/layout/fragment_about.xml"
+    },
+    {
+        "merged": "com.example.luid.app-mergeDebugResources-47:/layout/fragment_profile.xml",
+        "source": "com.example.luid.app-main-50:/layout/fragment_profile.xml"
+    }
+]
