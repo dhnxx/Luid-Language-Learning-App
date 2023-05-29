@@ -1,0 +1,131 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.luid"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+8-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="33" />
+9-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+11-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:5:5-81
+11-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:5:22-78
+12
+13    <permission
+13-->[androidx.core:core:1.10.1] C:\Users\dhn\.gradle\caches\transforms-3\78b4e9434c97da7aa1cdc9dbdaf8fc00\transformed\core-1.10.1\AndroidManifest.xml:22:5-24:47
+14        android:name="com.example.luid.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+14-->[androidx.core:core:1.10.1] C:\Users\dhn\.gradle\caches\transforms-3\78b4e9434c97da7aa1cdc9dbdaf8fc00\transformed\core-1.10.1\AndroidManifest.xml:23:9-81
+15        android:protectionLevel="signature" />
+15-->[androidx.core:core:1.10.1] C:\Users\dhn\.gradle\caches\transforms-3\78b4e9434c97da7aa1cdc9dbdaf8fc00\transformed\core-1.10.1\AndroidManifest.xml:24:9-44
+16
+17    <uses-permission android:name="com.example.luid.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+17-->[androidx.core:core:1.10.1] C:\Users\dhn\.gradle\caches\transforms-3\78b4e9434c97da7aa1cdc9dbdaf8fc00\transformed\core-1.10.1\AndroidManifest.xml:26:5-97
+17-->[androidx.core:core:1.10.1] C:\Users\dhn\.gradle\caches\transforms-3\78b4e9434c97da7aa1cdc9dbdaf8fc00\transformed\core-1.10.1\AndroidManifest.xml:26:22-94
+18
+19    <application
+19-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:7:5-41:19
+20        android:allowBackup="true"
+20-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:8:9-35
+21        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+21-->[androidx.core:core:1.10.1] C:\Users\dhn\.gradle\caches\transforms-3\78b4e9434c97da7aa1cdc9dbdaf8fc00\transformed\core-1.10.1\AndroidManifest.xml:28:18-86
+22        android:dataExtractionRules="@xml/data_extraction_rules"
+22-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:9:9-65
+23        android:debuggable="true"
+24        android:extractNativeLibs="false"
+25        android:fullBackupContent="@xml/backup_rules"
+25-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:10:9-54
+26        android:hardwareAccelerated="true"
+26-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:16:9-43
+27        android:icon="@drawable/luid_white"
+27-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:11:9-44
+28        android:label="@string/app_name"
+28-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:12:9-41
+29        android:supportsRtl="true"
+29-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:13:9-35
+30        android:testOnly="true"
+31        android:theme="@style/AppTheme" >
+31-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:14:9-40
+32        <activity
+32-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:18:9-28:20
+33            android:name="com.example.luid.fragments.mainmenu.MainActivity"
+33-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:19:13-60
+34            android:exported="true"
+34-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:20:13-36
+35            android:label="@string/app_name"
+35-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:21:13-45
+36            android:theme="@style/AppTheme" >
+36-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:22:13-44
+37            <intent-filter>
+37-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:23:13-27:29
+38                <action android:name="android.intent.action.MAIN" />
+38-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:24:17-69
+38-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:24:25-66
+39
+40                <category android:name="android.intent.category.LAUNCHER" />
+40-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:26:17-77
+40-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:26:27-74
+41            </intent-filter>
+42        </activity>
+43        <activity
+43-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:29:9-32:54
+44            android:name="com.example.luid.fragments.gamemodes.SentenceFragment"
+44-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:30:13-65
+45            android:exported="true"
+45-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:31:13-36
+46            android:windowSoftInputMode="adjustPan" />
+46-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:32:13-52
+47        <activity
+47-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:33:9-35:39
+48            android:name="com.example.luid.fragments.gamemodes.SentenceConstruction"
+48-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:34:13-69
+49            android:exported="true" />
+49-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:35:13-36
+50        <activity
+50-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:36:9-39:47
+51            android:name="com.example.luid.fragments.gamemodes.WordAssociation"
+51-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:37:13-64
+52            android:exported="true"
+52-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:38:13-36
+53            android:theme="@style/AppTheme" />
+53-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:39:13-44
+54
+55        <uses-library
+55-->[androidx.window:window:1.0.0] C:\Users\dhn\.gradle\caches\transforms-3\710bae210ab5fa9b11ffe3a6b034c0d0\transformed\window-1.0.0\AndroidManifest.xml:25:9-27:40
+56            android:name="androidx.window.extensions"
+56-->[androidx.window:window:1.0.0] C:\Users\dhn\.gradle\caches\transforms-3\710bae210ab5fa9b11ffe3a6b034c0d0\transformed\window-1.0.0\AndroidManifest.xml:26:13-54
+57            android:required="false" />
+57-->[androidx.window:window:1.0.0] C:\Users\dhn\.gradle\caches\transforms-3\710bae210ab5fa9b11ffe3a6b034c0d0\transformed\window-1.0.0\AndroidManifest.xml:27:13-37
+58        <uses-library
+58-->[androidx.window:window:1.0.0] C:\Users\dhn\.gradle\caches\transforms-3\710bae210ab5fa9b11ffe3a6b034c0d0\transformed\window-1.0.0\AndroidManifest.xml:28:9-30:40
+59            android:name="androidx.window.sidecar"
+59-->[androidx.window:window:1.0.0] C:\Users\dhn\.gradle\caches\transforms-3\710bae210ab5fa9b11ffe3a6b034c0d0\transformed\window-1.0.0\AndroidManifest.xml:29:13-51
+60            android:required="false" />
+60-->[androidx.window:window:1.0.0] C:\Users\dhn\.gradle\caches\transforms-3\710bae210ab5fa9b11ffe3a6b034c0d0\transformed\window-1.0.0\AndroidManifest.xml:30:13-37
+61
+62        <provider
+62-->[androidx.emoji2:emoji2:1.2.0] C:\Users\dhn\.gradle\caches\transforms-3\1a60a21b74c53048d7b215710b25ad1e\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+63            android:name="androidx.startup.InitializationProvider"
+63-->[androidx.emoji2:emoji2:1.2.0] C:\Users\dhn\.gradle\caches\transforms-3\1a60a21b74c53048d7b215710b25ad1e\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+64            android:authorities="com.example.luid.androidx-startup"
+64-->[androidx.emoji2:emoji2:1.2.0] C:\Users\dhn\.gradle\caches\transforms-3\1a60a21b74c53048d7b215710b25ad1e\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+65            android:exported="false" >
+65-->[androidx.emoji2:emoji2:1.2.0] C:\Users\dhn\.gradle\caches\transforms-3\1a60a21b74c53048d7b215710b25ad1e\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
+66            <meta-data
+66-->[androidx.emoji2:emoji2:1.2.0] C:\Users\dhn\.gradle\caches\transforms-3\1a60a21b74c53048d7b215710b25ad1e\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+67                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+67-->[androidx.emoji2:emoji2:1.2.0] C:\Users\dhn\.gradle\caches\transforms-3\1a60a21b74c53048d7b215710b25ad1e\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
+68                android:value="androidx.startup" />
+68-->[androidx.emoji2:emoji2:1.2.0] C:\Users\dhn\.gradle\caches\transforms-3\1a60a21b74c53048d7b215710b25ad1e\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+69            <meta-data
+69-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\dhn\.gradle\caches\transforms-3\0a355154793be38f6ee2d97a0a53ab66\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+70                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+70-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\dhn\.gradle\caches\transforms-3\0a355154793be38f6ee2d97a0a53ab66\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+71                android:value="androidx.startup" />
+71-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\dhn\.gradle\caches\transforms-3\0a355154793be38f6ee2d97a0a53ab66\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+72        </provider>
+73    </application>
+74
+75</manifest>
