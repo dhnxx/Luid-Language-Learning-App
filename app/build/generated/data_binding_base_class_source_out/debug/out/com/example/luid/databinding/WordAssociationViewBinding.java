@@ -65,6 +65,9 @@ public final class WordAssociationViewBinding implements ViewBinding {
   public final ConstraintLayout constraintLayout4;
 
   @NonNull
+  public final Button nextButton;
+
+  @NonNull
   public final TextView question;
 
   @NonNull
@@ -80,8 +83,8 @@ public final class WordAssociationViewBinding implements ViewBinding {
       @NonNull MaterialCardView choice3, @NonNull ImageView choice3Image,
       @NonNull TextView choice3Text, @NonNull MaterialCardView choice4,
       @NonNull ImageView choice4Image, @NonNull TextView choice4Text,
-      @NonNull ConstraintLayout constraintLayout4, @NonNull TextView question,
-      @NonNull Button submitButton, @NonNull TextView usrtxt) {
+      @NonNull ConstraintLayout constraintLayout4, @NonNull Button nextButton,
+      @NonNull TextView question, @NonNull Button submitButton, @NonNull TextView usrtxt) {
     this.rootView = rootView;
     this.anstxt = anstxt;
     this.choice1 = choice1;
@@ -97,6 +100,7 @@ public final class WordAssociationViewBinding implements ViewBinding {
     this.choice4Image = choice4Image;
     this.choice4Text = choice4Text;
     this.constraintLayout4 = constraintLayout4;
+    this.nextButton = nextButton;
     this.question = question;
     this.submitButton = submitButton;
     this.usrtxt = usrtxt;
@@ -213,6 +217,12 @@ public final class WordAssociationViewBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.nextButton;
+      Button nextButton = ViewBindings.findChildViewById(rootView, id);
+      if (nextButton == null) {
+        break missingId;
+      }
+
       id = R.id.question;
       TextView question = ViewBindings.findChildViewById(rootView, id);
       if (question == null) {
@@ -233,7 +243,7 @@ public final class WordAssociationViewBinding implements ViewBinding {
 
       return new WordAssociationViewBinding((ConstraintLayout) rootView, anstxt, choice1,
           choice1Image, choice1Text, choice2, choice2Image, choice2Text, choice3, choice3Image,
-          choice3Text, choice4, choice4Image, choice4Text, constraintLayout4, question,
+          choice3Text, choice4, choice4Image, choice4Text, constraintLayout4, nextButton, question,
           submitButton, usrtxt);
     }
     String missingId = rootView.getResources().getResourceName(id);

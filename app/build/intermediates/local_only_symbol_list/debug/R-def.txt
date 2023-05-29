@@ -180,6 +180,7 @@ id materialCardView
 id materialCardView2
 id materialCardView3
 id nav_graph
+id nextButton
 id parentTitle
 id phaseRecyclerView
 id profileFragment
