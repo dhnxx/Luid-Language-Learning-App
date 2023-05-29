@@ -4,16 +4,16 @@
         "source": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-main-50:\\layout\\fragment_about.xml"
     },
     {
-        "merged": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-mergeDebugResources-47:\\layout\\fragment_about_luid.xml",
-        "source": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-main-50:\\layout\\fragment_about_luid.xml"
+        "merged": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-mergeDebugResources-47:\\layout\\fragment_tab_phase_review.xml",
+        "source": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-main-50:\\layout\\fragment_tab_phase_review.xml"
     },
     {
         "merged": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-mergeDebugResources-47:\\layout\\fragment_about_quinta.xml",
         "source": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-main-50:\\layout\\fragment_about_quinta.xml"
     },
     {
-        "merged": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-mergeDebugResources-47:\\layout\\fragment_tab_phase_review.xml",
-        "source": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-main-50:\\layout\\fragment_tab_phase_review.xml"
+        "merged": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-mergeDebugResources-47:\\layout\\fragment_about_luid.xml",
+        "source": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-main-50:\\layout\\fragment_about_luid.xml"
     },
     {
         "merged": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-mergeDebugResources-47:\\layout\\word_association_view.xml",
@@ -36,12 +36,20 @@
         "source": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-main-50:\\layout\\fragment_story.xml"
     },
     {
+        "merged": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-mergeDebugResources-47:\\layout\\eachlevelview.xml",
+        "source": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-main-50:\\layout\\eachlevelview.xml"
+    },
+    {
         "merged": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-mergeDebugResources-47:\\layout\\parentphasecard.xml",
         "source": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-main-50:\\layout\\parentphasecard.xml"
     },
     {
-        "merged": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-mergeDebugResources-47:\\layout\\eachlevelview.xml",
-        "source": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-main-50:\\layout\\eachlevelview.xml"
+        "merged": "com.example.luid.app-mergeDebugResources-47:/layout/word_association_view.xml",
+        "source": "com.example.luid.app-main-50:/layout/word_association_view.xml"
+    },
+    {
+        "merged": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-mergeDebugResources-47:\\layout\\fragment_result.xml",
+        "source": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-main-50:\\layout\\fragment_result.xml"
     },
     {
         "merged": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-mergeDebugResources-47:\\layout\\fragment_profile.xml",
@@ -82,10 +90,6 @@
     {
         "merged": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-mergeDebugResources-47:\\layout\\activity_sentence_construction.xml",
         "source": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-main-50:\\layout\\activity_sentence_construction.xml"
-    },
-    {
-        "merged": "com.example.luid.app-mergeDebugResources-47:/layout/fragment_result.xml",
-        "source": "com.example.luid.app-main-50:/layout/fragment_result.xml"
     },
     {
         "merged": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-mergeDebugResources-47:\\layout\\achvcardview.xml",

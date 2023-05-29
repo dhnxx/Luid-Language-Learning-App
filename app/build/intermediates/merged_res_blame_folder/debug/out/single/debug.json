@@ -20,10 +20,6 @@
         "source": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-main-50:\\drawable\\about.xml"
     },
     {
-        "merged": "com.example.luid.app-merged_res-48:/layout_fragment_result.xml.flat",
-        "source": "com.example.luid.app-main-50:/layout/fragment_result.xml"
-    },
-    {
         "merged": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-merged_res-48:\\drawable_home.xml.flat",
         "source": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-main-50:\\drawable\\home.xml"
     },
@@ -152,8 +148,16 @@
         "source": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-main-50:\\layout\\word_association_view.xml"
     },
     {
+        "merged": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-merged_res-48:\\layout_fragment_result.xml.flat",
+        "source": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-main-50:\\layout\\fragment_result.xml"
+    },
+    {
         "merged": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-merged_res-48:\\drawable_bnav_home.xml.flat",
         "source": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-main-50:\\drawable\\bnav_home.xml"
+    },
+    {
+        "merged": "com.example.luid.app-merged_res-48:/layout_word_association_view.xml.flat",
+        "source": "com.example.luid.app-main-50:/layout/word_association_view.xml"
     },
     {
         "merged": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-merged_res-48:\\drawable_quinta.png.flat",
