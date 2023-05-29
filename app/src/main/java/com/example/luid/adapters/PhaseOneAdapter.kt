@@ -58,6 +58,7 @@ class PhaseOneAdapter(
         val choice4Text: TextView = itemView.findViewById(R.id.choice4Text)
         val choice4Image: ImageView = itemView.findViewById(R.id.choice4Image)
         val submitButton: Button = itemView.findViewById(R.id.submitButton)
+        val nextButton: Button = itemView.findViewById(R.id.nextButton)
         val usrtxt: TextView = itemView.findViewById(R.id.usrtxt)
         val anstxt: TextView = itemView.findViewById(R.id.anstxt)
     }
@@ -77,6 +78,11 @@ class PhaseOneAdapter(
 
 
         val question = questionList[position]
+
+        holder.nextButton.visibility = View.GONE
+        holder.submitButton.visibility = View.VISIBLE
+        holder.nextButton.isEnabled = false
+        holder.submitButton.isEnabled = true
 
         recyclerView.isNestedScrollingEnabled = false
         var db = DBConnect(context).readableDatabase
@@ -157,6 +163,7 @@ class PhaseOneAdapter(
             tempAns = holder.choice4Text.text.toString()
             holder.usrtxt.text = tempAns
         }
+        println("Correct Answer: $correctAns")
 
         holder.submitButton.setOnClickListener {
 /*
@@ -183,8 +190,7 @@ class PhaseOneAdapter(
                     db.update("$temp_qstion", cv, "_id = $id1", null)
 
 */
-            println("CORRECT ANSWER : $correctAns")
-            println("CORRECT ANSWER : $correctAnswer")
+
             var db = DBConnect(context).readableDatabase
             var cursor = db.rawQuery(
                 "SELECT * FROM $questions_tb WHERE kapampangan = ?  OR tagalog = ? OR english = ?",
@@ -198,7 +204,6 @@ class PhaseOneAdapter(
 
             //
 
-            println("Correct Answer: $correctAns")
 
             if (holder.usrtxt.text == holder.anstxt.text) {
                 Toast.makeText(holder.submitButton.context, "Correct!", Toast.LENGTH_SHORT).show()
@@ -248,12 +253,13 @@ class PhaseOneAdapter(
 
             // change submit button to next button
 
+            holder.submitButton.visibility = View.GONE
+            holder.nextButton.visibility = View.VISIBLE
+            holder.submitButton.isEnabled = false
+            holder.nextButton.isEnabled = true
 
-            holder.submitButton.text = "Next"
-            holder.submitButton.setOnClickListener {
-                // reset submit button
-                holder.submitButton.text = "Submit"
-                // reset card color
+            holder.nextButton.setOnClickListener {
+
                 cardReset()
                 // reset user answer
                 holder.usrtxt.text = ""
@@ -323,9 +329,7 @@ class PhaseOneAdapter(
                 var sm = SMLeitner(context)
                 score = sm.score(correctAnswer, questionList.size)
 
-                println(questionList.size)
-                println(correctAnswer)
-                println(score)
+
 
                 tempAns = "" // reset tempAns
                 correctAns = "" // reset correctAns
