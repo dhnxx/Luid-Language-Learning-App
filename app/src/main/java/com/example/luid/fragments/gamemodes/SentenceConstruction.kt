@@ -1,4 +1,4 @@
-package com.example.luid.fragments.mainmenu.gamemodes
+package com.example.luid.fragments.gamemodes
 
 import android.annotation.SuppressLint
 import android.database.Cursor

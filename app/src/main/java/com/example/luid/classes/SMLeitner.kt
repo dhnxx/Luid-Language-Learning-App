@@ -553,5 +553,50 @@ class SMLeitner(context : Context) {
         return resultScreen
     }
 
+    // To force change the gameSession Number in user_records and questions tables
+    // used in querying atleast 5 questions during a game session
+    fun validateQuestionBank(context: Context, level: Int, phase: Int){
+        var db = DBConnect(context).writableDatabase
+        var cursor = db.rawQuery("SELECT * FROM $tQuestions WHERE level = $level AND phase = $phase AND game_session = $currentGameSession",null)
+        var count = cursor.count
+        var cv = ContentValues()
+
+        println("COUNT : $count")
+
+
+        while (count < 5){
+            cursor = db.rawQuery("SELECT * FROM $tQuestions WHERE level = $level AND phase = $phase AND game_session = $currentGameSession",null)
+            count = cursor.count
+            if(!(count < 5)){
+                break
+            }
+            cursor = db.rawQuery("SELECT * FROM $tUserRecords", null)
+
+            cursor.moveToLast()
+            var gameSessionCol = cursor.getColumnIndex("game_session_number")
+            var idCol = cursor.getColumnIndex("_id")
+            var gameSessionTempVal = cursor.getInt(gameSessionCol)
+            var gameSessionValUpd = gameSessionTempVal + 1
+            var idVal = cursor.getInt(idCol)
+            currentGameSession = gameSessionValUpd
+
+            cv.put("game_session_number", gameSessionValUpd)
+            db.update("$tUserRecords", cv, "_id = $idVal", null)
+            cv.clear()
+
+            cv.put("game_session", gameSessionValUpd)
+            db.update("$tTempQuestions", cv, "game_session = $gameSessionTempVal", null)
+            db.update("$tQuestions", cv, "game_session = $gameSessionTempVal", null)
+            cv.clear()
+            count++
+        }
+
+        cv.clear()
+        cursor.close()
+        db.close()
+    }
+
+
+
 
 }
