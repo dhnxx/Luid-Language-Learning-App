@@ -27,11 +27,25 @@ class WordAssociation : AppCompatActivity() {
     private var level = 0
     private var phase = 0
     private var timeSpent = 0
+    private val layoutManager = CustomGridLayoutManager(this)
 
+
+    class CustomGridLayoutManager(context: Context) : LinearLayoutManager(context, HORIZONTAL, false) {
+        private var isScrollEnabled = true
+
+        fun setScrollEnabled(flag: Boolean) {
+            isScrollEnabled = flag
+        }
+
+        override fun canScrollHorizontally(): Boolean {
+            return isScrollEnabled && super.canScrollHorizontally()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_word_association)
+
 
         // intent is used for communicating between fragments to separate activities
         val selectPhase = intent.getStringExtra("Phase")
@@ -41,18 +55,29 @@ class WordAssociation : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.layoutManager = layoutManager
+
+
         questionList = ArrayList()
         // getQuestionList(selectPhase)
         phaseone()
-        adapter = PhaseOneAdapter(recyclerView, questionList, progressbar, context, level, phase, timeSpent)
+        adapter = PhaseOneAdapter(
+            recyclerView,
+            questionList,
+            progressbar,
+            context,
+            level,
+            phase,
+            timeSpent,
+            layoutManager
+        )
         recyclerView.adapter = adapter
 
         progressbar.max = questionList.size
 
 
     }
+
 
     @SuppressLint("Range")
     private fun phaseone() {
@@ -83,10 +108,10 @@ class WordAssociation : AppCompatActivity() {
 
             } while (cursor.moveToNext())
         }
-        for(i in 0 until 10) {
+        for (i in 0 until 10) {
             decoy.clear()
 
-            when ( (1..4).random() ){
+            when ((1..4).random()) {
 
                 1 -> {
                     decoy.clear()
@@ -95,11 +120,11 @@ class WordAssociation : AppCompatActivity() {
                     answers.add(tag[i])
 
                     decoy.addAll(tag)
-                    for(i in answers){
-                        for(j in tag) {
+                    for (i in answers) {
+                        for (j in tag) {
                             if (decoy.contains(i)) {
                                 decoy.remove(i)
-                                if(!answers.contains(j)){
+                                if (!answers.contains(j)) {
                                     decoy.add(j)
                                 }
                             }
@@ -114,11 +139,11 @@ class WordAssociation : AppCompatActivity() {
                     answers.add(eng[i])
 
                     decoy.addAll(eng)
-                    for(i in answers){
-                        for(j in eng) {
+                    for (i in answers) {
+                        for (j in eng) {
                             if (decoy.contains(i)) {
                                 decoy.remove(i)
-                                if(!answers.contains(j)){
+                                if (!answers.contains(j)) {
                                     decoy.add(j)
                                 }
                             }
@@ -133,11 +158,11 @@ class WordAssociation : AppCompatActivity() {
                     question.add("What is " + tag[i] + " in Kapampangan?")
                     answers.add(kap[i])
                     decoy.addAll(kap)
-                    for(i in answers){
-                        for(j in kap) {
+                    for (i in answers) {
+                        for (j in kap) {
                             if (decoy.contains(i)) {
                                 decoy.remove(i)
-                                if(!answers.contains(j)){
+                                if (!answers.contains(j)) {
                                     decoy.add(j)
                                 }
                             }
@@ -152,11 +177,11 @@ class WordAssociation : AppCompatActivity() {
                     answers.add(kap[i])
 
                     decoy.addAll(kap)
-                    for(i in answers){
-                        for(j in kap) {
+                    for (i in answers) {
+                        for (j in kap) {
                             if (decoy.contains(i)) {
                                 decoy.remove(i)
-                                if(!answers.contains(j)){
+                                if (!answers.contains(j)) {
                                     decoy.add(j)
                                 }
                             }
@@ -191,6 +216,14 @@ class WordAssociation : AppCompatActivity() {
         // clear question temp table after
         cursor.close()
     }
+
+
+
 }
+
+
+
+
+
 
 
