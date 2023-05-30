@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.luid.fragments.mainmenu.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_tabPhaseReview"
+            app:destination="@id/tabPhaseReview" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.luid.fragments.mainmenu.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.luid.fragments.mainmenu.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" >
+        <action
+            android:id="@+id/action_aboutFragment_to_about_luid2"
+            app:destination="@id/about_luid2" />
+        <action
+            android:id="@+id/action_aboutFragment_to_about_quinta"
+            app:destination="@id/about_quinta" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.luid.fragments.mainmenu.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/about_luid2"
+        android:name="com.example.luid.fragments.mainmenu.about_luid"
+        android:label="fragment_about_luid"
+        tools:layout="@layout/fragment_about_luid" />
+    <fragment
+        android:id="@+id/about_quinta"
+        android:name="com.example.luid.fragments.mainmenu.about_quinta"
+        android:label="fragment_about_quinta"
+        tools:layout="@layout/fragment_about_quinta" />
+    <fragment
+        android:id="@+id/tabPhaseReview"
+        android:name="com.example.luid.fragments.mainmenu.TabPhaseReview"
+        android:label="fragment_tab_phase_review"
+        tools:layout="@layout/fragment_tab_phase_review" >
+        <action
+            android:id="@+id/action_tabPhaseReview_to_storyFragment"
+            app:destination="@id/StoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/StoryFragment"
+        android:name="com.example.luid.fragments.mainmenu.StoryFragment"
+        android:label="storyFragment" >
+        <argument
+            android:name="phase"
+            app:argType="integer" />
+        <argument
+            android:name="level"
+            app:argType="integer"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/WordAssociation2"
+        android:name="com.example.luid.fragments.gamemodes.WordAssociation"
+        android:label="activity_word_association2"
+        tools:layout="@layout/activity_word_association2" >
+        <action
+            android:id="@+id/action_WordAssociation2_to_resultFragment"
+            app:destination="@id/resultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.example.luid.fragments.mainmenu.ResultFragment"
+        android:label="ResultFragment" />
+
+
+</navigation>
