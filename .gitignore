@@ -1,6 +1,7 @@
 # Gradle files
 .gradle/
-build/
+build 
+!build/generated/source/navigation-args/debug/com/example/luid/fragments/mainmenu
 
 # Local configuration file (sdk path, etc)
 local.properties
