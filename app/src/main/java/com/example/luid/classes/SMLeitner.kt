@@ -231,6 +231,94 @@ class SMLeitner(context : Context) {
         ldb.update("$tUserRecords", cv, "_id = $id", null)
     }
 
+    fun compareDF(context: Context) : ArrayList<ResultScreen>{
+        var db = DBConnect(context).readableDatabase
+        var cursorTemp = db.rawQuery("SELECT * FROM $temp_qstion", null)
+        var cursorMain : Cursor
+        var resultScreen = ArrayList<ResultScreen>()
+
+        /*
+        parameters || word : String, finalDF : Int, status : Int
+        0 -> sustain
+        1 -> diminish
+        2 -> improve
+         */
+
+        cursorTemp.moveToFirst()
+        var colTempId = cursorTemp.getColumnIndex("_id")
+        var colTempDF = cursorTemp.getColumnIndex("difficulty_level")
+        var colTempKap = cursorTemp.getColumnIndex("kapampangan")
+
+        var idTemp = cursorTemp.getInt(colTempId)
+
+        var dfTemp = 0
+        var dfMain = 0
+        var kapTemp = ""
+        var mainDFCol = 0
+
+        do{
+            cursorMain = db.rawQuery("SELECT * FROM $tQuestions WHERE _id = $idTemp", null)
+            cursorMain.moveToFirst()
+            mainDFCol = cursorMain.getColumnIndex("difficulty_level")
+
+            dfTemp = cursorTemp.getInt(colTempDF)
+            kapTemp = cursorTemp.getString(colTempKap)
+            dfMain = cursorMain.getInt(mainDFCol)
+
+            when{
+                dfTemp < dfMain -> resultScreen.add(ResultScreen(kapTemp, dfTemp, 1))
+                dfTemp > dfMain -> resultScreen.add(ResultScreen(kapTemp, dfTemp, 2))
+                else -> resultScreen.add(ResultScreen(kapTemp, dfTemp, 0))
+            }
+        }while(cursorTemp.moveToNext())
+
+        return resultScreen
+    }
+
+    // To force change the gameSession Number in user_records and questions tables
+    // used in querying atleast 5 questions during a game session
+    fun validateQuestionBank(context: Context, level: Int, phase: Int){
+        var db = DBConnect(context).writableDatabase
+        var cursor = db.rawQuery("SELECT * FROM $tQuestions WHERE level = $level AND phase = $phase AND game_session = $currentGameSession",null)
+        var count = cursor.count
+        var cv = ContentValues()
+
+        println("COUNT : $count")
+
+
+        while (count < 5){
+            cursor = db.rawQuery("SELECT * FROM $tQuestions WHERE level = $level AND phase = $phase AND game_session = $currentGameSession",null)
+            count = cursor.count
+            if(!(count < 5)){
+                break
+            }
+            cursor = db.rawQuery("SELECT * FROM $tUserRecords", null)
+
+            cursor.moveToLast()
+            var gameSessionCol = cursor.getColumnIndex("game_session_number")
+            var idCol = cursor.getColumnIndex("_id")
+            var gameSessionTempVal = cursor.getInt(gameSessionCol)
+            var gameSessionValUpd = gameSessionTempVal + 1
+            var idVal = cursor.getInt(idCol)
+            currentGameSession = gameSessionValUpd
+
+            cv.put("game_session_number", gameSessionValUpd)
+            db.update("$tUserRecords", cv, "_id = $idVal", null)
+            cv.clear()
+
+            cv.put("game_session", gameSessionValUpd)
+            db.update("$tTempQuestions", cv, "game_session = $gameSessionTempVal", null)
+            db.update("$tQuestions", cv, "game_session = $gameSessionTempVal", null)
+            cv.clear()
+            count++
+        }
+
+        cv.clear()
+        cursor.close()
+        db.close()
+    }
+
+
     // Methods for Achievements
 
     // ============================================================
@@ -454,6 +542,9 @@ class SMLeitner(context : Context) {
         return cursor.count
     }
 
+    // ============================================================
+    // Method to update Purchased Hearts Achievement in achievements table
+
     // Check if the user passed the level and/or phase
     fun ifPassed(db: SQLiteDatabase, level: Int, phase: Int): Boolean {
         var pass = getAchCLPassed(db, level, phase)
@@ -467,8 +558,6 @@ class SMLeitner(context : Context) {
         }
     }
 
-    // ============================================================
-    // Method to update Purchased Hearts Achievement in achievements table
     // ============================================================
 
     // Update achievements table for PH achievement
@@ -507,93 +596,6 @@ class SMLeitner(context : Context) {
         ldb.close()
 
         ldb.close()
-    }
-
-    fun compareDF(context: Context) : ArrayList<ResultScreen>{
-        var db = DBConnect(context).readableDatabase
-        var cursorTemp = db.rawQuery("SELECT * FROM $temp_qstion", null)
-        var cursorMain : Cursor
-        var resultScreen = ArrayList<ResultScreen>()
-
-        /*
-        parameters || word : String, finalDF : Int, status : Int
-        0 -> sustain
-        1 -> diminish
-        2 -> improve
-         */
-
-        cursorTemp.moveToFirst()
-        var colTempId = cursorTemp.getColumnIndex("_id")
-        var colTempDF = cursorTemp.getColumnIndex("difficulty_level")
-        var colTempKap = cursorTemp.getColumnIndex("kapampangan")
-
-        var idTemp = cursorTemp.getInt(colTempId)
-
-        var dfTemp = 0
-        var dfMain = 0
-        var kapTemp = ""
-        var mainDFCol = 0
-
-        do{
-            cursorMain = db.rawQuery("SELECT * FROM $tQuestions WHERE _id = $idTemp", null)
-            cursorMain.moveToFirst()
-            mainDFCol = cursorMain.getColumnIndex("difficulty_level")
-
-            dfTemp = cursorTemp.getInt(colTempDF)
-            kapTemp = cursorTemp.getString(colTempKap)
-            dfMain = cursorMain.getInt(mainDFCol)
-
-            when{
-                dfTemp < dfMain -> resultScreen.add(ResultScreen(kapTemp, dfTemp, 1))
-                dfTemp > dfMain -> resultScreen.add(ResultScreen(kapTemp, dfTemp, 2))
-                else -> resultScreen.add(ResultScreen(kapTemp, dfTemp, 0))
-            }
-        }while(cursorTemp.moveToNext())
-
-        return resultScreen
-    }
-
-    // To force change the gameSession Number in user_records and questions tables
-    // used in querying atleast 5 questions during a game session
-    fun validateQuestionBank(context: Context, level: Int, phase: Int){
-        var db = DBConnect(context).writableDatabase
-        var cursor = db.rawQuery("SELECT * FROM $tQuestions WHERE level = $level AND phase = $phase AND game_session = $currentGameSession",null)
-        var count = cursor.count
-        var cv = ContentValues()
-
-        println("COUNT : $count")
-
-
-        while (count < 5){
-            cursor = db.rawQuery("SELECT * FROM $tQuestions WHERE level = $level AND phase = $phase AND game_session = $currentGameSession",null)
-            count = cursor.count
-            if(!(count < 5)){
-                break
-            }
-            cursor = db.rawQuery("SELECT * FROM $tUserRecords", null)
-
-            cursor.moveToLast()
-            var gameSessionCol = cursor.getColumnIndex("game_session_number")
-            var idCol = cursor.getColumnIndex("_id")
-            var gameSessionTempVal = cursor.getInt(gameSessionCol)
-            var gameSessionValUpd = gameSessionTempVal + 1
-            var idVal = cursor.getInt(idCol)
-            currentGameSession = gameSessionValUpd
-
-            cv.put("game_session_number", gameSessionValUpd)
-            db.update("$tUserRecords", cv, "_id = $idVal", null)
-            cv.clear()
-
-            cv.put("game_session", gameSessionValUpd)
-            db.update("$tTempQuestions", cv, "game_session = $gameSessionTempVal", null)
-            db.update("$tQuestions", cv, "game_session = $gameSessionTempVal", null)
-            cv.clear()
-            count++
-        }
-
-        cv.clear()
-        cursor.close()
-        db.close()
     }
 
 
