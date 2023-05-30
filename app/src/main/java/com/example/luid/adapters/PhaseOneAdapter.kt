@@ -356,8 +356,7 @@ class PhaseOneAdapter(
 
 
 
-                var sm = SMLeitner(context)
-                score = sm.score(correctAnswer, questionList.size)
+
 
 
 
