@@ -14,6 +14,7 @@ import com.example.luid.R
 import android.content.Context
 import android.database.Cursor
 import android.graphics.Color
+import android.os.Handler
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.Toast
@@ -23,6 +24,7 @@ import com.example.luid.database.DBConnect
 import com.example.luid.database.DBConnect.Companion.questions_tb
 import com.example.luid.database.DBConnect.Companion.temp_qstion
 import java.util.*
+import com.example.luid.fragments.gamemodes.WordAssociation
 
 
 class PhaseOneAdapter(
@@ -32,7 +34,10 @@ class PhaseOneAdapter(
     private val context: Context,
     private val level: Int,
     private val phase: Int,
-    private val timeSpent: Int = 0
+    private val timeSpent: Int = 0,
+    private val layoutManager: WordAssociation.CustomGridLayoutManager = WordAssociation.CustomGridLayoutManager(
+        context
+    )
 ) :
     RecyclerView.Adapter<PhaseOneAdapter.QuestionViewHolder>() {
     private var tempAns: String = ""
@@ -40,6 +45,7 @@ class PhaseOneAdapter(
     private var correctAnswer = 0
     private var score = 0.0
     private var sm = SMLeitner(context)
+    private var en: Boolean = false
 
 
     inner class QuestionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -66,7 +72,10 @@ class PhaseOneAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.word_association_view, parent, false)
+
+
         return QuestionViewHolder(view)
+
     }
 
     override fun getItemCount(): Int {
@@ -76,15 +85,19 @@ class PhaseOneAdapter(
     @SuppressLint("ClickableViewAccessibility", "Range")
     override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {
 
+        //lock the recyclerview scrolling and enable card onlclicklistener
 
         val question = questionList[position]
+
+        layoutManager.setScrollEnabled(en)
+        println(en)
 
         holder.nextButton.visibility = View.GONE
         holder.submitButton.visibility = View.VISIBLE
         holder.nextButton.isEnabled = false
         holder.submitButton.isEnabled = true
 
-        recyclerView.isNestedScrollingEnabled = false
+
         var db = DBConnect(context).readableDatabase
         holder.question.text = question.questions
 
@@ -95,8 +108,8 @@ class PhaseOneAdapter(
         holder.usrtxt.text = tempAns
         // Create a list of choices and shuffle them
 
-        holder.usrtxt.visibility = View.GONE
-        holder.anstxt.visibility = View.GONE
+        holder.usrtxt.visibility = View.VISIBLE
+        holder.anstxt.visibility = View.VISIBLE
 
 
         val choices = mutableListOf(
@@ -127,6 +140,7 @@ class PhaseOneAdapter(
             setCardElevation(holder.choice3, 1f, holder.choice3.context)
             setCardElevation(holder.choice4, 1f, holder.choice4.context)
         }
+
 
         // Set click listeners or perform other operations as needed for the choices
         holder.choice1.setOnClickListener {
@@ -194,12 +208,12 @@ class PhaseOneAdapter(
             var db = DBConnect(context).readableDatabase
             var cursor = db.rawQuery(
                 "SELECT * FROM $questions_tb WHERE kapampangan = ?  OR tagalog = ? OR english = ?",
-                arrayOf("$correctAns","$correctAns","$correctAns")
+                arrayOf("$correctAns", "$correctAns", "$correctAns")
             )
             cursor.moveToFirst()
             var id = cursor.getInt(cursor.getColumnIndex("_id"))
             cursor.close()
-           // db.close()      remove muna
+            // db.close()      remove muna
 
 
             //
@@ -251,7 +265,6 @@ class PhaseOneAdapter(
             }
 
 
-            // change submit button to next button
 
             holder.submitButton.visibility = View.GONE
             holder.nextButton.visibility = View.VISIBLE
@@ -259,7 +272,7 @@ class PhaseOneAdapter(
             holder.nextButton.isEnabled = true
 
             holder.nextButton.setOnClickListener {
-
+                en = true
                 cardReset()
                 // reset user answer
                 holder.usrtxt.text = ""
@@ -273,9 +286,24 @@ class PhaseOneAdapter(
 
 
                 if (position < questionList.size - 1) {
-                    // proceed to the next question using snapHelper
+
+
+
                     recyclerView.smoothScrollToPosition(position + 1)
+
+
                     progressBar.progress += 1
+
+               // create a post that delays the en to false
+                    Handler().postDelayed({
+                        en = false
+                        println(en)
+                    }, 1000)
+
+
+
+
+
 
                 } else {
 
@@ -326,6 +354,8 @@ class PhaseOneAdapter(
 
                 }
 
+
+
                 var sm = SMLeitner(context)
                 score = sm.score(correctAnswer, questionList.size)
 
@@ -339,6 +369,7 @@ class PhaseOneAdapter(
 
 
         }
+
 
     }
 
