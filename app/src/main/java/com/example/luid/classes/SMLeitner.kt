@@ -4,7 +4,9 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import com.example.luid.ResultScreen
 import com.example.luid.database.DBConnect
+import com.example.luid.database.DBConnect.Companion.temp_qstion
 import java.util.Calendar
 
 
@@ -507,6 +509,49 @@ class SMLeitner(context : Context) {
         ldb.close()
     }
 
+    fun compareDF(context: Context) : ArrayList<ResultScreen>{
+        var db = DBConnect(context).readableDatabase
+        var cursorTemp = db.rawQuery("SELECT * FROM $temp_qstion", null)
+        var cursorMain : Cursor
+        var resultScreen = ArrayList<ResultScreen>()
+
+        /*
+        parameters || word : String, finalDF : Int, status : Int
+        0 -> sustain
+        1 -> diminish
+        2 -> improve
+         */
+
+        cursorTemp.moveToFirst()
+        var colTempId = cursorTemp.getColumnIndex("_id")
+        var colTempDF = cursorTemp.getColumnIndex("difficulty_level")
+        var colTempKap = cursorTemp.getColumnIndex("kapampangan")
+
+        var idTemp = cursorTemp.getInt(colTempId)
+
+        var dfTemp = 0
+        var dfMain = 0
+        var kapTemp = ""
+        var mainDFCol = 0
+
+        do{
+            cursorMain = db.rawQuery("SELECT * FROM $tQuestions WHERE _id = $idTemp", null)
+            cursorMain.moveToFirst()
+            mainDFCol = cursorMain.getColumnIndex("difficulty_level")
+
+            dfTemp = cursorTemp.getInt(colTempDF)
+            kapTemp = cursorTemp.getString(colTempKap)
+            dfMain = cursorMain.getInt(mainDFCol)
+
+            when{
+                dfTemp < dfMain -> resultScreen.add(ResultScreen(kapTemp, dfTemp, 1))
+                dfTemp > dfMain -> resultScreen.add(ResultScreen(kapTemp, dfTemp, 2))
+                else -> resultScreen.add(ResultScreen(kapTemp, dfTemp, 0))
+            }
+        }while(cursorTemp.moveToNext())
+
+        return resultScreen
+    }
 
 
 }
