@@ -8,13 +8,18 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
+        android:hardwareAccelerated="true"
         android:icon="@drawable/luid_white"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:targetApi="31"
-        android:hardwareAccelerated="true">
-
+        tools:targetApi="31">
+        <activity
+            android:name=".fragments.gamemodes.ResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".fragments.gamemodes.WordAssociation2"
+            android:exported="false" />
         <activity
             android:name=".fragments.mainmenu.MainActivity"
             android:exported="true"
@@ -29,7 +34,7 @@
         <activity
             android:name=".fragments.gamemodes.SentenceFragment"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".fragments.gamemodes.SentenceConstruction"
             android:exported="true" />
@@ -37,7 +42,6 @@
             android:name=".fragments.gamemodes.WordAssociation"
             android:exported="true"
             android:theme="@style/AppTheme" />
-
     </application>
 
 </manifest>

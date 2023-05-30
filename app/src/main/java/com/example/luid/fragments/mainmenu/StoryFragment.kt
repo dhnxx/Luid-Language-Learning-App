@@ -12,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.luid.fragments.gamemodes.SentenceConstruction
 import com.example.luid.fragments.gamemodes.SentenceFragment
 import com.example.luid.fragments.gamemodes.WordAssociation
+import com.example.luid.fragments.gamemodes.WordAssociation2
 
 
 class StoryFragment : Fragment() {
@@ -27,7 +28,7 @@ class StoryFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_story, container, false)
 
-        val intent1 = Intent(context, WordAssociation::class.java)
+        val intent1 = Intent(context, WordAssociation2::class.java)
         val intent2 = Intent(context, SentenceFragment::class.java)
         val intent3 = Intent(context, SentenceConstruction::class.java)
 
