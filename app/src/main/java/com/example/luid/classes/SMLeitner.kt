@@ -201,16 +201,28 @@ class SMLeitner() {
     fun addSession (context: Context, level: Int, phase: Int){
         var dbHelper = DBConnect(context)
         var ldb = dbHelper.writableDatabase
-        var cursor = ldb.rawQuery("SELECT * FROM $tUserRecords", null)
+        var cursor = ldb.rawQuery("SELECT * FROM $tUserRecords WHERE level = $level AND phase = $phase", null)
         var cv = ContentValues()
+        var today = listOf<Int>()
+        var date = ""
+        var sessionNumber = 0
+        var currency = 0
+        var replenished = 0
 
-        var today = getToday()
-        var date = today.joinToString(separator = "-")
-        var sessionNumber = if (cursor.count != 0){
-            getLatestGameSessionNumber(context, level, phase)
-        }else{
-            0
+        if(cursor.count != 0){
+            cursor.moveToLast()
+            val indGameSession = cursor.getColumnIndex("game_session_number")
+            val indReplenished = cursor.getColumnIndex("replenished")
+            val indCurrency = cursor.getColumnIndex("currency")
+
+            sessionNumber = cursor.getInt(indGameSession)
+            replenished = cursor.getInt(indReplenished)
+            currency = cursor.getInt(indCurrency)
+
         }
+
+        today = getToday()
+        date = today.joinToString(separator = "-")
 
         cv.put("game_session_number", "${sessionNumber + 1}")
         cv.put("level", "$level")
@@ -218,8 +230,8 @@ class SMLeitner() {
         cv.put("date_played", "$date")
         cv.put("score", "0.0")
         cv.put("time_spent", "0.0")
-        cv.put("replenished", "0")
-        cv.put("currency", "0")
+        cv.put("replenished", "$replenished")
+        cv.put("currency", "$currency")
 
         ldb.insert("user_records", null, cv)
 
