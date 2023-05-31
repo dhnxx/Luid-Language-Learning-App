@@ -354,7 +354,7 @@ class WordAssociation2 : AppCompatActivity() {
 
         }
     }
-
+// hello
     private fun clear() {
         choiceOne.setCardBackgroundColor(Color.parseColor("#FFFBFF"))
         choiceTwo.setCardBackgroundColor(Color.parseColor("#FFFBFF"))
