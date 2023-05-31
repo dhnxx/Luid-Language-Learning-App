@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:2:1-47:12
-INJECTED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:2:1-47:12
-INJECTED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:2:1-47:12
-INJECTED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:2:1-47:12
+ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:2:1-50:12
+INJECTED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:2:1-50:12
+INJECTED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:2:1-50:12
+INJECTED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:2:1-50:12
 MERGED from [androidx.databinding:viewbinding:7.4.2] C:\Users\dhn\.gradle\caches\transforms-3\38a8acae1a18fbb1294889104603b9b1\transformed\viewbinding-7.4.2\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.navigation:navigation-ui-ktx:2.5.3] C:\Users\dhn\.gradle\caches\transforms-3\051da00e1f84752f891b5aa2dbd77a40\transformed\navigation-ui-ktx-2.5.3\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.navigation:navigation-ui:2.5.3] C:\Users\dhn\.gradle\caches\transforms-3\f4d2f7816fff737a823cc1d683be447c\transformed\navigation-ui-2.5.3\AndroidManifest.xml:17:1-24:12
@@ -68,22 +68,22 @@ MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\dhn\.gradle\cach
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\dhn\.gradle\caches\transforms-3\5f65c4003f2d4cff9ce0d27bd0e69f7e\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] C:\Users\dhn\.gradle\caches\transforms-3\0d264bb8407a1a13b057a1088976b723\transformed\print-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.annotation:annotation-experimental:1.3.0] C:\Users\dhn\.gradle\caches\transforms-3\1bc18ffdf24e3a800e600723ebf5b65f\transformed\annotation-experimental-1.3.0\AndroidManifest.xml:17:1-22:12
-INJECTED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:2:1-47:12
-INJECTED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:2:1-47:12
-INJECTED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:2:1-47:12
+INJECTED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:2:1-50:12
+INJECTED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:2:1-50:12
+INJECTED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:2:1-50:12
 	package
 		INJECTED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:2:1-47:12
+		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:2:1-50:12
 		INJECTED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:2:1-47:12
+		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:2:1-50:12
 		INJECTED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml
 	xmlns:tools
 		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:3:5-51
 	android:versionCode
 		INJECTED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:2:1-47:12
+		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:2:1-50:12
 		INJECTED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:2:11-69
@@ -92,7 +92,7 @@ ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.
 	android:name
 		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:5:22-78
 application
-ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:7:5-45:19
+ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:7:5-48:19
 MERGED from [com.google.android.material:material:1.7.0] C:\Users\dhn\.gradle\caches\transforms-3\aa9e8faba9bb1c9e1460e6f4389faffb\transformed\material-1.7.0\AndroidManifest.xml:24:5-20
 MERGED from [com.google.android.material:material:1.7.0] C:\Users\dhn\.gradle\caches\transforms-3\aa9e8faba9bb1c9e1460e6f4389faffb\transformed\material-1.7.0\AndroidManifest.xml:24:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\dhn\.gradle\caches\transforms-3\fc28ed436de12b28385b8eb752e29c87\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
@@ -129,60 +129,66 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\dhn\.gradle\caches
 		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:15:9-40
 	android:dataExtractionRules
 		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:9:9-65
-activity#com.example.luid.fragments.gamemodes.ResultActivity
+activity#com.example.luid.fragments.gamemodes.WordAssociation2
 ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:17:9-19:40
 	android:exported
 		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:19:13-37
 	android:name
-		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:18:13-63
-activity#com.example.luid.fragments.gamemodes.WordAssociation2
+		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:18:13-65
+activity#com.example.luid.fragments.gamemodes.ResultActivity
 ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:20:9-22:40
 	android:exported
 		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:22:13-37
 	android:name
-		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:21:13-65
+		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:21:13-63
+activity#com.example.luid.fragments.gamemodes.SentenceFragment2
+ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:23:9-25:40
+	android:exported
+		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:25:13-37
+	android:name
+		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:24:13-66
 activity#com.example.luid.fragments.mainmenu.MainActivity
-ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:23:9-33:20
+ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:26:9-36:20
 	android:label
-		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:26:13-45
+		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:29:13-45
 	android:exported
-		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:25:13-36
+		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:28:13-36
 	android:theme
-		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:27:13-44
+		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:30:13-44
 	android:name
-		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:24:13-60
+		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:27:13-60
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:28:13-32:29
+ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:31:13-35:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:29:17-69
+ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:32:17-69
 	android:name
-		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:29:25-66
+		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:32:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:31:17-77
+ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:34:17-77
 	android:name
-		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:31:27-74
+		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:34:27-74
 activity#com.example.luid.fragments.gamemodes.SentenceFragment
-ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:34:9-37:55
+ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:37:9-40:55
 	android:windowSoftInputMode
-		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:37:13-52
+		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:40:13-52
 	android:exported
-		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:36:13-36
+		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:39:13-36
 	android:name
-		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:35:13-65
+		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:38:13-65
 activity#com.example.luid.fragments.gamemodes.SentenceConstruction
-ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:38:9-40:39
-	android:exported
-		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:40:13-36
-	android:name
-		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:39:13-69
-activity#com.example.luid.fragments.gamemodes.WordAssociation
-ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:41:9-44:47
+ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:41:9-43:39
 	android:exported
 		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:43:13-36
-	android:theme
-		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:44:13-44
 	android:name
-		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:42:13-64
+		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:42:13-69
+activity#com.example.luid.fragments.gamemodes.WordAssociation
+ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:44:9-47:47
+	android:exported
+		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:46:13-36
+	android:theme
+		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:47:13-44
+	android:name
+		ADDED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:45:13-64
 uses-sdk
 INJECTED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml

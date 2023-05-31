@@ -30,10 +30,13 @@
         android:testOnly="true"
         android:theme="@style/AppTheme" >
         <activity
+            android:name="com.example.luid.fragments.gamemodes.WordAssociation2"
+            android:exported="false" />
+        <activity
             android:name="com.example.luid.fragments.gamemodes.ResultActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.luid.fragments.gamemodes.WordAssociation2"
+            android:name="com.example.luid.fragments.gamemodes.SentenceFragment2"
             android:exported="false" />
         <activity
             android:name="com.example.luid.fragments.mainmenu.MainActivity"

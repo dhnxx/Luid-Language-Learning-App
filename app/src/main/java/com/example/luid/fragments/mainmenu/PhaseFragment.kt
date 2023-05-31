@@ -29,6 +29,7 @@ class PhaseFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private val phaseList = ArrayList<ParentPhase>()
     private val adapter = ParentPhaseAdapter(phaseList)
+// intialize the context
 
 
     override fun onCreateView(

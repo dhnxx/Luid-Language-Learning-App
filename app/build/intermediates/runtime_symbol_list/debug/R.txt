@@ -3563,6 +3563,7 @@ int layout achvcardview 0x7f0b001c
 int layout activity_main 0x7f0b001d
 int layout activity_result 0x7f0b001e
 int layout activity_sentence_construction 0x7f0b001f
+int layout activity_sentence_fragment2 0x7f0b0080
 int layout activity_sentencefragment 0x7f0b0020
 int layout activity_word_association 0x7f0b0021
 int layout activity_word_association2 0x7f0b0022
