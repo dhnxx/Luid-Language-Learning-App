@@ -6,137 +6,137 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="24"
-8-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml
+8-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml
 9        android:targetSdkVersion="33" />
-9-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml
+9-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml
 10
 11    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-11-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:5:5-81
-11-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:5:22-78
+11-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:5:5-81
+11-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:5:22-78
 12
 13    <permission
-13-->[androidx.core:core:1.10.1] C:\Users\dhn\.gradle\caches\transforms-3\78b4e9434c97da7aa1cdc9dbdaf8fc00\transformed\core-1.10.1\AndroidManifest.xml:22:5-24:47
+13-->[androidx.core:core:1.10.1] C:\Users\alkie\.gradle\caches\transforms-3\78b4e9434c97da7aa1cdc9dbdaf8fc00\transformed\core-1.10.1\AndroidManifest.xml:22:5-24:47
 14        android:name="com.example.luid.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-14-->[androidx.core:core:1.10.1] C:\Users\dhn\.gradle\caches\transforms-3\78b4e9434c97da7aa1cdc9dbdaf8fc00\transformed\core-1.10.1\AndroidManifest.xml:23:9-81
+14-->[androidx.core:core:1.10.1] C:\Users\alkie\.gradle\caches\transforms-3\78b4e9434c97da7aa1cdc9dbdaf8fc00\transformed\core-1.10.1\AndroidManifest.xml:23:9-81
 15        android:protectionLevel="signature" />
-15-->[androidx.core:core:1.10.1] C:\Users\dhn\.gradle\caches\transforms-3\78b4e9434c97da7aa1cdc9dbdaf8fc00\transformed\core-1.10.1\AndroidManifest.xml:24:9-44
+15-->[androidx.core:core:1.10.1] C:\Users\alkie\.gradle\caches\transforms-3\78b4e9434c97da7aa1cdc9dbdaf8fc00\transformed\core-1.10.1\AndroidManifest.xml:24:9-44
 16
 17    <uses-permission android:name="com.example.luid.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-17-->[androidx.core:core:1.10.1] C:\Users\dhn\.gradle\caches\transforms-3\78b4e9434c97da7aa1cdc9dbdaf8fc00\transformed\core-1.10.1\AndroidManifest.xml:26:5-97
-17-->[androidx.core:core:1.10.1] C:\Users\dhn\.gradle\caches\transforms-3\78b4e9434c97da7aa1cdc9dbdaf8fc00\transformed\core-1.10.1\AndroidManifest.xml:26:22-94
+17-->[androidx.core:core:1.10.1] C:\Users\alkie\.gradle\caches\transforms-3\78b4e9434c97da7aa1cdc9dbdaf8fc00\transformed\core-1.10.1\AndroidManifest.xml:26:5-97
+17-->[androidx.core:core:1.10.1] C:\Users\alkie\.gradle\caches\transforms-3\78b4e9434c97da7aa1cdc9dbdaf8fc00\transformed\core-1.10.1\AndroidManifest.xml:26:22-94
 18
 19    <application
-19-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:7:5-45:19
+19-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:7:5-45:19
 20        android:allowBackup="true"
-20-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:8:9-35
+20-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:8:9-35
 21        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-21-->[androidx.core:core:1.10.1] C:\Users\dhn\.gradle\caches\transforms-3\78b4e9434c97da7aa1cdc9dbdaf8fc00\transformed\core-1.10.1\AndroidManifest.xml:28:18-86
+21-->[androidx.core:core:1.10.1] C:\Users\alkie\.gradle\caches\transforms-3\78b4e9434c97da7aa1cdc9dbdaf8fc00\transformed\core-1.10.1\AndroidManifest.xml:28:18-86
 22        android:dataExtractionRules="@xml/data_extraction_rules"
-22-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:9:9-65
+22-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:9:9-65
 23        android:debuggable="true"
 24        android:extractNativeLibs="false"
 25        android:fullBackupContent="@xml/backup_rules"
-25-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:10:9-54
+25-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:10:9-54
 26        android:hardwareAccelerated="true"
-26-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:11:9-43
+26-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:11:9-43
 27        android:icon="@drawable/luid_white"
-27-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:12:9-44
+27-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:12:9-44
 28        android:label="@string/app_name"
-28-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:13:9-41
+28-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:13:9-41
 29        android:supportsRtl="true"
-29-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:14:9-35
+29-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:14:9-35
 30        android:testOnly="true"
 31        android:theme="@style/AppTheme" >
-31-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:15:9-40
+31-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:15:9-40
 32        <activity
-32-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:17:9-19:40
+32-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:17:9-19:40
 33            android:name="com.example.luid.fragments.gamemodes.ResultActivity"
-33-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:18:13-63
+33-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:18:13-63
 34            android:exported="false" />
-34-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:19:13-37
+34-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:19:13-37
 35        <activity
-35-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:20:9-22:40
+35-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:20:9-22:40
 36            android:name="com.example.luid.fragments.gamemodes.WordAssociation2"
-36-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:21:13-65
+36-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:21:13-65
 37            android:exported="false" />
-37-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:22:13-37
+37-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:22:13-37
 38        <activity
-38-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:23:9-33:20
+38-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:23:9-33:20
 39            android:name="com.example.luid.fragments.mainmenu.MainActivity"
-39-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:24:13-60
+39-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:24:13-60
 40            android:exported="true"
-40-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:25:13-36
+40-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:25:13-36
 41            android:label="@string/app_name"
-41-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:26:13-45
+41-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:26:13-45
 42            android:theme="@style/AppTheme" >
-42-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:27:13-44
+42-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:27:13-44
 43            <intent-filter>
-43-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:28:13-32:29
+43-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:28:13-32:29
 44                <action android:name="android.intent.action.MAIN" />
-44-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:29:17-69
-44-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:29:25-66
+44-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:29:17-69
+44-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:29:25-66
 45
 46                <category android:name="android.intent.category.LAUNCHER" />
-46-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:31:17-77
-46-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:31:27-74
+46-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:31:17-77
+46-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:31:27-74
 47            </intent-filter>
 48        </activity>
 49        <activity
-49-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:34:9-37:55
+49-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:34:9-37:55
 50            android:name="com.example.luid.fragments.gamemodes.SentenceFragment"
-50-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:35:13-65
+50-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:35:13-65
 51            android:exported="true"
-51-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:36:13-36
+51-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:36:13-36
 52            android:windowSoftInputMode="adjustPan" />
-52-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:37:13-52
+52-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:37:13-52
 53        <activity
-53-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:38:9-40:39
+53-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:38:9-40:39
 54            android:name="com.example.luid.fragments.gamemodes.SentenceConstruction"
-54-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:39:13-69
+54-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:39:13-69
 55            android:exported="true" />
-55-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:40:13-36
+55-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:40:13-36
 56        <activity
-56-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:41:9-44:47
+56-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:41:9-44:47
 57            android:name="com.example.luid.fragments.gamemodes.WordAssociation"
-57-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:42:13-64
+57-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:42:13-64
 58            android:exported="true"
-58-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:43:13-36
+58-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:43:13-36
 59            android:theme="@style/AppTheme" />
-59-->C:\Users\dhn\AndroidStudioProjects\LUID\app\src\main\AndroidManifest.xml:44:13-44
+59-->D:\FEU DOCX\Kotlin Notes\Thesis\app\src\main\AndroidManifest.xml:44:13-44
 60
 61        <uses-library
-61-->[androidx.window:window:1.0.0] C:\Users\dhn\.gradle\caches\transforms-3\710bae210ab5fa9b11ffe3a6b034c0d0\transformed\window-1.0.0\AndroidManifest.xml:25:9-27:40
+61-->[androidx.window:window:1.0.0] C:\Users\alkie\.gradle\caches\transforms-3\710bae210ab5fa9b11ffe3a6b034c0d0\transformed\window-1.0.0\AndroidManifest.xml:25:9-27:40
 62            android:name="androidx.window.extensions"
-62-->[androidx.window:window:1.0.0] C:\Users\dhn\.gradle\caches\transforms-3\710bae210ab5fa9b11ffe3a6b034c0d0\transformed\window-1.0.0\AndroidManifest.xml:26:13-54
+62-->[androidx.window:window:1.0.0] C:\Users\alkie\.gradle\caches\transforms-3\710bae210ab5fa9b11ffe3a6b034c0d0\transformed\window-1.0.0\AndroidManifest.xml:26:13-54
 63            android:required="false" />
-63-->[androidx.window:window:1.0.0] C:\Users\dhn\.gradle\caches\transforms-3\710bae210ab5fa9b11ffe3a6b034c0d0\transformed\window-1.0.0\AndroidManifest.xml:27:13-37
+63-->[androidx.window:window:1.0.0] C:\Users\alkie\.gradle\caches\transforms-3\710bae210ab5fa9b11ffe3a6b034c0d0\transformed\window-1.0.0\AndroidManifest.xml:27:13-37
 64        <uses-library
-64-->[androidx.window:window:1.0.0] C:\Users\dhn\.gradle\caches\transforms-3\710bae210ab5fa9b11ffe3a6b034c0d0\transformed\window-1.0.0\AndroidManifest.xml:28:9-30:40
+64-->[androidx.window:window:1.0.0] C:\Users\alkie\.gradle\caches\transforms-3\710bae210ab5fa9b11ffe3a6b034c0d0\transformed\window-1.0.0\AndroidManifest.xml:28:9-30:40
 65            android:name="androidx.window.sidecar"
-65-->[androidx.window:window:1.0.0] C:\Users\dhn\.gradle\caches\transforms-3\710bae210ab5fa9b11ffe3a6b034c0d0\transformed\window-1.0.0\AndroidManifest.xml:29:13-51
+65-->[androidx.window:window:1.0.0] C:\Users\alkie\.gradle\caches\transforms-3\710bae210ab5fa9b11ffe3a6b034c0d0\transformed\window-1.0.0\AndroidManifest.xml:29:13-51
 66            android:required="false" />
-66-->[androidx.window:window:1.0.0] C:\Users\dhn\.gradle\caches\transforms-3\710bae210ab5fa9b11ffe3a6b034c0d0\transformed\window-1.0.0\AndroidManifest.xml:30:13-37
+66-->[androidx.window:window:1.0.0] C:\Users\alkie\.gradle\caches\transforms-3\710bae210ab5fa9b11ffe3a6b034c0d0\transformed\window-1.0.0\AndroidManifest.xml:30:13-37
 67
 68        <provider
-68-->[androidx.emoji2:emoji2:1.2.0] C:\Users\dhn\.gradle\caches\transforms-3\1a60a21b74c53048d7b215710b25ad1e\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+68-->[androidx.emoji2:emoji2:1.2.0] C:\Users\alkie\.gradle\caches\transforms-3\1a60a21b74c53048d7b215710b25ad1e\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
 69            android:name="androidx.startup.InitializationProvider"
-69-->[androidx.emoji2:emoji2:1.2.0] C:\Users\dhn\.gradle\caches\transforms-3\1a60a21b74c53048d7b215710b25ad1e\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+69-->[androidx.emoji2:emoji2:1.2.0] C:\Users\alkie\.gradle\caches\transforms-3\1a60a21b74c53048d7b215710b25ad1e\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
 70            android:authorities="com.example.luid.androidx-startup"
-70-->[androidx.emoji2:emoji2:1.2.0] C:\Users\dhn\.gradle\caches\transforms-3\1a60a21b74c53048d7b215710b25ad1e\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+70-->[androidx.emoji2:emoji2:1.2.0] C:\Users\alkie\.gradle\caches\transforms-3\1a60a21b74c53048d7b215710b25ad1e\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
 71            android:exported="false" >
-71-->[androidx.emoji2:emoji2:1.2.0] C:\Users\dhn\.gradle\caches\transforms-3\1a60a21b74c53048d7b215710b25ad1e\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
+71-->[androidx.emoji2:emoji2:1.2.0] C:\Users\alkie\.gradle\caches\transforms-3\1a60a21b74c53048d7b215710b25ad1e\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
 72            <meta-data
-72-->[androidx.emoji2:emoji2:1.2.0] C:\Users\dhn\.gradle\caches\transforms-3\1a60a21b74c53048d7b215710b25ad1e\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+72-->[androidx.emoji2:emoji2:1.2.0] C:\Users\alkie\.gradle\caches\transforms-3\1a60a21b74c53048d7b215710b25ad1e\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
 73                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-73-->[androidx.emoji2:emoji2:1.2.0] C:\Users\dhn\.gradle\caches\transforms-3\1a60a21b74c53048d7b215710b25ad1e\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
+73-->[androidx.emoji2:emoji2:1.2.0] C:\Users\alkie\.gradle\caches\transforms-3\1a60a21b74c53048d7b215710b25ad1e\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
 74                android:value="androidx.startup" />
-74-->[androidx.emoji2:emoji2:1.2.0] C:\Users\dhn\.gradle\caches\transforms-3\1a60a21b74c53048d7b215710b25ad1e\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+74-->[androidx.emoji2:emoji2:1.2.0] C:\Users\alkie\.gradle\caches\transforms-3\1a60a21b74c53048d7b215710b25ad1e\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
 75            <meta-data
-75-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\dhn\.gradle\caches\transforms-3\0a355154793be38f6ee2d97a0a53ab66\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+75-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\alkie\.gradle\caches\transforms-3\0a355154793be38f6ee2d97a0a53ab66\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
 76                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-76-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\dhn\.gradle\caches\transforms-3\0a355154793be38f6ee2d97a0a53ab66\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+76-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\alkie\.gradle\caches\transforms-3\0a355154793be38f6ee2d97a0a53ab66\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
 77                android:value="androidx.startup" />
-77-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\dhn\.gradle\caches\transforms-3\0a355154793be38f6ee2d97a0a53ab66\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+77-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\alkie\.gradle\caches\transforms-3\0a355154793be38f6ee2d97a0a53ab66\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
 78        </provider>
 79    </application>
 80
