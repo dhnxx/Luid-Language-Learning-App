@@ -6,6 +6,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import com.example.luid.database.DBConnect
 import com.example.luid.database.DBConnect.Companion.temp_qstion
+import java.lang.IndexOutOfBoundsException
 import java.util.Calendar
 
 
@@ -205,35 +206,49 @@ class SMLeitner() {
         var cv = ContentValues()
         var today = listOf<Int>()
         var date = ""
+
+        val indGameSession = cursor.getColumnIndex("game_session_number")
+        val indReplenished = cursor.getColumnIndex("replenished")
+        val indCurrency = cursor.getColumnIndex("currency")
+
         var sessionNumber = 0
         var currency = 0
         var replenished = 0
 
-        if(cursor.count != 0){
-            cursor.moveToLast()
-            val indGameSession = cursor.getColumnIndex("game_session_number")
-            val indReplenished = cursor.getColumnIndex("replenished")
-            val indCurrency = cursor.getColumnIndex("currency")
+        try {
+            if(cursor.count != 0){
+                cursor.moveToLast()
 
-            sessionNumber = cursor.getInt(indGameSession)
-            replenished = cursor.getInt(indReplenished)
-            currency = cursor.getInt(indCurrency)
+                sessionNumber = cursor.getInt(indGameSession)
+                replenished = cursor.getInt(indReplenished)
+                currency = cursor.getInt(indCurrency)
 
+            }else{
+                cursor = ldb.rawQuery("SELECT * FROM $tUserRecords", null)
+
+                cursor.moveToLast()
+                replenished = cursor.getInt(indReplenished)
+                currency = cursor.getInt(indCurrency)
+            }
+        }catch (e: IndexOutOfBoundsException){
+            replenished = 0
+            currency = 0
+        }finally {
+            today = getToday()
+            date = today.joinToString(separator = "-")
+
+            cv.put("game_session_number", "${sessionNumber + 1}")
+            cv.put("level", "$level")
+            cv.put("phase", "$phase")
+            cv.put("date_played", "$date")
+            cv.put("score", "0.0")
+            cv.put("time_spent", "0.0")
+            cv.put("replenished", "$replenished")
+            cv.put("currency", "$currency")
+
+            ldb.insert("user_records", null, cv)
         }
 
-        today = getToday()
-        date = today.joinToString(separator = "-")
-
-        cv.put("game_session_number", "${sessionNumber + 1}")
-        cv.put("level", "$level")
-        cv.put("phase", "$phase")
-        cv.put("date_played", "$date")
-        cv.put("score", "0.0")
-        cv.put("time_spent", "0.0")
-        cv.put("replenished", "$replenished")
-        cv.put("currency", "$currency")
-
-        ldb.insert("user_records", null, cv)
 
         cv.clear()
         ldb.close()
