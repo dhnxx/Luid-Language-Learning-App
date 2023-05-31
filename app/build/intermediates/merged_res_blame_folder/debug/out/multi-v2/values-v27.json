@@ -4,7 +4,7 @@
             "outputFile": "com.example.luid.app-mergeDebugResources-46:/values-v27/values-v27.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\dhn\\AndroidStudioProjects\\LUID\\app\\src\\main\\res\\values-v27\\themes.xml",
+                    "source": "D:\\FEU DOCX\\Kotlin Notes\\Thesis\\app\\src\\main\\res\\values-v27\\themes.xml",
                     "from": {
                         "startLines": "3",
                         "startColumns": "4",
