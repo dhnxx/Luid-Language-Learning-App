@@ -9,14 +9,13 @@ import com.example.luid.database.DBConnect.Companion.temp_qstion
 import java.util.Calendar
 
 
-class SMLeitner(context : Context) {
+class SMLeitner() {
+
     // Table name declarations
-
-
     private val tQuestions = "questions"
     private val tUserRecords = "user_records"
     private val tAchievements = "achievements"
-    private var currentGameSession = 0
+    var currentGameSession = 0
 
 
     //FORMULA for Leitner

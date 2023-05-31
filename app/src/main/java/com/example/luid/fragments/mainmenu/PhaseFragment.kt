@@ -1,11 +1,13 @@
 package com.example.luid.fragments.mainmenu
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -16,19 +18,22 @@ import com.example.luid.adapters.LevelSwitchStateViewModel
 import com.example.luid.adapters.*
 import com.example.luid.classes.ChildPhase
 import com.example.luid.classes.ParentPhase
+import com.example.luid.classes.SMLeitner
 
 
-
-class PhaseFragment : Fragment() {
+class PhaseFragment() : Fragment() {
 
 
     //view model to store switch state
     private lateinit var levelSwitchStateViewModel: LevelSwitchStateViewModel
 
     // for Phase Selection
+    private lateinit var context: Context
     private lateinit var recyclerView: RecyclerView
+    private lateinit var button : Button
     private val phaseList = ArrayList<ParentPhase>()
     private val adapter = ParentPhaseAdapter(phaseList)
+
 
 
     override fun onCreateView(
@@ -61,6 +66,12 @@ class PhaseFragment : Fragment() {
         val childPhase1 = ArrayList<ChildPhase>()
         val childPhase2 = ArrayList<ChildPhase>()
 
+
+        button = view.findViewById(R.id.button)
+        button.setOnClickListener{
+            val sm = SMLeitner()
+            sm.buyLives(context)
+        }
 
         phaseList.clear()
 
@@ -310,11 +321,13 @@ class PhaseFragment : Fragment() {
             }
 
             recyclerView.adapter = adapter
+
         }
 
 
+            return view
 
-        return view
+
     }
 
 
