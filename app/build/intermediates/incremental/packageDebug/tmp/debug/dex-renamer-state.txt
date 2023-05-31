@@ -1,12 +1,12 @@
-#Tue May 30 21:45:01 SGT 2023
-base.0=C\:\\Users\\dhn\\AndroidStudioProjects\\LUID\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
-base.1=C\:\\Users\\dhn\\AndroidStudioProjects\\LUID\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
-base.2=C\:\\Users\\dhn\\AndroidStudioProjects\\LUID\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\10\\classes.dex
-base.3=C\:\\Users\\dhn\\AndroidStudioProjects\\LUID\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\3\\classes.dex
-base.4=C\:\\Users\\dhn\\AndroidStudioProjects\\LUID\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\4\\classes.dex
-base.5=C\:\\Users\\dhn\\AndroidStudioProjects\\LUID\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\5\\classes.dex
-base.6=C\:\\Users\\dhn\\AndroidStudioProjects\\LUID\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\9\\classes.dex
-base.7=C\:\\Users\\dhn\\AndroidStudioProjects\\LUID\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
+#Wed May 31 11:50:15 PST 2023
+base.0=C\:\\Users\\Charles\\AndroidStudioProjects\\Luid-Language-Learning-App\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+base.1=C\:\\Users\\Charles\\AndroidStudioProjects\\Luid-Language-Learning-App\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.2=C\:\\Users\\Charles\\AndroidStudioProjects\\Luid-Language-Learning-App\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\10\\classes.dex
+base.3=C\:\\Users\\Charles\\AndroidStudioProjects\\Luid-Language-Learning-App\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\3\\classes.dex
+base.4=C\:\\Users\\Charles\\AndroidStudioProjects\\Luid-Language-Learning-App\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\4\\classes.dex
+base.5=C\:\\Users\\Charles\\AndroidStudioProjects\\Luid-Language-Learning-App\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\5\\classes.dex
+base.6=C\:\\Users\\Charles\\AndroidStudioProjects\\Luid-Language-Learning-App\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\9\\classes.dex
+base.7=C\:\\Users\\Charles\\AndroidStudioProjects\\Luid-Language-Learning-App\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
 path.0=classes.dex
 path.1=0/classes.dex
 path.2=10/classes.dex
