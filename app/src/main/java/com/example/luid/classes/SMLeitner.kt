@@ -7,38 +7,18 @@ import android.database.sqlite.SQLiteDatabase
 import com.example.luid.database.DBConnect
 import com.example.luid.database.DBConnect.Companion.questions_tb
 import com.example.luid.database.DBConnect.Companion.temp_qstion
+import java.lang.IndexOutOfBoundsException
 import java.util.Calendar
 
 
-class SMLeitner(context : Context) {
+class SMLeitner() {
+
     // Table name declarations
-
-
     private val tQuestions = "questions"
     private val tUserRecords = "user_records"
     private val tAchievements = "achievements"
-    private val tTempQuestions = "questiontable_tmp"
-    private var currentGameSession = 0
+    var currentGameSession = 0
 
-
-    init {
-        // Initialization of total game sessions done by the user
-        var dbHelper = DBConnect(context)
-        var db = dbHelper.writableDatabase
-
-        var rsUserRecords = db.rawQuery("SELECT * FROM $tUserRecords", null)
-        rsUserRecords.moveToLast()
-
-        if(rsUserRecords.count != 0){
-            var ind = rsUserRecords.getColumnIndex("game_session_number")
-            currentGameSession = rsUserRecords.getInt(ind)
-        }else{
-            currentGameSession = 0
-        }
-
-        rsUserRecords.close()
-        db.close()
-    }
 
     //FORMULA for Leitner
     //# EF'= EF+(0.1-((5-q)*0.08)-((5-q)0.02))
@@ -61,29 +41,29 @@ class SMLeitner(context : Context) {
         var indTimesViewed = cursor.getColumnIndex("times_viewed")
 
         cursor.moveToFirst()
-            var id = cursor.getInt(indID)
-            var oldGameSession = cursor.getInt(indGameSession)
-            var oldEF = cursor.getFloat(indEF)
-            var oldTimesViewed = cursor.getInt(indTimesViewed)
+        var id = cursor.getInt(indID)
+        var oldGameSession = cursor.getInt(indGameSession)
+        var oldEF = cursor.getFloat(indEF)
+        var oldTimesViewed = cursor.getInt(indTimesViewed)
 
-            //FORMULA for Leitner
-            //# EF'= EF+(0.1-((5-q)*0.08)-((5-q)0.02))
-            var newQuality = getNewQuality(status, timeSpent)
-            var newEF = getEF(newQuality, oldEF.toDouble())
-            var newDF = getNewDifficultyLevel(newEF)
-            var newInterval = getNewInterval(newEF, newDF, oldTimesViewed + 1)
-            var newGameSession = oldGameSession + newInterval
+        //FORMULA for Leitner
+        //# EF'= EF+(0.1-((5-q)*0.08)-((5-q)0.02))
+        var newQuality = getNewQuality(status, timeSpent)
+        var newEF = getEF(newQuality, oldEF.toDouble())
+        var newDF = getNewDifficultyLevel(newEF)
+        var newInterval = getNewInterval(newEF, newDF, oldTimesViewed + 1)
+        var newGameSession = oldGameSession + newInterval
 
-            var cv = ContentValues()
+        var cv = ContentValues()
 
-            cv.put("easiness_factor", "$newEF")
-            cv.put("interval", "$newInterval")
-            cv.put("game_session", "$newGameSession")
-            cv.put("difficulty_level", "$newDF")
-            cv.put("times_viewed", "${oldTimesViewed + 1}")
+        cv.put("easiness_factor", "$newEF")
+        cv.put("interval", "$newInterval")
+        cv.put("game_session", "$newGameSession")
+        cv.put("difficulty_level", "$newDF")
+        cv.put("times_viewed", "${oldTimesViewed + 1}")
 
-            ldb.update("$temp_qstion", cv, "_id = $id", null)
-        }
+        ldb.update("$temp_qstion", cv, "_id = $id", null)
+    }
 
 
     // New Calculated quality value for algorithm
@@ -134,6 +114,38 @@ class SMLeitner(context : Context) {
         return newInterval
     }
 
+    fun buyLives(context: Context) : Boolean{
+        var db = DBConnect(context).writableDatabase
+        var cursor = db.rawQuery("SELECT * FROM $tUserRecords", null)
+        var cv = ContentValues()
+        var totalCurrency = 0
+        var currencyCol = cursor.getColumnIndex("currency")
+
+        if(cursor.moveToLast()){
+            totalCurrency = cursor.getInt(currencyCol)
+        }
+
+        println("TOTAL CURRENCY : $totalCurrency\n\n")
+
+        if(!(totalCurrency >= 60)){
+            return false
+        }
+
+        cursor.moveToLast()
+        var idCol = cursor.getColumnIndex("_id")
+        var id = cursor.getInt(idCol)
+        var latestCurrency = cursor.getInt(currencyCol)
+        latestCurrency -= 60
+        cv.put("currency", "$latestCurrency")
+        db.update("$tUserRecords", cv, "_id = $id", null)
+
+        cv.clear()
+        cursor.close()
+        db.close()
+
+        return true
+    }
+
     // Calculate and return the score
     fun score(totalCorrectAnswers : Int, totalItems : Int) : Double{
         var score = ((totalCorrectAnswers.toDouble() / totalItems.toDouble())*100)
@@ -141,11 +153,12 @@ class SMLeitner(context : Context) {
     }
 
     // Calculate and Returns the rewards for gameSession
-    fun reward(score : Double) : Double{
-        return if (score > 80.0){
-            10 + ((score/100) * 10)
-        }else{
-            ((score/100) * 10)
+    fun rewardCalc(score : Double) : Double{
+        return when{
+            score >= 80.00 -> 70 + ((score/100) * 10)
+            score in 70.00 .. 79.99 -> 60 + ((score/100) * 10)
+            score in 60.00 .. 69.99 -> 60 + ((score/100) * 10)
+            else -> ((score/100) * 10)
         }
     }
 
@@ -169,70 +182,147 @@ class SMLeitner(context : Context) {
     }
 
     // Get the last game_session value from user_records
-    fun getLatestGameSessionNumber(context: Context) : Int{
+    fun getLatestGameSessionNumber(context: Context, level: Int, phase : Int) : Int{
         var dbHelper = DBConnect(context)
         var ldb = dbHelper.writableDatabase
+
         var colGameSesNum = "game_session_number"
-        var cursor = ldb.rawQuery("SELECT $colGameSesNum FROM $tUserRecords ORDER BY _id DESC LIMIT 1", null)
+
+        var cursor = ldb.rawQuery("SELECT * FROM $tUserRecords WHERE level = $level AND phase = $phase", null)
         var ind = cursor.getColumnIndex("$colGameSesNum")
-        var q : Int = 0
+        var latestGameSessionVal : Int = 0
 
-        if (cursor.moveToFirst()){
-            q = cursor.getInt(ind)
-        }
+        cursor.moveToLast()
+        latestGameSessionVal = cursor.getInt(ind)
+        currentGameSession = latestGameSessionVal
 
-        return q
+        return latestGameSessionVal
     }
 
     // Adds a game session row in user_records table
-    fun addSession (context: Context){
+    fun addSession (context: Context, level: Int, phase: Int){
         var dbHelper = DBConnect(context)
         var ldb = dbHelper.writableDatabase
+        var cursor = ldb.rawQuery("SELECT * FROM $tUserRecords WHERE level = $level AND phase = $phase", null)
         var cv = ContentValues()
+        var today = listOf<Int>()
+        var date = ""
 
-        var today = getToday()
-        var date = today.joinToString(separator = "-")
-        var sessionNumber = getLatestGameSessionNumber(context)
+        val indGameSession = cursor.getColumnIndex("game_session_number")
+        val indReplenished = cursor.getColumnIndex("replenished")
+        val indCurrency = cursor.getColumnIndex("currency")
 
-        cv.put("game_session_number", "${sessionNumber + 1}")
-        cv.put("date_played", "$date")
-        cv.put("score", "0.0")
-        cv.put("time_spent", "0.0")
-        cv.put("replenished", "0")
+        var sessionNumber = 0
+        var currency = 0
+        var replenished = 0
 
-        ldb.insert("user_records", null, cv)
+        try {
+            if(cursor.count != 0){
+                cursor.moveToLast()
+
+                sessionNumber = cursor.getInt(indGameSession)
+                replenished = cursor.getInt(indReplenished)
+                currency = cursor.getInt(indCurrency)
+
+            }else{
+                cursor = ldb.rawQuery("SELECT * FROM $tUserRecords", null)
+
+                cursor.moveToLast()
+                replenished = cursor.getInt(indReplenished)
+                currency = cursor.getInt(indCurrency)
+            }
+        }catch (e: IndexOutOfBoundsException){
+            replenished = 0
+            currency = 0
+        }finally {
+            today = getToday()
+            date = today.joinToString(separator = "-")
+
+            cv.put("game_session_number", "${sessionNumber + 1}")
+            cv.put("level", "$level")
+            cv.put("phase", "$phase")
+            cv.put("date_played", "$date")
+            cv.put("score", "0.0")
+            cv.put("time_spent", "0.0")
+            cv.put("replenished", "$replenished")
+            cv.put("currency", "$currency")
+
+            ldb.insert("user_records", null, cv)
+        }
+
 
         cv.clear()
         ldb.close()
     }
 
     // Updates the user_records table with the data after finishing a game session
-    fun updUserRecords(context: Context, score : Double, timeSpent : Int, replenishedHearts : Int){
-        var dbHelper = DBConnect(context)
-        var ldb = dbHelper.writableDatabase
+    fun updUserRecords(context: Context, level: Int, phase: Int, score : Float, timeSpent : Int, replenishedHearts : Int, currencyEarned : Int){
+        var db = DBConnect(context).writableDatabase
         val today = getToday().joinToString()
-        val colName = "date_played"
-        val cursor = ldb.rawQuery("SELECT * FROM $tUserRecords", null)
-        val index = cursor.getColumnIndex(colName)
+        val cursor = db.rawQuery("SELECT * FROM $tUserRecords WHERE level = $level AND phase = $phase", null)
+        val indId = cursor.getColumnIndex("_id")
+        val indCurrency = cursor.getColumnIndex("currency")
+        var currency = 0
         var id = 0
-        var dbDate = " "
 
-        if (cursor.moveToLast()){
-            do{
-                dbDate = cursor.getString(index)
-                if (dbDate == today){
-                    id = cursor.getInt(0)
-                    break
-                }
-            }while (cursor.moveToPrevious())
-        }
+        cursor.moveToLast()
+        id = cursor.getInt(indId)
+        currency = cursor.getInt(indCurrency) + currencyEarned
 
         val cv = ContentValues()
         cv.put("score", "$score")
         cv.put("time_spent", "$timeSpent")
         cv.put("replenished", "$replenishedHearts")
-        ldb.update("$tUserRecords", cv, "_id = $id", null)
+        cv.put("currency", "$currency")
+        db.update("$tUserRecords", cv, "_id = $id", null)
+
+        cv.clear()
+        cursor.close()
+        db.close()
     }
+
+    fun validateQuestionBank(context: Context, level: Int, phase: Int){
+        var db = DBConnect(context).writableDatabase
+        var cursor = db.rawQuery("SELECT * FROM $tQuestions WHERE level = $level AND phase = $phase AND game_session = $currentGameSession",null)
+        var count = cursor.count
+        var cv = ContentValues()
+
+        println("COUNT : $count")
+
+
+        while (count < 5){
+            cursor = db.rawQuery("SELECT * FROM $tQuestions WHERE level = $level AND phase = $phase AND game_session = $currentGameSession",null)
+            count = cursor.count
+            if(!(count < 5)){
+                break
+            }
+            cursor = db.rawQuery("SELECT * FROM $tUserRecords", null)
+
+            cursor.moveToLast()
+            var gameSessionCol = cursor.getColumnIndex("game_session_number")
+            var idCol = cursor.getColumnIndex("_id")
+            var gameSessionTempVal = cursor.getInt(gameSessionCol)
+            var gameSessionValUpd = gameSessionTempVal + 1
+            var idVal = cursor.getInt(idCol)
+            currentGameSession = gameSessionValUpd
+
+            cv.put("game_session_number", gameSessionValUpd)
+            db.update("$tUserRecords", cv, "_id = $idVal", null)
+            cv.clear()
+
+            cv.put("game_session", gameSessionValUpd)
+//            db.update("$tTempQuestions", cv, "game_session = $gameSessionTempVal", null)
+            db.update("$tQuestions", cv, "game_session = $gameSessionTempVal", null)
+            cv.clear()
+            count++
+        }
+
+        cv.clear()
+        cursor.close()
+        db.close()
+    }
+
+
 
     // Methods for Achievements
 
