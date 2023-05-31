@@ -62,6 +62,7 @@ class WordAssociation2 : AppCompatActivity() {
     private var time = 0
     private var totalTime = 0
     private var avgTime = 0
+    private var id = 1
 
     private val timerRunnable = object : Runnable {
         override fun run() {
@@ -345,6 +346,12 @@ class WordAssociation2 : AppCompatActivity() {
             println("Time = $time")
             println("Total Time = $totalTime")
             // smLeitner algo and temptable here
+
+            if(id < 10){
+                id++
+            }
+            println(id)
+
         }
     }
 
@@ -391,6 +398,7 @@ class WordAssociation2 : AppCompatActivity() {
     }
 
     private fun checkAnswer(i: Int) {
+        val sm = SMLeitner(context)
 
         if (tempAnswer == questionList[i].correct) {
             println("Correct")
@@ -411,6 +419,9 @@ class WordAssociation2 : AppCompatActivity() {
                 }
             }
 
+            sm.smLeitnerCalc(context, id, level, phase, true, timeSpent)
+
+
         } else {
             println("Wrong")
             // make the selected card red and show the correct answer
@@ -428,6 +439,8 @@ class WordAssociation2 : AppCompatActivity() {
                     choiceFour.setCardBackgroundColor(Color.parseColor("#FFB6C1"))
                 }
             }
+
+            sm.smLeitnerCalc(context, id, level, phase, false, timeSpent)
 
             when (questionList[i].correct) {
                 choices[0].text -> {
