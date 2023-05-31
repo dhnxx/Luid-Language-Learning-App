@@ -223,6 +223,7 @@ layout achvcardview
 layout activity_main
 layout activity_result
 layout activity_sentence_construction
+layout activity_sentence_fragment2
 layout activity_sentencefragment
 layout activity_word_association
 layout activity_word_association2

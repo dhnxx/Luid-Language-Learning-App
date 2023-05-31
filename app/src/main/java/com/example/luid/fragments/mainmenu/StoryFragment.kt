@@ -9,10 +9,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.luid.R
 import androidx.navigation.fragment.navArgs
-import com.example.luid.fragments.gamemodes.SentenceConstruction
-import com.example.luid.fragments.gamemodes.SentenceFragment
-import com.example.luid.fragments.gamemodes.WordAssociation
-import com.example.luid.fragments.gamemodes.WordAssociation2
+import com.example.luid.fragments.gamemodes.*
 
 
 class StoryFragment : Fragment() {
@@ -29,7 +26,7 @@ class StoryFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_story, container, false)
 
         val intent1 = Intent(context, WordAssociation2::class.java)
-        val intent2 = Intent(context, SentenceFragment::class.java)
+        val intent2 = Intent(context, SentenceFragment2::class.java)
         val intent3 = Intent(context, SentenceConstruction::class.java)
 
         val start = view.findViewById<Button>(R.id.startGameButton)

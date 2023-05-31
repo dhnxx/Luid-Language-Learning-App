@@ -15,10 +15,13 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
+            android:name=".fragments.gamemodes.WordAssociation2"
+            android:exported="false" />
+        <activity
             android:name=".fragments.gamemodes.ResultActivity"
             android:exported="false" />
         <activity
-            android:name=".fragments.gamemodes.WordAssociation2"
+            android:name=".fragments.gamemodes.SentenceFragment2"
             android:exported="false" />
         <activity
             android:name=".fragments.mainmenu.MainActivity"

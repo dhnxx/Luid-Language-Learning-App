@@ -4,20 +4,16 @@
         "source": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-main-50:\\layout\\fragment_about.xml"
     },
     {
-        "merged": "com.example.luid.app-mergeDebugResources-47:/layout/activity_word_association2.xml",
-        "source": "com.example.luid.app-main-50:/layout/activity_word_association2.xml"
-    },
-    {
-        "merged": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-mergeDebugResources-47:\\layout\\fragment_about_luid.xml",
-        "source": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-main-50:\\layout\\fragment_about_luid.xml"
+        "merged": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-mergeDebugResources-47:\\layout\\fragment_tab_phase_review.xml",
+        "source": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-main-50:\\layout\\fragment_tab_phase_review.xml"
     },
     {
         "merged": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-mergeDebugResources-47:\\layout\\fragment_about_quinta.xml",
         "source": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-main-50:\\layout\\fragment_about_quinta.xml"
     },
     {
-        "merged": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-mergeDebugResources-47:\\layout\\fragment_tab_phase_review.xml",
-        "source": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-main-50:\\layout\\fragment_tab_phase_review.xml"
+        "merged": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-mergeDebugResources-47:\\layout\\fragment_about_luid.xml",
+        "source": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-main-50:\\layout\\fragment_about_luid.xml"
     },
     {
         "merged": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-mergeDebugResources-47:\\layout\\word_association_view.xml",
@@ -46,6 +42,10 @@
     {
         "merged": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-mergeDebugResources-47:\\layout\\parentphasecard.xml",
         "source": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-main-50:\\layout\\parentphasecard.xml"
+    },
+    {
+        "merged": "com.example.luid.app-mergeDebugResources-47:/layout/activity_sentence_fragment2.xml",
+        "source": "com.example.luid.app-main-50:/layout/activity_sentence_fragment2.xml"
     },
     {
         "merged": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-mergeDebugResources-47:\\layout\\activity_result.xml",
@@ -80,12 +80,12 @@
         "source": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-main-50:\\layout\\activity_word_association.xml"
     },
     {
-        "merged": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-mergeDebugResources-47:\\layout\\childphasecard.xml",
-        "source": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-main-50:\\layout\\childphasecard.xml"
+        "merged": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-mergeDebugResources-47:\\layout\\activity_sentence_fragment2.xml",
+        "source": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-main-50:\\layout\\activity_sentence_fragment2.xml"
     },
     {
-        "merged": "com.example.luid.app-mergeDebugResources-47:/layout/activity_result.xml",
-        "source": "com.example.luid.app-main-50:/layout/activity_result.xml"
+        "merged": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-mergeDebugResources-47:\\layout\\childphasecard.xml",
+        "source": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-main-50:\\layout\\childphasecard.xml"
     },
     {
         "merged": "C:\\Users\\dhn\\.gradle\\daemon\\8.2-milestone-1\\com.example.luid.app-mergeDebugResources-47:\\layout\\fragment_review.xml",
