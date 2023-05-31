@@ -28,7 +28,7 @@ class PhaseFragment() : Fragment() {
     private lateinit var levelSwitchStateViewModel: LevelSwitchStateViewModel
 
     // for Phase Selection
-    private lateinit var context: Context
+    private lateinit var contextExternal: Context
     private lateinit var recyclerView: RecyclerView
     private lateinit var button : Button
     private val phaseList = ArrayList<ParentPhase>()
@@ -70,7 +70,7 @@ class PhaseFragment() : Fragment() {
         button = view.findViewById(R.id.button)
         button.setOnClickListener{
             val sm = SMLeitner()
-            sm.buyLives(context)
+            sm.buyLives(contextExternal)
         }
 
         phaseList.clear()
