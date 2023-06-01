@@ -7,7 +7,7 @@ data class ChildPhase(
     val description: String,
     val image: Int,
     val onClickListener: View.OnClickListener,
-    var isEnabled: Boolean = false // Add a new property to indicate the enabled/disabled state
+    var isEnabled: Boolean = true // Add a new property to indicate the enabled/disabled state
 ) {
 
 
