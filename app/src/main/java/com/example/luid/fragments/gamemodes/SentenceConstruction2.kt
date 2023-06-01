@@ -12,6 +12,7 @@ import android.os.Handler
 import android.os.SystemClock
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -21,11 +22,11 @@ import com.example.luid.classes.SMLeitner
 import com.example.luid.classes.SentenceFragment
 import com.example.luid.database.DBConnect
 
-class SentenceFragment2 : AppCompatActivity() {
+class SentenceConstruction2 : AppCompatActivity() {
     private lateinit var questionList: ArrayList<com.example.luid.classes.SentenceFragment>
     private lateinit var questionText: TextView
     private lateinit var questionImage: ImageView
-    private lateinit var answerLabel: TextView
+    private lateinit var answerLabel: EditText
     private lateinit var flexboxLayout: com.google.android.flexbox.FlexboxLayout
     private lateinit var clearButton: Button
     private lateinit var submitButton: Button
@@ -59,12 +60,11 @@ class SentenceFragment2 : AppCompatActivity() {
         }
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sentence_fragment2)
+        setContentView(R.layout.activity_sentence_construction2)
 
-        val intent2 = Intent(this, ResultActivity::class.java)
+        val intent3 = Intent(this, ResultActivity::class.java)
 
         progressbar = findViewById(R.id.progressBar)
         timeText = findViewById(R.id.timetxt)
@@ -98,16 +98,16 @@ class SentenceFragment2 : AppCompatActivity() {
                 submit(i)
                 avgTime = (totalTime / questionList.size)
                 println("AVG TIME: $avgTime")
-                intent2.putExtra("score", score)
-                intent2.putExtra("totalTime", totalTime)
-                startActivity(intent2)
+                intent3.putExtra("score", score)
+                intent3.putExtra("totalTime", totalTime)
+                startActivity(intent3)
             }
 
 
         }
 
         clearButton.setOnClickListener {
-            answerLabel.text = ""
+            answerLabel.text.clear()
             for (i in 0 until flexboxLayout.childCount) {
                 val child = flexboxLayout.getChildAt(i)
                 child.isEnabled = true
@@ -116,6 +116,7 @@ class SentenceFragment2 : AppCompatActivity() {
 
         }
     }
+
 
     override fun onBackPressed() {
         showConfirmationDialog()
@@ -231,6 +232,14 @@ class SentenceFragment2 : AppCompatActivity() {
 
     private fun refresh(i: Int) {
 
+        startTime = SystemClock.uptimeMillis()
+        handler = Handler()
+        handler?.postDelayed(timerRunnable, 0)
+        questionText.text = questionList[i].question
+
+        answerLabel.text.clear()
+        answerLabel.isEnabled = true
+
         nextButton.isEnabled = false
         nextButton.visibility = View.INVISIBLE
         submitButton.isEnabled = true
@@ -238,7 +247,9 @@ class SentenceFragment2 : AppCompatActivity() {
 
 
         flexboxLayout.removeAllViews()
-        answerLabel.text = ""
+
+        //answerLabel.text = ""
+
         answerLabel.setTextColor(Color.parseColor("#1C1B1F"))
 
         val question = questionList[i]
@@ -247,41 +258,6 @@ class SentenceFragment2 : AppCompatActivity() {
         progressbar.max = questionList.size
         progressbar.progress = i + 1
         // start a stopwatch for each question
-
-        startTime = SystemClock.uptimeMillis()
-        handler = Handler()
-        handler?.postDelayed(timerRunnable, 0)
-
-
-
-        for (word in deconstructedWords) {
-            val wordView = TextView(context)
-            wordView.text = word
-            wordView.textSize = 20f
-            wordView.setPadding(10, 10, 10, 10)
-            wordView.setBackgroundResource(R.drawable.rounded_corner)
-
-            wordView.setOnClickListener {
-                answerLabel.text =
-                    answerLabel.text.toString() + wordView.text.toString() + " "
-                wordView.isEnabled = false
-
-            }
-
-
-            val params = com.google.android.flexbox.FlexboxLayout.LayoutParams(
-                com.google.android.flexbox.FlexboxLayout.LayoutParams.WRAP_CONTENT,
-                com.google.android.flexbox.FlexboxLayout.LayoutParams.WRAP_CONTENT
-            )
-            params.setMargins(10, 10, 10, 10)
-            wordView.layoutParams = params
-            flexboxLayout.addView(wordView)
-
-
-
-            questionText.text = questionList[i].question
-
-        }
 
 
     }
@@ -293,6 +269,8 @@ class SentenceFragment2 : AppCompatActivity() {
 
         submitButton.setOnClickListener {
             handler?.removeCallbacks(timerRunnable)
+
+            answerLabel.isEnabled = false
             if (answerLabel.text.replace(
                     "\\s+".toRegex(),
                     ""
@@ -322,9 +300,8 @@ class SentenceFragment2 : AppCompatActivity() {
             submitButton.isEnabled = false
 
         }
+    }
 
-
-        }
     private fun showConfirmationDialog() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Confirm")
@@ -341,3 +318,13 @@ class SentenceFragment2 : AppCompatActivity() {
         builder.show()
     }
 }
+
+
+
+
+
+
+
+
+
+
