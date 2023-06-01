@@ -10,8 +10,7 @@ import kotlinx.coroutines.currentCoroutineContext
 class PhaseTwoClass {
     fun getTagalog(context: Context, level : Int, phase : Int) : ArrayList<String>{
         var db = DBConnect(context).readableDatabase
-        var cursor = db.rawQuery("SELECT * FROM ${DBConnect.questions_tb} WHERE level = $level AND phase = $phase", null)
-        cursor = db.rawQuery("SELECT * FROM ${DBConnect.temp_qstion}", null)
+        var cursor = db.rawQuery("SELECT * FROM ${DBConnect.temp_qstion} WHERE level = $level AND phase = $phase", null)
         var tagalog = ArrayList<String>()
         var index = cursor.getColumnIndex("tagalog")
 
@@ -21,13 +20,15 @@ class PhaseTwoClass {
             }while (cursor.moveToNext())
         }
 
+        cursor.close()
+        db.close()
+
         return tagalog
     }
 
     fun getEnglish(context: Context, level : Int, phase : Int) : ArrayList<String>{
         var db = DBConnect(context).readableDatabase
-        var cursor = db.rawQuery("SELECT * FROM ${DBConnect.questions_tb} WHERE level = $level AND phase = $phase", null)
-        cursor = db.rawQuery("SELECT * FROM ${DBConnect.temp_qstion}", null)
+        var cursor = db.rawQuery("SELECT * FROM ${DBConnect.temp_qstion} WHERE level = $level AND phase = $phase", null)
         var english = ArrayList<String>()
         var index = cursor.getColumnIndex("english")
 
@@ -37,29 +38,35 @@ class PhaseTwoClass {
             }while (cursor.moveToNext())
         }
 
+        cursor.close()
+        db.close()
+
         return english
     }
 
     fun getKapampangan(context: Context, level : Int, phase : Int) : ArrayList<String>{
         var db = DBConnect(context).readableDatabase
-        var cursor = db.rawQuery("SELECT * FROM ${DBConnect.questions_tb} WHERE level = $level AND phase = $phase", null)
-        cursor = db.rawQuery("SELECT * FROM ${DBConnect.temp_qstion}", null)
+        var cursor = db.rawQuery("SELECT * FROM ${DBConnect.temp_qstion} WHERE level = $level AND phase = $phase", null)
         var kapampangan = ArrayList<String>()
         var index = cursor.getColumnIndex("kapampangan")
 
-        if(cursor.moveToFirst()){
-            do{
-                kapampangan.add(cursor.getString(index))
-            }while (cursor.moveToNext())
-        }
+        println("COUNT IN KAP FUN : ${cursor.count}")
+
+        cursor.moveToFirst()
+        do{
+            kapampangan.add(cursor.getString(index))
+        }while (cursor.moveToNext())
+
 
         return kapampangan
+
+        cursor.close()
+        db.close()
     }
 
     fun getImg(context: Context, level : Int, phase : Int) : ArrayList<Int>{
         var db = DBConnect(context).readableDatabase
-        var cursor = db.rawQuery("SELECT * FROM ${DBConnect.questions_tb} WHERE level = $level AND phase = $phase", null)
-        cursor = db.rawQuery("SELECT * FROM ${DBConnect.temp_qstion}", null)
+        var cursor = db.rawQuery("SELECT * FROM ${DBConnect.temp_qstion} WHERE level = $level AND phase = $phase", null)
         var img = ArrayList<Int>()
         var index = cursor.getColumnIndex("drawable")
 
@@ -74,8 +81,7 @@ class PhaseTwoClass {
 
     fun getQuestion(context: Context, level : Int, phase : Int) : ArrayList<String>{
         var db = DBConnect(context).readableDatabase
-        var cursor = db.rawQuery("SELECT * FROM ${DBConnect.questions_tb} WHERE level = $level AND phase = $phase", null)
-        cursor = db.rawQuery("SELECT * FROM ${DBConnect.temp_qstion}", null)
+        var cursor = db.rawQuery("SELECT * FROM ${DBConnect.temp_qstion} WHERE level = $level AND phase = $phase", null)
         var question = ArrayList<String>()
         var index = cursor.getColumnIndex("question")
 
@@ -84,6 +90,9 @@ class PhaseTwoClass {
                 question.add(cursor.getString(index))
             }while (cursor.moveToNext())
         }
+
+        cursor.close()
+        db.close()
 
         return question
     }

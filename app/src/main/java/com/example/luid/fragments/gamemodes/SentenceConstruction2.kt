@@ -131,37 +131,7 @@ class SentenceConstruction2 : AppCompatActivity() {
             "SELECT * FROM ${DBConnect.questions_tb} WHERE level = $level AND phase = $phase",
             null
         )
-        val cv = ContentValues()
 
-        try {
-            if (cursor.moveToFirst()) {
-                do {
-
-                    cv.put("_id", cursor.getInt(0))
-                    cv.put("level", cursor.getString(1))
-                    cv.put("phase", cursor.getString(2))
-                    cv.put("question", cursor.getString(3))
-                    cv.put("kapampangan", cursor.getString(4))
-                    cv.put("english", cursor.getString(5))
-                    cv.put("tagalog", cursor.getString(6))
-                    cv.put("translation", cursor.getString(7))
-                    cv.put("game_session", cursor.getString(8))
-                    cv.put("easiness_factor", cursor.getString(9))
-                    cv.put("interval", cursor.getString(10))
-                    cv.put("difficulty_level", cursor.getString(11))
-                    cv.put("times_viewed", cursor.getString(12))
-                    cv.put("visibility", cursor.getString(13))
-                    cv.put("drawable", cursor.getString(14))
-                    db.insert("${DBConnect.temp_qstion}", null, cv)
-                } while (cursor.moveToNext())
-            }
-
-
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-        cv.clear()
         cursor.close()
         db.close()
 

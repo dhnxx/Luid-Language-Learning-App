@@ -159,11 +159,10 @@ class WordAssociation2 : AppCompatActivity() {
 
     @SuppressLint("Range")
     private fun phaseone() {
-        var level = 1
-        var phase = 1
         val sm = SMLeitner()
         sm.validateQuestionBank(context, level, phase)
         var gameSessionNumber = sm.getLatestGameSessionNumber(context, level, phase)
+
         var db = DBConnect(applicationContext).readableDatabase
         val selectQuery =
             "SELECT * FROM ${DBConnect.questions_tb} WHERE level = $level AND phase = $phase"
@@ -171,7 +170,7 @@ class WordAssociation2 : AppCompatActivity() {
         cursor = db.rawQuery(selectQuery, null)
         // CREATE TEMP TABLE QUESTION
         db.execSQL("DROP TABLE IF EXISTS ${DBConnect.temp_qstion}")
-        db.execSQL("CREATE TABLE IF NOT EXISTS ${DBConnect.temp_qstion} AS SELECT * FROM ${DBConnect.questions_tb} WHERE level = level AND phase = phase AND game_session_number $gameSessionNumber")
+        db.execSQL("CREATE TABLE IF NOT EXISTS ${DBConnect.temp_qstion} AS SELECT * FROM ${DBConnect.questions_tb} WHERE level = level AND phase = phase")
         var kap = ArrayList<String>()
         var eng = ArrayList<String>()
         var tag = ArrayList<String>()

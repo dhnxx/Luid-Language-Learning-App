@@ -29,7 +29,7 @@ class SMLeitner() {
         var ldb = dbHelper.writableDatabase
         var tempTable = "questions"
         var cursor = ldb.rawQuery(
-            "SELECT * FROM $temp_qstion WHERE _id = $qId AND level = 1 AND phase = 1",
+            "SELECT * FROM $temp_qstion WHERE _id = $qId AND level = $level AND phase = $phase",
             null
         )
         // Old Algorithm Values
