@@ -30,7 +30,8 @@ class HomeFragment : Fragment() {
         super.onAttach(context)
 
         // Initialize the LevelSwitchStateViewModel instance
-        levelSwitchStateViewModel = ViewModelProvider(requireActivity()).get(LevelSwitchStateViewModel::class.java)
+        levelSwitchStateViewModel =
+            ViewModelProvider(requireActivity()).get(LevelSwitchStateViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -60,8 +61,10 @@ class HomeFragment : Fragment() {
         levelRecyclerView.adapter = LevelAdapter(getLevelList()).apply {
             setOnItemClickListener { levelSelection ->
 
+
                 // Store the selected switch state in the ViewModel
                 levelSwitchStateViewModel.setSwitchState(levelSelection.levelID)
+
 
                 // Edit recyclerview's data here based on the level selected
                 when (levelSelection.levelID) {
@@ -69,12 +72,15 @@ class HomeFragment : Fragment() {
                         Toast.makeText(activity, "Level 1 Test", Toast.LENGTH_LONG).show()
 
                     }
+
                     "Level 2" -> {
                         Toast.makeText(activity, "Level 2 Test", Toast.LENGTH_LONG).show()
                     }
+
                     "Level 3" -> {
                         Toast.makeText(activity, "Level 3 Test", Toast.LENGTH_LONG).show()
                     }
+
                     "Level 4" -> {
                         Toast.makeText(activity, "Level 4 Test", Toast.LENGTH_LONG).show()
                     }
@@ -86,7 +92,6 @@ class HomeFragment : Fragment() {
                 findNavController().navigate(R.id.action_homeFragment_to_tabPhaseReview)
                 bottomNav?.isEnabled = false
                 bottomNav?.visibility = View.GONE
-
 
 
             }
@@ -103,13 +108,15 @@ class HomeFragment : Fragment() {
                 "Level 1",
                 "Introduction",
                 R.drawable.home,
-                "Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!"
+                "Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!",
+            true
             ),
             LevelSelection(
                 "Level 2",
                 "Numbers",
                 R.drawable.profile,
-                "Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!"
+                "Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!",
+
             ),
             LevelSelection(
                 "Level 3",
@@ -129,3 +136,5 @@ class HomeFragment : Fragment() {
     }
 
 }
+
+

@@ -38,6 +38,22 @@ class  LevelAdapter(private val levelList: List<LevelSelection>) :
         holder.levelImage.setImageResource(level.levelImage)
         holder.levelDescription.text = level.levelDescription
 
+        // Disable the card view if isEnabled is false
+        holder.itemView.isEnabled = level.isEnabled
+
+        if (!level.isEnabled) {
+            // Set the disabled appearance for the card
+            holder.itemView.alpha = 0.5f // Example: Reduce the opacity of the card
+            holder.itemView.isClickable = false // Disable click events on the card
+            // Add any additional styling you want for the disabled state
+        } else {
+            // Set the enabled appearance for the card
+            holder.itemView.alpha = 1.0f // Example: Set the opacity back to normal
+            holder.itemView.isClickable = true // Enable click events on the card
+            // Add any additional styling you want for the enabled state
+        }
+
+
         holder.itemView.setOnClickListener {
             onItemClick?.invoke(level)
         }

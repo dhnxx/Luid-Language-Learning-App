@@ -18,7 +18,6 @@ import com.example.luid.classes.ChildPhase
 import com.example.luid.classes.ParentPhase
 
 
-
 class PhaseFragment : Fragment() {
 
 
@@ -71,8 +70,6 @@ class PhaseFragment : Fragment() {
                 "Level 1" -> {
 
 
-
-
                     childPhase0.add(
                         ChildPhase(
                             "Phase 1",
@@ -87,7 +84,9 @@ class PhaseFragment : Fragment() {
                                 )
 
 
-                            }
+                            },
+
+                            true
                         )
                     )
 
@@ -135,6 +134,7 @@ class PhaseFragment : Fragment() {
 
 
                 }
+
                 "Level 2" -> {
 
                     childPhase0.add(
@@ -192,6 +192,7 @@ class PhaseFragment : Fragment() {
 
 
                 }
+
                 "Level 3" -> {
 
                     childPhase0.add(
@@ -224,6 +225,7 @@ class PhaseFragment : Fragment() {
                                     )
                                 )
                             }
+
                         )
                     )
                     phaseList.add(ParentPhase("Phase 2: Sentence Fragments", childPhase1))
@@ -248,6 +250,7 @@ class PhaseFragment : Fragment() {
 
 
                 }
+
                 "Level 4" -> {
 
                     childPhase0.add(
