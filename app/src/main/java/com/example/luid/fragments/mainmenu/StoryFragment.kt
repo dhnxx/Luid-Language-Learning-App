@@ -27,7 +27,7 @@ class StoryFragment : Fragment() {
 
         val intent1 = Intent(context, WordAssociation2::class.java)
         val intent2 = Intent(context, SentenceFragment2::class.java)
-        val intent3 = Intent(context, SentenceConstruction::class.java)
+        val intent3 = Intent(context, SentenceConstruction2::class.java)
 
         val start = view.findViewById<Button>(R.id.startGameButton)
 
