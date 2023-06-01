@@ -145,12 +145,22 @@ class SentenceFragment2 : AppCompatActivity() {
             null
         )
 
+        var id = ArrayList<Int>()
+        if(cursor.moveToFirst()){
+            var idCol = cursor.getColumnIndex("_id")
+            do{
+                var idlist = cursor.getInt(idCol)
+                id.add(idlist)
+            }while (cursor.moveToNext())
+        }
+
         println("COUNT : ${cursor.count}")
         println("LEVEL : $level")
         println("PHASE : $phase")
 
         cursor.close()
         db.close()
+
 
         var kap = ph2.getKapampangan(context, level, phase)
         var eng = ph2.getEnglish(context, level, phase)
@@ -210,6 +220,7 @@ class SentenceFragment2 : AppCompatActivity() {
         for (i in 1 until kap.size) {
             questionList.add(
                 SentenceFragment(
+                    id[i],
                     questions[i],
                     answers[i],
 //                    imgList[i]
@@ -279,12 +290,15 @@ class SentenceFragment2 : AppCompatActivity() {
     }
 
     private fun submit(i: Int) {
-
+        val sm = SMLeitner()
         val question = questionList[i]
 
 
         submitButton.setOnClickListener {
             handler?.removeCallbacks(timerRunnable)
+
+            time = (elapsedTime / 1000).toInt()
+
             if (answerLabel.text.replace(
                     "\\s+".toRegex(),
                     ""
@@ -293,16 +307,19 @@ class SentenceFragment2 : AppCompatActivity() {
                 answerLabel.setTextColor(Color.parseColor("#037d50"))
                 println("CORRECT")
                 correctAnswerCounter++
+
+                sm.smLeitnerCalc(context, questionList[i].id, level, phase, true, time)
             } else {
                 answerLabel.setTextColor(Color.parseColor("#FF0000"))
                 println("WRONG")
+
+                sm.smLeitnerCalc(context, questionList[i].id, level, phase, false, time)
             }
             println(answerLabel.text.replace("\\s+".toRegex(), ""))
             println(question.sentence.replace("\\s+".toRegex(), ""))
 
-            time = (elapsedTime / 1000).toInt()
+
             totalTime += time
-            val sm = SMLeitner()
             score = sm.scoreCalc(correctAnswerCounter, questionList.size)
             println("Score = $score")
             println("Time = $time")

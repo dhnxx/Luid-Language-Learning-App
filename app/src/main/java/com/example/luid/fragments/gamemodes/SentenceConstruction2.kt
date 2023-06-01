@@ -34,6 +34,8 @@ class SentenceConstruction2 : AppCompatActivity() {
     private lateinit var timeText: TextView
     private lateinit var progressbar: ProgressBar
     private var context: Context = this
+    private var level: Int = 0 // intent
+    private var phase = 3
     private var startTime: Long = 0
     private var timeInMilliseconds: Long = 0
     private var elapsedTime: Long = 0
@@ -64,6 +66,7 @@ class SentenceConstruction2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sentence_construction2)
 
+        level = intent.getIntExtra("level", 0)
         val intent3 = Intent(this, ResultActivity::class.java)
 
         progressbar = findViewById(R.id.progressBar)
@@ -123,14 +126,33 @@ class SentenceConstruction2 : AppCompatActivity() {
     }
 
     private fun phasetwo() {
+        val sm = SMLeitner()
+        val ph2 = PhaseTwoClass()
+        sm.validateQuestionBank(context, level, phase)
+        var gameSessionNumber = sm.getLatestGameSessionNumber(context, level, phase)
 
-        var level = 1
-        var phase = 2
-        var db = DBConnect(context).readableDatabase
+        var db = DBConnect(context).writableDatabase
+        // CREATE TEMP TABLE QUESTION
+        db.execSQL("DROP TABLE IF EXISTS ${DBConnect.temp_qstion}")
+        db.execSQL("CREATE TABLE IF NOT EXISTS ${DBConnect.temp_qstion} AS SELECT * FROM ${DBConnect.questions_tb} WHERE level = $level AND phase = $phase")
+
         var cursor = db.rawQuery(
             "SELECT * FROM ${DBConnect.questions_tb} WHERE level = $level AND phase = $phase",
             null
         )
+
+        var id = ArrayList<Int>()
+        if(cursor.moveToFirst()){
+            var idCol = cursor.getColumnIndex("_id")
+            do{
+                var idlist = cursor.getInt(idCol)
+                id.add(idlist)
+            }while (cursor.moveToNext())
+        }
+
+        println("COUNT : ${cursor.count}")
+        println("LEVEL : $level")
+        println("PHASE : $phase")
 
         cursor.close()
         db.close()
@@ -189,6 +211,7 @@ class SentenceConstruction2 : AppCompatActivity() {
         for (i in 1 until kap.size) {
             questionList.add(
                 SentenceFragment(
+                    id[i],
                     questions[i],
                     answers[i],
 //                    imgList[i]
@@ -233,12 +256,14 @@ class SentenceConstruction2 : AppCompatActivity() {
     }
 
     private fun submit(i: Int) {
-
+        val sm = SMLeitner()
         val question = questionList[i]
 
 
         submitButton.setOnClickListener {
             handler?.removeCallbacks(timerRunnable)
+
+            time = (elapsedTime / 1000).toInt()
 
             answerLabel.isEnabled = false
             if (answerLabel.text.replace(
@@ -249,16 +274,18 @@ class SentenceConstruction2 : AppCompatActivity() {
                 answerLabel.setTextColor(Color.parseColor("#037d50"))
                 println("CORRECT")
                 correctAnswerCounter++
+
+                sm.smLeitnerCalc(context, questionList[i].id, level, phase, true, time)
             } else {
                 answerLabel.setTextColor(Color.parseColor("#FF0000"))
                 println("WRONG")
+
+                sm.smLeitnerCalc(context, questionList[i].id, level, phase, false, time)
             }
             println(answerLabel.text.replace("\\s+".toRegex(), ""))
             println(question.sentence.replace("\\s+".toRegex(), ""))
 
-            time = (elapsedTime / 1000).toInt()
             totalTime += time
-            val sm = SMLeitner()
             score = sm.scoreCalc(correctAnswerCounter, questionList.size)
             println("Score = $score")
             println("Time = $time")

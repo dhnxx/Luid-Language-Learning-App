@@ -1,6 +1,6 @@
 package com.example.luid.classes
 
-data class SentenceFragment(val question: String, val sentence: String, val sentenceImage: Int) {
+data class SentenceFragment(val id : Int, val question: String, val sentence: String, val sentenceImage: Int) {
 
     private val deconstructedSentence: ArrayList<String> = ArrayList()
 
