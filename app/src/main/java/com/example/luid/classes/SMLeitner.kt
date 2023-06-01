@@ -337,12 +337,14 @@ class SMLeitner() {
         cursorTemp.moveToFirst()
         var colTempId = cursorTemp.getColumnIndex("_id")
         var colTempEF = cursorTemp.getColumnIndex("easiness_factor")
+        var colTempDF = cursorTemp.getColumnIndex("difficulty_level")
         var colTempKap = cursorTemp.getColumnIndex("kapampangan")
 
         var idTemp = cursorTemp.getInt(colTempId)
-
-        var efTemp = 0.00
-        var efMain = 0.00
+        var efTemp = 0.0
+        var dfTemp = 0
+        var efMain = 0.0
+        var dfMain = 0
         var kapTemp = ""
         var mainEFCol = 0
 
@@ -352,13 +354,14 @@ class SMLeitner() {
             mainEFCol = cursorMain.getColumnIndex("easiness_factor")
 
             efTemp = cursorTemp.getDouble(colTempEF)
+            dfTemp = cursorTemp.getInt(colTempDF)
             kapTemp = cursorTemp.getString(colTempKap)
             efMain = cursorMain.getDouble(mainEFCol)
 
             when{
-                efTemp < efMain -> resultScreen.add(ResultScreen(kapTemp, efTemp, 1))
-                efTemp > efMain -> resultScreen.add(ResultScreen(kapTemp, efTemp, 2))
-                else -> resultScreen.add(ResultScreen(kapTemp, efTemp, 0))
+                efTemp < efMain -> resultScreen.add(ResultScreen(kapTemp, efTemp, dfTemp,1))
+                efTemp > efMain -> resultScreen.add(ResultScreen(kapTemp, efTemp, dfTemp, 2))
+                else -> resultScreen.add(ResultScreen(kapTemp, efTemp, dfTemp, 0))
             }
         }while(cursorTemp.moveToNext())
 

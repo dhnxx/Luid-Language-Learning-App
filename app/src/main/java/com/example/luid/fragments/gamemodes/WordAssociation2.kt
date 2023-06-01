@@ -64,7 +64,6 @@ class WordAssociation2 : AppCompatActivity() {
     private var time = 0
     private var totalTime = 0
     private var avgTime = 0
-    private var id = 1
 
     private val timerRunnable = object : Runnable {
         override fun run() {
@@ -141,7 +140,7 @@ class WordAssociation2 : AppCompatActivity() {
                 intent1.putExtra("level", level)
                 intent1.putExtra("phase", phase)
                 intent1.putExtra("score", score)
-                intent1.putExtra("totalItems", questionList.size+1)
+                intent1.putExtra("totalItems", questionList.size)
                 intent1.putExtra("totalTime", totalTime)
                 intent1.putExtra("avgTime", avgTime)
                 startActivity(intent1)
@@ -171,6 +170,7 @@ class WordAssociation2 : AppCompatActivity() {
         // CREATE TEMP TABLE QUESTION
         db.execSQL("DROP TABLE IF EXISTS ${DBConnect.temp_qstion}")
         db.execSQL("CREATE TABLE IF NOT EXISTS ${DBConnect.temp_qstion} AS SELECT * FROM ${DBConnect.questions_tb} WHERE level = level AND phase = phase")
+        var id = ArrayList<Int>()
         var kap = ArrayList<String>()
         var eng = ArrayList<String>()
         var tag = ArrayList<String>()
@@ -179,10 +179,12 @@ class WordAssociation2 : AppCompatActivity() {
         answers = ArrayList()
         if (cursor.moveToFirst()) {
             do {
+                var idlist = cursor.getInt(cursor.getColumnIndex("_id"))
                 var kaplist = cursor.getString(cursor.getColumnIndex("kapampangan"))
                 var taglist = cursor.getString(cursor.getColumnIndex("tagalog"))
                 var englist = cursor.getString(cursor.getColumnIndex("english"))
 
+                id.add(idlist)
                 kap.add(kaplist)
                 tag.add(taglist)
                 eng.add(englist)
@@ -282,6 +284,7 @@ class WordAssociation2 : AppCompatActivity() {
             }
             questionList.add(
                 WordAssociationClass(
+                    id[i],
                     question[i],
                     answers[i],
                     R.drawable.home,
@@ -350,20 +353,17 @@ class WordAssociation2 : AppCompatActivity() {
             nextButton.isEnabled = true
             nextButton.visibility = View.VISIBLE
             selectAnswer()
+            time = (elapsedTime/ 1000).toInt()
             checkAnswer(i)
             val sm = SMLeitner()
             score = sm.scoreCalc(correctAnswerCounter, questionList.size)
-            time = (elapsedTime/ 1000).toInt()
             totalTime += time
             println("Score = $score")
             println("Time = $time")
             println("Total Time = $totalTime")
             // smLeitner algo and temptable here
 
-            if(id < 10){
-                id++
-            }
-            println(id)
+
 
         }
     }
@@ -431,8 +431,8 @@ class WordAssociation2 : AppCompatActivity() {
                     choiceFour.setCardBackgroundColor(Color.parseColor("#CFFFD5"))
                 }
             }
+            sm.smLeitnerCalc(context, questionList[i].id, level, phase, true, time)
 
-            sm.smLeitnerCalc(context, id, level, phase, true, timeSpent)
 
 
         } else {
@@ -453,7 +453,7 @@ class WordAssociation2 : AppCompatActivity() {
                 }
             }
 
-            sm.smLeitnerCalc(context, id, level, phase, false, timeSpent)
+            sm.smLeitnerCalc(context, questionList[i].id, level, phase, false, time)
 
             when (questionList[i].correct) {
                 choices[0].text -> {
