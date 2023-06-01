@@ -7,6 +7,6 @@ data class LevelSelection(
     val levelTitle: String,
     val levelImage: Int,
     val levelDescription: String,
-    var isEnabled: Boolean = false // Add a new property to indicate the enabled/disabled state
+    var isEnabled: Boolean = true // Add a new property to indicate the enabled/disabled state
 )
 
