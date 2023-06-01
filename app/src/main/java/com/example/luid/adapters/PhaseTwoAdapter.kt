@@ -25,7 +25,7 @@ class PhaseTwoAdapter(
     private val timeSpent: Int
 ) :
     RecyclerView.Adapter<PhaseTwoAdapter.QuestionViewHolder>() {
-    private var sm = SMLeitner(context)
+    private var sm = SMLeitner()
 
     inner class QuestionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
