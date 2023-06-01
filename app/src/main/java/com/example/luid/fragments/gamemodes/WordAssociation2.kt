@@ -345,7 +345,7 @@ class WordAssociation2 : AppCompatActivity() {
             nextButton.visibility = View.VISIBLE
             selectAnswer()
             checkAnswer(i)
-            val sm = SMLeitner(context)
+            val sm = SMLeitner()
             score = sm.score(correctAnswerCounter, questionList.size)
             time = (elapsedTime/ 1000).toInt()
             totalTime += time
@@ -405,7 +405,7 @@ class WordAssociation2 : AppCompatActivity() {
     }
 
     private fun checkAnswer(i: Int) {
-        val sm = SMLeitner(context)
+        val sm = SMLeitner()
 
         if (tempAnswer == questionList[i].correct) {
             println("Correct")
