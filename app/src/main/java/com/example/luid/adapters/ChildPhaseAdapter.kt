@@ -17,6 +17,8 @@ class ChildPhaseAdapter(private val childList: List<ChildPhase>): RecyclerView.A
         val childTitle: TextView = itemView.findViewById(R.id.childTitle)
         val childDescription: TextView = itemView.findViewById(R.id.childDescription)
         val childImage: ImageView = itemView.findViewById(R.id.childImage)
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChildViewHolder {
@@ -34,8 +36,26 @@ class ChildPhaseAdapter(private val childList: List<ChildPhase>): RecyclerView.A
         holder.childTitle.text = childPhase.title
         holder.childDescription.text = childPhase.description
         holder.childImage.setImageResource(childPhase.image)
-
         val childButton = holder.itemView.findViewById<Button>(R.id.childButton)
-        childButton.setOnClickListener(childPhase.onClickListener)
+
+        // Disable the card view if isEnabled is false
+        holder.itemView.isEnabled = childPhase.isEnabled
+
+        if (!childPhase.isEnabled) {
+            // Set the disabled appearance for the card
+            holder.itemView.alpha = 0.5f // Example: Reduce the opacity of the card
+            holder.itemView.isClickable = false // Disable click events on the card
+            // Add any additional styling you want for the disabled state
+            childButton.isEnabled = false
+        } else {
+            // Set the enabled appearance for the card
+            holder.itemView.alpha = 1.0f // Example: Set the opacity back to normal
+            holder.itemView.isClickable = true // Enable click events on the card
+            // Add any additional styling you want for the enabled state
+            childButton.isEnabled = true
+            childButton.setOnClickListener(childPhase.onClickListener)
+        }
+
+
     }
 }
