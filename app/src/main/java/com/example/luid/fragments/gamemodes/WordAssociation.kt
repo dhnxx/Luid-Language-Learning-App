@@ -199,26 +199,26 @@ class WordAssociation : AppCompatActivity() {
             for (k in 1..decoy.size) {
                 randInd.add(k)
             }
-            questionList.add(
-                WordAssociationClass(
-                    question[i],
-                    answers[i],
-                    R.drawable.home,
-                    decoy[randInd[0]],
-                    R.drawable.home,
-                    decoy[randInd[1]],
-                    R.drawable.home,
-                    decoy[randInd[2]],
-                    R.drawable.home
-                )
-            )
+//            questionList.add(
+//                WordAssociationClass(
+//                    question[i],
+//                    answers[i],
+//                    R.drawable.home,
+//                    decoy[randInd[0]],
+//                    R.drawable.home,
+//                    decoy[randInd[1]],
+//                    R.drawable.home,
+//                    decoy[randInd[2]],
+//                    R.drawable.home
+//                )
+//            )
+//        }
+//        // clear question temp table after
+            cursor.close()
         }
-        // clear question temp table after
-        cursor.close()
+
+
     }
-
-
-
 }
 
 
