@@ -1,7 +1,9 @@
 package com.example.luid.fragments.gamemodes
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.database.Cursor
 import android.graphics.Color
@@ -144,6 +146,11 @@ class WordAssociation2 : AppCompatActivity() {
 
 
     }
+
+    override fun onBackPressed() {
+        showConfirmationDialog()
+    }
+    
 
 
     @SuppressLint("Range")
@@ -460,4 +467,22 @@ class WordAssociation2 : AppCompatActivity() {
         }
 
     }
+
+    private fun showConfirmationDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Confirm")
+        builder.setMessage("Are you sure you want to go back? Any unsaved progress will be lost.")
+        builder.setPositiveButton("Yes") { dialog: DialogInterface, _: Int ->
+            // Handle the back action here
+            super.onBackPressed()
+            dialog.dismiss()
+        }
+        builder.setNegativeButton("No") { dialog: DialogInterface, _: Int ->
+            // Continue the current operation, such as staying on the current screen
+            dialog.dismiss()
+        }
+        builder.show()
+    }
 }
+
+
