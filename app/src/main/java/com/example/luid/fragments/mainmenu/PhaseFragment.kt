@@ -33,6 +33,7 @@ class PhaseFragment : Fragment() {
     private val phaseList = ArrayList<ParentPhase>()
     private lateinit var button : Button
     private val adapter = ParentPhaseAdapter(phaseList)
+// intialize the context
 
 
     override fun onCreateView(

@@ -20,7 +20,7 @@ class PhaseThreeAdapter(
     private val timeSpent: Int
 ) :
     RecyclerView.Adapter<PhaseThreeAdapter.QuestionViewHolder>() {
-    private var sm = SMLeitner(context)
+    private var sm = SMLeitner()
 
     inner class QuestionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
