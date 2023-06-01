@@ -44,7 +44,7 @@ class PhaseOneAdapter(
     private var correctAns: String = ""
     private var correctAnswer = 0
     private var score = 0.0
-    private var sm = SMLeitner(context)
+    private var sm = SMLeitner()
     private var en: Boolean = false
 
 

@@ -150,4 +150,10 @@ class SentenceFragment : AppCompatActivity() {
 
 
     }
+    private fun refreshview() {
+
+
+    }
+
+
 }
