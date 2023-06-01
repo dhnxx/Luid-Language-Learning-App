@@ -1,6 +1,7 @@
 package com.example.luid.classes
 
 data class WordAssociationClass(
+    val id : Int,
     val questions: String,
     val correct: String,
     val correctImg: Int,
