@@ -66,38 +66,39 @@ class PhaseOneClass {
         return img
     }
 
-    fun questionListAdd(
-        answer : String, question : String, decoy : ArrayList<String>,
-        correctImage : Int, decoyImage : ArrayList<Int>) : ArrayList<WordAssociationClass>{
-
-
-        decoy.removeAll(listOf(answer).toSet())
-        decoyImage.removeAll(listOf(correctImage).toSet())
-
-        var randInd = ArrayList<Int>()
-        var temp = ArrayList<WordAssociationClass>()
-
-        for (i in 1 .. decoy.size){
-            randInd.add(i)
-        }
-        randInd.shuffle()
-
-        temp.add(
-            WordAssociationClass(
-                question,
-                answer,
-                correctImage,
-                decoy[randInd[0]],
-                decoyImage[randInd[0]],
-                decoy[randInd[1]],
-                decoyImage[randInd[1]],
-                decoy[randInd[2]],
-                decoyImage[randInd[2]]
-            )
-        )
-
-        return temp
-
-    }
+//    fun questionListAdd(
+//        answer : String, question : String, decoy : ArrayList<String>,
+//        correctImage : Int, decoyImage : ArrayList<Int>) : ArrayList<WordAssociationClass>{
+//
+//
+//        decoy.removeAll(listOf(answer).toSet())
+//        decoyImage.removeAll(listOf(correctImage).toSet())
+//
+//        var randInd = ArrayList<Int>()
+//        var temp = ArrayList<WordAssociationClass>()
+//
+//        for (i in 1 .. decoy.size){
+//            randInd.add(i)
+//        }
+//        randInd.shuffle()
+//
+//        temp.add(
+//            WordAssociationClass(
+//                id[i],
+//                question,
+//                answer,
+//                correctImage,
+//                decoy[randInd[0]],
+//                decoyImage[randInd[0]],
+//                decoy[randInd[1]],
+//                decoyImage[randInd[1]],
+//                decoy[randInd[2]],
+//                decoyImage[randInd[2]]
+//            )
+//        )
+//
+//        return temp
+//
+//    }
 
 }

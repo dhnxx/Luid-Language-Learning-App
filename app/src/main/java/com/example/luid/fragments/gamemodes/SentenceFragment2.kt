@@ -33,6 +33,8 @@ class SentenceFragment2 : AppCompatActivity() {
     private lateinit var timeText: TextView
     private lateinit var progressbar: ProgressBar
     private var context: Context = this
+    private var level: Int = 0 // intent
+    private var phase = 2
     private var startTime: Long = 0
     private var timeInMilliseconds: Long = 0
     private var elapsedTime: Long = 0
@@ -64,6 +66,7 @@ class SentenceFragment2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sentence_fragment2)
 
+        level = intent.getIntExtra("level", 0)
         val intent2 = Intent(this, ResultActivity::class.java)
 
         progressbar = findViewById(R.id.progressBar)
@@ -77,6 +80,7 @@ class SentenceFragment2 : AppCompatActivity() {
         nextButton = findViewById(R.id.nextButton)
 
         var i = 0
+
 
 
         questionList = ArrayList()
@@ -98,8 +102,12 @@ class SentenceFragment2 : AppCompatActivity() {
                 submit(i)
                 avgTime = (totalTime / questionList.size)
                 println("AVG TIME: $avgTime")
+                intent2.putExtra("level", level)
+                intent2.putExtra("phase", phase)
                 intent2.putExtra("score", score)
+                intent2.putExtra("totalItems", questionList.size+1)
                 intent2.putExtra("totalTime", totalTime)
+                intent2.putExtra("avgTime", avgTime)
                 startActivity(intent2)
             }
 
@@ -122,56 +130,50 @@ class SentenceFragment2 : AppCompatActivity() {
     }
 
     private fun phasetwo() {
+        val sm = SMLeitner()
+        val ph2 = PhaseTwoClass()
+        sm.validateQuestionBank(context, level, phase)
+        var gameSessionNumber = sm.getLatestGameSessionNumber(context, level, phase)
 
-        var level = 1
-        var phase = 2
-        var db = DBConnect(context).readableDatabase
+        var db = DBConnect(context).writableDatabase
+        // CREATE TEMP TABLE QUESTION
+        db.execSQL("DROP TABLE IF EXISTS ${DBConnect.temp_qstion}")
+        db.execSQL("CREATE TABLE IF NOT EXISTS ${DBConnect.temp_qstion} AS SELECT * FROM ${DBConnect.questions_tb} WHERE level = $level AND phase = $phase")
+
         var cursor = db.rawQuery(
             "SELECT * FROM ${DBConnect.questions_tb} WHERE level = $level AND phase = $phase",
             null
         )
-        val cv = ContentValues()
 
-        try {
-            if (cursor.moveToFirst()) {
-                do {
-
-                    cv.put("_id", cursor.getInt(0))
-                    cv.put("level", cursor.getString(1))
-                    cv.put("phase", cursor.getString(2))
-                    cv.put("question", cursor.getString(3))
-                    cv.put("kapampangan", cursor.getString(4))
-                    cv.put("english", cursor.getString(5))
-                    cv.put("tagalog", cursor.getString(6))
-                    cv.put("translation", cursor.getString(7))
-                    cv.put("game_session", cursor.getString(8))
-                    cv.put("easiness_factor", cursor.getString(9))
-                    cv.put("interval", cursor.getString(10))
-                    cv.put("difficulty_level", cursor.getString(11))
-                    cv.put("times_viewed", cursor.getString(12))
-                    cv.put("visibility", cursor.getString(13))
-                    cv.put("drawable", cursor.getString(14))
-                    db.insert("${DBConnect.temp_qstion}", null, cv)
-                } while (cursor.moveToNext())
-            }
-
-
-        } catch (e: Exception) {
-            e.printStackTrace()
+        var id = ArrayList<Int>()
+        if(cursor.moveToFirst()){
+            var idCol = cursor.getColumnIndex("_id")
+            do{
+                var idlist = cursor.getInt(idCol)
+                id.add(idlist)
+            }while (cursor.moveToNext())
         }
 
-        cv.clear()
+        println("COUNT : ${cursor.count}")
+        println("LEVEL : $level")
+        println("PHASE : $phase")
+
         cursor.close()
         db.close()
 
-        var kap = PhaseTwoClass().getKapampangan(context, level, phase)
-        var eng = PhaseTwoClass().getEnglish(context, level, phase)
-        var tag = PhaseTwoClass().getTagalog(context, level, phase)
-        var img = PhaseTwoClass().getImg(context, level, phase)
+
+        var kap = ph2.getKapampangan(context, level, phase)
+        var eng = ph2.getEnglish(context, level, phase)
+        var tag = ph2.getTagalog(context, level, phase)
+        var img = ph2.getImg(context, level, phase)
         var imgList = ArrayList<Int>()
         var answers = ArrayList<String>()
         var questions = ArrayList<String>()
 
+
+        for (i in kap){
+            println(i)
+        }
         print("KAP SIZE: ${kap.size}\n")
         print("ENG SIZE: ${eng.size}\n")
         print("TAG SIZE: ${tag.size}\n")
@@ -218,6 +220,7 @@ class SentenceFragment2 : AppCompatActivity() {
         for (i in 1 until kap.size) {
             questionList.add(
                 SentenceFragment(
+                    id[i],
                     questions[i],
                     answers[i],
 //                    imgList[i]
@@ -287,12 +290,15 @@ class SentenceFragment2 : AppCompatActivity() {
     }
 
     private fun submit(i: Int) {
-
+        val sm = SMLeitner()
         val question = questionList[i]
 
 
         submitButton.setOnClickListener {
             handler?.removeCallbacks(timerRunnable)
+
+            time = (elapsedTime / 1000).toInt()
+
             if (answerLabel.text.replace(
                     "\\s+".toRegex(),
                     ""
@@ -301,17 +307,20 @@ class SentenceFragment2 : AppCompatActivity() {
                 answerLabel.setTextColor(Color.parseColor("#037d50"))
                 println("CORRECT")
                 correctAnswerCounter++
+
+                sm.smLeitnerCalc(context, questionList[i].id, level, phase, true, time)
             } else {
                 answerLabel.setTextColor(Color.parseColor("#FF0000"))
                 println("WRONG")
+
+                sm.smLeitnerCalc(context, questionList[i].id, level, phase, false, time)
             }
             println(answerLabel.text.replace("\\s+".toRegex(), ""))
             println(question.sentence.replace("\\s+".toRegex(), ""))
 
-            time = (elapsedTime / 1000).toInt()
+
             totalTime += time
-            val sm = SMLeitner()
-            score = sm.score(correctAnswerCounter, questionList.size)
+            score = sm.scoreCalc(correctAnswerCounter, questionList.size)
             println("Score = $score")
             println("Time = $time")
             println("Total Time = $totalTime")

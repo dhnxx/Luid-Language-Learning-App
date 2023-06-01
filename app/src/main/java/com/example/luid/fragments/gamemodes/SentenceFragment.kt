@@ -136,16 +136,16 @@ class SentenceFragment : AppCompatActivity() {
             randInd.add(k)
         }
 
-        for (i in 1 until kap.size){
-            questionList.add(
-                SentenceFragment(
-                    questions[i],
-                    answers[i],
-//                    imgList[i]
-                    R.drawable.home
-                )
-            )
-        }
+//        for (i in 1 until kap.size){
+//            questionList.add(
+//                SentenceFragment(
+//                    questions[i],
+//                    answers[i],
+////                    imgList[i]
+//                    R.drawable.home
+//                )
+//            )
+//        }
 
 
 
