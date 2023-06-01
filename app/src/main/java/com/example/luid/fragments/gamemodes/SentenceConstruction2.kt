@@ -289,7 +289,7 @@ class SentenceConstruction2 : AppCompatActivity() {
             time = (elapsedTime / 1000).toInt()
             totalTime += time
             val sm = SMLeitner()
-            score = sm.score(correctAnswerCounter, questionList.size)
+            score = sm.scoreCalc(correctAnswerCounter, questionList.size)
             println("Score = $score")
             println("Time = $time")
             println("Total Time = $totalTime")
