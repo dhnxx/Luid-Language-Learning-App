@@ -147,19 +147,19 @@ class SMLeitner() {
     }
 
     // Calculate and return the score
-    fun score(totalCorrectAnswers : Int, totalItems : Int) : Double{
+    fun scoreCalc(totalCorrectAnswers : Int, totalItems : Int) : Double{
         var score = ((totalCorrectAnswers.toDouble() / totalItems.toDouble())*100)
         return score
     }
 
     // Calculate and Returns the rewards for gameSession
-    fun rewardCalc(score : Double) : Double{
+    fun rewardCalc(score : Double) : Int{
         return when{
             score >= 80.00 -> 70 + ((score/100) * 10)
             score in 70.00 .. 79.99 -> 60 + ((score/100) * 10)
             score in 60.00 .. 69.99 -> 60 + ((score/100) * 10)
             else -> ((score/100) * 10)
-        }
+        }.toInt()
     }
 
     // Get the latest score from Database
@@ -256,7 +256,7 @@ class SMLeitner() {
     }
 
     // Updates the user_records table with the data after finishing a game session
-    fun updUserRecords(context: Context, level: Int, phase: Int, score : Float, timeSpent : Int, replenishedHearts : Int, currencyEarned : Int){
+    fun updUserRecords(context: Context, level: Int, phase: Int, score : Double, timeSpent : Int, currencyEarned : Int){
         var db = DBConnect(context).writableDatabase
         val today = getToday().joinToString()
         val cursor = db.rawQuery("SELECT * FROM $tUserRecords WHERE level = $level AND phase = $phase", null)
@@ -272,7 +272,6 @@ class SMLeitner() {
         val cv = ContentValues()
         cv.put("score", "$score")
         cv.put("time_spent", "$timeSpent")
-        cv.put("replenished", "$replenishedHearts")
         cv.put("currency", "$currency")
         db.update("$tUserRecords", cv, "_id = $id", null)
 
@@ -322,7 +321,53 @@ class SMLeitner() {
         db.close()
     }
 
+    fun compareEF(context: Context) : ArrayList<ResultScreen>{
+        var db = DBConnect(context).readableDatabase
+        var cursorTemp = db.rawQuery("SELECT * FROM $temp_qstion", null)
+        var cursorMain : Cursor
+        var resultScreen = ArrayList<ResultScreen>()
 
+        /*
+        parameters || word : String, finalDF : Int, status : Int
+        0 -> sustain
+        1 -> diminish
+        2 -> improve
+         */
+
+        cursorTemp.moveToFirst()
+        var colTempId = cursorTemp.getColumnIndex("_id")
+        var colTempEF = cursorTemp.getColumnIndex("easiness_factor")
+        var colTempKap = cursorTemp.getColumnIndex("kapampangan")
+
+        var idTemp = cursorTemp.getInt(colTempId)
+
+        var efTemp = 0.00
+        var efMain = 0.00
+        var kapTemp = ""
+        var mainEFCol = 0
+
+        do{
+            cursorMain = db.rawQuery("SELECT * FROM $tQuestions WHERE _id = $idTemp", null)
+            cursorMain.moveToFirst()
+            mainEFCol = cursorMain.getColumnIndex("easiness_factor")
+
+            efTemp = cursorTemp.getDouble(colTempEF)
+            kapTemp = cursorTemp.getString(colTempKap)
+            efMain = cursorMain.getDouble(mainEFCol)
+
+            when{
+                efTemp < efMain -> resultScreen.add(ResultScreen(kapTemp, efTemp, 1))
+                efTemp > efMain -> resultScreen.add(ResultScreen(kapTemp, efTemp, 2))
+                else -> resultScreen.add(ResultScreen(kapTemp, efTemp, 0))
+            }
+        }while(cursorTemp.moveToNext())
+
+        cursorMain.close()
+        cursorTemp.close()
+        db.close()
+
+        return resultScreen
+    }
 
     // Methods for Achievements
 

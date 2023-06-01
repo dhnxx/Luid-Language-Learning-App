@@ -136,8 +136,12 @@ class WordAssociation2 : AppCompatActivity() {
                 submit(i)
                avgTime = (totalTime / questionList.size)
                 println("AVG TIME: $avgTime")
+                intent1.putExtra("level", level)
+                intent1.putExtra("phase", phase)
                 intent1.putExtra("score", score)
-                intent1.putExtra("time", time)
+                intent1.putExtra("totalItems", questionList.size+1)
+                intent1.putExtra("totalTime", totalTime)
+                intent1.putExtra("avgTime", avgTime)
                 startActivity(intent1)
             }
         }
@@ -150,6 +154,9 @@ class WordAssociation2 : AppCompatActivity() {
     private fun phaseone() {
         var level = 1
         var phase = 1
+        val sm = SMLeitner()
+        sm.validateQuestionBank(context, level, phase)
+        var gameSessionNumber = sm.getLatestGameSessionNumber(context, level, phase)
         var db = DBConnect(applicationContext).readableDatabase
         val selectQuery =
             "SELECT * FROM ${DBConnect.questions_tb} WHERE level = $level AND phase = $phase"
@@ -157,7 +164,7 @@ class WordAssociation2 : AppCompatActivity() {
         cursor = db.rawQuery(selectQuery, null)
         // CREATE TEMP TABLE QUESTION
         db.execSQL("DROP TABLE IF EXISTS ${DBConnect.temp_qstion}")
-        db.execSQL("CREATE TABLE IF NOT EXISTS ${DBConnect.temp_qstion} AS SELECT * FROM ${DBConnect.questions_tb} WHERE level = level AND phase = phase")
+        db.execSQL("CREATE TABLE IF NOT EXISTS ${DBConnect.temp_qstion} AS SELECT * FROM ${DBConnect.questions_tb} WHERE level = level AND phase = phase AND game_session_number $gameSessionNumber")
         var kap = ArrayList<String>()
         var eng = ArrayList<String>()
         var tag = ArrayList<String>()
@@ -338,8 +345,8 @@ class WordAssociation2 : AppCompatActivity() {
             nextButton.visibility = View.VISIBLE
             selectAnswer()
             checkAnswer(i)
-            val sm = SMLeitner(context)
-            score = sm.score(correctAnswerCounter, questionList.size)
+            val sm = SMLeitner()
+            score = sm.scoreCalc(correctAnswerCounter, questionList.size)
             time = (elapsedTime/ 1000).toInt()
             totalTime += time
             println("Score = $score")
@@ -354,7 +361,7 @@ class WordAssociation2 : AppCompatActivity() {
 
         }
     }
-// hello
+
     private fun clear() {
         choiceOne.setCardBackgroundColor(Color.parseColor("#FFFBFF"))
         choiceTwo.setCardBackgroundColor(Color.parseColor("#FFFBFF"))
@@ -398,7 +405,7 @@ class WordAssociation2 : AppCompatActivity() {
     }
 
     private fun checkAnswer(i: Int) {
-        val sm = SMLeitner(context)
+        val sm = SMLeitner()
 
         if (tempAnswer == questionList[i].correct) {
             println("Correct")
