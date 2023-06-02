@@ -231,10 +231,12 @@ class SMLeitner() {
         val indGameSession = cursor.getColumnIndex("game_session_number")
         val indReplenished = cursor.getColumnIndex("replenished")
         val indCurrency = cursor.getColumnIndex("currency")
+        val indLives = cursor.getColumnIndex("lives")
 
         var sessionNumber = 0
         var currency = 0
         var replenished = 0
+        var lives = 0
 
         try {
             if(cursor.count != 0){
@@ -243,6 +245,7 @@ class SMLeitner() {
                 sessionNumber = cursor.getInt(indGameSession)
                 replenished = cursor.getInt(indReplenished)
                 currency = cursor.getInt(indCurrency)
+                lives = cursor.getInt(indLives)
 
             }else{
                 cursor = ldb.rawQuery("SELECT * FROM $tUserRecords", null)
@@ -250,10 +253,12 @@ class SMLeitner() {
                 cursor.moveToLast()
                 replenished = cursor.getInt(indReplenished)
                 currency = cursor.getInt(indCurrency)
+                lives = cursor.getInt(indLives)
             }
         }catch (e: IndexOutOfBoundsException){
             replenished = 0
             currency = 0
+            lives = 5
         }finally {
             today = getToday()
             date = today.joinToString(separator = "-")
@@ -266,6 +271,7 @@ class SMLeitner() {
             cv.put("time_spent", "0.0")
             cv.put("replenished", "$replenished")
             cv.put("currency", "$currency")
+            cv.put("lives", "$lives")
 
             ldb.insert("user_records", null, cv)
         }
