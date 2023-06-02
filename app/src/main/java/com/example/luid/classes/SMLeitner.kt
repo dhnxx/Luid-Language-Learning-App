@@ -561,7 +561,6 @@ class SMLeitner() {
         var currPhase = 0
         var currLevel = 0
 
-        // For level 1
         for(i in levelList){
             for(k in phaseList){
                 if (ifPassed(ldb, i, k)){

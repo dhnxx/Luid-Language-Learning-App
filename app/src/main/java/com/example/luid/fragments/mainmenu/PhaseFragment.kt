@@ -19,6 +19,7 @@ import com.example.luid.adapters.*
 import com.example.luid.classes.ChildPhase
 import com.example.luid.classes.ParentPhase
 import com.example.luid.classes.SMLeitner
+import com.example.luid.database.DBConnect
 
 class PhaseFragment : Fragment() {
 
@@ -64,10 +65,11 @@ class PhaseFragment : Fragment() {
         val childPhase0 = ArrayList<ChildPhase>()
         val childPhase1 = ArrayList<ChildPhase>()
         val childPhase2 = ArrayList<ChildPhase>()
+        val sm = SMLeitner()
+        val db = DBConnect(contextExternal).readableDatabase
 
         button = view.findViewById(R.id.button)
         button.setOnClickListener{
-            val sm = SMLeitner()
             sm.buyLives(contextExternal)
             sm.updAchPH(contextExternal)
         }
@@ -118,7 +120,8 @@ class PhaseFragment : Fragment() {
                                         level = 1
                                     )
                                 )
-                            }
+                            },
+                            sm.ifPassed(db, 1, 2)
                         )
                     )
                     phaseList.add(ParentPhase("Phase 2: Sentence Fragments", childPhase1))
@@ -138,7 +141,8 @@ class PhaseFragment : Fragment() {
                                     )
                                 )
 
-                            }
+                            },
+                            sm.ifPassed(db, 1, 3)
                         )
                     )
                     phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2))
@@ -160,7 +164,8 @@ class PhaseFragment : Fragment() {
                                         level = 2
                                     )
                                 )
-                            }
+                            },
+                            sm.ifPassed(db, 2, 1)
                         )
                     )
 
@@ -178,7 +183,8 @@ class PhaseFragment : Fragment() {
                                         level = 2
                                     )
                                 )
-                            }
+                            },
+                            sm.ifPassed(db, 2, 2)
                         )
                     )
                     phaseList.add(ParentPhase("Phase 2: Sentence Fragments", childPhase1))
@@ -196,7 +202,8 @@ class PhaseFragment : Fragment() {
                                         level = 2
                                     )
                                 )
-                            }
+                            },
+                            sm.ifPassed(db, 2, 3)
                         )
                     )
                     phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2))
@@ -218,7 +225,8 @@ class PhaseFragment : Fragment() {
                                         level = 3
                                     )
                                 )
-                            }
+                            },
+                            sm.ifPassed(db, 3, 1)
                         )
                     )
                     phaseList.add(ParentPhase("Phase 1: Word Association", childPhase0))
@@ -235,7 +243,8 @@ class PhaseFragment : Fragment() {
                                         level = 3
                                     )
                                 )
-                            }
+                            },
+                            sm.ifPassed(db, 3, 2)
 
                         )
                     )
@@ -254,7 +263,8 @@ class PhaseFragment : Fragment() {
                                         level = 3
                                     )
                                 )
-                            }
+                            },
+                            sm.ifPassed(db, 3, 3)
                         )
                     )
                     phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2))
@@ -276,7 +286,8 @@ class PhaseFragment : Fragment() {
                                         level = 4
                                     )
                                 )
-                            }
+                            },
+                            sm.ifPassed(db, 4, 1)
                         )
                     )
                     phaseList.add(ParentPhase("Phase 1: Word Association", childPhase0))
@@ -293,7 +304,8 @@ class PhaseFragment : Fragment() {
                                         level = 4
                                     )
                                 )
-                            }
+                            },
+                            sm.ifPassed(db, 4, 2)
                         )
                     )
                     phaseList.add(ParentPhase("Phase 2: Sentence Fragments", childPhase1))
@@ -311,7 +323,8 @@ class PhaseFragment : Fragment() {
                                         level = 4
                                     )
                                 )
-                            }
+                            },
+                            sm.ifPassed(db, 4, 3)
                         )
                     )
                     phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2))
@@ -328,7 +341,7 @@ class PhaseFragment : Fragment() {
         }
 
 
-
+        db.close()
         return view
     }
 
