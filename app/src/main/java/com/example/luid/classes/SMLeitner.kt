@@ -162,6 +162,26 @@ class SMLeitner() {
         }.toInt()
     }
 
+
+    fun getCurrency(context: Context) : Int{
+        var dbHelper = DBConnect(context)
+        var ldb = dbHelper.readableDatabase
+        var colCurrency = "currency"
+        var cursor = ldb.rawQuery("SELECT $colCurrency FROM $tUserRecords ORDER BY _id DESC LIMIT 1", null)
+        var colCurrencyInd = cursor.getColumnIndex("$colCurrency")
+        var latestScore = 0
+
+        if (cursor.moveToFirst()){
+            latestScore = cursor.getInt(colCurrencyInd)
+        }
+
+        cursor.close()
+        ldb.close()
+
+        return latestScore
+    }
+
+
     // Get the latest score from Database
     fun getScore(context: Context) : Double{
         var dbHelper = DBConnect(context)
