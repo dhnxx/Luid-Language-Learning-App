@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
@@ -34,9 +35,9 @@ class PhaseFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private val phaseList = ArrayList<ParentPhase>()
     private lateinit var button : Button
+    private lateinit var livesText : TextView
     private val adapter = ParentPhaseAdapter(phaseList)
     private lateinit var builder : AlertDialog.Builder
-// intialize the context
 
 
     override fun onCreateView(
@@ -70,6 +71,11 @@ class PhaseFragment : Fragment() {
         val childPhase2 = ArrayList<ChildPhase>()
         val sm = SMLeitner()
         val db = DBConnect(contextExternal).readableDatabase
+
+        livesText = view.findViewById(R.id.textLives)
+        livesText.text = sm.displayLives(contextExternal).toString()
+
+
 
         button = view.findViewById(R.id.button)
         button.setOnClickListener{

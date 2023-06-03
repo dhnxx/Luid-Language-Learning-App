@@ -45,22 +45,27 @@ class StoryFragment : Fragment() {
 
         println(selectedPhase)
 
+
+
         start?.setOnClickListener {
 
             when (selectedPhase) {
                 1 -> {
                     intent1.putExtra("level", selectedLevel)
                     sm.addSession(contextExt, selectedLevel, selectedPhase)
+                    sm.lifeSpent(contextExt, selectedLevel, selectedPhase)
                     startActivity(intent1)
                 }
                 2 -> {
                     intent2.putExtra("level", selectedLevel)
                     sm.addSession(contextExt, selectedLevel, selectedPhase)
+                    sm.lifeSpent(contextExt, selectedLevel, selectedPhase)
                     startActivity(intent2)
                 }
                 3 -> {
                     intent3.putExtra("level", selectedLevel)
                     sm.addSession(contextExt, selectedLevel, selectedPhase)
+                    sm.lifeSpent(contextExt, selectedLevel, selectedPhase)
                     startActivity(intent3)
                 }
             }
