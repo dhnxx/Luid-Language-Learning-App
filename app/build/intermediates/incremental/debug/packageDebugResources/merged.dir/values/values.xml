@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr format="color" name="colorCorrect"/>
+    <attr format="color" name="colorCorrectContainer"/>
+    <attr format="color" name="colorOnCorrect"/>
+    <attr format="color" name="colorOnCorrectContainer"/>
+    <attr format="color" name="harmonizeCorrectColor1"/>
+    <color name="black">#FF000000</color>
+    <color name="colorPlaceholder1">#1cb0f6</color>
+    <color name="colorPlaceholder2">#ff9600</color>
+    <color name="colorPlaceholder3">#ce82ff</color>
+    <color name="colorPlaceholder4">#2b70c9</color>
+    <color name="md_theme_dark_background">#1C1B1E</color>
+    <color name="md_theme_dark_correct">#00e564</color>
+    <color name="md_theme_dark_correctContainer">#00531f</color>
+    <color name="md_theme_dark_error">#FFB4AB</color>
+    <color name="md_theme_dark_errorContainer">#93000A</color>
+    <color name="md_theme_dark_inverseOnSurface">#1C1B1E</color>
+    <color name="md_theme_dark_inversePrimary">#6750A4</color>
+    <color name="md_theme_dark_inverseSurface">#E6E1E6</color>
+    <color name="md_theme_dark_onBackground">#E6E1E6</color>
+    <color name="md_theme_dark_onCorrect">#68ff89</color>
+    <color name="md_theme_dark_onCorrectContainer">#002108</color>
+    <color name="md_theme_dark_onError">#690005</color>
+    <color name="md_theme_dark_onErrorContainer">#FFDAD6</color>
+    <color name="md_theme_dark_onPrimary">#381E72</color>
+    <color name="md_theme_dark_onPrimaryContainer">#E9DDFF</color>
+    <color name="md_theme_dark_onSecondary">#332D41</color>
+    <color name="md_theme_dark_onSecondaryContainer">#E8DEF8</color>
+    <color name="md_theme_dark_onSurface">#E6E1E6</color>
+    <color name="md_theme_dark_onSurfaceVariant">#CAC4CF</color>
+    <color name="md_theme_dark_onTertiary">#5F1411</color>
+    <color name="md_theme_dark_onTertiaryContainer">#FFDAD6</color>
+    <color name="md_theme_dark_outline">#948F99</color>
+    <color name="md_theme_dark_outlineVariant">#49454E</color>
+    <color name="md_theme_dark_primary">#CFBCFF</color>
+    <color name="md_theme_dark_primaryContainer">#4F378A</color>
+    <color name="md_theme_dark_scrim">#000000</color>
+    <color name="md_theme_dark_secondary">#CBC2DB</color>
+    <color name="md_theme_dark_secondaryContainer">#4A4458</color>
+    <color name="md_theme_dark_shadow">#000000</color>
+    <color name="md_theme_dark_surface">#1C1B1E</color>
+    <color name="md_theme_dark_surfaceTint">#CFBCFF</color>
+    <color name="md_theme_dark_surfaceVariant">#49454E</color>
+    <color name="md_theme_dark_tertiary">#FFB4AB</color>
+    <color name="md_theme_dark_tertiaryContainer">#7D2B25</color>
+    <color name="md_theme_light_background">#FFFBFF</color>
+    <color name="md_theme_light_correct">#006e2c</color>
+    <color name="md_theme_light_correctContainer">#68ff89</color>
+    <color name="md_theme_light_error">#BA1A1A</color>
+    <color name="md_theme_light_errorContainer">#FFDAD6</color>
+    <color name="md_theme_light_inverseOnSurface">#F4EFF4</color>
+    <color name="md_theme_light_inversePrimary">#CFBCFF</color>
+    <color name="md_theme_light_inverseSurface">#313033</color>
+    <color name="md_theme_light_onBackground">#1C1B1E</color>
+    <color name="md_theme_light_onCorrect">#ffffff</color>
+    <color name="md_theme_light_onCorrectContainer">#002108</color>
+    <color name="md_theme_light_onError">#FFFFFF</color>
+    <color name="md_theme_light_onErrorContainer">#410002</color>
+    <color name="md_theme_light_onPrimary">#FFFFFF</color>
+    <color name="md_theme_light_onPrimaryContainer">#22005D</color>
+    <color name="md_theme_light_onSecondary">#FFFFFF</color>
+    <color name="md_theme_light_onSecondaryContainer">#1E192B</color>
+    <color name="md_theme_light_onSurface">#1C1B1E</color>
+    <color name="md_theme_light_onSurfaceVariant">#49454E</color>
+    <color name="md_theme_light_onTertiary">#FFFFFF</color>
+    <color name="md_theme_light_onTertiaryContainer">#410002</color>
+    <color name="md_theme_light_outline">#7A757F</color>
+    <color name="md_theme_light_outlineVariant">#CAC4CF</color>
+    <color name="md_theme_light_primary">#6750A4</color>
+    <color name="md_theme_light_primaryContainer">#E9DDFF</color>
+    <color name="md_theme_light_scrim">#000000</color>
+    <color name="md_theme_light_secondary">#625B71</color>
+    <color name="md_theme_light_secondaryContainer">#E8DEF8</color>
+    <color name="md_theme_light_shadow">#000000</color>
+    <color name="md_theme_light_surface">#FFFBFF</color>
+    <color name="md_theme_light_surfaceTint">#6750A4</color>
+    <color name="md_theme_light_surfaceVariant">#E7E0EB</color>
+    <color name="md_theme_light_tertiary">#9C423A</color>
+    <color name="md_theme_light_tertiaryContainer">#FFDAD6</color>
+    <color name="navbar_theme_light">#F6EBEE</color>
+    <color name="seed">#9C423A</color>
+    <color name="white">#FFFFFFFF</color>
+    <dimen name="fab_margin">16dp</dimen>
+    <string name="action_settings">Settings</string>
+    <string name="app_name">LUID</string>
+    <string name="card_desc1">Discover the purpose of LUID, the Kapampangan language learning app, and learn how it promotes language conservation and prolongation.</string>
+    <string name="card_desc2">Learn more about the dedicated team behind LUID, their passion for Kapampangan and language preservation, and the expertise they bring to the table to create an innovative language learning app.</string>
+    <string name="card_title1">Luid</string>
+    <string name="card_title2">Quinta</string>
+    <string name="dictionary">Dictionary</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Home</string>
+    <string name="info">Info</string>
+    <string name="levels">Levels</string>
+    <string name="lorem">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu congue justo. Vivamus blandit odio a nisi ultricies ultricies. Nunc maximus quis orci in rhoncus. Aliquam id efficitur tellus, id rhoncus libero. Vivamus vestibulum vitae elit sit amet egestas. Maecenas bibendum enim eget libero congue dapibus. In et velit malesuada, malesuada massa id, fermentum turpis. Nullam sit amet interdum nibh. Nunc vel leo ut sem facilisis malesuada. Integer sit amet sodales lacus. Nunc ac accumsan massa. Donec blandit tellus non enim pharetra elementum.
+    </string>
+    <string name="profile">Profile</string>
+    <string name="settings">Settings</string>
+    <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:height">60dp </item>
+        <item name="android:width">75dp </item>
+    </style>
+    <style name="AppTheme" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/md_theme_light_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_light_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_light_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/md_theme_light_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_light_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/md_theme_light_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_light_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/md_theme_light_tertiary</item>
+        <item name="colorOnTertiary">@color/md_theme_light_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/md_theme_light_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/md_theme_light_onTertiaryContainer</item>
+        <item name="colorError">@color/md_theme_light_error</item>
+        <item name="colorErrorContainer">@color/md_theme_light_errorContainer</item>
+        <item name="colorOnError">@color/md_theme_light_onError</item>
+        <item name="colorOnErrorContainer">@color/md_theme_light_onErrorContainer</item>
+        <item name="android:colorBackground">@color/md_theme_light_background</item>
+        <item name="colorOnBackground">@color/md_theme_light_onBackground</item>
+        <item name="colorSurface">@color/md_theme_light_surface</item>
+        <item name="colorOnSurface">@color/md_theme_light_onSurface</item>
+        <item name="colorSurfaceVariant">@color/md_theme_light_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_light_onSurfaceVariant</item>
+        <item name="colorOutline">@color/md_theme_light_outline</item>
+        <item name="colorOnSurfaceInverse">@color/md_theme_light_inverseOnSurface</item>
+
+        <item name="colorCorrect">@color/md_theme_light_correct</item>
+        <item name="colorOnCorrect">@color/md_theme_light_onCorrect</item>
+        <item name="colorCorrectContainer">@color/md_theme_light_correctContainer</item>
+        <item name="colorOnCorrectContainer">@color/md_theme_light_onCorrectContainer</item>
+
+        <item name="colorSurfaceInverse">@color/md_theme_light_inverseSurface</item>
+        <item name="colorPrimaryInverse">@color/md_theme_light_inversePrimary</item>
+        <item name="android:navigationBarColor">@color/navbar_theme_light</item>
+
+    </style>
+    <style name="Base.Theme.LUID" parent="Theme.Material3.DayNight.NoActionBar">
+
+    </style>
+    <style name="CustomProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal">
+        <item name="android:height">10dp</item> 
+    </style>
+    <style name="CustomTabText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">16sp</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="CustomTextView1" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:background">@drawable/rounded_corner2</item>
+        <item name="android:padding">10dp</item>
+
+    </style>
+    <style name="NoRippleCardView" parent="Widget.MaterialComponents.CardView">
+        <item name="android:clickable">true</item>
+        <item name="android:foreground">@null</item>
+        <item name="android:foregroundTint">@android:color/transparent</item>
+    </style>
+    <style name="Theme.HorizontalRecyclerView" parent="Theme.MaterialComponents.DayNight.NoActionBar"> </style>
+</resources>
