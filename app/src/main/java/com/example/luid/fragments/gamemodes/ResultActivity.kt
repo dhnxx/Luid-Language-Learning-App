@@ -98,11 +98,12 @@ class ResultActivity : AppCompatActivity() {
         val sm = SMLeitner()
         val resultListDB = sm.compareEF(this)
 
+
         for(i in 0 until resultListDB.size){
             resultList.add(
                 ResultScreen(
                     resultListDB[i].word,
-                    resultListDB[i].finalEF,
+                    String.format("%2f", resultListDB[i].finalEF).toDouble(),
                     resultListDB[i].finalDF,
                     resultListDB[i].status
                 )
