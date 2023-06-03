@@ -375,7 +375,7 @@ class SMLeitner() {
         var mainEFCol = 0
 
         do{
-            cursorMain = db.rawQuery("SELECT * FROM $tQuestions WHERE _id = $idTemp", null)
+            cursorMain = db.rawQuery("SELECT * FROM $temp_qstion WHERE _id = $idTemp", null)
             cursorMain.moveToFirst()
             mainEFCol = cursorMain.getColumnIndex("easiness_factor")
 
