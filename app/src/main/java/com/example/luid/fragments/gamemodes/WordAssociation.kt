@@ -271,7 +271,7 @@ class WordAssociation : AppCompatActivity() {
                     answers = answerstemp
 
                 }
-
+// hello
 
             }
 
