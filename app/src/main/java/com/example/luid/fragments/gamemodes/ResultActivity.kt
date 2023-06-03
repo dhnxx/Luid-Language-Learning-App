@@ -29,8 +29,8 @@ class ResultActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerView)
 
         //intent
-      //  val intent = Intent(this, MainActivity::class.java)
 
+        val intent2 = Intent(this, MainActivity::class.java)
         button = findViewById(R.id.button)
 
         var level = 0
@@ -60,7 +60,6 @@ class ResultActivity : AppCompatActivity() {
 
         // Query List to be displayed
         val sm = SMLeitner()
-        val resultList = sm.compareEF(this)
 
         // Calculate Score
         val extras = intent.extras
@@ -89,24 +88,32 @@ class ResultActivity : AppCompatActivity() {
 
         button.setOnClickListener {
 
-            end()
+            end(intent2)
         }
 
 
     }
 
     private fun add() {
+        val sm = SMLeitner()
+        val resultListDB = sm.compareEF(this)
 
-        resultList.add(ResultScreen("word1", 0.0, 0, 1))
-        resultList.add(ResultScreen("word2", 0.0, 0, 1))
-        resultList.add(ResultScreen("word3", 0.0, 0, 1))
-
+        for(i in 0 until resultListDB.size){
+            resultList.add(
+                ResultScreen(
+                    resultListDB[i].word,
+                    resultListDB[i].finalEF,
+                    resultListDB[i].finalDF,
+                    resultListDB[i].status
+                )
+            )
+        }
 
     }
 
-    private fun end() {
+    private fun end(intent2 : Intent) {
 
-        startActivity(intent)
+        startActivity(intent2)
         finish()
 
     }
