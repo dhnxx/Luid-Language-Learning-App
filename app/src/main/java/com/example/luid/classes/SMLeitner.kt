@@ -281,6 +281,47 @@ class SMLeitner() {
         ldb.close()
     }
 
+    fun lifeSpent(context: Context, level: Int, phase: Int){
+        var db = DBConnect(context).writableDatabase
+        var cursor = db.rawQuery("SELECT * FROM $tUserRecords WHERE level = $level AND phase = $phase", null)
+        var cv = ContentValues()
+
+        val indId = cursor.getColumnIndex("_id")
+        val indLives = cursor.getColumnIndex("lives")
+        var lives = 0
+        var id = 0
+
+        if(cursor.moveToLast()){
+            lives = cursor.getInt(indLives)
+            id = cursor.getInt(indId)
+        }
+
+        lives -= 1
+
+        cv.put("lives", lives)
+
+        db.update(tUserRecords, cv, "_id = $id", null)
+
+        cursor.close()
+        db.close()
+
+    }
+
+    fun displayLives(context: Context) : Int{
+        var db = DBConnect(context).readableDatabase
+        var cursor = db.rawQuery("SELECT lives FROM $tUserRecords", null)
+        var lives = 0
+
+        if (cursor.moveToLast()){
+            lives = cursor.getInt(0)
+        }
+
+        cursor.close()
+        db.close()
+
+        return lives
+    }
+
     // Updates the user_records table with the data after finishing a game session
     fun updUserRecords(context: Context, level: Int, phase: Int, score : Double, timeSpent : Int, currencyEarned : Int){
         var db = DBConnect(context).writableDatabase
