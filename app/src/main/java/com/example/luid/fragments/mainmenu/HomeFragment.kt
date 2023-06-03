@@ -15,6 +15,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.luid.R
 import com.example.luid.adapters.*
 import com.example.luid.classes.LevelSelection
+import com.example.luid.database.DBConnect
+import com.example.luid.database.DBConnect.Companion.achievements_tb
+import com.example.luid.database.DBConnect.Companion.questions_tb
 
 
 class HomeFragment : Fragment() {
@@ -103,6 +106,18 @@ class HomeFragment : Fragment() {
     }
 
     private fun getLevelList(): List<LevelSelection> {
+        val db = DBConnect(context).readableDatabase
+        var cursor = db.rawQuery("SELECT current_level FROM $achievements_tb WHERE _id = 3", null)
+        var currLevel = 0
+        var colInd = cursor.getColumnIndex("current_level")
+
+        if(cursor.moveToFirst()){
+            currLevel = cursor.getInt(colInd)
+        }
+
+        cursor.close()
+        db.close()
+
         return listOf(
             LevelSelection(
                 "Level 1",
@@ -116,24 +131,27 @@ class HomeFragment : Fragment() {
                 "Numbers",
                 R.drawable.profile,
                 "Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!",
-
+                2 <= currLevel
             ),
             LevelSelection(
                 "Level 3",
                 "People",
                 R.drawable.about,
-                "Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!"
+                "Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!",
+                3 <= currLevel
             ),
             LevelSelection(
                 "Level 4",
                 "Basic Conversations",
                 R.drawable.settings,
-                "Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!"
+                "Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!",
+                4 <= currLevel
             ),
         )
 
 
     }
+
 
 }
 
