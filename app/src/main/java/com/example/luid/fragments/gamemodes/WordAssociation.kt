@@ -30,6 +30,8 @@ class WordAssociation : AppCompatActivity() {
     private lateinit var questionList: ArrayList<WordAssociationClass>
     private lateinit var decoy: ArrayList<String>
     private lateinit var answers: ArrayList<String>
+    private lateinit var answerstemp: ArrayList<String>
+    private lateinit var decoytemp: ArrayList<String>
     private lateinit var progressbar: ProgressBar
     private lateinit var questionText: TextView
     private lateinit var timeText: TextView
@@ -163,20 +165,27 @@ class WordAssociation : AppCompatActivity() {
         var gameSessionNumber = sm.getLatestGameSessionNumber(context, level, phase)
 
         var db = DBConnect(applicationContext).readableDatabase
+        println("DB  TEMP NOT CREATED")
+
         val selectQuery =
-            "SELECT * FROM ${DBConnect.temp_qstion} WHERE level = $level AND phase = $phase"
+            "SELECT * FROM ${DBConnect.temp_qstion} WHERE level = $level AND phase = $phase AND game_session = $gameSessionNumber"
         val cursor: Cursor
-        cursor = db.rawQuery(selectQuery, null)
         // CREATE TEMP TABLE QUESTION
+
         db.execSQL("DROP TABLE IF EXISTS ${DBConnect.temp_qstion}")
         db.execSQL("CREATE TABLE IF NOT EXISTS ${DBConnect.temp_qstion} AS SELECT * FROM ${DBConnect.questions_tb} WHERE level = $level AND phase = $phase")
+
+        println("$gameSessionNumber" + "HELLO")
         var id = ArrayList<Int>()
         var kap = ArrayList<String>()
         var eng = ArrayList<String>()
         var tag = ArrayList<String>()
-        var question = ArrayList<String>()
+        var question = ArrayList<String>() 
         decoy = ArrayList()
         answers = ArrayList()
+        decoytemp = ArrayList()
+        answerstemp = ArrayList()
+        cursor = db.rawQuery(selectQuery, null)
         if (cursor.moveToFirst()) {
             do {
                 var idlist = cursor.getInt(cursor.getColumnIndex("_id"))
@@ -191,90 +200,88 @@ class WordAssociation : AppCompatActivity() {
 
             } while (cursor.moveToNext())
         }
+        println("BEFORE for loop")
+
+        for (i in 0 until tag.size){
+            println(tag[i])
+
+        }
         for (i in 0 until 10) {
             decoy.clear()
-
+            answers.clear()
             when ((1..4).random()) {
 
                 1 -> {
-                    decoy.clear()
-
+                    decoytemp.clear()
+                    answerstemp.clear()
                     question.add("What is " + kap[i] + " in Tagalog?")
-                    answers.add(tag[i])
+                    answerstemp.add(tag[i])
+                    decoytemp.addAll(tag)
 
-                    decoy.addAll(tag)
-                    for (i in answers) {
-                        for (j in tag) {
-                            if (decoy.contains(i)) {
-                                decoy.remove(i)
-                                if (!answers.contains(j)) {
-                                    decoy.add(j)
-                                }
-                            }
+                    for(i in answerstemp){
+                        if(decoytemp.contains(i)){
+                            decoytemp.remove(i)
                         }
                     }
+                    decoy = decoytemp
+                    answers = answerstemp
                 }
 
                 2 -> {
-                    decoy.clear()
-
+                    decoytemp.clear()
+                    answerstemp.clear()
                     question.add("What is " + kap[i] + " in English?")
-                    answers.add(eng[i])
-
-                    decoy.addAll(eng)
-                    for (i in answers) {
-                        for (j in eng) {
-                            if (decoy.contains(i)) {
-                                decoy.remove(i)
-                                if (!answers.contains(j)) {
-                                    decoy.add(j)
-                                }
-                            }
+                    answerstemp.add(eng[i])
+                    decoytemp.addAll(eng)
+                    for(i in answerstemp){
+                        if(decoytemp.contains(i)){
+                            decoytemp.remove(i)
                         }
                     }
-
+                    decoy = decoytemp
+                    answers = answerstemp
                 }
 
                 3 -> {
-                    decoy.clear()
-
+                    decoytemp.clear()
+                    answerstemp.clear()
                     question.add("What is " + tag[i] + " in Kapampangan?")
-                    answers.add(kap[i])
-                    decoy.addAll(kap)
-                    for (i in answers) {
-                        for (j in kap) {
-                            if (decoy.contains(i)) {
-                                decoy.remove(i)
-                                if (!answers.contains(j)) {
-                                    decoy.add(j)
-                                }
-                            }
+                    answerstemp.add(kap[i])
+                    decoytemp.addAll(kap)
+                    for(i in answerstemp){
+                        if(decoytemp.contains(i)){
+                            decoytemp.remove(i)
                         }
                     }
-
+                    decoy = decoytemp
+                    answers = answerstemp
                 }
-
                 4 -> {
-                    decoy.clear()
+                    decoytemp.clear()
+                    answerstemp.clear()
                     question.add("What is " + eng[i] + " in Kapampangan?")
-                    answers.add(kap[i])
-
-                    decoy.addAll(kap)
-                    for (i in answers) {
-                        for (j in kap) {
-                            if (decoy.contains(i)) {
-                                decoy.remove(i)
-                                if (!answers.contains(j)) {
-                                    decoy.add(j)
-                                }
-                            }
+                    answerstemp.add(kap[i])
+                    decoytemp.addAll(kap)
+                    for(i in answerstemp){
+                        if(decoytemp.contains(i)){
+                            decoytemp.remove(i)
                         }
                     }
+                    decoy = decoytemp
+                    answers = answerstemp
 
                 }
 
 
             }
+
+            for ( i in 0 until answers.size){
+                println("ANSWERS = ${answerstemp[i]} " + i)
+            }
+            for (i in 0 until decoy.size){
+                println("DECOY = ${decoytemp[i]}" + " " + i )
+            }
+
 
 
             decoy.shuffle()
@@ -286,7 +293,7 @@ class WordAssociation : AppCompatActivity() {
                 WordAssociationClass(
                     id[i],
                     question[i],
-                    answers[i],
+                    answers[0],
                     R.drawable.home,
                     decoy[randInd[0]],
                     R.drawable.home,
@@ -296,6 +303,9 @@ class WordAssociation : AppCompatActivity() {
                     R.drawable.home
                 )
             )
+            for(i in 0 until 10){
+                println("MAIN DEC = ${decoy}")
+            }
         }
         // clear question temp table after
         cursor.close()

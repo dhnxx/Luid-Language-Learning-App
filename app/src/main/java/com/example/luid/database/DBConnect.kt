@@ -45,7 +45,7 @@ class DBConnect(context: Context?) : SQLiteOpenHelper(context, DB_NAME, null, DB
         //user_records table
         db.execSQL(
             "CREATE TABLE IF NOT EXISTS $user_records_tb (_id INTEGER PRIMARY KEY AUTOINCREMENT, game_session_number INTEGER, date_played TEXT, " +
-                    "score FLOAT, time_spent INTEGER, replenished INTEGER, currency FLOAT DEFAULT 0)"
+                    "score FLOAT, time_spent INTEGER, replenished INTEGER, currency FLOAT DEFAULT 0, lives INTEGER)"
         )
 
 
@@ -60,19 +60,10 @@ class DBConnect(context: Context?) : SQLiteOpenHelper(context, DB_NAME, null, DB
 
         // QUESTION TEMP
 
-        db.execSQL(
-            "CREATE TABLE IF NOT EXISTS $temp_qstion (_id INTEGER PRIMARY KEY AUTOINCREMENT, level INTEGER, phase FLOAT, " +
-                    "question TEXT, ${DBConnect.tkapWord} TEXT, ${DBConnect.tengWord} TEXT, ${DBConnect.ttagWord} TEXT, translation TEXT, game_session INTEGER DEFAULT 0, " +
-                    "easiness_factor FLOAT DEFAULT 0, interval INTEGER DEFAULT 0, ${DBConnect.tdiffs} INTEGER DEFAULT 2, times_viewed INTEGER DEFAULT 0, ${DBConnect.tvsbty} int DEFAULT 0, " +
-                    "drawable STRING)"
-        )
         // USER_RECORD TEMP
 
         // ACHIEVEMENTS TEMP
-        db.execSQL(
-            "CREATE TABLE IF NOT EXISTS $temp_achvmnts (_id INTEGER PRIMARY KEY AUTOINCREMENT, achievements_abbreviation TEXT, achievement_name TEXT, " +
-                    "description TEXT, current_progress INTEGER DEFAULT 0, current_level INTEGER DEFAULT 0, maximum_value INTEGER )"
-        )
+
     }
 
 
@@ -81,9 +72,6 @@ class DBConnect(context: Context?) : SQLiteOpenHelper(context, DB_NAME, null, DB
         db.execSQL("DROP TABLE IF EXISTS questions")
         db.execSQL("DROP TABLE IF EXISTS user_records")
         db.execSQL("DROP TABLE IF EXISTS achievements")
-        db.execSQL("DROP TABLE IF EXISTS $temp_qstion")
-        db.execSQL("DROP TABLE IF EXISTS $temp_achvmnts")
-        db.execSQL("DROP TABLE IF EXISTS $temp_userrec")
         onCreate(db)
 
     }
