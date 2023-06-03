@@ -164,12 +164,12 @@ class WordAssociation : AppCompatActivity() {
 
         var db = DBConnect(applicationContext).readableDatabase
         val selectQuery =
-            "SELECT * FROM ${DBConnect.questions_tb} WHERE level = $level AND phase = $phase"
+            "SELECT * FROM ${DBConnect.temp_qstion} WHERE level = $level AND phase = $phase"
         val cursor: Cursor
         cursor = db.rawQuery(selectQuery, null)
         // CREATE TEMP TABLE QUESTION
         db.execSQL("DROP TABLE IF EXISTS ${DBConnect.temp_qstion}")
-        db.execSQL("CREATE TABLE IF NOT EXISTS ${DBConnect.temp_qstion} AS SELECT * FROM ${DBConnect.questions_tb} WHERE level = level AND phase = phase")
+        db.execSQL("CREATE TABLE IF NOT EXISTS ${DBConnect.temp_qstion} AS SELECT * FROM ${DBConnect.questions_tb} WHERE level = $level AND phase = $phase")
         var id = ArrayList<Int>()
         var kap = ArrayList<String>()
         var eng = ArrayList<String>()

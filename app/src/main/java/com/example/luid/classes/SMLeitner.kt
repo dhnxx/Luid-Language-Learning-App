@@ -162,6 +162,26 @@ class SMLeitner() {
         }.toInt()
     }
 
+
+    fun getCurrency(context: Context) : Int{
+        var dbHelper = DBConnect(context)
+        var ldb = dbHelper.readableDatabase
+        var colCurrency = "currency"
+        var cursor = ldb.rawQuery("SELECT $colCurrency FROM $tUserRecords ORDER BY _id DESC LIMIT 1", null)
+        var colCurrencyInd = cursor.getColumnIndex("$colCurrency")
+        var latestScore = 0
+
+        if (cursor.moveToFirst()){
+            latestScore = cursor.getInt(colCurrencyInd)
+        }
+
+        cursor.close()
+        ldb.close()
+
+        return latestScore
+    }
+
+
     // Get the latest score from Database
     fun getScore(context: Context) : Double{
         var dbHelper = DBConnect(context)
@@ -211,10 +231,12 @@ class SMLeitner() {
         val indGameSession = cursor.getColumnIndex("game_session_number")
         val indReplenished = cursor.getColumnIndex("replenished")
         val indCurrency = cursor.getColumnIndex("currency")
+        val indLives = cursor.getColumnIndex("lives")
 
         var sessionNumber = 0
         var currency = 0
         var replenished = 0
+        var lives = 0
 
         try {
             if(cursor.count != 0){
@@ -223,6 +245,7 @@ class SMLeitner() {
                 sessionNumber = cursor.getInt(indGameSession)
                 replenished = cursor.getInt(indReplenished)
                 currency = cursor.getInt(indCurrency)
+                lives = cursor.getInt(indLives)
 
             }else{
                 cursor = ldb.rawQuery("SELECT * FROM $tUserRecords", null)
@@ -230,10 +253,12 @@ class SMLeitner() {
                 cursor.moveToLast()
                 replenished = cursor.getInt(indReplenished)
                 currency = cursor.getInt(indCurrency)
+                lives = cursor.getInt(indLives)
             }
         }catch (e: IndexOutOfBoundsException){
             replenished = 0
             currency = 0
+            lives = 5
         }finally {
             today = getToday()
             date = today.joinToString(separator = "-")
@@ -246,6 +271,7 @@ class SMLeitner() {
             cv.put("time_spent", "0.0")
             cv.put("replenished", "$replenished")
             cv.put("currency", "$currency")
+            cv.put("lives", "$lives")
 
             ldb.insert("user_records", null, cv)
         }
@@ -349,7 +375,7 @@ class SMLeitner() {
         var mainEFCol = 0
 
         do{
-            cursorMain = db.rawQuery("SELECT * FROM $tQuestions WHERE _id = $idTemp", null)
+            cursorMain = db.rawQuery("SELECT * FROM $temp_qstion WHERE _id = $idTemp", null)
             cursorMain.moveToFirst()
             mainEFCol = cursorMain.getColumnIndex("easiness_factor")
 
@@ -561,7 +587,6 @@ class SMLeitner() {
         var currPhase = 0
         var currLevel = 0
 
-        // For level 1
         for(i in levelList){
             for(k in phaseList){
                 if (ifPassed(ldb, i, k)){
