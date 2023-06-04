@@ -176,8 +176,7 @@ class PhaseFragment : Fragment() {
                                     )
                                 )
                             },
-                            //sm.ifPassed(db, 1, 2)
-                            true
+                            sm.ifPassed(db, 1, 2)
                         )
                     )
                     phaseList.add(ParentPhase("Phase 2: Sentence Fragments", childPhase1))
@@ -198,8 +197,7 @@ class PhaseFragment : Fragment() {
                                 )
 
                             },
-//                            sm.ifPassed(db, 1, 3)
-                        true
+                            sm.ifPassed(db, 1, 3)
                         )
                     )
                     phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2))
