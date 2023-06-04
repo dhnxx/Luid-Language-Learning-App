@@ -25,6 +25,14 @@ class ResultActivity : AppCompatActivity() {
     private lateinit var resultList: ArrayList<ResultScreen>
     private lateinit var adapter: ResultAdapter
     private lateinit var button: Button
+    private var level = 0
+    private var phase = 0
+    private var score = 0.0
+    private var reward = 0
+    private var totalItems = 0
+    private var timeSpent = 0
+    private var avgTime = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
@@ -37,13 +45,20 @@ class ResultActivity : AppCompatActivity() {
         val intent2 = Intent(this, MainActivity::class.java)
         button = findViewById(R.id.button)
 
-        var level = 0
-        var phase = 0
-        var score = 0.0
-        var reward = 0
-        var totalItems = 0
-        var timeSpent = 0
-        var avgTime = 0
+        // Query List to be displayed
+        val sm = SMLeitner()
+
+        // Calculate Score
+        val extras = intent.extras
+        if (extras != null) {
+            level = extras.getInt("level") // To be displayed in result Screen
+            phase = extras.getInt("phase") // To be displayed in result Screen
+            score = extras.getDouble("score") // To be displayed in result Screen
+            reward = sm.rewardCalc(score) // To be displayed in result Screen
+            totalItems = extras.getInt("totalItems")
+            timeSpent = extras.getInt("totalTime") // To be displayed in result Screen
+            avgTime = extras.getInt("avgTime") // To be displayed in result Screen
+        }
 
         //RECYCLER VIEW
 
@@ -62,20 +77,9 @@ class ResultActivity : AppCompatActivity() {
 
         // FOR RESULT SCREEN
 
-        // Query List to be displayed
-        val sm = SMLeitner()
 
-        // Calculate Score
-        val extras = intent.extras
-        if (extras != null) {
-            level = extras.getInt("level") // To be displayed in result Screen
-            phase = extras.getInt("phase") // To be displayed in result Screen
-            score = extras.getDouble("score") // To be displayed in result Screen
-            reward = sm.rewardCalc(score) // To be displayed in result Screen
-            totalItems = extras.getInt("totalItems")
-            timeSpent = extras.getInt("totalTime") // To be displayed in result Screen
-            avgTime = extras.getInt("avgTime") // To be displayed in result Screen
-        }
+
+
 
 
         // JOIN TEMP AND QUESTION TABLE HERE
@@ -121,7 +125,7 @@ class ResultActivity : AppCompatActivity() {
         var cursor: Cursor
 
         cursor = db.rawQuery(
-            "SELECT * FROM $temp_qstion WHERE level = 1 AND phase = 1",
+            "SELECT * FROM $temp_qstion WHERE level = $level AND phase = $phase",
             null
         )
 

@@ -100,6 +100,8 @@ class SentenceConstruction : AppCompatActivity() {
                 submit(i)
                 avgTime = (totalTime / questionList.size)
                 println("AVG TIME: $avgTime")
+                intent3.putExtra("phase", phase)
+                intent3.putExtra("level", level)
                 intent3.putExtra("score", score)
                 intent3.putExtra("totalTime", totalTime)
                 startActivity(intent3)
@@ -207,7 +209,7 @@ class SentenceConstruction : AppCompatActivity() {
             randInd.add(k)
         }
 
-        for (i in 1 until kap.size) {
+        for (i in 0 until kap.size) {
             questionList.add(
                 SentenceFragment(
                     id[i],

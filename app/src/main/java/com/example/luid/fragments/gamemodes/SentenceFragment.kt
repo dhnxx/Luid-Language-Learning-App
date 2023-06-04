@@ -216,7 +216,7 @@ class SentenceFragment : AppCompatActivity() {
             randInd.add(k)
         }
 
-        for (i in 1 until kap.size) {
+        for (i in 0 until kap.size) {
             questionList.add(
                 SentenceFragment(
                     id[i],
