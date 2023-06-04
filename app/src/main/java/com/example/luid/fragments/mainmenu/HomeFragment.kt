@@ -121,28 +121,28 @@ class HomeFragment : Fragment() {
         return listOf(
             LevelSelection(
                 "Level 1",
-                "Introduction",
+                "Pagbabakasyon (Pamagbakasyun)",
                 R.drawable.home,
                 "Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!",
             true
             ),
             LevelSelection(
                 "Level 2",
-                "Numbers",
+                "Pagtuklas (Pamag--)",
                 R.drawable.profile,
                 "Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!",
                 2 <= currLevel
             ),
             LevelSelection(
                 "Level 3",
-                "People",
+                "Pagpipista (Pamamyesta)",
                 R.drawable.about,
                 "Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!",
                 3 <= currLevel
             ),
             LevelSelection(
                 "Level 4",
-                "Basic Conversations",
+                "Pagpapaalam (Pamagpaalam)",
                 R.drawable.settings,
                 "Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!",
                 4 <= currLevel
