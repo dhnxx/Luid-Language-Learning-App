@@ -2746,6 +2746,7 @@ drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable imageplaceholder
+drawable instagram_like_notification
 drawable luid_white
 drawable m3_appbar_background
 drawable m3_popupmenu_background_overlay
@@ -3366,6 +3367,7 @@ id tag_window_insets_animation_callback
 id text
 id text2
 id textEnd
+id textLives
 id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
@@ -3381,7 +3383,6 @@ id textView2
 id textView3
 id textView4
 id textView5
-id textView7
 id textView8
 id text_input_end_icon
 id text_input_error_icon
@@ -3393,6 +3394,7 @@ id textinput_placeholder
 id textinput_prefix_text
 id textinput_suffix_text
 id time
+id timerText
 id timetxt
 id title
 id titleDividerNoCustom

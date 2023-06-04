@@ -100,6 +100,7 @@ drawable circle_indicator
 drawable home
 drawable home_unselected
 drawable imageplaceholder
+drawable instagram_like_notification
 drawable luid_white
 drawable placeholder
 drawable profile
@@ -202,6 +203,7 @@ id submitButton
 id tabLayout
 id tabPhaseReview
 id tagWord
+id textLives
 id textStats1
 id textStats1Desc
 id textStats2
@@ -213,8 +215,8 @@ id textView2
 id textView3
 id textView4
 id textView5
-id textView7
 id textView8
+id timerText
 id timetxt
 id toolbar
 id translation

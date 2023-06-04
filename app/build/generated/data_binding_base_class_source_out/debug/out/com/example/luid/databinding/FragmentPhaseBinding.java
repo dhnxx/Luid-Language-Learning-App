@@ -35,17 +35,22 @@ public final class FragmentPhaseBinding implements ViewBinding {
   public final RecyclerView phaseRecyclerView;
 
   @NonNull
-  public final TextView textView7;
+  public final TextView textLives;
+
+  @NonNull
+  public final TextView timerText;
 
   private FragmentPhaseBinding(@NonNull ConstraintLayout rootView, @NonNull MaterialButton button,
       @NonNull ConstraintLayout constraintLayout2, @NonNull ImageView imageView7,
-      @NonNull RecyclerView phaseRecyclerView, @NonNull TextView textView7) {
+      @NonNull RecyclerView phaseRecyclerView, @NonNull TextView textLives,
+      @NonNull TextView timerText) {
     this.rootView = rootView;
     this.button = button;
     this.constraintLayout2 = constraintLayout2;
     this.imageView7 = imageView7;
     this.phaseRecyclerView = phaseRecyclerView;
-    this.textView7 = textView7;
+    this.textLives = textLives;
+    this.timerText = timerText;
   }
 
   @Override
@@ -99,14 +104,20 @@ public final class FragmentPhaseBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.textView7;
-      TextView textView7 = ViewBindings.findChildViewById(rootView, id);
-      if (textView7 == null) {
+      id = R.id.textLives;
+      TextView textLives = ViewBindings.findChildViewById(rootView, id);
+      if (textLives == null) {
+        break missingId;
+      }
+
+      id = R.id.timerText;
+      TextView timerText = ViewBindings.findChildViewById(rootView, id);
+      if (timerText == null) {
         break missingId;
       }
 
       return new FragmentPhaseBinding((ConstraintLayout) rootView, button, constraintLayout2,
-          imageView7, phaseRecyclerView, textView7);
+          imageView7, phaseRecyclerView, textLives, timerText);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
