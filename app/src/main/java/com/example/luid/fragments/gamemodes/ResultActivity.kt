@@ -27,6 +27,14 @@ class ResultActivity : AppCompatActivity() {
     private lateinit var resultList: ArrayList<ResultScreen>
     private lateinit var adapter: ResultAdapter
     private lateinit var button: Button
+    private var level = 0
+    private var phase = 0
+    private var score = 0.0
+    private var reward = 0
+    private var totalItems = 0
+    private var timeSpent = 0
+    private var avgTime = 0
+
     private lateinit var avgTimeText: TextView
     private lateinit var correctPercentageText: TextView
     private lateinit var currencyText: TextView
@@ -41,31 +49,6 @@ class ResultActivity : AppCompatActivity() {
 
         val intent2 = Intent(this, MainActivity::class.java)
         button = findViewById(R.id.button)
-
-        var level = 0
-        var phase = 0
-        var score = 0.0
-        var reward = 0
-        var totalItems = 0
-        var timeSpent = 0
-        var avgTime = 0
-
-        //RECYCLER VIEW
-
-        recyclerView.setHasFixedSize(true)
-
-        recyclerView.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-
-        resultList = ArrayList()
-        add()
-        adapter = ResultAdapter(resultList)
-        recyclerView.adapter = adapter
-
-        //END OF RECYCLER VIEW
-
-
-        // FOR RESULT SCREEN
 
         // Query List to be displayed
         val sm = SMLeitner()
@@ -88,6 +71,27 @@ class ResultActivity : AppCompatActivity() {
         avgTimeText.text = "$avgTime s"
         correctPercentageText.text = "${String.format("%2f", score).toDouble()}%"
         currencyText.text = "$reward"
+
+
+        //RECYCLER VIEW
+
+        recyclerView.setHasFixedSize(true)
+
+        recyclerView.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+        resultList = ArrayList()
+        add()
+        adapter = ResultAdapter(resultList)
+        recyclerView.adapter = adapter
+
+        //END OF RECYCLER VIEW
+
+
+        // FOR RESULT SCREEN
+
+
+
 
 
 
@@ -134,7 +138,7 @@ class ResultActivity : AppCompatActivity() {
         var cursor: Cursor
 
         cursor = db.rawQuery(
-            "SELECT * FROM $temp_qstion WHERE level = 1 AND phase = 1",
+            "SELECT * FROM $temp_qstion WHERE level = $level AND phase = $phase",
             null
         )
 
