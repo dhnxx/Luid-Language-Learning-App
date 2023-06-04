@@ -3,6 +3,7 @@ package com.example.luid.fragments.mainmenu
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +24,8 @@ import com.example.luid.classes.ParentPhase
 import com.example.luid.classes.SMLeitner
 import com.example.luid.database.DBConnect
 import com.google.android.material.snackbar.Snackbar
+import android.content.SharedPreferences
+import androidx.appcompat.app.AppCompatActivity
 
 class PhaseFragment : Fragment() {
 
@@ -34,10 +37,11 @@ class PhaseFragment : Fragment() {
     private lateinit var contextExternal: Context
     private lateinit var recyclerView: RecyclerView
     private val phaseList = ArrayList<ParentPhase>()
-    private lateinit var button : Button
-    private lateinit var livesText : TextView
+    private lateinit var button: Button
+    private lateinit var livesText: TextView
+    private lateinit var timerText: TextView
     private val adapter = ParentPhaseAdapter(phaseList)
-    private lateinit var builder : AlertDialog.Builder
+    private lateinit var builder: AlertDialog.Builder
 
 
     override fun onCreateView(
@@ -64,25 +68,68 @@ class PhaseFragment : Fragment() {
             ViewModelProvider(requireActivity())[LevelSwitchStateViewModel::class.java]
 
         // Populating data for each switch/phase
-
-
         val childPhase0 = ArrayList<ChildPhase>()
         val childPhase1 = ArrayList<ChildPhase>()
         val childPhase2 = ArrayList<ChildPhase>()
         val sm = SMLeitner()
         val db = DBConnect(contextExternal).readableDatabase
+        var lives = sm.displayLives(contextExternal) // function that display current lives in the database
+        val maxLives = 5
+        val timerDuration = 1 * 60 * 1000L // 5 minutes in milliseconds
+        var timer: CountDownTimer? = null
 
         livesText = view.findViewById(R.id.textLives)
-        livesText.text = sm.displayLives(contextExternal).toString()
+        livesText.text = lives.toString()
 
+        // COUNTDOWN TIMER
 
+        timerText = view.findViewById(R.id.timerText)
 
-        button = view.findViewById(R.id.button)
-        button.setOnClickListener{
-            buyLives(contextExternal)
+        fun startTimer(textView: TextView) {
+            if (lives >= maxLives) {
+                println("Maximum number of lives reached!")
+                return
+            }
+
+            timer = object : CountDownTimer(timerDuration, 1000) {
+                override fun onTick(millisUntilFinished: Long) {
+                    val secondsRemaining = millisUntilFinished / 1000
+                    val minutes = secondsRemaining / 60
+                    val seconds = secondsRemaining % 60
+                    val timerText = String.format("%02d:%02d", minutes, seconds)
+                    textView.text = timerText
+
+                }
+
+                override fun onFinish() {
+                    sm.lifeGain(contextExternal) // this function increases the lives by 1
+                    lives = sm.displayLives(contextExternal)
+                    livesText.text = lives.toString()
+
+                    if (lives < maxLives) {
+                        startTimer(timerText)
+                        lives = sm.displayLives(contextExternal)
+                        livesText.text = lives.toString()
+
+                    }
+                }
+            }.start()
         }
 
 
+        // Check if the timer is already running
+        if (timer != null) {
+            // Timer is running, do nothing
+        } else {
+            startTimer(timerText)
+        }
+
+        button = view.findViewById(R.id.button)
+        button.setOnClickListener {
+            buyLives(contextExternal)
+        }
+
+        ///////////////////////////////////////////////////////////////////
         phaseList.clear()
 
         // Observe switch state LiveData
@@ -352,34 +399,35 @@ class PhaseFragment : Fragment() {
         return view
     }
 
-    fun buyLives(context: Context){
+    fun buyLives(context: Context) {
 
         val sm = SMLeitner()
         var currency = sm.getCurrency(context)
 
         builder = AlertDialog.Builder(context)
-        builder.setTitle("Purchase Lives")
-            .setMessage("You currently have $currency currency.\n1 life = 60 currency.\nDo you want to buy lives?")
-            .setPositiveButton("Yes"){ dialog, _ ->
 
-                if(currency >= 60){
-                    sm.buyLives(context)
-                    sm.updAchPH(context)
-                    showSnackbar("Purchase Successful! \nYour current currency is : ${currency-60}")
-                    dialog.dismiss()
-                }else{
-                    showSnackbar("You do not have enough currency. Your current currency is : ${currency}")
-                    dialog.dismiss()
 
+
+        if (currency >= 60) {
+            builder.setTitle("Purchase Lives")
+                .setMessage("You currently have $currency currency.\n1 life = 60 currency.\nDo you want to buy lives?")
+                .setPositiveButton("Yes") { dialog, _ ->
+                        sm.buyLives(context)
+                        sm.updAchPH(context)
+                        showSnackbar("Purchase Successful! \nYour current currency is : ${currency - 60}")
+                        dialog.dismiss()
+                }
+                .setNegativeButton("No") { dialog, _ ->
+                    dialog.dismiss()
                 }
 
-            }
-            .setNegativeButton("No"){dialog, _ ->
-                dialog.dismiss()
-            }
+            val alertDialog: AlertDialog = builder.create()
+            alertDialog.show()
+        } else {
+            showSnackbar("You do not have enough currency. Your current currency is : ${currency}")
+        }
 
-        val alertDialog : AlertDialog = builder.create()
-        alertDialog.show()
+
 
 
     }
