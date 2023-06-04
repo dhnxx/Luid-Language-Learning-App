@@ -282,7 +282,7 @@ class SMLeitner() {
             today = getToday()
             date = today.joinToString(separator = "-")
 
-            cv.put("game_session_number", "${sessionNumber + 1}")
+            cv.put("game_session_number", "${sessionNumber}")
             cv.put("level", "$level")
             cv.put("phase", "$phase")
             cv.put("date_played", "$date")
@@ -389,6 +389,7 @@ class SMLeitner() {
         timeSpent: Int,
         currencyEarned: Int
     ) {
+        println("PHASE : $phase")
         var db = DBConnect(context).writableDatabase
         val today = getToday().joinToString()
         val cursor =
@@ -450,7 +451,7 @@ class SMLeitner() {
 
             cv.put("game_session", gameSessionValUpd)
 //            db.update("$tTempQuestions", cv, "game_session = $gameSessionTempVal", null)
-            db.update("$tQuestions", cv, "game_session = $gameSessionTempVal", null)
+            db.update("$tQuestions", cv, "game_session = $gameSessionTempVal AND level = $level AND phase = $phase", null)
             cv.clear()
             count++
         }
