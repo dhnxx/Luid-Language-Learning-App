@@ -7,6 +7,7 @@ import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.luid.R
@@ -17,6 +18,7 @@ import com.example.luid.database.DBConnect
 import com.example.luid.database.DBConnect.Companion.questions_tb
 import com.example.luid.database.DBConnect.Companion.temp_qstion
 import com.example.luid.fragments.mainmenu.MainActivity
+import org.w3c.dom.Text
 
 
 class ResultActivity : AppCompatActivity() {
@@ -25,6 +27,9 @@ class ResultActivity : AppCompatActivity() {
     private lateinit var resultList: ArrayList<ResultScreen>
     private lateinit var adapter: ResultAdapter
     private lateinit var button: Button
+    private lateinit var avgTimeText: TextView
+    private lateinit var correctPercentageText: TextView
+    private lateinit var currencyText: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
@@ -76,6 +81,14 @@ class ResultActivity : AppCompatActivity() {
             timeSpent = extras.getInt("totalTime") // To be displayed in result Screen
             avgTime = extras.getInt("avgTime") // To be displayed in result Screen
         }
+        avgTimeText = findViewById(R.id.avgTime)
+        correctPercentageText = findViewById(R.id.correctPercentage)
+        currencyText = findViewById(R.id.currency)
+
+        avgTimeText.text = "$avgTime s"
+        correctPercentageText.text = "${String.format("%2f", score).toDouble()}%"
+        currencyText.text = "$reward"
+
 
 
         // JOIN TEMP AND QUESTION TABLE HERE

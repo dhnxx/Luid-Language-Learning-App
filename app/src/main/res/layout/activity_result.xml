@@ -105,6 +105,7 @@
                 </TextView>
 
                 <TextView
+                    android:id="@+id/avgTime"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -143,6 +144,7 @@
                 </TextView>
 
                 <TextView
+                    android:id="@+id/correctPercentage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -182,6 +184,7 @@
                 </TextView>
 
                 <TextView
+                    android:id="@+id/currency"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
