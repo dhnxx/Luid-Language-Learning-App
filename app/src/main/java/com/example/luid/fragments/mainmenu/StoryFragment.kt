@@ -53,19 +53,19 @@ class StoryFragment : Fragment() {
                 1 -> {
                     intent1.putExtra("level", selectedLevel)
                     sm.addSession(contextExt, selectedLevel, selectedPhase)
-                    sm.lifeSpent(contextExt, selectedLevel, selectedPhase)
+                    sm.lifeSpent(contextExt)
                     startActivity(intent1)
                 }
                 2 -> {
                     intent2.putExtra("level", selectedLevel)
                     sm.addSession(contextExt, selectedLevel, selectedPhase)
-                    sm.lifeSpent(contextExt, selectedLevel, selectedPhase)
+                    sm.lifeSpent(contextExt)
                     startActivity(intent2)
                 }
                 3 -> {
                     intent3.putExtra("level", selectedLevel)
                     sm.addSession(contextExt, selectedLevel, selectedPhase)
-                    sm.lifeSpent(contextExt, selectedLevel, selectedPhase)
+                    sm.lifeSpent(contextExt)
                     startActivity(intent3)
                 }
             }
