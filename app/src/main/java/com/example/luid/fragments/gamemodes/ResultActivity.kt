@@ -1,6 +1,9 @@
 package com.example.luid.fragments.gamemodes
 
+import android.annotation.SuppressLint
+import android.content.ContentValues
 import android.content.Intent
+import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -11,6 +14,7 @@ import com.example.luid.adapters.ResultAdapter
 import com.example.luid.classes.ResultScreen
 import com.example.luid.classes.SMLeitner
 import com.example.luid.database.DBConnect
+import com.example.luid.database.DBConnect.Companion.questions_tb
 import com.example.luid.database.DBConnect.Companion.temp_qstion
 import com.example.luid.fragments.mainmenu.MainActivity
 
@@ -94,9 +98,11 @@ class ResultActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("Range")
     private fun add() {
         val sm = SMLeitner()
         val resultListDB = sm.compareEF(this)
+        var db = DBConnect(applicationContext).readableDatabase
 
 
         for(i in 0 until resultListDB.size){
@@ -108,6 +114,44 @@ class ResultActivity : AppCompatActivity() {
                     resultListDB[i].status
                 )
             )
+        }
+
+
+
+        var cursor: Cursor
+
+        cursor = db.rawQuery(
+            "SELECT * FROM $temp_qstion WHERE level = 1 AND phase = 1",
+            null
+        )
+
+        if (cursor.moveToNext()) {
+
+            val cv = ContentValues()
+
+            do {
+
+                val id = cursor.getLong(cursor.getColumnIndex("_id"))
+
+                val gamesession = cursor.getInt(cursor.getColumnIndex("game_session"))
+
+                val EaFa = cursor.getDouble(cursor.getColumnIndex("easiness_factor"))
+
+                val interval = cursor.getInt(cursor.getColumnIndex("interval"))
+
+                val difflevel = cursor.getInt(cursor.getColumnIndex("difficulty_level"))
+
+                val timviewed = cursor.getInt(cursor.getColumnIndex("times_viewed"))
+
+                cv.put("game_session", gamesession)
+                cv.put("easiness_factor", EaFa)
+                cv.put("interval", interval)
+                cv.put("difficulty_level", difflevel)
+                cv.put("times_viewed", timviewed)
+
+                db.update("$questions_tb", cv, "_id = $id", null)
+
+            } while (cursor.moveToNext())
         }
 
     }
