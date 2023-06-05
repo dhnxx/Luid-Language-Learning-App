@@ -29,7 +29,6 @@ class ProfileFragment : Fragment() {
 
         for (i in 0 until numberOfCards) {
             val cardView = layoutInflater.inflate(R.layout.achvcardview, achvLinearLayout, false)
-            val titleTextView = cardView.findViewById<TextView>(R.id.achvcurrlvl)
             val progressBar = cardView.findViewById<ProgressBar>(R.id.achvprogressBar)
             val progressTextView = cardView.findViewById<TextView>(R.id.achvprogresstxt)
             val achTitleTextView = cardView.findViewById<TextView>  (R.id.achvtitle)
@@ -37,7 +36,6 @@ class ProfileFragment : Fragment() {
 
             when (i) {
                 0 -> {
-                    titleTextView.text = "Level ${achContent[0].currLevel}"
                     progressBar.progress = achContent[0].currLevel.toInt()
                     progressBar.max = achContent[0].maxValue.toInt()
                     progressTextView.text = "${achContent[0].currLevel}/${achContent[0].maxValue}"
@@ -45,7 +43,6 @@ class ProfileFragment : Fragment() {
                     descriptionTextView.text = achContent[0].description
                 }
                 1 -> {
-                    titleTextView.text = "Level ${achContent[1].currLevel}"
                     progressBar.progress = achContent[1].currLevel.toInt()
                     progressBar.max = achContent[1].maxValue.toInt()
                     progressTextView.text = "${achContent[1].currLevel}/${achContent[1].maxValue}"
@@ -53,7 +50,6 @@ class ProfileFragment : Fragment() {
                     descriptionTextView.text = achContent[1].description
                 }
                 2 -> {
-                    titleTextView.text = "Level ${achContent[2].currLevel}"
                     progressBar.progress = achContent[2].currLevel.toInt()
                     progressBar.max = achContent[2].maxValue.toInt()
                     progressTextView.text = "${achContent[2].currLevel}/${achContent[2].maxValue}"
@@ -61,7 +57,6 @@ class ProfileFragment : Fragment() {
                     descriptionTextView.text = achContent[2].description
                 }
                 3 -> {
-                    titleTextView.text = "Level ${achContent[3].currLevel}"
                     progressBar.progress = achContent[3].currLevel.toInt()
                     progressBar.max = achContent[3].maxValue.toInt()
                     progressTextView.text = "${achContent[3].currLevel}/${achContent[3].maxValue}"
@@ -69,7 +64,6 @@ class ProfileFragment : Fragment() {
                     descriptionTextView.text = achContent[3].description
                 }
                 4 -> {
-                    titleTextView.text = "Level ${achContent[4].currLevel}"
                     progressBar.progress = achContent[4].currLevel.toInt()
                     progressBar.max = achContent[4].maxValue.toInt()
                     progressTextView.text = "${achContent[4].currLevel}/${achContent[4].maxValue}"

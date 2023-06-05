@@ -2,6 +2,7 @@ package com.example.luid.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -18,8 +19,10 @@ class  LevelAdapter(private val levelList: List<LevelSelection>) :
 
         val levelId: TextView = itemView.findViewById(R.id.level_id)
         val levelTitle: TextView = itemView.findViewById(R.id.level_title)
+        val levelTitleAlt: TextView = itemView.findViewById(R.id.level_titleAlt)
         val levelImage: ImageView = itemView.findViewById(R.id.level_image)
         val levelDescription: TextView = itemView.findViewById(R.id.level_description)
+        val button:Button = itemView.findViewById(R.id.levelButton)
 
 
     }
@@ -35,6 +38,7 @@ class  LevelAdapter(private val levelList: List<LevelSelection>) :
         val level = levelList[position]
         holder.levelId.text = level.levelID
         holder.levelTitle.text = level.levelTitle
+        holder.levelTitleAlt.text = level.levelTitleAlt
         holder.levelImage.setImageResource(level.levelImage)
         holder.levelDescription.text = level.levelDescription
 
@@ -53,8 +57,11 @@ class  LevelAdapter(private val levelList: List<LevelSelection>) :
             // Add any additional styling you want for the enabled state
         }
 
+        //disable the card view click
+        holder.itemView.isClickable = false
 
-        holder.itemView.setOnClickListener {
+
+        holder.button.setOnClickListener {
             onItemClick?.invoke(level)
         }
     }

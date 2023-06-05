@@ -15,13 +15,12 @@ import com.example.luid.fragments.gamemodes.WordAssociation
 import com.example.luid.fragments.gamemodes.*
 
 
-
 class StoryFragment : Fragment() {
     private val args: StoryFragmentArgs by navArgs()
     private val selectedLevel: Int by lazy { args.level }
-    private val selectedPhase: Int by lazy { args.phase}
+    private val selectedPhase: Int by lazy { args.phase }
 
-    private lateinit var contextExt : Context
+    private lateinit var contextExt: Context
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -33,6 +32,8 @@ class StoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val sm = SMLeitner()
+        var lives:Int =
+            sm.displayLives(requireContext()) // function that display current lives in the database
 
 
         val view = inflater.inflate(R.layout.fragment_story, container, false)
@@ -46,25 +47,35 @@ class StoryFragment : Fragment() {
         println(selectedPhase)
 
 
+        if (lives == 0) {
+            start?.isEnabled = false
+            //toast message that will appear if the user has no lives
+            start?.text = "You have no lives left"
+
+        } else {
+            start?.isEnabled = true
+            start?.text = "Start"
+        }
 
         start?.setOnClickListener {
+
 
             when (selectedPhase) {
                 1 -> {
                     intent1.putExtra("level", selectedLevel)
-                    sm.addSession(contextExt, selectedLevel, selectedPhase)
                     sm.lifeSpent(contextExt)
                     startActivity(intent1)
+
                 }
+
                 2 -> {
                     intent2.putExtra("level", selectedLevel)
-                    sm.addSession(contextExt, selectedLevel, selectedPhase)
                     sm.lifeSpent(contextExt)
                     startActivity(intent2)
                 }
+
                 3 -> {
                     intent3.putExtra("level", selectedLevel)
-                    sm.addSession(contextExt, selectedLevel, selectedPhase)
                     sm.lifeSpent(contextExt)
                     startActivity(intent3)
                 }

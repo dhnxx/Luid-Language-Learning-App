@@ -1,6 +1,7 @@
 package com.example.luid.fragments.mainmenu
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -29,6 +30,8 @@ class HomeFragment : Fragment() {
     private lateinit var levelSwitchStateViewModel: LevelSwitchStateViewModel
 
 
+
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
@@ -50,6 +53,7 @@ class HomeFragment : Fragment() {
 
         ////////////////////////LEVEL SELECTION/////////////////////////////
 
+
         levelRecyclerView = view.findViewById(R.id.recyclerView)
 
         levelRecyclerView.layoutManager =
@@ -58,6 +62,7 @@ class HomeFragment : Fragment() {
 
         val snapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(levelRecyclerView)
+
 
 
         // onCreateView of HomeFragment from LevelAdapter
@@ -69,29 +74,6 @@ class HomeFragment : Fragment() {
                 levelSwitchStateViewModel.setSwitchState(levelSelection.levelID)
 
 
-                // Edit recyclerview's data here based on the level selected
-                when (levelSelection.levelID) {
-                    "Level 1" -> {
-                        Toast.makeText(activity, "Level 1 Test", Toast.LENGTH_LONG).show()
-
-                    }
-
-                    "Level 2" -> {
-                        Toast.makeText(activity, "Level 2 Test", Toast.LENGTH_LONG).show()
-                    }
-
-                    "Level 3" -> {
-                        Toast.makeText(activity, "Level 3 Test", Toast.LENGTH_LONG).show()
-                    }
-
-                    "Level 4" -> {
-                        Toast.makeText(activity, "Level 4 Test", Toast.LENGTH_LONG).show()
-                    }
-
-                    else -> {
-
-                    }
-                }
                 findNavController().navigate(R.id.action_homeFragment_to_tabPhaseReview)
                 bottomNav?.isEnabled = false
                 bottomNav?.visibility = View.GONE
@@ -121,29 +103,33 @@ class HomeFragment : Fragment() {
         return listOf(
             LevelSelection(
                 "Level 1",
-                "Pagbabakasyon (Pamagbakasyun)",
-                R.drawable.home,
+                "Pagbabakasyon",
+                "(Pamagbakasyun)",
+                R.drawable.about_background,
                 "Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!",
             true
             ),
             LevelSelection(
                 "Level 2",
-                "Pagtuklas (Pamag--)",
-                R.drawable.profile,
+                "Pagtuklas",
+                "(Pamag--)",
+                R.drawable.about_background,
                 "Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!",
                 2 <= currLevel
             ),
             LevelSelection(
                 "Level 3",
-                "Pagpipista (Pamamyesta)",
-                R.drawable.about,
+                "Pagpipista",
+                "(Pamamyesta)",
+                R.drawable.about_background,
                 "Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!",
                 3 <= currLevel
             ),
             LevelSelection(
                 "Level 4",
-                "Pagpapaalam (Pamagpaalam)",
-                R.drawable.settings,
+                "Pagpapaalam",
+                "(Pamagpaalam)",
+                R.drawable.about_background,
                 "Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!",
                 4 <= currLevel
             ),

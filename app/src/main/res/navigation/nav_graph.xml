@@ -57,6 +57,9 @@
         <action
             android:id="@+id/action_tabPhaseReview_to_storyFragment"
             app:destination="@id/StoryFragment" />
+        <action
+            android:id="@+id/action_tabPhaseReview_self2"
+            app:destination="@id/tabPhaseReview" />
     </fragment>
     <fragment
         android:id="@+id/StoryFragment"
@@ -70,19 +73,7 @@
             app:argType="integer"/>
     </fragment>
 
-    <fragment
-        android:id="@+id/WordAssociation2"
-        android:name="com.example.luid.fragments.gamemodes.WordAssociation"
-        android:label="activity_word_association2"
-        tools:layout="@layout/activity_word_association2" >
-        <action
-            android:id="@+id/action_WordAssociation2_to_resultFragment"
-            app:destination="@id/resultFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/resultFragment"
-        android:name="com.example.luid.fragments.mainmenu.ResultFragment"
-        android:label="ResultFragment" />
+
 
 
 </navigation>
