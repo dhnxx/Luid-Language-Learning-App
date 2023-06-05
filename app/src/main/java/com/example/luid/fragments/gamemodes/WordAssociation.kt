@@ -22,6 +22,7 @@ import com.example.luid.classes.SMLeitner
 import com.example.luid.classes.WordAssociationClass
 import com.example.luid.database.DBConnect
 import android.os.SystemClock
+import com.example.luid.fragments.mainmenu.MainActivity
 
 
 data class Choice(val text: String, @DrawableRes val imageResId: Int)
@@ -49,8 +50,7 @@ class WordAssociation : AppCompatActivity() {
     private lateinit var choiceFourText: TextView
     private lateinit var submitButton: Button
     private lateinit var nextButton: Button
-    private lateinit var sm: SMLeitner
-    private var context:Context = this
+    private var context: Context = this
     private var level: Int = 0 // intent
     private var phase = 1
     private var timeSpent = 0
@@ -83,8 +83,6 @@ class WordAssociation : AppCompatActivity() {
     }
 
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_word_association2)
@@ -110,6 +108,7 @@ class WordAssociation : AppCompatActivity() {
         var i = 0
         level = intent.getIntExtra("level", 0)
         val intent1 = Intent(this, ResultActivity::class.java)
+        val sm = SMLeitner()
 
         nextButton.isEnabled = false
         nextButton.visibility = View.INVISIBLE
@@ -137,7 +136,8 @@ class WordAssociation : AppCompatActivity() {
                 // Last element of the questionList, navigate to result screen
                 // navigate using navController
                 submit(i)
-               avgTime = (totalTime / questionList.size)
+                sm.addSession(this, level, phase)
+                avgTime = (totalTime / questionList.size)
                 println("AVG TIME: $avgTime")
                 intent1.putExtra("level", level)
                 intent1.putExtra("phase", phase)
@@ -154,8 +154,8 @@ class WordAssociation : AppCompatActivity() {
 
     override fun onBackPressed() {
         showConfirmationDialog()
-    }
 
+    }
 
 
     @SuppressLint("Range")
@@ -180,7 +180,7 @@ class WordAssociation : AppCompatActivity() {
         var kap = ArrayList<String>()
         var eng = ArrayList<String>()
         var tag = ArrayList<String>()
-        var question = ArrayList<String>() 
+        var question = ArrayList<String>()
         decoy = ArrayList()
         answers = ArrayList()
         decoytemp = ArrayList()
@@ -202,7 +202,7 @@ class WordAssociation : AppCompatActivity() {
         }
         println("BEFORE for loop")
 
-        for (i in 0 until tag.size){
+        for (i in 0 until tag.size) {
             println(tag[i])
 
         }
@@ -218,8 +218,8 @@ class WordAssociation : AppCompatActivity() {
                     answerstemp.add(tag[i])
                     decoytemp.addAll(tag)
 
-                    for(i in answerstemp){
-                        if(decoytemp.contains(i)){
+                    for (i in answerstemp) {
+                        if (decoytemp.contains(i)) {
                             decoytemp.remove(i)
                         }
                     }
@@ -233,8 +233,8 @@ class WordAssociation : AppCompatActivity() {
                     question.add("What is " + kap[i] + " in English?")
                     answerstemp.add(eng[i])
                     decoytemp.addAll(eng)
-                    for(i in answerstemp){
-                        if(decoytemp.contains(i)){
+                    for (i in answerstemp) {
+                        if (decoytemp.contains(i)) {
                             decoytemp.remove(i)
                         }
                     }
@@ -248,22 +248,23 @@ class WordAssociation : AppCompatActivity() {
                     question.add("What is " + tag[i] + " in Kapampangan?")
                     answerstemp.add(kap[i])
                     decoytemp.addAll(kap)
-                    for(i in answerstemp){
-                        if(decoytemp.contains(i)){
+                    for (i in answerstemp) {
+                        if (decoytemp.contains(i)) {
                             decoytemp.remove(i)
                         }
                     }
                     decoy = decoytemp
                     answers = answerstemp
                 }
+
                 4 -> {
                     decoytemp.clear()
                     answerstemp.clear()
                     question.add("What is " + eng[i] + " in Kapampangan?")
                     answerstemp.add(kap[i])
                     decoytemp.addAll(kap)
-                    for(i in answerstemp){
-                        if(decoytemp.contains(i)){
+                    for (i in answerstemp) {
+                        if (decoytemp.contains(i)) {
                             decoytemp.remove(i)
                         }
                     }
@@ -275,11 +276,11 @@ class WordAssociation : AppCompatActivity() {
 
             }
 
-            for ( i in 0 until answers.size){
+            for (i in 0 until answers.size) {
                 println("ANSWERS = ${answerstemp[i]} " + i)
             }
-            for (i in 0 until decoy.size){
-                println("DECOY = ${decoytemp[i]}" + " " + i )
+            for (i in 0 until decoy.size) {
+                println("DECOY = ${decoytemp[i]}" + " " + i)
             }
 
 
@@ -303,7 +304,7 @@ class WordAssociation : AppCompatActivity() {
                     R.drawable.home
                 )
             )
-            for(i in 0 until 10){
+            for (i in 0 until 10) {
                 println("MAIN DEC = ${decoy}")
             }
         }
@@ -314,9 +315,12 @@ class WordAssociation : AppCompatActivity() {
     private fun refreshview(i: Int) {
 
         // start a stopwatch for each question
+
         startTime = SystemClock.uptimeMillis()
         handler = Handler()
         handler?.postDelayed(timerRunnable, 0)
+
+        selectAnswer()
 
 
         nextButton.isEnabled = false
@@ -354,7 +358,8 @@ class WordAssociation : AppCompatActivity() {
         submit(i)
 
     }
-    private fun submit(i: Int){
+
+    private fun submit(i: Int) {
 
         submitButton.setOnClickListener {
             handler?.removeCallbacks(timerRunnable)
@@ -362,8 +367,8 @@ class WordAssociation : AppCompatActivity() {
             submitButton.visibility = View.INVISIBLE
             nextButton.isEnabled = true
             nextButton.visibility = View.VISIBLE
-            selectAnswer()
-            time = (elapsedTime/ 1000).toInt()
+            time = (elapsedTime / 1000).toInt()
+            cardDisable()
             checkAnswer(i)
             val sm = SMLeitner()
             score = sm.scoreCalc(correctAnswerCounter, questionList.size)
@@ -374,10 +379,10 @@ class WordAssociation : AppCompatActivity() {
             // smLeitner algo and temptable here
 
 
-
         }
     }
-// hello
+
+    // hello
     private fun clear() {
         choiceOne.setCardBackgroundColor(Color.parseColor("#FFFBFF"))
         choiceTwo.setCardBackgroundColor(Color.parseColor("#FFFBFF"))
@@ -431,18 +436,20 @@ class WordAssociation : AppCompatActivity() {
                 choices[0].text -> {
                     choiceOne.setCardBackgroundColor(Color.parseColor("#CFFFD5"))
                 }
+
                 choices[1].text -> {
                     choiceTwo.setCardBackgroundColor(Color.parseColor("#CFFFD5"))
                 }
+
                 choices[2].text -> {
                     choiceThree.setCardBackgroundColor(Color.parseColor("#CFFFD5"))
                 }
+
                 choices[3].text -> {
                     choiceFour.setCardBackgroundColor(Color.parseColor("#CFFFD5"))
                 }
             }
             sm.smLeitnerCalc(context, questionList[i].id, level, phase, true, time)
-
 
 
         } else {
@@ -452,12 +459,15 @@ class WordAssociation : AppCompatActivity() {
                 choices[0].text -> {
                     choiceOne.setCardBackgroundColor(Color.parseColor("#FFB6C1"))
                 }
+
                 choices[1].text -> {
                     choiceTwo.setCardBackgroundColor(Color.parseColor("#FFB6C1"))
                 }
+
                 choices[2].text -> {
                     choiceThree.setCardBackgroundColor(Color.parseColor("#FFB6C1"))
                 }
+
                 choices[3].text -> {
                     choiceFour.setCardBackgroundColor(Color.parseColor("#FFB6C1"))
                 }
@@ -469,12 +479,15 @@ class WordAssociation : AppCompatActivity() {
                 choices[0].text -> {
                     choiceOne.setCardBackgroundColor(Color.parseColor("#CFFFD5"))
                 }
+
                 choices[1].text -> {
                     choiceTwo.setCardBackgroundColor(Color.parseColor("#CFFFD5"))
                 }
+
                 choices[2].text -> {
                     choiceThree.setCardBackgroundColor(Color.parseColor("#CFFFD5"))
                 }
+
                 choices[3].text -> {
                     choiceFour.setCardBackgroundColor(Color.parseColor("#CFFFD5"))
                 }
@@ -492,11 +505,25 @@ class WordAssociation : AppCompatActivity() {
             // Handle the back action here
             super.onBackPressed()
             dialog.dismiss()
+            val intent = Intent(this, MainActivity::class.java)
+
+            startActivity(intent)
+            finish()
+
         }
         builder.setNegativeButton("No") { dialog: DialogInterface, _: Int ->
             // Continue the current operation, such as staying on the current screen
             dialog.dismiss()
         }
         builder.show()
+    }
+
+    private fun cardDisable() {
+
+        // disable onclick listener for all cards
+        choiceOne.setOnClickListener(null)
+        choiceTwo.setOnClickListener(null)
+        choiceThree.setOnClickListener(null)
+        choiceFour.setOnClickListener(null)
     }
 }

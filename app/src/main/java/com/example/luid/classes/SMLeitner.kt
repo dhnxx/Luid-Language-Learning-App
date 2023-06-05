@@ -451,7 +451,12 @@ class SMLeitner() {
 
             cv.put("game_session", gameSessionValUpd)
 //            db.update("$tTempQuestions", cv, "game_session = $gameSessionTempVal", null)
-            db.update("$tQuestions", cv, "game_session = $gameSessionTempVal AND level = $level AND phase = $phase", null)
+            db.update(
+                "$tQuestions",
+                cv,
+                "game_session = $gameSessionTempVal AND level = $level AND phase = $phase",
+                null
+            )
             cv.clear()
             count++
         }
@@ -725,8 +730,8 @@ class SMLeitner() {
     fun getAchCLPassed(db: SQLiteDatabase, level: Int, phase: Int): Int {
         val dfLevel = 0
         var cursor = db.rawQuery(
-            "SELECT * FROM $tQuestions WHERE level = $level AND phase = $phase AND difficulty_level = $dfLevel",
-            null
+            "SELECT * FROM $tQuestions WHERE level = ? AND phase = ? AND difficulty_level = ?",
+            arrayOf(level.toString(), phase.toString(), dfLevel.toString())
         )
         return cursor.count
     }

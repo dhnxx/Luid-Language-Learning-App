@@ -47,7 +47,7 @@ class ResultActivity : AppCompatActivity() {
 
         //intent
 
-        val intent2 = Intent(this, MainActivity::class.java)
+
         button = findViewById(R.id.button)
 
         // Query List to be displayed
@@ -91,10 +91,6 @@ class ResultActivity : AppCompatActivity() {
         // FOR RESULT SCREEN
 
 
-
-
-
-
         // JOIN TEMP AND QUESTION TABLE HERE
 
         // UPDATE USER RECORDS
@@ -109,11 +105,16 @@ class ResultActivity : AppCompatActivity() {
 
         button.setOnClickListener {
 
-            end(intent2)
+            end()
         }
 
 
     }
+
+    override fun onBackPressed() {
+        end()
+    }
+
 
     @SuppressLint("Range")
     private fun add() {
@@ -122,7 +123,7 @@ class ResultActivity : AppCompatActivity() {
         var db = DBConnect(applicationContext).readableDatabase
 
 
-        for(i in 0 until resultListDB.size){
+        for (i in 0 until resultListDB.size) {
             resultList.add(
                 ResultScreen(
                     resultListDB[i].word,
@@ -132,7 +133,6 @@ class ResultActivity : AppCompatActivity() {
                 )
             )
         }
-
 
 
         var cursor: Cursor
@@ -173,8 +173,9 @@ class ResultActivity : AppCompatActivity() {
 
     }
 
-    private fun end(intent2 : Intent) {
-
+    private fun end() {
+        val intent2 = Intent(this, MainActivity::class.java)
+        intent2.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent2)
         finish()
 

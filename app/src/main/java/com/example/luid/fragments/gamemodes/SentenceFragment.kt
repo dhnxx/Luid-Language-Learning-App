@@ -19,6 +19,7 @@ import com.example.luid.classes.PhaseTwoClass
 import com.example.luid.classes.SMLeitner
 import com.example.luid.classes.SentenceFragment
 import com.example.luid.database.DBConnect
+import com.example.luid.fragments.mainmenu.MainActivity
 
 class SentenceFragment : AppCompatActivity() {
     private lateinit var questionList: ArrayList<SentenceFragment>
@@ -79,6 +80,7 @@ class SentenceFragment : AppCompatActivity() {
         nextButton = findViewById(R.id.nextButton)
 
         var i = 0
+        val sm = SMLeitner()
 
 
 
@@ -101,6 +103,7 @@ class SentenceFragment : AppCompatActivity() {
                 submit(i)
                 avgTime = (totalTime / questionList.size)
                 println("AVG TIME: $avgTime")
+                sm.addSession(this, level, phase)
                 intent2.putExtra("level", level)
                 intent2.putExtra("phase", phase)
                 intent2.putExtra("score", score)
@@ -341,6 +344,8 @@ class SentenceFragment : AppCompatActivity() {
             // Handle the back action here
             super.onBackPressed()
             dialog.dismiss()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
         builder.setNegativeButton("No") { dialog: DialogInterface, _: Int ->
             // Continue the current operation, such as staying on the current screen

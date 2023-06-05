@@ -26,6 +26,8 @@ import com.example.luid.database.DBConnect
 import com.google.android.material.snackbar.Snackbar
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
+import androidx.navigation.findNavController
 
 class PhaseFragment : Fragment() {
 
@@ -42,6 +44,8 @@ class PhaseFragment : Fragment() {
     private lateinit var timerText: TextView
     private val adapter = ParentPhaseAdapter(phaseList)
     private lateinit var builder: AlertDialog.Builder
+    private lateinit var timer: CountDownTimer
+    private lateinit var currencyText: TextView
 
 
     override fun onCreateView(
@@ -73,60 +77,30 @@ class PhaseFragment : Fragment() {
         val childPhase2 = ArrayList<ChildPhase>()
         val sm = SMLeitner()
         val db = DBConnect(contextExternal).readableDatabase
-        var lives = sm.displayLives(contextExternal) // function that display current lives in the database
+        var lives =
+            sm.displayLives(contextExternal) // function that display current lives in the database
+        var currency = sm.getCurrency(contextExternal)
         val maxLives = 5
         val timerDuration = 1 * 60 * 1000L // 5 minutes in milliseconds
-        var timer: CountDownTimer? = null
+
+
 
         livesText = view.findViewById(R.id.textLives)
         livesText.text = lives.toString()
+        currencyText = view.findViewById(R.id.textCurrency)
+        currencyText.text = "💵$currency"
+        button = view.findViewById(R.id.button)
 
         // COUNTDOWN TIMER
 
         timerText = view.findViewById(R.id.timerText)
 
-        fun startTimer(textView: TextView) {
-            if (lives >= maxLives) {
-                println("Maximum number of lives reached!")
-                return
-            }
-
-            timer = object : CountDownTimer(timerDuration, 1000) {
-                override fun onTick(millisUntilFinished: Long) {
-                    val secondsRemaining = millisUntilFinished / 1000
-                    val minutes = secondsRemaining / 60
-                    val seconds = secondsRemaining % 60
-                    val timerText = String.format("%02d:%02d", minutes, seconds)
-                    textView.text = timerText
-
-                }
-
-                override fun onFinish() {
-                    sm.lifeGain(contextExternal) // this function increases the lives by 1
-                    lives = sm.displayLives(contextExternal)
-                    livesText.text = lives.toString()
-
-                    if (lives < maxLives) {
-                        startTimer(timerText)
-                        lives = sm.displayLives(contextExternal)
-                        livesText.text = lives.toString()
-
-                    }
-                }
-            }.start()
-        }
+        startTimer(timerText, maxLives, timerDuration, livesText, button)
 
 
-        // Check if the timer is already running
-        if (timer != null) {
-            // Timer is running, do nothing
-        } else {
-            startTimer(timerText)
-        }
 
-        button = view.findViewById(R.id.button)
         button.setOnClickListener {
-            buyLives(contextExternal)
+            buyLives(contextExternal, livesText)
         }
 
         ///////////////////////////////////////////////////////////////////
@@ -142,7 +116,7 @@ class PhaseFragment : Fragment() {
                         ChildPhase(
                             "Phase 1",
                             "Integer eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.settings,
+                            R.drawable.about,
                             View.OnClickListener {
                                 findNavController().navigate(
                                     TabPhaseReviewDirections.actionTabPhaseReviewToStoryFragment(
@@ -167,7 +141,7 @@ class PhaseFragment : Fragment() {
                         ChildPhase(
                             "Phase 2",
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.settings,
+                            R.drawable.about,
                             View.OnClickListener {
                                 findNavController().navigate(
                                     TabPhaseReviewDirections.actionTabPhaseReviewToStoryFragment(
@@ -187,7 +161,7 @@ class PhaseFragment : Fragment() {
                         ChildPhase(
                             "Phase 3",
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.settings,
+                            R.drawable.about,
                             View.OnClickListener {
                                 findNavController().navigate(
                                     TabPhaseReviewDirections.actionTabPhaseReviewToStoryFragment(
@@ -209,9 +183,9 @@ class PhaseFragment : Fragment() {
 
                     childPhase0.add(
                         ChildPhase(
-                            "Phase 1.1",
+                            "Phase 1",
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.settings,
+                            R.drawable.about,
                             View.OnClickListener {
                                 findNavController().navigate(
                                     TabPhaseReviewDirections.actionTabPhaseReviewToStoryFragment(
@@ -230,7 +204,7 @@ class PhaseFragment : Fragment() {
                         ChildPhase(
                             "Phase 2",
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.settings,
+                            R.drawable.about,
                             View.OnClickListener {
                                 findNavController().navigate(
                                     TabPhaseReviewDirections.actionTabPhaseReviewToStoryFragment(
@@ -249,7 +223,7 @@ class PhaseFragment : Fragment() {
                         ChildPhase(
                             "Phase 3",
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.settings,
+                            R.drawable.about,
                             View.OnClickListener {
                                 findNavController().navigate(
                                     TabPhaseReviewDirections.actionTabPhaseReviewToStoryFragment(
@@ -272,7 +246,7 @@ class PhaseFragment : Fragment() {
                         ChildPhase(
                             "Phase 1",
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.settings,
+                            R.drawable.about,
                             View.OnClickListener {
                                 findNavController().navigate(
                                     TabPhaseReviewDirections.actionTabPhaseReviewToStoryFragment(
@@ -290,7 +264,7 @@ class PhaseFragment : Fragment() {
                         ChildPhase(
                             "Phase 2",
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.settings,
+                            R.drawable.about,
                             View.OnClickListener {
                                 findNavController().navigate(
                                     TabPhaseReviewDirections.actionTabPhaseReviewToStoryFragment(
@@ -310,7 +284,7 @@ class PhaseFragment : Fragment() {
                         ChildPhase(
                             "Phase 3",
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.settings,
+                            R.drawable.about,
                             View.OnClickListener {
                                 findNavController().navigate(
                                     TabPhaseReviewDirections.actionTabPhaseReviewToStoryFragment(
@@ -333,7 +307,7 @@ class PhaseFragment : Fragment() {
                         ChildPhase(
                             "Phase 1",
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.settings,
+                            R.drawable.about,
                             View.OnClickListener {
                                 findNavController().navigate(
                                     TabPhaseReviewDirections.actionTabPhaseReviewToStoryFragment(
@@ -351,7 +325,7 @@ class PhaseFragment : Fragment() {
                         ChildPhase(
                             "Phase 2",
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.settings,
+                            R.drawable.about,
                             View.OnClickListener {
                                 findNavController().navigate(
                                     TabPhaseReviewDirections.actionTabPhaseReviewToStoryFragment(
@@ -370,7 +344,7 @@ class PhaseFragment : Fragment() {
                         ChildPhase(
                             "Phase 3",
                             "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.settings,
+                            R.drawable.about,
                             View.OnClickListener {
                                 findNavController().navigate(
                                     TabPhaseReviewDirections.actionTabPhaseReviewToStoryFragment(
@@ -399,10 +373,12 @@ class PhaseFragment : Fragment() {
         return view
     }
 
-    fun buyLives(context: Context) {
+    private fun buyLives(context: Context, livesText: TextView) {
 
         val sm = SMLeitner()
         var currency = sm.getCurrency(context)
+        var lives = sm.displayLives(contextExternal)
+
 
         builder = AlertDialog.Builder(context)
 
@@ -410,12 +386,15 @@ class PhaseFragment : Fragment() {
 
         if (currency >= 60) {
             builder.setTitle("Purchase Lives")
-                .setMessage("You currently have $currency currency.\n1 life = 60 currency.\nDo you want to buy lives?")
+                .setMessage("1 life = 60 currency.\nDo you want to buy lives?")
                 .setPositiveButton("Yes") { dialog, _ ->
-                        sm.buyLives(context)
-                        sm.updAchPH(context)
-                        showSnackbar("Purchase Successful! \nYour current currency is : ${currency - 60}")
-                        dialog.dismiss()
+                    sm.lifeGain(context)
+                    sm.updAchPH(context)
+                    showSnackbar("Purchase Successful! \nYour current currency is : ${currency - 60}")
+                    dialog.dismiss()
+                    lives = sm.displayLives(contextExternal)
+                    livesText.text = lives.toString()
+
                 }
                 .setNegativeButton("No") { dialog, _ ->
                     dialog.dismiss()
@@ -424,16 +403,69 @@ class PhaseFragment : Fragment() {
             val alertDialog: AlertDialog = builder.create()
             alertDialog.show()
         } else {
-            showSnackbar("You do not have enough currency. Your current currency is : ${currency}")
+            showSnackbar("You do not have enough currency 😢")
         }
 
+        if (lives >= 5) {
+            timerText.isVisible = false
+            button.isVisible = false
 
-
+        }
 
     }
 
     private fun showSnackbar(message: String) {
         Snackbar.make(button, message, Snackbar.LENGTH_SHORT).show()
+
+    }
+
+
+    private fun startTimer(
+        timerTxt: TextView,
+        maxLives: Int,
+        timerDuration: Long,
+        livesText: TextView,
+        button: Button
+    ) {
+        val sm = SMLeitner()
+        var lives = sm.displayLives(contextExternal)
+        livesText.text = lives.toString()
+
+
+        if (lives >= maxLives) {
+            timerText.isVisible = false
+            button.isVisible = false
+            return
+        } else {
+
+
+            timer = object : CountDownTimer(timerDuration, 1000) {
+                override fun onTick(millisUntilFinished: Long) {
+                    val secondsRemaining = millisUntilFinished / 1000
+                    val minutes = secondsRemaining / 60
+                    val seconds = secondsRemaining % 60
+                    val timerText = String.format("%2d:%02d", minutes, seconds)
+                    timerTxt.text = timerText
+                    lives = sm.displayLives(contextExternal)
+                    livesText.text = lives.toString()
+
+                }
+
+                override fun onFinish() {
+                    sm.lifeGain(contextExternal) // this function increases the lives by 1
+
+
+                    if (lives <= maxLives) {
+                        startTimer(timerText, maxLives, timerDuration, livesText, button)
+
+                    } else {
+                        timer.cancel()
+                        timerText.isVisible = false
+                        button.isVisible = false
+                    }
+                }
+            }.start()
+        }
     }
 
 
