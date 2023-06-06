@@ -113,8 +113,8 @@ class PhaseFragment : Fragment() {
                     childPhase0.add(
                         ChildPhase(
                             "Phase 1",
-                            "Integer eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.about,
+                            "Learn Kapampangan as you embark on a captivating journey through Kian's first visit to his ancestral home, where language and culture intertwine.",
+                            R.drawable.bag,
                             View.OnClickListener {
                                 findNavController().navigate(
                                     TabPhaseReviewDirections.actionTabPhaseReviewToStoryFragment(
@@ -138,8 +138,8 @@ class PhaseFragment : Fragment() {
                     childPhase1.add(
                         ChildPhase(
                             "Phase 2",
-                            "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.about,
+                            "Embrace the challenge of learning Kapampangan as Kian engages in heartfelt conversations with his Kapampangan-speaking relatives, forging deeper connections along the way.",
+                            R.drawable.handshake,
                             View.OnClickListener {
                                 findNavController().navigate(
                                     TabPhaseReviewDirections.actionTabPhaseReviewToStoryFragment(
@@ -148,7 +148,8 @@ class PhaseFragment : Fragment() {
                                     )
                                 )
                             },
-                            sm.ifPassed(db, 1, 1)
+                            true
+                           // sm.ifPassed(db, 1, 1)
                         )
                     )
                     phaseList.add(ParentPhase("Phase 2: Sentence Fragments", childPhase1))
@@ -158,8 +159,8 @@ class PhaseFragment : Fragment() {
                     childPhase2.add(
                         ChildPhase(
                             "Phase 3",
-                            "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.about,
+                            "Join Kian as he embraces the challenge of learning Kapampangan and engages in meaningful conversations with his Kapampangan-speaking relatives.",
+                            R.drawable.wave,
                             View.OnClickListener {
                                 findNavController().navigate(
                                     TabPhaseReviewDirections.actionTabPhaseReviewToStoryFragment(
@@ -169,7 +170,8 @@ class PhaseFragment : Fragment() {
                                 )
 
                             },
-                            sm.ifPassed(db, 1, 2)
+                            true
+                           // sm.ifPassed(db, 1, 2)
                         )
                     )
                     phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2))
