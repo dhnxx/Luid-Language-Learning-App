@@ -81,6 +81,7 @@ class SentenceConstruction : AppCompatActivity() {
 
         var i = 0
         val sm = SMLeitner()
+        sm.lifeSpent(context)
 
 
         questionList = ArrayList()
@@ -312,6 +313,7 @@ class SentenceConstruction : AppCompatActivity() {
             super.onBackPressed()
             dialog.dismiss()
             val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
         }
         builder.setNegativeButton("No") { dialog: DialogInterface, _: Int ->

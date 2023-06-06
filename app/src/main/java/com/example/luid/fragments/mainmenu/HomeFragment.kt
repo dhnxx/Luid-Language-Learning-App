@@ -50,6 +50,7 @@ class HomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         bottomNav?.isEnabled = true
         bottomNav?.visibility = View.VISIBLE
+        val context = requireContext()
 
         ////////////////////////LEVEL SELECTION/////////////////////////////
 
@@ -58,7 +59,7 @@ class HomeFragment : Fragment() {
 
         levelRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        levelRecyclerView.adapter = LevelAdapter(getLevelList())
+        levelRecyclerView.adapter = LevelAdapter(getLevelList(), context)
 
         val snapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(levelRecyclerView)
@@ -66,7 +67,7 @@ class HomeFragment : Fragment() {
 
 
         // onCreateView of HomeFragment from LevelAdapter
-        levelRecyclerView.adapter = LevelAdapter(getLevelList()).apply {
+        levelRecyclerView.adapter = LevelAdapter(getLevelList(), context).apply {
             setOnItemClickListener { levelSelection ->
 
 
@@ -102,6 +103,7 @@ class HomeFragment : Fragment() {
 
         return listOf(
             LevelSelection(
+                1,
                 "Level 1",
                 "Pagbabakasyon",
                 "(Pamagbakasyun)",
@@ -110,6 +112,7 @@ class HomeFragment : Fragment() {
             true
             ),
             LevelSelection(
+                2,
                 "Level 2",
                 "Pagtuklas",
                 "(Pamag--)",
@@ -118,6 +121,7 @@ class HomeFragment : Fragment() {
                 2 <= currLevel
             ),
             LevelSelection(
+                3,
                 "Level 3",
                 "Pagpipista",
                 "(Pamamyesta)",
@@ -126,6 +130,7 @@ class HomeFragment : Fragment() {
                 3 <= currLevel
             ),
             LevelSelection(
+                4,
                 "Level 4",
                 "Pagpapaalam",
                 "(Pamagpaalam)",

@@ -22,6 +22,7 @@ import com.example.luid.classes.SMLeitner
 import com.example.luid.classes.WordAssociationClass
 import com.example.luid.database.DBConnect
 import android.os.SystemClock
+import androidx.navigation.findNavController
 import com.example.luid.fragments.mainmenu.MainActivity
 
 
@@ -109,6 +110,7 @@ class WordAssociation : AppCompatActivity() {
         level = intent.getIntExtra("level", 0)
         val intent1 = Intent(this, ResultActivity::class.java)
         val sm = SMLeitner()
+        sm.lifeSpent(context)
 
         nextButton.isEnabled = false
         nextButton.visibility = View.INVISIBLE
@@ -506,9 +508,10 @@ class WordAssociation : AppCompatActivity() {
             super.onBackPressed()
             dialog.dismiss()
             val intent = Intent(this, MainActivity::class.java)
-
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
             finish()
+
 
         }
         builder.setNegativeButton("No") { dialog: DialogInterface, _: Int ->

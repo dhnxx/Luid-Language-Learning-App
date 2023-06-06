@@ -3,6 +3,7 @@ package com.example.luid.classes
 
 // for LevelAdapter.kt, level selection data class,
 data class LevelSelection(
+    val level: Int,
     val levelID: String,
     val levelTitle: String,
     val levelTitleAlt: String,
