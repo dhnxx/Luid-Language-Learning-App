@@ -31,6 +31,8 @@ data class Choice(val text: String, @DrawableRes val imageResId: Int)
 class WordAssociation : AppCompatActivity() {
     private lateinit var questionList: ArrayList<WordAssociationClass>
     private lateinit var decoy: ArrayList<String>
+    private lateinit var decoyimg: ArrayList<String>
+    private lateinit var decoyimgtemp: ArrayList<String>
     private lateinit var answers: ArrayList<String>
     private lateinit var answerstemp: ArrayList<String>
     private lateinit var decoytemp: ArrayList<String>
@@ -67,6 +69,11 @@ class WordAssociation : AppCompatActivity() {
     private var time = 0
     private var totalTime = 0
     private var avgTime = 0
+    private var langch = ""
+    private var answerimg = ""
+    private var decimg0 = ""
+    private var decimg1 = ""
+    private var decimg2 = ""
 
     private val timerRunnable = object : Runnable {
         override fun run() {
@@ -184,8 +191,10 @@ class WordAssociation : AppCompatActivity() {
         var tag = ArrayList<String>()
         var question = ArrayList<String>()
         decoy = ArrayList()
+        decoyimg = ArrayList()
         answers = ArrayList()
         decoytemp = ArrayList()
+        decoyimgtemp = ArrayList()
         answerstemp = ArrayList()
         cursor = db.rawQuery(selectQuery, null)
         if (cursor.moveToFirst()) {
@@ -208,7 +217,7 @@ class WordAssociation : AppCompatActivity() {
             println(tag[i])
 
         }
-        for (i in 0 until 10) {
+        for (i in 0 until tag.size) {
             decoy.clear()
             answers.clear()
             when ((1..4).random()) {
@@ -227,6 +236,8 @@ class WordAssociation : AppCompatActivity() {
                     }
                     decoy = decoytemp
                     answers = answerstemp
+                    langch = "tagalog"
+
                 }
 
                 2 -> {
@@ -242,6 +253,8 @@ class WordAssociation : AppCompatActivity() {
                     }
                     decoy = decoytemp
                     answers = answerstemp
+                    langch = "english"
+
                 }
 
                 3 -> {
@@ -257,6 +270,8 @@ class WordAssociation : AppCompatActivity() {
                     }
                     decoy = decoytemp
                     answers = answerstemp
+                    langch = "kapampangan"
+
                 }
 
                 4 -> {
@@ -272,6 +287,7 @@ class WordAssociation : AppCompatActivity() {
                     }
                     decoy = decoytemp
                     answers = answerstemp
+                    langch = "kapampangan"
 
                 }
 // hello
@@ -284,26 +300,78 @@ class WordAssociation : AppCompatActivity() {
             for (i in 0 until decoy.size) {
                 println("DECOY = ${decoytemp[i]}" + " " + i)
             }
-
-
-
             decoy.shuffle()
-            var randInd = ArrayList<Int>()
-            for (k in 1..decoy.size) {
-                randInd.add(k)
+
+        //  var langch = choice sample napili kapampangan
+
+            val ansimg = answers[0]
+            val searchimg0 = decoy[0]
+            val searchimg1 = decoy[1]
+            val searchimg2 = decoy[2]
+            val cursor1: Cursor
+            cursor1 = db.rawQuery("SELECT * FROM ${DBConnect.questions_tb}", null)
+
+            if(cursor1.moveToFirst()){
+                do{
+                    val ans = cursor.getString(cursor.getColumnIndex("$langch"))
+                    if(ans.equals(ansimg, ignoreCase = true)) {
+                        val id = cursor1.getInt(cursor1.getColumnIndex("_id"))
+                        answerimg = "img$id"
+                    }
+                    val dec0 = cursor.getString(cursor.getColumnIndex("$langch"))
+                    if(dec0.equals(searchimg0, ignoreCase = true)) {
+                        val id = cursor1.getInt(cursor1.getColumnIndex("_id"))
+                        decimg0 = "img$id"
+                    }
+                    val dec1 = cursor.getString(cursor.getColumnIndex("$langch"))
+                    if(dec1.equals(searchimg1, ignoreCase = true)) {
+                        val id = cursor1.getInt(cursor1.getColumnIndex("_id"))
+                        decimg1 = "img$id"
+                    }
+                    val dec2 = cursor.getString(cursor.getColumnIndex("$langch"))
+                    if(dec2.equals(searchimg2, ignoreCase = true)) {
+                        val id = cursor1.getInt(cursor1.getColumnIndex("_id"))
+                        decimg2 = "img$id"
+                    }
+                } while(cursor1.moveToNext())
             }
+
+            val anszimg = resources.getIdentifier(
+                decimg0,
+                "drawable",
+                packageName
+            )
+
+            val image0 = resources.getIdentifier(
+                decimg0,
+                "drawable",
+                packageName
+            )
+
+            val image1 = resources.getIdentifier(
+                decimg1,
+                "drawable",
+                packageName
+            )
+
+            val image2 = resources.getIdentifier(
+                decimg2,
+                "drawable",
+                packageName
+            )
+
             questionList.add(
                 WordAssociationClass(
                     id[i],
                     question[i],
                     answers[0],
-                    R.drawable.home,
-                    decoy[randInd[0]],
-                    R.drawable.home,
-                    decoy[randInd[1]],
-                    R.drawable.home,
-                    decoy[randInd[2]],
-                    R.drawable.home
+                    anszimg,
+                    decoy[0],
+                    image0,
+                    decoy[1],
+                    image1,
+                    decoy[2],
+                    image2
                 )
             )
             for (i in 0 until 10) {
