@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.luid.R
+import com.example.luid.fragments.mainmenu.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -41,7 +42,7 @@ class LoginFragment : Fragment() {
             if(email.isNotEmpty() && pass.isNotEmpty()){
                 fbauth.signInWithEmailAndPassword(email, pass).addOnCompleteListener{
                     if(it.isSuccessful){
-                        val intent = Intent(context, LoginRegister::class.java)
+                        val intent = Intent(context, MainActivity::class.java)
                         startActivity(intent)
                     } else{
                         Toast.makeText(context, it.exception.toString(), Toast.LENGTH_SHORT).show()
