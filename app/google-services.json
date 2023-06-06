@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "160796917460",
+    "project_id": "luid-9fed9",
+    "storage_bucket": "luid-9fed9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:160796917460:android:49227a3f0d800e6a604541",
+        "android_client_info": {
+          "package_name": "com.example.luid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "160796917460-h2rdasg1hor5eki84eo26jc17vlj78f6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCFAYx-MV2YOsx-P_aaPovUW6-oq9rYQo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "160796917460-h2rdasg1hor5eki84eo26jc17vlj78f6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
