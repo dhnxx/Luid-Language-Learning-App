@@ -34,7 +34,7 @@ class LoginFragment : Fragment() {
         etemail = view.findViewById(R.id.login_email)
         etpass = view.findViewById(R.id.login_password)
         loginbutton = view.findViewById(R.id.login_button)
-
+// w
         loginbutton.setOnClickListener(){
             val email = etemail.text.toString()
             val pass = etpass.text.toString()
