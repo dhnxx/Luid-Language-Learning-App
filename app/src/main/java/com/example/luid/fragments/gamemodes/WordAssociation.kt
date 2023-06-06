@@ -337,7 +337,7 @@ class WordAssociation : AppCompatActivity() {
             }
 
             val anszimg = resources.getIdentifier(
-                decimg0,
+                answerimg,
                 "drawable",
                 packageName
             )
