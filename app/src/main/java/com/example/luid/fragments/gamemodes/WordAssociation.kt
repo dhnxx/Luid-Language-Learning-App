@@ -228,7 +228,6 @@ class WordAssociation : AppCompatActivity() {
                     decoy = decoytemp
                     answers = answerstemp
                 }
-
                 2 -> {
                     decoytemp.clear()
                     answerstemp.clear()
