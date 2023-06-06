@@ -13,7 +13,7 @@
     android:foreground="?attr/selectableItemBackground"
     app:cardBackgroundColor="?attr/colorSurface"
     app:cardCornerRadius="12dp"
-    app:cardElevation="1dp"
+    app:cardElevation="3dp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="15dp"
             android:progress="28"
-            android:progressBackgroundTint="?attr/colorSurface"
+            android:progressBackgroundTint="?attr/colorSecondaryContainer"
             android:progressTint="@color/colorPlaceholder2"/>
 
 
