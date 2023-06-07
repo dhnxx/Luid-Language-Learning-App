@@ -94,6 +94,29 @@ class ResultActivity : AppCompatActivity() {
         // JOIN TEMP AND QUESTION TABLE HERE
 
         // UPDATE USER RECORDS
+
+        var db = DBConnect(applicationContext).readableDatabase
+        var cursor = db.rawQuery("SELECT * FROM ${DBConnect.user_records_tb} WHERE level = $level AND phase = $phase", null)
+        var cv = ContentValues()
+
+        var colTime = cursor.getColumnIndex("time_spent")
+        var colLives = cursor.getColumnIndex("lives")
+        var colGame = cursor.getColumnIndex("game_session_number")
+        var colID = cursor.getColumnIndex("_id")
+
+        var lives = 0
+        var date = sm.getToday().joinToString(separator = "-")
+        var id = 0
+
+        println("COUNT : ${cursor.count}")
+        println("DATE : ${date}")
+
+//        cursor.moveToFirst()
+//        if (!(cursor.count == 1 && cursor.getInt(colTime) == 0 &&
+//                    cursor.getInt(colLives) != 0)){
+//            sm.addSession(this, level, phase)
+//        }
+
         sm.updUserRecords(this, level, phase, score, timeSpent, reward)
 
         // UPDATING ACHIEVEMENTS
