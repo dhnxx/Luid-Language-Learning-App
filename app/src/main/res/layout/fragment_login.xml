@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".fragments.loginregister.LoginRegister">
 
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,7 +25,7 @@
             android:drawablePadding="8dp"
             android:hint="Email"
             android:padding="8dp"
-            android:textColor="?attr/colorSurface" />
+            android:textColor="?attr/colorOnSurface" />
 
         <EditText
             android:id="@+id/login_password"
@@ -34,7 +36,7 @@
             android:drawablePadding="8dp"
             android:hint="Password"
             android:padding="8dp"
-            android:textColor="?attr/colorSurface"/>
+            android:textColor="?attr/colorOnSurface"/>
 
 
         <Button
@@ -71,5 +73,5 @@
 
     </LinearLayout>
 
-
+</LinearLayout>
 </ScrollView>

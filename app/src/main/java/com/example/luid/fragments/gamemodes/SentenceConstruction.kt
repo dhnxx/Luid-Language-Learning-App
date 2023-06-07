@@ -20,6 +20,7 @@ import com.example.luid.classes.PhaseTwoClass
 import com.example.luid.classes.SMLeitner
 import com.example.luid.classes.SentenceFragment
 import com.example.luid.database.DBConnect
+import com.example.luid.database.DBConnect.Companion.user_records_tb
 import com.example.luid.fragments.mainmenu.MainActivity
 
 class SentenceConstruction : AppCompatActivity() {
@@ -81,8 +82,21 @@ class SentenceConstruction : AppCompatActivity() {
 
         var i = 0
         val sm = SMLeitner()
-        sm.lifeSpent(context)
 
+        var db = DBConnect(context).writableDatabase
+        var cursor = db.rawQuery("SELECT * FROM $user_records_tb WHERE level = $level AND phase = $phase", null)
+
+        if(cursor.count == 0 ){
+            sm.addSession(context, level, phase)
+        }
+
+        if(cursor.count == 0 ){
+            sm.addSession(context, level, phase)
+        }else if(cursor.count >= 0){
+            sm.addSession(context, level, phase)
+        }
+
+        sm.lifeSpent(context)
 
         questionList = ArrayList()
 
@@ -103,7 +117,6 @@ class SentenceConstruction : AppCompatActivity() {
                 submit(i)
                 avgTime = (totalTime / questionList.size)
                 println("AVG TIME: $avgTime")
-                sm.addSession(this, level, phase)
                 intent3.putExtra("phase", phase)
                 intent3.putExtra("level", level)
                 intent3.putExtra("score", score)
@@ -132,14 +145,12 @@ class SentenceConstruction : AppCompatActivity() {
 
     private fun phasetwo() {
         val sm = SMLeitner()
-        val ph2 = PhaseTwoClass()
         sm.validateQuestionBank(context, level, phase)
         var gameSessionNumber = sm.getLatestGameSessionNumber(context, level, phase)
-
         var db = DBConnect(context).writableDatabase
         // CREATE TEMP TABLE QUESTION
         db.execSQL("DROP TABLE IF EXISTS ${DBConnect.temp_qstion}")
-        db.execSQL("CREATE TABLE IF NOT EXISTS ${DBConnect.temp_qstion} AS SELECT * FROM ${DBConnect.questions_tb} WHERE level = $level AND phase = $phase")
+        db.execSQL("CREATE TABLE IF NOT EXISTS ${DBConnect.temp_qstion} AS SELECT * FROM ${DBConnect.questions_tb} WHERE level = $level AND phase = $phase AND game_session = $gameSessionNumber")
 
         var cursor = db.rawQuery(
             "SELECT * FROM ${DBConnect.questions_tb} WHERE level = $level AND phase = $phase",
