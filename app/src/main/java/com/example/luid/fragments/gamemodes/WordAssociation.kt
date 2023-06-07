@@ -313,25 +313,30 @@ class WordAssociation : AppCompatActivity() {
 
             if(cursor1.moveToFirst()){
                 do{
+
                     val ans = cursor.getString(cursor.getColumnIndex("$langch"))
                     if(ans.equals(ansimg, ignoreCase = true)) {
                         val id = cursor1.getInt(cursor1.getColumnIndex("_id"))
                         answerimg = "img$id"
                     }
+
                     val dec0 = cursor.getString(cursor.getColumnIndex("$langch"))
                     if(dec0.equals(searchimg0, ignoreCase = true)) {
                         val id = cursor1.getInt(cursor1.getColumnIndex("_id"))
                         decimg0 = "img$id"
                     }
+
                     val dec1 = cursor.getString(cursor.getColumnIndex("$langch"))
                     if(dec1.equals(searchimg1, ignoreCase = true)) {
                         val id = cursor1.getInt(cursor1.getColumnIndex("_id"))
                         decimg1 = "img$id"
                     }
+
                     val dec2 = cursor.getString(cursor.getColumnIndex("$langch"))
                     if(dec2.equals(searchimg2, ignoreCase = true)) {
                         val id = cursor1.getInt(cursor1.getColumnIndex("_id"))
                         decimg2 = "img$id"
+
                     }
                 } while(cursor1.moveToNext())
             }
