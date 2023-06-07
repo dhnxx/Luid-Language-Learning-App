@@ -2,6 +2,7 @@ package com.example.luid.fragments.gamemodes
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.ContentValues
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -23,6 +24,7 @@ import com.example.luid.classes.WordAssociationClass
 import com.example.luid.database.DBConnect
 import android.os.SystemClock
 import androidx.navigation.findNavController
+import com.example.luid.database.DBConnect.Companion.user_records_tb
 import com.example.luid.fragments.mainmenu.MainActivity
 
 
@@ -117,6 +119,21 @@ class WordAssociation : AppCompatActivity() {
         level = intent.getIntExtra("level", 0)
         val intent1 = Intent(this, ResultActivity::class.java)
         val sm = SMLeitner()
+
+        var db = DBConnect(context).writableDatabase
+        var cursor = db.rawQuery("SELECT * FROM $user_records_tb WHERE level = $level AND phase = $phase", null)
+
+        var colTime = cursor.getColumnIndex("time_spent")
+        cursor.moveToLast()
+        var timeSpentDB = cursor.getInt(timeSpent)
+
+        if(cursor.count >= 2 ){
+            sm.addSession(context, level, phase)
+        }else{
+            sm.addSession(context, level, phase)
+        }
+
+
         sm.lifeSpent(context)
 
         nextButton.isEnabled = false
@@ -145,7 +162,9 @@ class WordAssociation : AppCompatActivity() {
                 // Last element of the questionList, navigate to result screen
                 // navigate using navController
                 submit(i)
-                sm.addSession(this, level, phase)
+
+
+
                 avgTime = (totalTime / questionList.size)
                 println("AVG TIME: $avgTime")
                 intent1.putExtra("level", level)
@@ -303,37 +322,37 @@ class WordAssociation : AppCompatActivity() {
 
         //  var langch = choice sample napili kapampangan
 
-            val ansimg = answers[0]
-            val searchimg0 = decoy[0]
-            val searchimg1 = decoy[1]
-            val searchimg2 = decoy[2]
-            val cursor1: Cursor
-            cursor1 = db.rawQuery("SELECT * FROM ${DBConnect.questions_tb}", null)
-
-            if(cursor1.moveToFirst()){
-                do{
-                    val ans = cursor.getString(cursor.getColumnIndex("$langch"))
-                    if(ans.equals(ansimg, ignoreCase = true)) {
-                        val id = cursor1.getInt(cursor1.getColumnIndex("_id"))
-                        answerimg = "img$id"
-                    }
-                    val dec0 = cursor.getString(cursor.getColumnIndex("$langch"))
-                    if(dec0.equals(searchimg0, ignoreCase = true)) {
-                        val id = cursor1.getInt(cursor1.getColumnIndex("_id"))
-                        decimg0 = "img$id"
-                    }
-                    val dec1 = cursor.getString(cursor.getColumnIndex("$langch"))
-                    if(dec1.equals(searchimg1, ignoreCase = true)) {
-                        val id = cursor1.getInt(cursor1.getColumnIndex("_id"))
-                        decimg1 = "img$id"
-                    }
-                    val dec2 = cursor.getString(cursor.getColumnIndex("$langch"))
-                    if(dec2.equals(searchimg2, ignoreCase = true)) {
-                        val id = cursor1.getInt(cursor1.getColumnIndex("_id"))
-                        decimg2 = "img$id"
-                    }
-                } while(cursor1.moveToNext())
-            }
+//            val ansimg = answers[0]
+//            val searchimg0 = decoy[0]
+//            val searchimg1 = decoy[1]
+//            val searchimg2 = decoy[2]
+//            val cursor1: Cursor
+//            cursor1 = db.rawQuery("SELECT * FROM ${DBConnect.questions_tb}", null)
+//
+//            if(cursor1.moveToFirst()){
+//                do{
+//                    val ans = cursor.getString(cursor.getColumnIndex("$langch"))
+//                    if(ans.equals(ansimg, ignoreCase = true)) {
+//                        val id = cursor1.getInt(cursor1.getColumnIndex("_id"))
+//                        answerimg = "img$id"
+//                    }
+//                    val dec0 = cursor.getString(cursor.getColumnIndex("$langch"))
+//                    if(dec0.equals(searchimg0, ignoreCase = true)) {
+//                        val id = cursor1.getInt(cursor1.getColumnIndex("_id"))
+//                        decimg0 = "img$id"
+//                    }
+//                    val dec1 = cursor.getString(cursor.getColumnIndex("$langch"))
+//                    if(dec1.equals(searchimg1, ignoreCase = true)) {
+//                        val id = cursor1.getInt(cursor1.getColumnIndex("_id"))
+//                        decimg1 = "img$id"
+//                    }
+//                    val dec2 = cursor.getString(cursor.getColumnIndex("$langch"))
+//                    if(dec2.equals(searchimg2, ignoreCase = true)) {
+//                        val id = cursor1.getInt(cursor1.getColumnIndex("_id"))
+//                        decimg2 = "img$id"
+//                    }
+//                } while(cursor1.moveToNext())
+//            }
 
             val anszimg = resources.getIdentifier(
                 answerimg,
