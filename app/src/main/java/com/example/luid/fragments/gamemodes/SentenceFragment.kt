@@ -19,6 +19,7 @@ import com.example.luid.classes.PhaseTwoClass
 import com.example.luid.classes.SMLeitner
 import com.example.luid.classes.SentenceFragment
 import com.example.luid.database.DBConnect
+import com.example.luid.database.DBConnect.Companion.user_records_tb
 import com.example.luid.fragments.mainmenu.MainActivity
 
 class SentenceFragment : AppCompatActivity() {
@@ -81,6 +82,19 @@ class SentenceFragment : AppCompatActivity() {
 
         var i = 0
         val sm = SMLeitner()
+
+        var db = DBConnect(context).writableDatabase
+        var cursor = db.rawQuery("SELECT * FROM $user_records_tb WHERE level = $level AND phase = $phase", null)
+
+        if(cursor.count == 0 ){
+            sm.addSession(context, level, phase)
+        }else if(cursor.count >= 0){
+            sm.addSession(context, level, phase)
+        }
+
+
+
+
         sm.lifeSpent(context)
 
 
@@ -104,7 +118,6 @@ class SentenceFragment : AppCompatActivity() {
                 submit(i)
                 avgTime = (totalTime / questionList.size)
                 println("AVG TIME: $avgTime")
-                sm.addSession(this, level, phase)
                 intent2.putExtra("level", level)
                 intent2.putExtra("phase", phase)
                 intent2.putExtra("score", score)
@@ -144,7 +157,7 @@ class SentenceFragment : AppCompatActivity() {
         db.execSQL("CREATE TABLE IF NOT EXISTS ${DBConnect.temp_qstion} AS SELECT * FROM ${DBConnect.questions_tb} WHERE level = $level AND phase = $phase")
 
         var cursor = db.rawQuery(
-            "SELECT * FROM ${DBConnect.questions_tb} WHERE level = $level AND phase = $phase",
+            "SELECT * FROM ${DBConnect.questions_tb} WHERE level = $level AND phase = $phase  AND game_session = $gameSessionNumber",
             null
         )
 
