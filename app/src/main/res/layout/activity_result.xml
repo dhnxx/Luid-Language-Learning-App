@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Level 1 (Phase 1)"
+            android:text="Result"
             android:textColor="?attr/colorOnPrimary"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -57,7 +57,7 @@
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/imageplaceholder"
+                android:src="@drawable/trophy"
                 app:cornerRadius="60dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -85,7 +85,8 @@
             android:layout_height="120dp"
             android:layout_weight="1"
             android:layout_margin="5dp"
-            app:cardBackgroundColor="@color/colorPlaceholder1"
+            app:cardElevation="5dp"
+            app:cardBackgroundColor="?attr/colorSurface"
             app:strokeWidth="0dp">
 
             <LinearLayout
@@ -98,7 +99,7 @@
                     android:layout_height="50dp"
                     android:gravity="center"
                     android:text="Avg. Time"
-                    android:textColor="?attr/colorSurface"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="16sp"
                     android:textStyle="bold">
 
@@ -110,7 +111,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="50s"
-                    android:textColor="?attr/colorSurface"
+                    android:textColor="?attr/colorOnSurface"
                     android:textSize="40sp"
                     android:textStyle="bold" />
 
@@ -123,8 +124,9 @@
             android:layout_width="0dp"
             android:layout_height="120dp"
             android:layout_margin="5dp"
+            app:cardElevation="5dp"
             android:layout_weight="1"
-            app:cardBackgroundColor="@color/colorPlaceholder2"
+            app:cardBackgroundColor="?attr/colorSurface"
             app:strokeWidth="0dp">
 
             <LinearLayout
@@ -137,7 +139,7 @@
                     android:layout_height="50dp"
                     android:gravity="center"
                     android:text="Correct %"
-                    android:textColor="?attr/colorSurface"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="16sp"
                     android:textStyle="bold">
 
@@ -149,7 +151,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="90%"
-                    android:textColor="?attr/colorSurface"
+                    android:textColor="?attr/colorOnSurface"
                     android:textSize="40sp"
                     android:textStyle="bold" />
 
@@ -164,7 +166,8 @@
             android:layout_height="120dp"
             android:layout_weight="1"
             android:layout_margin="5dp"
-            app:cardBackgroundColor="@color/colorPlaceholder3"
+            app:cardElevation="5dp"
+            app:cardBackgroundColor="?attr/colorSurface"
             app:strokeWidth="0dp">
 
             <LinearLayout
@@ -177,7 +180,7 @@
                     android:layout_height="50dp"
                     android:gravity="center"
                     android:text="Currency"
-                    android:textColor="?attr/colorSurface"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="16sp"
                     android:textStyle="bold">
 
@@ -189,7 +192,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="+100"
-                    android:textColor="?attr/colorSurface"
+                    android:textColor="?attr/colorOnSurface"
                     android:textSize="40sp"
                     android:textStyle="bold" />
 
