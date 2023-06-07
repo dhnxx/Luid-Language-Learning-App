@@ -113,7 +113,7 @@ class StoryFragment : Fragment() {
                 true,
                 "Magandang umaga po, lola. Mano po.",
                 "Mayap a abak pu, Apo. Siklod ku pu.",
-                R.drawable.profile
+                R.drawable.kian
             )
         )
         storyList.add(
@@ -122,7 +122,7 @@ class StoryFragment : Fragment() {
                 false,
                 "Magandang umaga, apo.",
                 "Mayap a abak, apú.",
-                R.drawable.profile
+                R.drawable.lola
             )
         )
         storyList.add(
@@ -131,7 +131,7 @@ class StoryFragment : Fragment() {
                 false,
                 "Kumusta ka? Ngayon ka lang nadalaw dito.",
                 "Komusta ka? Ngeni kamu mekaratang keni.",
-                R.drawable.profile
+                R.drawable.lola
             )
         )
 
@@ -141,7 +141,7 @@ class StoryFragment : Fragment() {
                 true,
                 "Okay naman po ako,  salamat.",
                 "Mayap naku man pu. Salâmat.",
-                R.drawable.profile
+                R.drawable.kian
             )
         )
 
@@ -151,7 +151,7 @@ class StoryFragment : Fragment() {
                 false,
                 "Halika at ipapakilala kita kina tito Noel, tita Marites, at sa pinsan mong si Elena.",
                 "Mekeni, pakilala daka keng Bapa mung Noel, Darang Marites, ampong kng pisan mung Elena.",
-                R.drawable.profile
+                R.drawable.lola
             )
         )
 
@@ -161,7 +161,7 @@ class StoryFragment : Fragment() {
                 true,
                 "Sige po, lola.",
                 "Opu, Apu",
-                R.drawable.profile
+                R.drawable.kian
             )
         )
 
@@ -171,7 +171,7 @@ class StoryFragment : Fragment() {
                 false,
                 "Noel, pamangkin mo oh. Ngayon lang nakapunta dito.",
                 "Noel, paunakan mu, o. Ngeni yamu miras keti.",
-                R.drawable.profile
+                R.drawable.lola
             )
         )
 
@@ -181,7 +181,7 @@ class StoryFragment : Fragment() {
                 false,
                 "Mabuti at napadalaw ka, iho. Tawagin ko lang si Elena. Elena!",
                 "Mapnamu megbisita ka, itung. Awsan ke mu y Elena.",
-                R.drawable.profile
+                R.drawable.noel
             )
         )
 
@@ -191,7 +191,7 @@ class StoryFragment : Fragment() {
                 false,
                 "Ikaw pala ang pinsan kong taga-maynila, hello po.",
                 "Ika pala ing pisan kung ibat Menila. Hello pu.",
-                R.drawable.profile
+                R.drawable.elena
             )
         )
 
@@ -201,7 +201,7 @@ class StoryFragment : Fragment() {
                 false,
                 "Mamaya ka na namin ipapakilala sa tiya mo.",
                 "Pota pakilala da ka kang dara mu.",
-                R.drawable.profile
+                R.drawable.noel
             )
         )
 
@@ -211,7 +211,7 @@ class StoryFragment : Fragment() {
                 true,
                 "Nasaan po siya?",
                 "",
-                R.drawable.profile
+                R.drawable.kian
             )
         )
 
@@ -221,7 +221,7 @@ class StoryFragment : Fragment() {
                 false,
                 "Nasa palengke pa ang tita Marites mo, pinagsasabay ang pamimili sa kwentuhan.",
                 "Atyu pa palengki y dara mung Marites, piyayagnan na ing pamipagkwentu keng pamanyali.",
-                R.drawable.profile
+                R.drawable.lola
             )
         )
 
@@ -231,7 +231,7 @@ class StoryFragment : Fragment() {
                 false,
                 "Magpahinga ka muna. Malayo ang byahe mo.",
                 "Paynawa ka pa, marayu ka penibatán.",
-                R.drawable.profile
+                R.drawable.noel
             )
         )
 
@@ -241,7 +241,7 @@ class StoryFragment : Fragment() {
                 false,
                 "Elena, hatid mo muna pinsan mo sa magiging kwarto niya para makapag pahinga.",
                 "Elena, atad me pamu ing pisan mu kng kwartu na, ba yang mipaynawa.",
-                R.drawable.profile
+                R.drawable.lola
             )
         )
 
@@ -251,7 +251,7 @@ class StoryFragment : Fragment() {
                 false,
                 "Sige po, lola.",
                 "Opu, Apu.",
-                R.drawable.profile
+                R.drawable.elena
             )
         )
 

@@ -23,7 +23,7 @@
             android:id="@+id/childImage"
             android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:background="@color/colorPlaceholder1"
+            android:background="?attr/colorPrimaryContainer"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -53,7 +53,7 @@
             <TextView
                 android:id="@+id/childDescription"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:paddingLeft="8dp"
                 android:text="@string/lorem"
                 android:textAlignment="textStart"
