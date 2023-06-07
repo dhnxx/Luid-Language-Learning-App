@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 import com.example.luid.database.DBConnect
 import com.example.luid.database.DBConnect.Companion.questions_tb
 import com.example.luid.database.DBConnect.Companion.temp_qstion
+import com.example.luid.database.DBConnect.Companion.user_records_tb
 import java.lang.IndexOutOfBoundsException
 import java.util.Calendar
 
@@ -70,6 +71,19 @@ class SMLeitner() {
         cv.put("times_viewed", "${oldTimesViewed + 1}")
 
         ldb.update("$temp_qstion", cv, "_id = $id", null)
+
+        println("NEW GAME SESSION : $newGameSession")
+
+        cv.clear()
+        cv.put("game_session_number", "$newGameSession")
+        cursor = ldb.rawQuery("SELECT * FROM $user_records_tb WHERE level = $level AND phase = $phase", null)
+        cursor.moveToLast()
+        id = cursor.getInt(indID)
+
+        ldb.update("$user_records_tb", cv, "_id = $id", null)
+
+        cursor.close()
+        ldb.close()
     }
 
 
@@ -232,7 +246,9 @@ class SMLeitner() {
         latestGameSessionVal = cursor.getInt(ind)
         currentGameSession = latestGameSessionVal
 
-        return latestGameSessionVal
+        println("CURRENT GAME SESSION : $currentGameSession")
+
+        return currentGameSession
     }
 
     // Adds a game session row in user_records table
@@ -268,6 +284,8 @@ class SMLeitner() {
 
             } else {
                 cursor = ldb.rawQuery("SELECT * FROM $tUserRecords", null)
+
+                sessionNumber = 1
 
                 cursor.moveToLast()
                 replenished = cursor.getInt(indReplenished)
@@ -339,14 +357,17 @@ class SMLeitner() {
 
         val indId = cursor.getColumnIndex("_id")
         val indLives = cursor.getColumnIndex("lives")
+        val indCurrency = cursor.getColumnIndex("currency")
         var lives = 0
         val minLives = 0
         val maxLives = 5
         var id = 0
+        var currency = 0
 
         if (cursor.moveToLast()) {
             lives = cursor.getInt(indLives)
             id = cursor.getInt(indId)
+            currency = cursor.getInt(indCurrency)
         }
 
         if (lives >= maxLives) {
@@ -354,7 +375,6 @@ class SMLeitner() {
         } else {
             lives += 1
         }
-
 
         cv.put("lives", lives)
 
@@ -367,15 +387,47 @@ class SMLeitner() {
 
     fun displayLives(context: Context): Int {
         var db = DBConnect(context).readableDatabase
-        var cursor = db.rawQuery("SELECT lives FROM $tUserRecords", null)
+        var cursor = db.rawQuery("SELECT * FROM $tUserRecords", null)
+        var cv = ContentValues()
+
+        var colTime = cursor.getColumnIndex("time_spent")
+        var colLives = cursor.getColumnIndex("lives")
+        var colGame = cursor.getColumnIndex("game_session_number")
+        var colID = cursor.getColumnIndex("_id")
+
         var lives = 0
+        var date = getToday().joinToString(separator = "-")
+        var id = 0
 
-        if (cursor.moveToLast()) {
-            lives = cursor.getInt(0)
+        cursor.moveToFirst()
+        if (cursor.count == 1 && cursor.getInt(colTime) == 0 &&
+                cursor.getInt(colLives) == 0 && cursor.getInt(colGame) == 1){
+
+            id = cursor.getInt(colID)
+
+            cv.put("date_played", date)
+
+            db.update(tUserRecords, cv, "_id = $id", null)
+            lives = cursor.getInt(colLives)
+
+            cursor.close()
+            db.close()
+
+            return lives
+
+        }else{
+            if (cursor.moveToLast()) {
+                lives = cursor.getInt(colLives)
+                id = cursor.getInt(colID)
+
+                cv.put("date_played", date)
+
+                db.update(tUserRecords, cv, "_id = $id", null)
+
+                cursor.close()
+                db.close()
+            }
         }
-
-        cursor.close()
-        db.close()
 
         return lives
     }
@@ -391,7 +443,6 @@ class SMLeitner() {
     ) {
         println("PHASE : $phase")
         var db = DBConnect(context).writableDatabase
-        val today = getToday().joinToString()
         val cursor =
             db.rawQuery("SELECT * FROM $tUserRecords WHERE level = $level AND phase = $phase", null)
         val indId = cursor.getColumnIndex("_id")
@@ -416,6 +467,7 @@ class SMLeitner() {
 
     fun validateQuestionBank(context: Context, level: Int, phase: Int) {
         var db = DBConnect(context).writableDatabase
+        currentGameSession = getLatestGameSessionNumber(context, level, phase)
         var cursor = db.rawQuery(
             "SELECT * FROM $tQuestions WHERE level = $level AND phase = $phase AND game_session = $currentGameSession",
             null
@@ -441,7 +493,7 @@ class SMLeitner() {
             var gameSessionCol = cursor.getColumnIndex("game_session_number")
             var idCol = cursor.getColumnIndex("_id")
             var gameSessionTempVal = cursor.getInt(gameSessionCol)
-            var gameSessionValUpd = gameSessionTempVal + 1
+            var gameSessionValUpd = gameSessionTempVal
             var idVal = cursor.getInt(idCol)
             currentGameSession = gameSessionValUpd
 
@@ -532,6 +584,7 @@ class SMLeitner() {
 
         val cursor = ldb.rawQuery("SELECT $columnName FROM $tUserRecords", null)
         var currProg = 0
+        var tempCurrProg = 0
         var currLevel = 0
         var today = getToday()
         var latestDate: List<Int>
@@ -545,23 +598,33 @@ class SMLeitner() {
             latestDate = getDateDB(cursor)
             date1 = today
             date2 = latestDate
-            while (cursor.moveToPrevious()) {
+             do{
 
-                if (((date1[2] - date2[2]) <= 1) && ((date1[1] - date2[1]) <= 1) && ((date1[0] - date2[0]) <= 1)) {
+                if (((date1[2] - date2[2]) == 1) && ((date1[1] - date2[1]) == 0) && ((date1[0] - date2[0]) == 0)) {
                     date1 = date2
                     date2 = getDateBefore(cursor)
-                    currProg += 1
+                    tempCurrProg += 1
                 } else {
+                    currProg = 0
                     break
                 }
-            }
+            }while (cursor.moveToPrevious())
         }
+
+
 
         when (currProg) {
             in 1..2 -> currLevel = 1
             in 3..4 -> currLevel = 2
             in 5..6 -> currLevel = 3
             else -> currLevel = 4
+        }
+
+        if (tempCurrProg == 0){
+            currProg = 0
+            currLevel = 0
+        }else{
+            currProg = tempCurrProg
         }
 
         cv.put("current_level", "$currLevel")
@@ -673,6 +736,10 @@ class SMLeitner() {
         currProg += cursor.getInt(dbCurrTime)
         while (cursor.moveToNext()) {
             currProg += cursor.getInt(dbCurrTime)
+        }
+
+        if(currProg != 0){
+            currProg = (currProg / 60).toInt()
         }
 
         currLevel = when (currProg) {

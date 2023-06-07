@@ -1,5 +1,6 @@
 package com.example.luid.fragments.mainmenu
 
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -28,6 +29,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.navigation.findNavController
+import com.example.luid.database.DBConnect.Companion.user_records_tb
 
 class PhaseFragment : Fragment() {
 
@@ -148,8 +150,10 @@ class PhaseFragment : Fragment() {
                                     )
                                 )
                             },
+
                             true
                            // sm.ifPassed(db, 1, 1)
+
                         )
                     )
                     phaseList.add(ParentPhase("Phase 2: Sentence Fragments", childPhase1))
@@ -170,8 +174,10 @@ class PhaseFragment : Fragment() {
                                 )
 
                             },
-                            true
-                           // sm.ifPassed(db, 1, 2)
+
+//                            sm.ifPassed(db, 1, 2)
+                        true
+
                         )
                     )
                     phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2))
@@ -390,10 +396,24 @@ class PhaseFragment : Fragment() {
                 .setPositiveButton("Yes") { dialog, _ ->
                     sm.lifeGain(context)
                     sm.updAchPH(context)
+
+                    var db = DBConnect(contextExternal).writableDatabase
+                    var cursor = db.rawQuery("SELECT * FROM $user_records_tb", null)
+
+                    var colID = cursor.getColumnIndex("_id")
+                    var cv = ContentValues()
+
+                    cursor.moveToLast()
+                    var id = cursor.getInt(colID)
+                    cv.put("currency", "${currency - 60}")
+                    db.update("$user_records_tb", cv, "_id = $id", null)
+
                     showSnackbar("Purchase Successful! \nYour current currency is : ${currency - 60}")
                     dialog.dismiss()
                     lives = sm.displayLives(contextExternal)
+                    currency = sm.getCurrency(contextExternal)
                     livesText.text = lives.toString()
+                    currencyText.text = "💵$currency"
 
                 }
                 .setNegativeButton("No") { dialog, _ ->
