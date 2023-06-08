@@ -353,7 +353,7 @@ class WordAssociation : AppCompatActivity() {
 //                    }
 //                } while(cursor1.moveToNext())
 //            }
-
+// h
             val anszimg = resources.getIdentifier(
                 answerimg,
                 "drawable",
