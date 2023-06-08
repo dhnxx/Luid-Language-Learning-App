@@ -13,6 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:orientation="vertical">
 
             <ImageView
@@ -30,8 +31,40 @@
                 android:layout_marginTop="30dp"
                 android:layout_gravity="center"
                 android:background="?attr/colorSecondaryContainer"
-                android:drawablePadding="8dp"
                 android:hint="Email"
+                android:padding="8dp"
+                android:textColor="?attr/colorOnSurface" />
+
+            <EditText
+                android:id="@+id/signup_fname"
+                android:layout_width="350dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center"
+                android:background="?attr/colorSecondaryContainer"
+                android:hint="First Name"
+                android:padding="8dp"
+                android:textColor="?attr/colorOnSurface" />
+
+            <EditText
+                android:id="@+id/signup_lname"
+                android:layout_width="350dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center"
+                android:background="?attr/colorSecondaryContainer"
+                android:hint="Last Name"
+                android:padding="8dp"
+                android:textColor="?attr/colorOnSurface" />
+
+            <EditText
+                android:id="@+id/signup_uname"
+                android:layout_width="350dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center"
+                android:background="?attr/colorSecondaryContainer"
+                android:hint="Username"
                 android:padding="8dp"
                 android:textColor="?attr/colorOnSurface" />
 
@@ -42,7 +75,6 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:background="?attr/colorSecondaryContainer"
-                android:drawablePadding="8dp"
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:padding="8dp"
@@ -55,7 +87,6 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:background="?attr/colorSecondaryContainer"
-                android:drawablePadding="8dp"
                 android:hint="Confirm Password"
                 android:inputType="textPassword"
                 android:padding="8dp"
