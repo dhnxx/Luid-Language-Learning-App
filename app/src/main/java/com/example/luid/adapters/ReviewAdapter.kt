@@ -3,6 +3,7 @@ package com.example.luid.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.luid.R
@@ -16,6 +17,7 @@ class ReviewAdapter (private val reviewList: List<Review>) : RecyclerView.Adapte
         val kapWord: TextView = itemView.findViewById(R.id.kapWord)
         val engWord: TextView = itemView.findViewById(R.id.engWord)
         val tagWord: TextView = itemView.findViewById(R.id.tagWord)
+        val indicator: ImageView = itemView.findViewById(R.id.indicator)
 
     }
 

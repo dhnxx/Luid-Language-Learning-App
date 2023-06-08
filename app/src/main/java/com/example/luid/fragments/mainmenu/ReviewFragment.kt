@@ -29,7 +29,6 @@ import com.example.luid.database.DBConnect.Companion.vsbty
 class ReviewFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private val reviewList = ArrayList<ParentPhase>()
-    private val adapter = ParentPhaseAdapter(reviewList)
     private lateinit var dbHelper: DBConnect
     private lateinit var data: List<Review>
 
