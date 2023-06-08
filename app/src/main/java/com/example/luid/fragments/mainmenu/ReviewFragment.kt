@@ -16,6 +16,7 @@ import com.example.luid.adapters.LevelSwitchStateViewModel
 import com.example.luid.classes.ParentPhase
 import com.example.luid.classes.Review
 import com.example.luid.database.DBConnect
+import com.example.luid.database.DBConnect.Companion.diffs
 import com.example.luid.database.DBConnect.Companion.engWord
 import com.example.luid.database.DBConnect.Companion.kapWord
 import com.example.luid.database.DBConnect.Companion.level
@@ -76,14 +77,16 @@ class ReviewFragment : Fragment() {
                 val engIndex = it.getColumnIndex(engWord)
                 val tagIndex = it.getColumnIndex(tagWord)
                 val vsbtyIndex = it.getColumnIndex(vsbty)
+                val dfIndex = it.getColumnIndex(diffs)
 
                 while (it.moveToNext()) {
                     val kap = it.getString(kapIndex)
                     val eng = it.getString(engIndex)
                     val tag = it.getString(tagIndex)
                     val vsbty = it.getInt(vsbtyIndex)
+                    val df = it.getInt(dfIndex)
 
-                    val review = Review(kap, eng, tag)
+                    val review = Review(kap, eng, tag, df)
                     list.add(review)
 
                 }
