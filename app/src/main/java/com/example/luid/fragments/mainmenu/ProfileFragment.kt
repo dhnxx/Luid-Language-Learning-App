@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import com.example.luid.R
 import com.example.luid.classes.Achievement
 import com.example.luid.database.DBConnect
@@ -29,6 +30,7 @@ class ProfileFragment : Fragment() {
 
         for (i in 0 until numberOfCards) {
             val cardView = layoutInflater.inflate(R.layout.achvcardview, achvLinearLayout, false)
+            cardView.elevation = 10f 
             val progressBar = cardView.findViewById<ProgressBar>(R.id.achvprogressBar)
             val progressTextView = cardView.findViewById<TextView>(R.id.achvprogresstxt)
             val achTitleTextView = cardView.findViewById<TextView>  (R.id.achvtitle)

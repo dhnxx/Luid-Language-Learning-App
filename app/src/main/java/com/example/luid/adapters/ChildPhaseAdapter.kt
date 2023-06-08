@@ -14,7 +14,7 @@ class ChildPhaseAdapter(private val childList: List<ChildPhase>): RecyclerView.A
 
     inner class ChildViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val childTitle: TextView = itemView.findViewById(R.id.childTitle)
+      val childTitle: TextView = itemView.findViewById(R.id.childTitle)
         val childDescription: TextView = itemView.findViewById(R.id.childDescription)
         val childImage: ImageView = itemView.findViewById(R.id.childImage)
 
@@ -33,7 +33,7 @@ class ChildPhaseAdapter(private val childList: List<ChildPhase>): RecyclerView.A
 
     override fun onBindViewHolder(holder: ChildViewHolder, position: Int) {
         val childPhase = childList[position]
-        holder.childTitle.text = childPhase.title
+       holder.childTitle.text = childPhase.title
         holder.childDescription.text = childPhase.description
         holder.childImage.setImageResource(childPhase.image)
         val childButton = holder.itemView.findViewById<Button>(R.id.childButton)
