@@ -302,7 +302,7 @@ class WordAssociation : AppCompatActivity() {
             decoy.shuffle()
 
         //  var langch = choice sample napili kapampangan
-/*
+
             val ansimg = answers[0]
             val searchimg0 = decoy[0]
             val searchimg1 = decoy[1]
@@ -358,7 +358,7 @@ class WordAssociation : AppCompatActivity() {
                 "drawable",
                 packageName
             )
-*/
+
             questionList.add(
                 WordAssociationClass(
                     id[i],
