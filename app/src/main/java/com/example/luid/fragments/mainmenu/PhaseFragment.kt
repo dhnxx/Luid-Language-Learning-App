@@ -114,7 +114,7 @@ class PhaseFragment : Fragment() {
 
                     childPhase0.add(
                         ChildPhase(
-                            "Phase 1",
+                            "Pamagdatang",
                             "Learn Kapampangan as you embark on a captivating journey through Kian's first visit to his ancestral home, where language and culture intertwine.",
                             R.drawable.bag,
                             View.OnClickListener {
