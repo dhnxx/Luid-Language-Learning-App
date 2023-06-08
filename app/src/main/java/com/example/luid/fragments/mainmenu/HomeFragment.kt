@@ -106,7 +106,7 @@ class HomeFragment : Fragment() {
                 1,
                 "Level 1",
                 "Pagbabakasyon",
-                "(Pamagbakasyun)",
+                "Pamagbakasyun",
                 R.drawable.about_background,
                 "Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!",
             true
@@ -115,7 +115,7 @@ class HomeFragment : Fragment() {
                 2,
                 "Level 2",
                 "Pagtuklas",
-                "(Pamag--)",
+                "Pamag--",
                 R.drawable.about_background,
                 "Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!",
                 2 <= currLevel
@@ -124,7 +124,7 @@ class HomeFragment : Fragment() {
                 3,
                 "Level 3",
                 "Pagpipista",
-                "(Pamamyesta)",
+                "Pamamyesta",
                 R.drawable.about_background,
                 "Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!",
                 3 <= currLevel
@@ -133,7 +133,7 @@ class HomeFragment : Fragment() {
                 4,
                 "Level 4",
                 "Pagpapaalam",
-                "(Pamagpaalam)",
+                "Pamagpaalam",
                 R.drawable.about_background,
                 "Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!",
                 4 <= currLevel

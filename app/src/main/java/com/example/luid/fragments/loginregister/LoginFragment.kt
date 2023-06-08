@@ -1,5 +1,6 @@
 package com.example.luid.fragments.loginregister
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -16,6 +17,8 @@ import com.example.luid.R
 import com.example.luid.fragments.mainmenu.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import android.content.SharedPreferences
+import android.graphics.drawable.ColorDrawable
+import android.util.Patterns
 
 
 class LoginFragment : Fragment() {
@@ -32,6 +35,7 @@ class LoginFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_login, container, false)
         val registerButton = view.findViewById<TextView>(R.id.registerRedirectText)
+        val forgot = view.findViewById<TextView>(R.id.forgot_password)
 
         fbauth = FirebaseAuth.getInstance()
         etemail = view.findViewById(R.id.login_email)
@@ -45,6 +49,27 @@ class LoginFragment : Fragment() {
             return view
         }
 
+        forgot.setOnClickListener(){
+            val builder = AlertDialog.Builder(requireContext())
+            val view2 = layoutInflater.inflate(R.layout.dialog_forgot, null)
+            val userEmail = view2.findViewById<EditText>(R.id.editBox)
+            builder.setView(view2)
+            val dialog = builder.create()
+            view2.findViewById<Button>(R.id.btnReset).setOnClickListener {
+                compareEmail(userEmail)
+                dialog.dismiss()
+            }
+            view2.findViewById<Button>(R.id.btnCancel).setOnClickListener {
+                dialog.dismiss()
+            }
+            if (dialog.window != null){
+                dialog.window!!.setBackgroundDrawable(ColorDrawable(0))
+            }
+            dialog.show()
+
+
+
+        }
 
         loginbutton.setOnClickListener() {
             val email = etemail.text.toString()
@@ -63,6 +88,8 @@ class LoginFragment : Fragment() {
                 Toast.makeText(context, "Fields are empty..", Toast.LENGTH_SHORT).show()
             }
         }
+
+
 
         registerButton.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
@@ -85,7 +112,21 @@ class LoginFragment : Fragment() {
     private fun redirectToMain() {
         val intent = Intent(context, MainActivity::class.java)
         startActivity(intent)
-        requireActivity().finish() // Optional: Close the login activity after redirecting to the main activity
+        requireActivity().finish() // finish the login activity
+    }
+    private fun compareEmail(email: EditText) {
+        if (email.text.toString().isEmpty()) {
+            return
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email.text.toString()).matches()) {
+            return
+        }
+        fbauth.sendPasswordResetEmail(email.text.toString())
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(requireContext(), "Check your email", Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 
 
