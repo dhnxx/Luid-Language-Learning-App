@@ -1,5 +1,6 @@
 package com.example.luid.fragments.mainmenu
 
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -28,6 +29,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.navigation.findNavController
+import com.example.luid.database.DBConnect.Companion.user_records_tb
 
 class PhaseFragment : Fragment() {
 
@@ -113,8 +115,8 @@ class PhaseFragment : Fragment() {
                     childPhase0.add(
                         ChildPhase(
                             "Phase 1",
-                            "Integer eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.about,
+                            "Learn Kapampangan as you embark on a captivating journey through Kian's first visit to his ancestral home, where language and culture intertwine.",
+                            R.drawable.bag,
                             View.OnClickListener {
                                 findNavController().navigate(
                                     TabPhaseReviewDirections.actionTabPhaseReviewToStoryFragment(
@@ -138,8 +140,8 @@ class PhaseFragment : Fragment() {
                     childPhase1.add(
                         ChildPhase(
                             "Phase 2",
-                            "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.about,
+                            "Embrace the challenge of learning Kapampangan as Kian engages in heartfelt conversations with his Kapampangan-speaking relatives, forging deeper connections along the way.",
+                            R.drawable.handshake,
                             View.OnClickListener {
                                 findNavController().navigate(
                                     TabPhaseReviewDirections.actionTabPhaseReviewToStoryFragment(
@@ -148,7 +150,10 @@ class PhaseFragment : Fragment() {
                                     )
                                 )
                             },
-                            sm.ifPassed(db, 1, 1)
+
+                            true
+                           // sm.ifPassed(db, 1, 1)
+
                         )
                     )
                     phaseList.add(ParentPhase("Phase 2: Sentence Fragments", childPhase1))
@@ -158,8 +163,8 @@ class PhaseFragment : Fragment() {
                     childPhase2.add(
                         ChildPhase(
                             "Phase 3",
-                            "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
-                            R.drawable.about,
+                            "Join Kian as he embraces the challenge of learning Kapampangan and engages in meaningful conversations with his Kapampangan-speaking relatives.",
+                            R.drawable.wave,
                             View.OnClickListener {
                                 findNavController().navigate(
                                     TabPhaseReviewDirections.actionTabPhaseReviewToStoryFragment(
@@ -169,7 +174,10 @@ class PhaseFragment : Fragment() {
                                 )
 
                             },
-                            sm.ifPassed(db, 1, 2)
+
+//                            sm.ifPassed(db, 1, 2)
+                        true
+
                         )
                     )
                     phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2))
@@ -388,10 +396,24 @@ class PhaseFragment : Fragment() {
                 .setPositiveButton("Yes") { dialog, _ ->
                     sm.lifeGain(context)
                     sm.updAchPH(context)
+
+                    var db = DBConnect(contextExternal).writableDatabase
+                    var cursor = db.rawQuery("SELECT * FROM $user_records_tb", null)
+
+                    var colID = cursor.getColumnIndex("_id")
+                    var cv = ContentValues()
+
+                    cursor.moveToLast()
+                    var id = cursor.getInt(colID)
+                    cv.put("currency", "${currency - 60}")
+                    db.update("$user_records_tb", cv, "_id = $id", null)
+
                     showSnackbar("Purchase Successful! \nYour current currency is : ${currency - 60}")
                     dialog.dismiss()
                     lives = sm.displayLives(contextExternal)
+                    currency = sm.getCurrency(contextExternal)
                     livesText.text = lives.toString()
+                    currencyText.text = "💵$currency"
 
                 }
                 .setNegativeButton("No") { dialog, _ ->
