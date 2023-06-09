@@ -114,8 +114,8 @@ class PhaseFragment : Fragment() {
 
                     childPhase0.add(
                         ChildPhase(
-                            "Pamagdatang",
-                            "Learn Kapampangan as you embark on a captivating journey through Kian's first visit to his ancestral home, where language and culture intertwine.",
+                            "Pagdating",
+                            "The protagonist finally arrived at the province and was eventually welcomed in by their grandmother and house.",
                             R.drawable.bag,
                             View.OnClickListener {
                                 findNavController().navigate(
@@ -139,8 +139,8 @@ class PhaseFragment : Fragment() {
 
                     childPhase1.add(
                         ChildPhase(
-                            "Phase 2",
-                            "Embrace the challenge of learning Kapampangan as Kian engages in heartfelt conversations with his Kapampangan-speaking relatives, forging deeper connections along the way.",
+                            "Pagkilala",
+                            "The phase introduces the relatives to the protagonist and their corresponding honorifics in Kapampangan.",
                             R.drawable.handshake,
                             View.OnClickListener {
                                 findNavController().navigate(
@@ -162,8 +162,8 @@ class PhaseFragment : Fragment() {
 
                     childPhase2.add(
                         ChildPhase(
-                            "Phase 3",
-                            "Join Kian as he embraces the challenge of learning Kapampangan and engages in meaningful conversations with his Kapampangan-speaking relatives.",
+                            "Pakikipagkapwa",
+                            "The protagonist got out of the house and was greeted by a neighbor, new friend.",
                             R.drawable.wave,
                             View.OnClickListener {
                                 findNavController().navigate(
@@ -189,8 +189,8 @@ class PhaseFragment : Fragment() {
 
                     childPhase0.add(
                         ChildPhase(
-                            "Phase 1",
-                            "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
+                            "Pagbibili sa umaga",
+                            "The phase focuses on a common encounter where the protagonist buys something from the local sari-sari store.",
                             R.drawable.about,
                             View.OnClickListener {
                                 findNavController().navigate(
@@ -208,8 +208,8 @@ class PhaseFragment : Fragment() {
 
                     childPhase1.add(
                         ChildPhase(
-                            "Phase 2",
-                            "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
+                            "Pagpasyal",
+                            "This is the time where the protagonist along with their cousin and new found friend decides where to go where surface-level directions are introduced.",
                             R.drawable.about,
                             View.OnClickListener {
                                 findNavController().navigate(
@@ -227,8 +227,8 @@ class PhaseFragment : Fragment() {
 
                     childPhase2.add(
                         ChildPhase(
-                            "Phase 3",
-                            "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
+                            "Peryahan",
+                            "The trio proceeded to the amusement park and explored with the rides and other sources of entertainment there.",
                             R.drawable.about,
                             View.OnClickListener {
                                 findNavController().navigate(
@@ -250,8 +250,8 @@ class PhaseFragment : Fragment() {
 
                     childPhase0.add(
                         ChildPhase(
-                            "Phase 1",
-                            "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
+                            "Pagdayo",
+                            "The family prepared and introduced local celebrations in the area during transport. Eventually, the protagonist learned that they are on their way to the Sinukwan Festival ",
                             R.drawable.about,
                             View.OnClickListener {
                                 findNavController().navigate(
@@ -268,8 +268,8 @@ class PhaseFragment : Fragment() {
 
                     childPhase1.add(
                         ChildPhase(
-                            "Phase 2",
-                            "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
+                            "Pagdiriwang",
+                            "The trio finally set foot on the area of the Festival and had a great time.",
                             R.drawable.about,
                             View.OnClickListener {
                                 findNavController().navigate(
@@ -288,8 +288,8 @@ class PhaseFragment : Fragment() {
 
                     childPhase2.add(
                         ChildPhase(
-                            "Phase 3",
-                            "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
+                            "Pagliliwaliw",
+                            "After visiting the Sinukwan Festival, the family decided to go for a detour since there's still a lot of time.",
                             R.drawable.about,
                             View.OnClickListener {
                                 findNavController().navigate(
@@ -311,8 +311,8 @@ class PhaseFragment : Fragment() {
 
                     childPhase0.add(
                         ChildPhase(
-                            "Phase 1",
-                            "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
+                            "Pag-iimpake",
+                            "The protagonist chatted with their relatives for a bit while preparing their personal stuff before traveling back to the city.",
                             R.drawable.about,
                             View.OnClickListener {
                                 findNavController().navigate(
@@ -329,8 +329,8 @@ class PhaseFragment : Fragment() {
 
                     childPhase1.add(
                         ChildPhase(
-                            "Phase 2",
-                            "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
+                            "Pasalubong",
+                            "The protagonist asked their relatives about what can they bring as gifts going back.",
                             R.drawable.about,
                             View.OnClickListener {
                                 findNavController().navigate(
@@ -348,8 +348,8 @@ class PhaseFragment : Fragment() {
 
                     childPhase2.add(
                         ChildPhase(
-                            "Phase 3",
-                            "nteger eu ante nec augue maximus blandit. Suspendisse sed tristique libero, sit amet blandit tellus. Quisque sagittis risus metus",
+                            "Pagabalik sa kabihasnan",
+                            "The protagonist expressed their gratitude to their relatives and bid farewell until the next visit.",
                             R.drawable.about,
                             View.OnClickListener {
                                 findNavController().navigate(

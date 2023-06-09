@@ -1,41 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".fragments.mainmenu.about_luid"
     android:orientation="vertical">
 
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:src="@drawable/luid_white"
-        android:background="?attr/colorPrimary"
-        />
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text= "About Luid"
-        android:textSize="24dp"
-        android:textStyle="bold"
-        android:layout_margin="20dp" >
-    </TextView>
+        android:orientation="vertical"
+        tools:context=".fragments.mainmenu.about_luid">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/lorem"
-        android:layout_margin="16dp" >
-    </TextView>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:src="@drawable/luid_white"
+            android:background="?attr/colorPrimary"
+            />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/lorem"
-        android:layout_margin="16dp" >
-    </TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text= "About Luid"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:layout_margin="20dp" >
+        </TextView>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/luid_about_def"
+            android:layout_margin="16dp"
+            android:justificationMode="inter_word">
+        </TextView>
 
-</LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/luid_about_desc"
+            android:layout_margin="16dp"
+            android:justificationMode="inter_word">
+        </TextView>
+
+    </LinearLayout>
+
+</ScrollView>

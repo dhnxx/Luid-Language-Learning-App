@@ -680,8 +680,8 @@ class StoryFragment : Fragment() {
                 StoryClass(
                     "Elena",
                     false,
-                    "Isang kahon po mg sansrival.",
-                    "Metung pung kahun ning sansribal.",
+                    "Isang kahon po mg sansrival. (Nag-abot ng ₱500)",
+                    "Metung pung kahun ning sansribal. (Nag-abot ng ₱500)",
                     R.drawable.elena
                 )
             )
@@ -691,7 +691,7 @@ class StoryFragment : Fragment() {
                     "Tindero",
                     false,
                     "Ito ang sukli mo, ₱125..",
-                    "Oyni ing sukli mo, Sientus bentsingko. (₱125)",
+                    "Oyni ing sukli mo, sientu beintisingku. (₱125)",
                     R.drawable.home
                 )
             )
@@ -1239,7 +1239,7 @@ class StoryFragment : Fragment() {
                     "Kian",
                     true,
                     "Ang dami palang mga tao, ang nagdiriwang ng piyestang ito.",
-                    "Karakal palang taung makipamyesta keti.",
+                    "Karakal pu palang manamang migaganap keni ne. Sana mipunta ku karen keng tutuki.",
                     R.drawable.kian
                 )
             )
@@ -1308,8 +1308,8 @@ class StoryFragment : Fragment() {
                 StoryClass(
                     "Marites",
                     false,
-                    "Ang singsing na iyon ay simbolo ng Alaya. Ang Alaya ay ang espiritu, kaluluwa, at kaibuturan ng mga Kapampangan.",
-                    "Simbulu ne ning Alaya ing singsing. Yapin ing espiritu, kaladwa, ampo kalubluban dareng Kapampangan.",
+                    "Ang singsing na iyon ay simbolo ng Aláya. Ang Aláya ay ang espiritu, kaluluwa, at kaibuturan ng mga Kapampangan.",
+                    "Simbulu ne ning Aláya ing singsing. Yapin ing espiritu, kaladwa, ampo kalubluban dareng Kapampangan.",
                     R.drawable.home
                 )
             )
@@ -1375,7 +1375,7 @@ class StoryFragment : Fragment() {
                     "Kian",
                     true,
                     "Tito, maaari ba tayong pumunta sa patimpalak mamaya?",
-                    "place holder",
+                    "Bápa, malyári tamung munta keng patimpalak póta?",
                     R.drawable.kian
                 )
             )
@@ -1385,7 +1385,7 @@ class StoryFragment : Fragment() {
                     "Noel",
                     false,
                     "Pwede naman, pero papipiliin ko kayo.",
-                    "place holder",
+                    "Malyari naman, pero pamilinan da kayú.",
                     R.drawable.noel
                 )
             )
@@ -1395,7 +1395,7 @@ class StoryFragment : Fragment() {
                     "Elena",
                     false,
                     "Ano po iyon?",
-                    "place holder",
+                    "Nánu pu itá?",
                     R.drawable.elena
                 )
             )
@@ -1405,7 +1405,7 @@ class StoryFragment : Fragment() {
                     "Noel",
                     false,
                     "Gusto niyo bang manatili rito o pumunta sa ibang lugar?",
-                    "place holder",
+                    "Bisa kong magdatún keni o múnta kng alíwang lugál?",
                     R.drawable.noel
                 )
             )
@@ -1414,8 +1414,8 @@ class StoryFragment : Fragment() {
                 StoryClass(
                     "Marites",
                     false,
-                    "Titignan natin kung hanggang saan tayo aabot. Tanghali palang naman.",
-                    "place holder",
+                    "Titingnan natin kung hanggang saan tayo aabot. Tanghali palang naman.",
+                    "Lawén támu no' támu mírás. Ugtu pamu naman.",
                     R.drawable.home
                 )
             )
@@ -1424,8 +1424,8 @@ class StoryFragment : Fragment() {
                 StoryClass(
                     "Kian",
                     true,
-                    "Punta tayo sa ibang lugar, tito.",
-                    "place holder",
+                    "Punta po tayo sa ibang lugar, Tito.",
+                    "Muntá tamu pú keng aliwang lugal, Bap.",
                     R.drawable.kian
                 )
             )
@@ -1435,7 +1435,7 @@ class StoryFragment : Fragment() {
                     "Noel",
                     false,
                     "Sige, ayain niyo si Clara at baka gusto niyang sumama.",
-                    "place holder",
+                    "Sige, agkat ye y Clara, pota bisa yang tuki.",
                     R.drawable.noel
                 )
             )
@@ -1445,7 +1445,7 @@ class StoryFragment : Fragment() {
                     "Elena",
                     false,
                     "Sige po, tito. Matutuwa si pinsan diyan.",
-                    "place holder",
+                    "Sige pu, 'Tang. Matula ya y pisan ku ken.",
                     R.drawable.elena
                 )
             )
@@ -1455,7 +1455,7 @@ class StoryFragment : Fragment() {
                     "Marites",
                     false,
                     "Anong lugar ba ang una nating pupuntahan?",
-                    "place holder",
+                    "Sánu ing múmuna támung puntalán?",
                     R.drawable.home
                 )
             )
@@ -1465,7 +1465,7 @@ class StoryFragment : Fragment() {
                     "Noel",
                     false,
                     "Daanan ba natin ang Mt. Pinatubo?",
-                    "place holder",
+                    "Dalanan taya ing Mt. Pinatubó?",
                     R.drawable.noel
                 )
             )
@@ -1474,8 +1474,8 @@ class StoryFragment : Fragment() {
                 StoryClass(
                     "Kian",
                     true,
-                    "Sige po, tito. Hindi po ba maraming nasalanta ang Pinatubo noong 1991?",
-                    "place holder",
+                    "Sige po, Tito. Hindi po ba maraming nasalanta ang Pinatubo noong 1991?",
+                    "Sige pu, Bap. E wari dakál la pu deng méte keng Pinatubu anyang 1991?",
                     R.drawable.kian
                 )
             )
@@ -1485,7 +1485,7 @@ class StoryFragment : Fragment() {
                     "Marites",
                     false,
                     "Maraming nasalanta at maraming nawalan.",
-                    "place holder",
+                    "Dakal méte ampo kéwalan.",
                     R.drawable.home
                 )
             )
@@ -1495,7 +1495,7 @@ class StoryFragment : Fragment() {
                     "Noel",
                     false,
                     "Ngayon, natutunan ng mga tao rito kung paano sila magkakaroon ng kabuhayan sa kahirapan na idinulot nito.",
-                    "place holder",
+                    "Ngeni mebyasa la deng tau nung makananu la mika-kabyayan keng kasákitang géwa na nini.",
                     R.drawable.noel
                 )
             )
@@ -1504,8 +1504,8 @@ class StoryFragment : Fragment() {
                 StoryClass(
                     "Elena",
                     false,
-                    "Grabi talaga ang dugong Pilipino. Kayang tapatan kahit anong problema.",
-                    "place holder",
+                    "Grabe talaga ang dugong Pilipino. Kayang tapatan kahit anong problema.",
+                    "Grabi ing dayang Pilipinu. Agyúng tapatán agyang nanung problema.",
                     R.drawable.elena
                 )
             )
@@ -1515,7 +1515,7 @@ class StoryFragment : Fragment() {
                     "Kian",
                     true,
                     "Hanggang ngayon po pala ay may mga abo parin na nakakalat? Ang dilim.",
-                    "place holder",
+                    "Angga ngeni pu pala atin pang abúng makákalat? Madalumdúm.",
                     R.drawable.kian
                 )
             )
@@ -1525,7 +1525,7 @@ class StoryFragment : Fragment() {
                     "Marites",
                     false,
                     "Isa lang yan sa palatandaan kung gaano katindi ang idinulot niyan.",
-                    "place holder",
+                    "Metung yamu kareng maragul nang pinsála yan.",
                     R.drawable.home
                 )
             )
@@ -1535,7 +1535,7 @@ class StoryFragment : Fragment() {
                     "Elena",
                     false,
                     "Nakakalungkot naman. May iba pa ba tayong pwedeng puntahan?",
-                    "place holder",
+                    "Mákalungkut. Atin ta pang alíwang malyaring puntalan?",
                     R.drawable.elena
                 )
             )
@@ -1545,7 +1545,7 @@ class StoryFragment : Fragment() {
                     "Noel",
                     false,
                     "Ang susunod na pupuntahan natin ay ang bukang ng Puning.",
-                    "place holder",
+                    "Ing tutuki tamung puntalan, ing bukang ng Puning.",
                     R.drawable.noel
                 )
             )
@@ -1555,7 +1555,7 @@ class StoryFragment : Fragment() {
                     "Kian",
                     true,
                     "Saan po iyon?",
-                    "place holder",
+                    "Nókarín pu itá?",
                     R.drawable.kian
                 )
             )
@@ -1565,7 +1565,7 @@ class StoryFragment : Fragment() {
                     "Marites",
                     false,
                     "Angeles lang, medyo malayo ang distansya sa Pinatubo.",
-                    "place holder",
+                    "Angeles mu, marayúng bagya kng Pinatúbu.",
                     R.drawable.home
                 )
             )
@@ -1575,7 +1575,7 @@ class StoryFragment : Fragment() {
                     "Noel",
                     false,
                     "Kahit na malayo ito sa Pinatubo, produkto ito ng pagputok ng bulkan na iyon.",
-                    "place holder",
+                    "Agyang marayu ya kng Pinatubú, produktu ne ning pánga-akbúng ning bulkán.",
                     R.drawable.noel
                 )
             )
@@ -1585,7 +1585,7 @@ class StoryFragment : Fragment() {
                     "Kian",
                     true,
                     "May nakukuha rin palang maganda sa destruksyon na iyon?",
-                    "place holder",
+                    "Atin palang máyap a disnán itang kalamidád ayta?",
                     R.drawable.kian
                 )
             )
@@ -1595,7 +1595,7 @@ class StoryFragment : Fragment() {
                     "Elena",
                     false,
                     "Bagong simula.",
-                    "place holder",
+                    "Báyung simulá.",
                     R.drawable.elena
                 )
             )
@@ -1605,7 +1605,7 @@ class StoryFragment : Fragment() {
                     "Kian",
                     true,
                     "Saan naman po tayo tutungo ngayon?",
-                    "place holder",
+                    "Nokarin ta naman pu munta ngeni?",
                     R.drawable.kian
                 )
             )
@@ -1614,8 +1614,8 @@ class StoryFragment : Fragment() {
                 StoryClass(
                     "Noel",
                     false,
-                    "Ang susunod nating pupuntahan ay ang Museo ning Angeles.",
-                    "place holder",
+                    "Sa Museo ng Angeles.",
+                    "Keng Museú ning Angeles.",
                     R.drawable.noel
                 )
             )
@@ -1625,7 +1625,7 @@ class StoryFragment : Fragment() {
                     "Marites",
                     false,
                     "Hindi man halata, dito niyo makikita ang historya ng Pampanga.",
-                    "place holder",
+                    "E man ûlatá, karin yu akit ing istorya ning Pampanga.",
                     R.drawable.home
                 )
             )
@@ -1635,27 +1635,17 @@ class StoryFragment : Fragment() {
                     "Noel",
                     false,
                     "Malalaman niyo ang mayamang kultura at tradisyon ng mga Kapampangan.",
-                    "place holder",
+                    "Karin yu abalu ing masaplálang kultura ampong tradisyung Kapampángan, abe na ing sining.",
                     R.drawable.noel
                 )
             )
 
             storyList.add(
                 StoryClass(
-                    "Kian",
-                    true,
-                    "Malalaman po ba namin ang pamumuhay ng mga tao noon?",
-                    "place holder",
-                    R.drawable.kian
-                )
-            )
-
-            storyList.add(
-                StoryClass(
-                    "Noek",
+                    "Noel",
                     false,
-                    "Syempre naman, kasama na diyan ang sining.",
-                    "place holder",
+                    "Malalaman niyo ang mayamang kultura at tradisyon ng mga Kapampangan, kasama na diyan ang sining.",
+                    "Karin yu abalu ing masaplálang kultura ampong tradisyung Kapampángan, abe na ing sining.",
                     R.drawable.noel
                 )
             )
@@ -1665,7 +1655,7 @@ class StoryFragment : Fragment() {
                     "Elena",
                     false,
                     "Mabilis bang umunlad ang Pampanga?",
-                    "place holder",
+                    "Mabilis ya pung mínasensú ing Pampánga",
                     R.drawable.elena
                 )
             )
@@ -1675,7 +1665,7 @@ class StoryFragment : Fragment() {
                     "Marites",
                     false,
                     "Kung ikukumpara sa ibang mga lugar, hamak bilis ang pag-unlad ng lugar na ito.",
-                    "place holder",
+                    "Nung kumpará me kng alíwang lugal, mabilis ya ping minasensú.",
                     R.drawable.home
                 )
             )
@@ -1685,7 +1675,7 @@ class StoryFragment : Fragment() {
                     "Noel",
                     false,
                     "Maraming mga proyekto at mga ipinatayong mga imprastraktura.",
-                    "place holder",
+                    "Dakál a mitalakád a proyektu ampong imprastuktura.",
                     R.drawable.noel
                 )
             )
@@ -1695,7 +1685,7 @@ class StoryFragment : Fragment() {
                     "Marites",
                     false,
                     "Ngunit kasabay ng pag-unlad, ay mayroon na ring mga nalilimutan.",
-                    "place holder",
+                    "Yamu, kayagnan ning asensú, atin mu ring mengakalingwán.",
                     R.drawable.home
                 )
             )
@@ -1705,7 +1695,7 @@ class StoryFragment : Fragment() {
                     "Noel",
                     false,
                     "May ilang mga kapistahan na bihira na lamang ganapin.",
-                    "place holder",
+                    "Ating pyestang malágad namung piyabalán.",
                     R.drawable.noel
                 )
             )
@@ -1715,7 +1705,7 @@ class StoryFragment : Fragment() {
                     "Marites",
                     false,
                     "May mga tradisyon na ring hindi nagagawa.",
-                    "place holder",
+                    "Atin mu namang tradisyung e na magagawá.",
                     R.drawable.home
                 )
             )
@@ -1725,7 +1715,7 @@ class StoryFragment : Fragment() {
                     "Noel",
                     false,
                     "Isa na ang lenguahe ng  Kapampangan diyan.",
-                    "place holder",
+                    "Metung ne kareng makakalingwan ing amánung Kapampángan.",
                     R.drawable.noel
                 )
             )
@@ -1735,7 +1725,7 @@ class StoryFragment : Fragment() {
                     "Elena",
                     false,
                     "Kahit sa eskwela, kapag sinasalita ko ang Kapampangan, hindi na nila ako.",
-                    "place holder",
+                    "Agyang keng eskwelahan, e da naku aintindyan patche mágsalita kung Kapampangan.",
                     R.drawable.elena
                 )
             )
@@ -1745,7 +1735,7 @@ class StoryFragment : Fragment() {
                     "Kian",
                     true,
                     "Ako naman ay ngayon lang natututo.",
-                    "place holder",
+                    "Aku naman, ngeni ku pamu mababiása.",
                     R.drawable.kian
                 )
             )
@@ -1755,7 +1745,7 @@ class StoryFragment : Fragment() {
                     "Noel",
                     false,
                     "Sa walong mga lenguahe, Kapampangan ang nanganganib dahil kakaunti na lamang ang marunong magsalita nito.",
-                    "place holder",
+                    "Kareng walung amanung Pilipinú, delikadu neng lumbúg ing Kapampángan uling ditak na lamu deng magsálita kanini.",
                     R.drawable.noel
                 )
             )
@@ -1765,7 +1755,7 @@ class StoryFragment : Fragment() {
                     "Kian",
                     true,
                     "Mabuti po at tinuturuan ninyo ako. Sisikapin ko rin na ipaalam ito sa iba.",
-                    "place holder",
+                    "Mapnamu pu, tuturú yukú. Panikuanan ku mu ring turú ini karéng alíwa.",
                     R.drawable.kian
                 )
             )
@@ -1774,7 +1764,7 @@ class StoryFragment : Fragment() {
                     "Noel",
                     false,
                     "Oh siya, ginabi na tayo. Luluwas ka pa bukas.",
-                    "place holder",
+                    "O, mebengi tána. Magbyahi ka pa búkas.",
                     R.drawable.noel
                 )
             )
@@ -1783,7 +1773,7 @@ class StoryFragment : Fragment() {
                     "Marites",
                     false,
                     "Hindi ba kayo gutom? Kumain muna tayo sa sikat na sisigan bago umuwi. Sikat pa naman ang sisig dito.",
-                    "place holder",
+                    "E ko maranóp? Mangan tamu ketang Aling Lucing, itang sikàt a sísigán bayu ka múli.",
                     R.drawable.home
                 )
             )
@@ -1792,7 +1782,7 @@ class StoryFragment : Fragment() {
                     "Elena",
                     false,
                     "Tara na po at kailangan pa magpahinga at mag-impake ni pinsan.",
-                    "place holder",
+                    "Tara pu, ba neng mipaynawa ampo manimpaki y pisan ku.",
                     R.drawable.elena
                 )
             )
