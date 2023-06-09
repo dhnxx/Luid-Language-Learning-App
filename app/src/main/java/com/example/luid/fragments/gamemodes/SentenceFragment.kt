@@ -25,6 +25,7 @@ import com.example.luid.fragments.mainmenu.MainActivity
 class SentenceFragment : AppCompatActivity() {
     private lateinit var questionList: ArrayList<SentenceFragment>
     private lateinit var questionText: TextView
+
     private lateinit var questionImage: ImageView
     private lateinit var answerLabel: TextView
     private lateinit var flexboxLayout: com.google.android.flexbox.FlexboxLayout
@@ -45,6 +46,8 @@ class SentenceFragment : AppCompatActivity() {
     private var avgTime = 0
     private var score = 0.0
     private var correctAnswerCounter = 0
+    private var id = ArrayList<Int>()
+
 
 
     private val timerRunnable = object : Runnable {
@@ -92,13 +95,7 @@ class SentenceFragment : AppCompatActivity() {
             sm.addSession(context, level, phase)
         }
 
-
-
-
         sm.lifeSpent(context)
-
-
-
         questionList = ArrayList()
 
         phasetwo()
@@ -161,7 +158,7 @@ class SentenceFragment : AppCompatActivity() {
             null
         )
 
-        var id = ArrayList<Int>()
+
         if(cursor.moveToFirst()){
             var idCol = cursor.getColumnIndex("_id")
             do{
@@ -190,10 +187,6 @@ class SentenceFragment : AppCompatActivity() {
         for (i in kap){
             println(i)
         }
-        print("KAP SIZE: ${kap.size}\n")
-        print("ENG SIZE: ${eng.size}\n")
-        print("TAG SIZE: ${tag.size}\n")
-        print("IMG SIZE: ${img.size}\n")
 
         for (i in 0 until kap.size) {
             when ((1..4).random()) {
@@ -256,12 +249,20 @@ class SentenceFragment : AppCompatActivity() {
         submitButton.visibility = View.VISIBLE
 
 
+
+
         flexboxLayout.removeAllViews()
         answerLabel.text = ""
         answerLabel.setTextColor(Color.parseColor("#1C1B1F"))
 
         val question = questionList[i]
         val deconstructedWords = question.getDeconstructedSentence()
+
+
+        val id2 = questionList[i].id
+        val answerimg = "zimg$id2"
+        val answerimgid = resources.getIdentifier(answerimg, "drawable", packageName)
+
 
         progressbar.max = questionList.size
         progressbar.progress = i + 1
@@ -299,7 +300,7 @@ class SentenceFragment : AppCompatActivity() {
 
 
             questionText.text = questionList[i].question
-
+            questionImage.setImageResource(answerimgid)
         }
 
 
