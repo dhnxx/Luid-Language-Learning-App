@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- XML layout for achievements card view -->
+<?xml version="1.0" encoding="utf-8"?><!-- XML layout for achievements card view -->
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -25,104 +24,95 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:orientation="vertical"
-            android:background="@color/colorPlaceholder1">
-
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:layout_margin="15dp"
-                android:src="@drawable/about" />
-
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-         >
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="100dp"
+                android:background="?attr/colorSecondary"
+                android:orientation="vertical">
 
-                <ProgressBar
-                    android:id="@+id/achvprogressBar"
-                    style="@style/CustomProgressBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:progress="28"
-                    android:progressBackgroundTint="?attr/colorSurface"
-                    android:progressTint="@color/colorPlaceholder2"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <ImageView
+                    android:id="@+id/achvImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="15dp"
+                    android:src="@drawable/about" />
 
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/achvprogresstxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1/5"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="8dp"
-                android:textAlignment="center"
-                android:textColor="?attr/colorOnSurface"
-                android:textSize="10sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
- />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/achvtitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="8dp"
-            android:text="Title"
-            android:textColor="?attr/colorTertiary"
-            android:textStyle="bold" />
+                    <ProgressBar
+                        android:id="@+id/achvprogressBar"
+                        style="@style/CustomProgressBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:progress="28"
+                        android:progressBackgroundTint="?attr/colorSurface"
+                        android:progressTint="@color/colorPlaceholder2"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/achvdesc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="Description"
-            android:textColor="?attr/colorOnSurface"
-            android:textSize="12sp" />
 
-    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/achvprogresstxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="1/5"
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                />
+
+                <TextView
+                    android:id="@+id/achvtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="Title"
+                    android:textColor="?attr/colorTertiary"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/achvdesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="Description"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
         </LinearLayout>
 
 
     </com.google.android.material.card.MaterialCardView>
 
 
-
-
-
-
-
-
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

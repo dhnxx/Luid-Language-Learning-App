@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -30,11 +31,12 @@ class ProfileFragment : Fragment() {
 
         for (i in 0 until numberOfCards) {
             val cardView = layoutInflater.inflate(R.layout.achvcardview, achvLinearLayout, false)
-            cardView.elevation = 10f 
+            cardView.elevation = 10f
             val progressBar = cardView.findViewById<ProgressBar>(R.id.achvprogressBar)
             val progressTextView = cardView.findViewById<TextView>(R.id.achvprogresstxt)
-            val achTitleTextView = cardView.findViewById<TextView>  (R.id.achvtitle)
+            val achTitleTextView = cardView.findViewById<TextView>(R.id.achvtitle)
             val descriptionTextView = cardView.findViewById<TextView>(R.id.achvdesc)
+            val achvImage = cardView.findViewById<ImageView>(R.id.achvImage)
 
             when (i) {
                 0 -> {
@@ -43,34 +45,43 @@ class ProfileFragment : Fragment() {
                     progressTextView.text = "${achContent[0].currLevel}/${achContent[0].maxValue}"
                     achTitleTextView.text = achContent[0].achName
                     descriptionTextView.text = achContent[0].description
+                    achvImage.setImageResource(R.drawable.fire)
                 }
+
                 1 -> {
                     progressBar.progress = achContent[1].currLevel.toInt()
                     progressBar.max = achContent[1].maxValue.toInt()
                     progressTextView.text = "${achContent[1].currLevel}/${achContent[1].maxValue}"
                     achTitleTextView.text = achContent[1].achName
                     descriptionTextView.text = achContent[1].description
+                    achvImage.setImageResource(R.drawable.aim)
                 }
+
                 2 -> {
                     progressBar.progress = achContent[2].currLevel.toInt()
                     progressBar.max = achContent[2].maxValue.toInt()
                     progressTextView.text = "${achContent[2].currLevel}/${achContent[2].maxValue}"
                     achTitleTextView.text = achContent[2].achName
                     descriptionTextView.text = achContent[2].description
+                    achvImage.setImageResource(R.drawable.trophy)
                 }
+
                 3 -> {
                     progressBar.progress = achContent[3].currLevel.toInt()
                     progressBar.max = achContent[3].maxValue.toInt()
                     progressTextView.text = "${achContent[3].currLevel}/${achContent[3].maxValue}"
                     achTitleTextView.text = achContent[3].achName
                     descriptionTextView.text = achContent[3].description
+                    achvImage.setImageResource(R.drawable.clock)
                 }
+
                 4 -> {
                     progressBar.progress = achContent[4].currLevel.toInt()
                     progressBar.max = achContent[4].maxValue.toInt()
                     progressTextView.text = "${achContent[4].currLevel}/${achContent[4].maxValue}"
                     achTitleTextView.text = achContent[4].achName
                     descriptionTextView.text = achContent[4].description
+                    achvImage.setImageResource(R.drawable.instagram_like_notification)
                 }
             }
             achvLinearLayout.addView(cardView)
@@ -78,20 +89,20 @@ class ProfileFragment : Fragment() {
         return view
     }
 
-    fun getAchContent(): List<Achievement>{
+    fun getAchContent(): List<Achievement> {
         val list = mutableListOf<Achievement>()
         val selectQuery = "SELECT * FROM achievements"
         val db = DBConnect(requireContext()).writableDatabase
-        val cursor : Cursor = db.rawQuery(selectQuery, null)
+        val cursor: Cursor = db.rawQuery(selectQuery, null)
 
-        try{
+        try {
             val achName = cursor.getColumnIndex("achievement_name")
             val description = cursor.getColumnIndex("description")
             val currLevel = cursor.getColumnIndex("current_level")
             val currProg = cursor.getColumnIndex("current_progress")
             val maxValue = cursor.getColumnIndex("maximum_value")
 
-            while (cursor.moveToNext()){
+            while (cursor.moveToNext()) {
                 val name = cursor.getString(achName)
                 var desc = cursor.getString(description)
                 var clevel = cursor.getInt(currLevel).toString()
@@ -108,9 +119,9 @@ class ProfileFragment : Fragment() {
                 list.add(content)
             }
 
-        }catch (e: Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
-        }finally {
+        } finally {
             cursor.close()
             db.close()
         }
