@@ -125,10 +125,7 @@ class WordAssociation : AppCompatActivity() {
         var db = DBConnect(context).writableDatabase
         var cursor = db.rawQuery("SELECT * FROM $user_records_tb WHERE level = $level AND phase = $phase", null)
 
-        var colTime = cursor.getColumnIndex("time_spent")
         cursor.moveToLast()
-        var timeSpentDB = cursor.getInt(timeSpent)
-
         if(cursor.count >= 2 ){
             sm.addSession(context, level, phase)
         }else{
