@@ -5,6 +5,7 @@ data class StoryClass(
     val boolean: Boolean,
     val message: String,
     val messageAlt: String,
-    val charImage: Int
+    val charImage: Int,
+    val actionMsg: String? = null,
 ) {
 }

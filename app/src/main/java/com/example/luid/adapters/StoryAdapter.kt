@@ -26,6 +26,7 @@ class StoryAdapter(private val storyList: List<StoryClass>) :
         val userMessage: TextView = itemView.findViewById(R.id.userMessage)
         val otherMessageAlt: TextView = itemView.findViewById(R.id.otherMessageAlt)
         val userMessageAlt: TextView = itemView.findViewById(R.id.userMessageAlt)
+        val actionMsg: TextView = itemView.findViewById(R.id.actionMsg)
 
 
     }
@@ -44,9 +45,14 @@ class StoryAdapter(private val storyList: List<StoryClass>) :
 
 
         val currentItem = storyList[position]
-
+        holder.actionMsg.visibility = View.GONE
         holder.otherLayout.visibility = View.GONE
         holder.userLayout.visibility = View.GONE
+
+        if (currentItem.actionMsg != null) {
+            holder.actionMsg.visibility = View.VISIBLE
+            holder.actionMsg.text = currentItem.actionMsg
+        }
 
         if (currentItem.boolean) {
             holder.otherLayout.visibility = View.GONE
