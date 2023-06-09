@@ -44,7 +44,7 @@ class PhaseFragment : Fragment() {
     private lateinit var button: Button
     private lateinit var livesText: TextView
     private lateinit var timerText: TextView
-    private val adapter = ParentPhaseAdapter(phaseList)
+
     private lateinit var builder: AlertDialog.Builder
     private lateinit var timer: CountDownTimer
     private lateinit var currencyText: TextView
@@ -114,7 +114,7 @@ class PhaseFragment : Fragment() {
 
                     childPhase0.add(
                         ChildPhase(
-                            "Phase 1",
+                            "Pamagdatang",
                             "Learn Kapampangan as you embark on a captivating journey through Kian's first visit to his ancestral home, where language and culture intertwine.",
                             R.drawable.bag,
                             View.OnClickListener {
@@ -133,7 +133,7 @@ class PhaseFragment : Fragment() {
                     )
 
 
-                    phaseList.add(ParentPhase("Phase 1: Word Association", childPhase0))
+                    phaseList.add(ParentPhase("Phase 1: Word Association", childPhase0,1,1))
 
 
 
@@ -156,7 +156,7 @@ class PhaseFragment : Fragment() {
 
                         )
                     )
-                    phaseList.add(ParentPhase("Phase 2: Sentence Fragments", childPhase1))
+                    phaseList.add(ParentPhase("Phase 2: Sentence Fragments", childPhase1,1,2))
 
 
 
@@ -180,7 +180,7 @@ class PhaseFragment : Fragment() {
 
                         )
                     )
-                    phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2))
+                    phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2,1,3))
 
 
                 }
@@ -204,7 +204,7 @@ class PhaseFragment : Fragment() {
                         )
                     )
 
-                    phaseList.add(ParentPhase("Phase 1: Word Association", childPhase0))
+                    phaseList.add(ParentPhase("Phase 1: Word Association", childPhase0,2,1))
 
                     childPhase1.add(
                         ChildPhase(
@@ -222,7 +222,7 @@ class PhaseFragment : Fragment() {
                             sm.ifPassed(db, 2, 1)
                         )
                     )
-                    phaseList.add(ParentPhase("Phase 2: Sentence Fragments", childPhase1))
+                    phaseList.add(ParentPhase("Phase 2: Sentence Fragments", childPhase1,2,2))
 
 
                     childPhase2.add(
@@ -241,7 +241,7 @@ class PhaseFragment : Fragment() {
                             sm.ifPassed(db, 2, 2)
                         )
                     )
-                    phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2))
+                    phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2,2,3))
 
 
                 }
@@ -264,7 +264,7 @@ class PhaseFragment : Fragment() {
                          true
                         )
                     )
-                    phaseList.add(ParentPhase("Phase 1: Word Association", childPhase0))
+                    phaseList.add(ParentPhase("Phase 1: Word Association", childPhase0,3,1))
 
                     childPhase1.add(
                         ChildPhase(
@@ -283,7 +283,7 @@ class PhaseFragment : Fragment() {
 
                         )
                     )
-                    phaseList.add(ParentPhase("Phase 2: Sentence Fragments", childPhase1))
+                    phaseList.add(ParentPhase("Phase 2: Sentence Fragments", childPhase1,3,2))
 
 
                     childPhase2.add(
@@ -302,7 +302,7 @@ class PhaseFragment : Fragment() {
                             sm.ifPassed(db, 3, 2)
                         )
                     )
-                    phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2))
+                    phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2,3,3))
 
 
                 }
@@ -325,7 +325,7 @@ class PhaseFragment : Fragment() {
                            true
                         )
                     )
-                    phaseList.add(ParentPhase("Phase 1: Word Association", childPhase0))
+                    phaseList.add(ParentPhase("Phase 1: Word Association", childPhase0,4,1))
 
                     childPhase1.add(
                         ChildPhase(
@@ -343,7 +343,7 @@ class PhaseFragment : Fragment() {
                             sm.ifPassed(db, 4, 1)
                         )
                     )
-                    phaseList.add(ParentPhase("Phase 2: Sentence Fragments", childPhase1))
+                    phaseList.add(ParentPhase("Phase 2: Sentence Fragments", childPhase1,4,2))
 
 
                     childPhase2.add(
@@ -362,7 +362,7 @@ class PhaseFragment : Fragment() {
                             sm.ifPassed(db, 4, 2)
                         )
                     )
-                    phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2))
+                    phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2,4,3))
 
 
                 }
@@ -371,7 +371,7 @@ class PhaseFragment : Fragment() {
 
                 }
             }
-
+            val adapter = ParentPhaseAdapter(phaseList, db)
             recyclerView.adapter = adapter
         }
 

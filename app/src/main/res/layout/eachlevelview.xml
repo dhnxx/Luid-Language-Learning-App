@@ -8,12 +8,12 @@
     android:layout_width="300dp"
     android:layout_height="500dp"
     android:layout_margin="10dp"
-    android:clickable="true"
-    android:focusable="true"
+    android:clickable="false"
+    android:focusable="false"
     android:foreground="?attr/selectableItemBackground"
     app:cardBackgroundColor="?attr/colorSurface"
     app:cardCornerRadius="12dp"
-    app:cardElevation="1dp"
+    app:cardElevation="3dp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -39,20 +39,9 @@
             android:layout_width="match_parent"
             android:layout_height="15dp"
             android:progress="28"
-            android:progressBackgroundTint="?attr/colorSurface"
+            android:progressBackgroundTint="?attr/colorSecondaryContainer"
             android:progressTint="@color/colorPlaceholder2"/>
 
-
-        <TextView
-            android:id="@+id/level_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="20dp"
-            android:gravity="start"
-            android:text="Level 1"
-            android:textColor="?attr/colorOnSurface"
-            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/level_title"
@@ -64,7 +53,7 @@
             android:maxLines="1"
             android:text="Introduction"
             android:textAlignment="textStart"
-            android:textColor="?attr/colorPrimary"
+            android:textColor="?attr/colorTertiary"
             android:textSize="28sp"
             android:textStyle="bold" />
 
@@ -92,6 +81,19 @@
             android:text="Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!"
             android:textColor="?attr/colorOnSurface"
             android:textSize="16sp" />
+
+
+        <Button
+            android:id="@+id/levelButton"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:text="Play">
+
+
+        </Button>
 
     </LinearLayout>
 

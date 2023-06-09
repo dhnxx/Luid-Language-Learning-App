@@ -154,7 +154,7 @@ class SentenceFragment : AppCompatActivity() {
         var db = DBConnect(context).writableDatabase
         // CREATE TEMP TABLE QUESTION
         db.execSQL("DROP TABLE IF EXISTS ${DBConnect.temp_qstion}")
-        db.execSQL("CREATE TABLE IF NOT EXISTS ${DBConnect.temp_qstion} AS SELECT * FROM ${DBConnect.questions_tb} WHERE level = $level AND phase = $phase")
+        db.execSQL("CREATE TABLE IF NOT EXISTS ${DBConnect.temp_qstion} AS SELECT * FROM ${DBConnect.questions_tb} WHERE level = $level AND level = 3 AND phase = $phase")
 
         var cursor = db.rawQuery(
             "SELECT * FROM ${DBConnect.questions_tb} WHERE level = $level AND phase = $phase  AND game_session = $gameSessionNumber",

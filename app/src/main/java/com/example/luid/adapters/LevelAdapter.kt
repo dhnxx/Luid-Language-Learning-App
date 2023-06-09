@@ -24,7 +24,7 @@ class LevelAdapter(private val levelList: List<LevelSelection>, private val cont
     class LevelViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
-        val levelId: TextView = itemView.findViewById(R.id.level_id)
+      //  val levelId: TextView = itemView.findViewById(R.id.level_id)
         val levelTitle: TextView = itemView.findViewById(R.id.level_title)
         val levelTitleAlt: TextView = itemView.findViewById(R.id.level_titleAlt)
         val levelImage: ImageView = itemView.findViewById(R.id.level_image)
@@ -50,7 +50,7 @@ class LevelAdapter(private val levelList: List<LevelSelection>, private val cont
         val level = levelList[position]
         var lvl = level.level
 
-        holder.levelId.text = level.levelID
+       // holder.levelId.text = level.levelID
         holder.levelTitle.text = level.levelTitle
         holder.levelTitleAlt.text = level.levelTitleAlt
         holder.levelImage.setImageResource(level.levelImage)
@@ -68,12 +68,12 @@ class LevelAdapter(private val levelList: List<LevelSelection>, private val cont
             // Set the disabled appearance for the card
             holder.itemView.alpha = 0.5f // Example: Reduce the opacity of the card
             holder.itemView.isClickable = false // Disable click events on the card
-            // Add any additional styling you want for the disabled state
+            holder.button.isEnabled = false
         } else {
             // Set the enabled appearance for the card
             holder.itemView.alpha = 1.0f // Example: Set the opacity back to normal
             holder.itemView.isClickable = true // Enable click events on the card
-            // Add any additional styling you want for the enabled state
+            holder.button.isEnabled = true
         }
 
 
