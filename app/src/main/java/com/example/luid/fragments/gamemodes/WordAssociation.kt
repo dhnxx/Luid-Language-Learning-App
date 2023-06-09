@@ -2,30 +2,30 @@ package com.example.luid.fragments.gamemodes
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.content.ContentValues
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.database.Cursor
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.drawable.Drawable
+import android.media.Image
 import android.os.Bundle
 import android.os.Handler
+import android.os.SystemClock
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.DrawableRes
-import com.google.android.material.card.MaterialCardView
+import androidx.appcompat.app.AppCompatActivity
 import com.example.luid.R
 import com.example.luid.classes.SMLeitner
 import com.example.luid.classes.WordAssociationClass
 import com.example.luid.database.DBConnect
-import android.os.SystemClock
-import androidx.navigation.findNavController
 import com.example.luid.database.DBConnect.Companion.user_records_tb
 import com.example.luid.fragments.mainmenu.MainActivity
+import com.google.android.material.card.MaterialCardView
 
 
 data class Choice(val text: String, @DrawableRes val imageResId: Int)
@@ -55,6 +55,7 @@ class WordAssociation : AppCompatActivity() {
     private lateinit var choiceFourText: TextView
     private lateinit var submitButton: Button
     private lateinit var nextButton: Button
+    private lateinit var image: ImageView
     private var context: Context = this
     private var level: Int = 0 // intent
     private var phase = 1
@@ -76,6 +77,7 @@ class WordAssociation : AppCompatActivity() {
     private var decimg0 = ""
     private var decimg1 = ""
     private var decimg2 = ""
+
 
     private val timerRunnable = object : Runnable {
         override fun run() {
@@ -320,63 +322,75 @@ class WordAssociation : AppCompatActivity() {
             }
             decoy.shuffle()
 
-        //  var langch = choice sample napili kapampangan
+            // imgs
 
-//            val ansimg = answers[0]
-//            val searchimg0 = decoy[0]
-//            val searchimg1 = decoy[1]
-//            val searchimg2 = decoy[2]
-//            val cursor1: Cursor
-//            cursor1 = db.rawQuery("SELECT * FROM ${DBConnect.questions_tb}", null)
-//
-//            if(cursor1.moveToFirst()){
-//                do{
-//                    val ans = cursor.getString(cursor.getColumnIndex("$langch"))
-//                    if(ans.equals(ansimg, ignoreCase = true)) {
-//                        val id = cursor1.getInt(cursor1.getColumnIndex("_id"))
-//                        answerimg = "img$id"
-//                    }
-//                    val dec0 = cursor.getString(cursor.getColumnIndex("$langch"))
-//                    if(dec0.equals(searchimg0, ignoreCase = true)) {
-//                        val id = cursor1.getInt(cursor1.getColumnIndex("_id"))
-//                        decimg0 = "img$id"
-//                    }
-//                    val dec1 = cursor.getString(cursor.getColumnIndex("$langch"))
-//                    if(dec1.equals(searchimg1, ignoreCase = true)) {
-//                        val id = cursor1.getInt(cursor1.getColumnIndex("_id"))
-//                        decimg1 = "img$id"
-//                    }
-//                    val dec2 = cursor.getString(cursor.getColumnIndex("$langch"))
-//                    if(dec2.equals(searchimg2, ignoreCase = true)) {
-//                        val id = cursor1.getInt(cursor1.getColumnIndex("_id"))
-//                        decimg2 = "img$id"
-//                    }
-//                } while(cursor1.moveToNext())
-//            }
-// h
-            val anszimg = resources.getIdentifier(
+            println("$langch")
+            val ansimg = answers[0]
+            val searchimg0 = decoy[0]
+            val searchimg1 = decoy[1]
+            val searchimg2 = decoy[2]
+            val cursor1: Cursor = db.rawQuery("SELECT * FROM ${DBConnect.temp_qstion}", null)
+            if(cursor1.moveToFirst()){
+                do {
+                    val ans = cursor1.getString(cursor1.getColumnIndex("$langch"))
+                    if (ans.equals(ansimg, ignoreCase = true)) {
+                        val id = cursor1.getInt(cursor1.getColumnIndex("_id"))
+                        println("ans ID${id}")
+                        answerimg = "zimg$id"
+                    }
+
+                    val img0 = cursor1.getString(cursor1.getColumnIndex("$langch"))
+                    if (img0.equals(searchimg0, ignoreCase = true)) {
+                        val id = cursor1.getInt(cursor1.getColumnIndex("_id"))
+                        println("DECOY0 ID${id}")
+                        decimg0 = "zimg$id"
+                    }
+
+                    val img1 = cursor1.getString(cursor1.getColumnIndex("$langch"))
+                    if (img1.equals(searchimg1, ignoreCase = true)) {
+                        val id = cursor1.getInt(cursor1.getColumnIndex("_id"))
+                        println("DECOY1 ID${id}")
+                        decimg1 = "zimg$id"
+                    }
+
+                    val img2 = cursor1.getString(cursor1.getColumnIndex("$langch"))
+                    if (img2.equals(searchimg2, ignoreCase = true)) {
+                        val id = cursor1.getInt(cursor1.getColumnIndex("_id"))
+                        println("DECOY2 ID${id}")
+                        decimg2 = "zimg$id"
+                    }
+                } while (cursor1.moveToNext())
+            }
+
+
+            var anszimg = resources.getIdentifier(
                 answerimg,
                 "drawable",
                 packageName
             )
-
-            val image0 = resources.getIdentifier(
+            var image0 = resources.getIdentifier(
                 decimg0,
                 "drawable",
                 packageName
             )
 
-            val image1 = resources.getIdentifier(
+            var image1 = resources.getIdentifier(
                 decimg1,
                 "drawable",
                 packageName
             )
 
-            val image2 = resources.getIdentifier(
+            var image2 = resources.getIdentifier(
                 decimg2,
                 "drawable",
                 packageName
             )
+            image = ImageView(this)
+            image.setImageResource(anszimg)
+            image.setImageResource(image0)
+            image.setImageResource(image1)
+            image.setImageResource(image2)
+            println("Decoyimg!!!!!!!!!!!!!!!!!!!!!!!")
 
             questionList.add(
                 WordAssociationClass(
