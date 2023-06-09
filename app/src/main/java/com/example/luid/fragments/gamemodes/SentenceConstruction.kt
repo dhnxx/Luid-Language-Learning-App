@@ -1,9 +1,11 @@
 package com.example.luid.fragments.gamemodes
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.database.Cursor
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -46,6 +48,9 @@ class SentenceConstruction : AppCompatActivity() {
     private var avgTime = 0
     private var score = 0.0
     private var correctAnswerCounter = 0
+    private var answerimg = ""
+    private var langch = ""
+    private var anszimg = 0
 
 
     private val timerRunnable = object : Runnable {
@@ -143,6 +148,7 @@ class SentenceConstruction : AppCompatActivity() {
         showConfirmationDialog()
     }
 
+    @SuppressLint("Range")
     private fun phasetwo() {
         val sm = SMLeitner()
         sm.validateQuestionBank(context, level, phase)
@@ -171,7 +177,7 @@ class SentenceConstruction : AppCompatActivity() {
         println("PHASE : $phase")
 
         cursor.close()
-        db.close()
+
 
         var kap = PhaseTwoClass().getKapampangan(context, level, phase)
         var eng = PhaseTwoClass().getEnglish(context, level, phase)
@@ -193,6 +199,7 @@ class SentenceConstruction : AppCompatActivity() {
                     questions.add("What is this phrase in Tagalog?\n${kap[i]}")
                     answers.add(tag[i])
                     imgList.add(img[i])
+                    langch = "tagalog"
                 }
 
                 2 -> {
@@ -200,6 +207,8 @@ class SentenceConstruction : AppCompatActivity() {
                     questions.add("What is this phrase in English?\n${kap[i]}")
                     answers.add(eng[i])
                     imgList.add(img[i])
+                    langch = "english"
+
                 }
 
                 3 -> {
@@ -207,6 +216,8 @@ class SentenceConstruction : AppCompatActivity() {
                     questions.add("What is this phrase in Kapampangan?\n${tag[i]}")
                     answers.add(kap[i])
                     imgList.add(img[i])
+                    langch = "kapampangan"
+
                 }
 
                 4 -> {
@@ -214,8 +225,31 @@ class SentenceConstruction : AppCompatActivity() {
                     questions.add("What is this phrase in Kapampangan?\n${eng[i]}")
                     answers.add(kap[i])
                     imgList.add(img[i])
+                    langch = "kapampangan"
+
                 }
             }
+
+            println("$langch")
+            val draw = answers[0]
+            val cursor1: Cursor = db.rawQuery("SELECT * FROM ${DBConnect.temp_qstion}", null)
+            if(cursor1.moveToFirst()){
+                do {
+                    val ans = cursor1.getString(cursor1.getColumnIndex("$langch"))
+                    if (ans.equals(draw, ignoreCase = true)) {
+                        val id = cursor1.getInt(cursor1.getColumnIndex("_id"))
+                        println("ans ID${id}")
+                        answerimg = "zimg$id"
+                    }
+                } while (cursor1.moveToNext())
+            }
+
+
+            anszimg = resources.getIdentifier(
+                answerimg,
+                "drawable",
+                packageName
+            )
 
         }
 
@@ -230,8 +264,7 @@ class SentenceConstruction : AppCompatActivity() {
                     id[i],
                     questions[i],
                     answers[i],
-//                    imgList[i]
-                    R.drawable.home
+                    anszimg
                 )
             )
         }

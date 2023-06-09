@@ -1,9 +1,11 @@
 package com.example.luid.fragments.gamemodes
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.database.Cursor
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -45,7 +47,9 @@ class SentenceFragment : AppCompatActivity() {
     private var avgTime = 0
     private var score = 0.0
     private var correctAnswerCounter = 0
-
+    private var answerimg = ""
+    private var langch = ""
+    private var anszimg = 0
 
     private val timerRunnable = object : Runnable {
         override fun run() {
@@ -145,6 +149,7 @@ class SentenceFragment : AppCompatActivity() {
         showConfirmationDialog()
     }
 
+    @SuppressLint("Range")
     private fun phasetwo() {
         val sm = SMLeitner()
         val ph2 = PhaseTwoClass()
@@ -226,6 +231,27 @@ class SentenceFragment : AppCompatActivity() {
                 }
             }
 
+            println("$langch")
+            val draw = answers[0]
+            val cursor1: Cursor = db.rawQuery("SELECT * FROM ${DBConnect.temp_qstion}", null)
+            if(cursor1.moveToFirst()){
+                do {
+                    val ans = cursor1.getString(cursor1.getColumnIndex("$langch"))
+                    if (ans.equals(draw, ignoreCase = true)) {
+                        val id = cursor1.getInt(cursor1.getColumnIndex("_id"))
+                        println("ans ID${id}")
+                        answerimg = "zimg$id"
+                    }
+                } while (cursor1.moveToNext())
+            }
+
+
+            anszimg = resources.getIdentifier(
+                answerimg,
+                "drawable",
+                packageName
+            )
+
         }
 
         var randInd = ArrayList<Int>()
@@ -240,7 +266,7 @@ class SentenceFragment : AppCompatActivity() {
                     questions[i],
                     answers[i],
 //                    imgList[i]
-                    R.drawable.home
+                    anszimg
                 )
             )
         }
