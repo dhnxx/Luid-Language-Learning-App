@@ -322,7 +322,7 @@ class WordAssociation : AppCompatActivity() {
             }
             decoy.shuffle()
 
-        //  var langch = choice sample napili kapampangan
+            // img
 
             println("$langch")
             val ansimg = answers[0]
