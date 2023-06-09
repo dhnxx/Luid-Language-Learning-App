@@ -191,7 +191,7 @@ class SentenceFragment : AppCompatActivity() {
         var answers = ArrayList<String>()
         var questions = ArrayList<String>()
 
-
+//
         for (i in kap){
             println(i)
         }

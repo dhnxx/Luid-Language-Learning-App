@@ -201,7 +201,7 @@ class SentenceConstruction : AppCompatActivity() {
                     imgList.add(img[i])
                     langch = "tagalog"
                 }
-
+//
                 2 -> {
                     // Kapampangan -> English
                     questions.add("What is this phrase in English?\n${kap[i]}")
