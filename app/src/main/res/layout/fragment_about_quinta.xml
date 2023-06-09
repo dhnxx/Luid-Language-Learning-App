@@ -34,7 +34,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="@string/lorem">
+            android:justificationMode="inter_word"
+            android:text="@string/quinta_about_desc">
 
         </TextView>
 
@@ -67,11 +68,12 @@
                     android:layout_height="match_parent"
                     android:background="?attr/colorPrimaryContainer"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/kian"
+                    android:src="@drawable/quinta_moki"
 
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0">
 
                 </ImageView>
 
@@ -82,7 +84,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:text="Dhacovic Ivan G. Mendoza"
+                    android:text="Michaella O. Gonzales"
                     android:textSize="18dp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -97,7 +99,7 @@
                     android:layout_alignEnd="@+id/imageView"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:text="Front End Developer"
+                    android:text="Project Manager\nDocumentation"
                     android:textSize="12dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -129,7 +131,7 @@
                     android:layout_height="match_parent"
                     android:background="?attr/colorPrimaryContainer"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/kian"
+                    android:src="@drawable/quinta_gab"
 
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -144,7 +146,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:text="Dhacovic Ivan G. Mendoza"
+                    android:text="Alkier Gabriel C. Magallanes"
                     android:textSize="18dp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -159,7 +161,7 @@
                     android:layout_alignEnd="@+id/imageView1"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:text="Front End Developer"
+                    android:text="Lead Programmer\nBack End Developer"
                     android:textSize="12dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView1"
@@ -253,7 +255,7 @@
                     android:layout_height="match_parent"
                     android:background="?attr/colorPrimaryContainer"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/kian"
+                    android:src="@drawable/quinta_eva"
 
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -268,7 +270,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:text="Dhacovic Ivan G. Mendoza"
+                    android:text="Maria Evangelicalyn D. Ong"
                     android:textSize="18dp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -283,7 +285,7 @@
                     android:layout_alignEnd="@+id/imageView3"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:text="Front End Developer"
+                    android:text="Documentation"
                     android:textSize="12dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView3"
@@ -315,7 +317,7 @@
                     android:layout_height="match_parent"
                     android:background="?attr/colorPrimaryContainer"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/kian"
+                    android:src="@drawable/quinta_chrls"
 
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -330,7 +332,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:text="Dhacovic Ivan G. Mendoza"
+                    android:text="Charles Christian O. Sapida"
                     android:textSize="18dp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -345,7 +347,7 @@
                     android:layout_alignEnd="@+id/imageView4"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:text="Front End Developer"
+                    android:text="Back End Developer"
                     android:textSize="12dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView4"
