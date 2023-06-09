@@ -24,7 +24,7 @@ class LevelAdapter(private val levelList: List<LevelSelection>, private val cont
     class LevelViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
-      //  val levelId: TextView = itemView.findViewById(R.id.level_id)
+        //  val levelId: TextView = itemView.findViewById(R.id.level_id)
         val levelTitle: TextView = itemView.findViewById(R.id.level_title)
         val levelTitleAlt: TextView = itemView.findViewById(R.id.level_titleAlt)
         val levelImage: ImageView = itemView.findViewById(R.id.level_image)
@@ -50,15 +50,13 @@ class LevelAdapter(private val levelList: List<LevelSelection>, private val cont
         val level = levelList[position]
         var lvl = level.level
 
-       // holder.levelId.text = level.levelID
+        // holder.levelId.text = level.levelID
         holder.levelTitle.text = level.levelTitle
         holder.levelTitleAlt.text = level.levelTitleAlt
         holder.levelImage.setImageResource(level.levelImage)
         holder.levelDescription.text = level.levelDescription
-       holder.progressBar.progress = 0
+        holder.progressBar.progress = 0
         holder.progressBar.max = 3
-
-
 
 
         // Disable the card view if isEnabled is false

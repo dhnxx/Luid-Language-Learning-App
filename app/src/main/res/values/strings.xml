@@ -27,5 +27,25 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="luid_about_def">      In Luid, you guide the protagonist in his small journey of going to his province, for the first time as you join him learn, explore, and discover the abundant culture and remarkable language of Pampanga. The application is currently composed of five (5) levels. In each level, there exists three (3) phases.</string>
+
+    <string name="luid_about_desc">In the three (3) phases per level, it will involve the following:
+
+        1st phase: Word Association
+            Where the player simply selects the corresponding
+            word of the given picture.
+
+        2nd phase: Sentence Arrangement
+            In which corresponding words are dragged and
+            dropped to construct a Kapampangan
+            phrase sentence.
+
+        3rd phase: Sentence Construction
+            That challenges the player to construct sentences in
+            Kapampangan and further translate it into English.</string>
+
+    <string name="quinta_about_desc">We are Quinta. We believe that learning should be interactive. With the advocacy of enriching and conserving the now endangered Kapampangan Language and taking advantage of our technological advancements, we present you, Luid.
+        Luid is an application that utilizes gamification with some of our chosen algorithms: Leitner, Spaced repetition, and SuperMemo implemented to tailor questions in accordance with the user\'s personal retention.</string>
+
 
 </resources>

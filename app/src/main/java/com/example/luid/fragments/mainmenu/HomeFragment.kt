@@ -107,17 +107,17 @@ class HomeFragment : Fragment() {
                 "Level 1",
                 "Pagbabakasyon",
                 "Pamagbakasyun",
-                R.drawable.about_background,
-                "Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!",
+                R.drawable.level1bg,
+                "The Level focuses on the Protagonist's arrival to the province of Pampanga.",
             true
             ),
             LevelSelection(
                 2,
                 "Level 2",
                 "Pagtuklas",
-                "Pamag--",
-                R.drawable.about_background,
-                "Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!",
+                "Pamagtuklas",
+                R.drawable.level2bg,
+                "The level revolves around the protagonist's familiarization in their neighborhood and as well as common day-to-day encounters.",
                 2 <= currLevel
             ),
             LevelSelection(
@@ -125,8 +125,8 @@ class HomeFragment : Fragment() {
                 "Level 3",
                 "Pagpipista",
                 "Pamamyesta",
-                R.drawable.about_background,
-                "Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!",
+                R.drawable.level3bg,
+                "The level introduces the idea of the family interested in going to a fiesta the Kapampangan celebrates.",
                 3 <= currLevel
             ),
             LevelSelection(
@@ -134,8 +134,8 @@ class HomeFragment : Fragment() {
                 "Level 4",
                 "Pagpapaalam",
                 "Pamagpaalam",
-                R.drawable.about_background,
-                "Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!",
+                R.drawable.level4bg,
+                "After a well-spent vacation, the protagonist packed, got pasalubong, and eventually bid farewell.",
                 4 <= currLevel
             ),
         )
