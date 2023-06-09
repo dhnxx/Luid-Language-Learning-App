@@ -108,16 +108,16 @@ class HomeFragment : Fragment() {
                 "Pagbabakasyon",
                 "Pamagbakasyun",
                 R.drawable.about_background,
-                "Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!",
+                "The Level focuses on the Protagonist's arrival to the province of Pampanga.",
             true
             ),
             LevelSelection(
                 2,
                 "Level 2",
                 "Pagtuklas",
-                "Pamag--",
+                "Pamagtuklas",
                 R.drawable.about_background,
-                "Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!",
+                "The level revolves around the protagonist's familiarization in their neighborhood and as well as common day-to-day encounters.",
                 2 <= currLevel
             ),
             LevelSelection(
@@ -126,7 +126,7 @@ class HomeFragment : Fragment() {
                 "Pagpipista",
                 "Pamamyesta",
                 R.drawable.about_background,
-                "Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!",
+                "The level introduces the idea of the family interested in going to a fiesta the Kapampangan celebrates.",
                 3 <= currLevel
             ),
             LevelSelection(
@@ -135,7 +135,7 @@ class HomeFragment : Fragment() {
                 "Pagpapaalam",
                 "Pamagpaalam",
                 R.drawable.about_background,
-                "Start your Kapampangan journey with basic words, personal pronouns, connectors/articles, and adjectives!",
+                "After a well-spent vacation, the protagonist packed, got pasalubong, and eventually bid farewell.",
                 4 <= currLevel
             ),
         )

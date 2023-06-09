@@ -9,12 +9,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.luid.R
 import com.example.luid.classes.ChildPhase
+import org.w3c.dom.Text
 
 class ChildPhaseAdapter(private val childList: List<ChildPhase>): RecyclerView.Adapter<ChildPhaseAdapter.ChildViewHolder>() {
 
     inner class ChildViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-      val childTitle: TextView = itemView.findViewById(R.id.childTitle)
+        val childTitle: TextView = itemView.findViewById(R.id.childTitle)
+        val childAltTitle : TextView = itemView.findViewById(R.id.childAltTitle)
         val childDescription: TextView = itemView.findViewById(R.id.childDescription)
         val childImage: ImageView = itemView.findViewById(R.id.childImage)
 
@@ -33,7 +35,8 @@ class ChildPhaseAdapter(private val childList: List<ChildPhase>): RecyclerView.A
 
     override fun onBindViewHolder(holder: ChildViewHolder, position: Int) {
         val childPhase = childList[position]
-       holder.childTitle.text = childPhase.title
+        holder.childTitle.text = childPhase.title
+        holder.childAltTitle.text = childPhase.altTitle
         holder.childDescription.text = childPhase.description
         holder.childImage.setImageResource(childPhase.image)
         val childButton = holder.itemView.findViewById<Button>(R.id.childButton)
