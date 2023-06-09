@@ -84,15 +84,18 @@ class SentenceConstruction : AppCompatActivity() {
         val sm = SMLeitner()
 
         var db = DBConnect(context).writableDatabase
-        var cursor = db.rawQuery("SELECT * FROM $user_records_tb WHERE level = $level AND phase = $phase", null)
+        var cursor = db.rawQuery(
+            "SELECT * FROM $user_records_tb WHERE level = $level AND phase = $phase",
+            null
+        )
 
-        if(cursor.count == 0 ){
+        if (cursor.count == 0) {
             sm.addSession(context, level, phase)
         }
 
-        if(cursor.count == 0 ){
+        if (cursor.count == 0) {
             sm.addSession(context, level, phase)
-        }else if(cursor.count >= 0){
+        } else if (cursor.count >= 0) {
             sm.addSession(context, level, phase)
         }
 
@@ -158,12 +161,12 @@ class SentenceConstruction : AppCompatActivity() {
         )
 
         var id = ArrayList<Int>()
-        if(cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             var idCol = cursor.getColumnIndex("_id")
-            do{
+            do {
                 var idlist = cursor.getInt(idCol)
                 id.add(idlist)
-            }while (cursor.moveToNext())
+            } while (cursor.moveToNext())
         }
 
         println("COUNT : ${cursor.count}")
@@ -264,10 +267,15 @@ class SentenceConstruction : AppCompatActivity() {
         val question = questionList[i]
         val deconstructedWords = question.getDeconstructedSentence()
 
+        val id2 = questionList[i].id
+        val answerimg = "zimg$id2"
+        val answerimgid = resources.getIdentifier(answerimg, "drawable", packageName)
+
+
         progressbar.max = questionList.size
         progressbar.progress = i + 1
         // start a stopwatch for each question
-
+        questionImage.setImageResource(answerimgid)
 
     }
 
