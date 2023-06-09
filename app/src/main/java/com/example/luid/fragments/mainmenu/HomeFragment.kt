@@ -107,7 +107,7 @@ class HomeFragment : Fragment() {
                 "Level 1",
                 "Pagbabakasyon",
                 "Pamagbakasyun",
-                R.drawable.about_background,
+                R.drawable.level1bg,
                 "The Level focuses on the Protagonist's arrival to the province of Pampanga.",
             true
             ),
@@ -116,7 +116,7 @@ class HomeFragment : Fragment() {
                 "Level 2",
                 "Pagtuklas",
                 "Pamagtuklas",
-                R.drawable.about_background,
+                R.drawable.level2bg,
                 "The level revolves around the protagonist's familiarization in their neighborhood and as well as common day-to-day encounters.",
                 2 <= currLevel
             ),
@@ -125,7 +125,7 @@ class HomeFragment : Fragment() {
                 "Level 3",
                 "Pagpipista",
                 "Pamamyesta",
-                R.drawable.about_background,
+                R.drawable.level3bg,
                 "The level introduces the idea of the family interested in going to a fiesta the Kapampangan celebrates.",
                 3 <= currLevel
             ),
@@ -134,7 +134,7 @@ class HomeFragment : Fragment() {
                 "Level 4",
                 "Pagpapaalam",
                 "Pamagpaalam",
-                R.drawable.about_background,
+                R.drawable.level4bg,
                 "After a well-spent vacation, the protagonist packed, got pasalubong, and eventually bid farewell.",
                 4 <= currLevel
             ),

@@ -30,8 +30,8 @@
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:layout_gravity="center"
-            android:background="@color/colorPlaceholder1"
-            android:scaleType="fitXY"
+            android:background="?attr/colorSecondaryContainer"
+            android:scaleType="centerCrop"
             android:src="@drawable/about_background" />
         <ProgressBar
             android:id="@+id/achvprogressBar"
