@@ -322,7 +322,7 @@ class WordAssociation : AppCompatActivity() {
             }
             decoy.shuffle()
 
-            // img
+            // imgs
 
             println("$langch")
             val ansimg = answers[0]
