@@ -108,6 +108,10 @@ class StoryFragment : Fragment() {
 
     private fun addStory() {
 
+
+
+
+
         if(selectedLevel == 1 && selectedPhase == 1){
 
             storyList.add(
@@ -267,7 +271,7 @@ class StoryFragment : Fragment() {
                     true,
                     "Puro Kapampangan ang sinasalita nila, naninibago ako. Pero sisikapin kong matuto.",
                     "Pane Kapampangan ing pamanyalita ra, manibayu ku. Pero panikwanan kung mabiasa.",
-                    R.drawable.noel
+                    R.drawable.kian
                 )
             )
 
@@ -287,7 +291,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Napasarap ang kwentuhan. Nakarating na ang pamangkin natin?",
                     "Mipanyaman ing satsatan. Míras ne ing paunakan tamo?",
-                    R.drawable.home
+                    R.drawable.marites
                 )
             )
 
@@ -317,7 +321,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Ay ang gandang/gwapong bata! Ilang taon ka na?",
                     "Ay, kasanting a yanak! Pilan nakang banua?",
-                    R.drawable.home
+                    R.drawable.marites
                 )
             )
 
@@ -347,7 +351,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Ito po ang isda at gulay, \'Nay.",
                     "Oyni pung asan ampo gulé, Imá.",
-                    R.drawable.home
+                    R.drawable.marites
                 )
             )
 
@@ -357,7 +361,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Salamat, anak. Oh siya, magpahinga muna kayo habang niluluto ang tanghalian.",
                     "Salamat, anak. Dâle, paynawa ko pamu kabang lulutu ing pagtuan.",
-                    R.drawable.home
+                    R.drawable.lola
                 )
             )
 
@@ -397,7 +401,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Mag-ingat ka.",
                     "Mimingat ka.",
-                    R.drawable.home
+                    R.drawable.noel
                 )
             )
         }
@@ -410,7 +414,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Magandang gabi, bago ka lang ba rito?",
                     "Mayap a bengi, bayu kamu keni?",
-                    R.drawable.home
+                    R.drawable.clara
                 )
             )
 
@@ -430,7 +434,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Ikaw, anong pangalan mo?",
                     "Ika, nanung lagyu mu?",
-                    R.drawable.home
+                    R.drawable.clara
                 )
             )
 
@@ -450,7 +454,7 @@ class StoryFragment : Fragment() {
                     false,
                     "",
                     "Masanting ka.",
-                    R.drawable.home
+                    R.drawable.clara
                 )
             )
 
@@ -470,7 +474,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Ang ibig sabihin noon, magandang lalaki ka. Di ka nagka-Kapampangan?",
                     "Buri nang sabyan nita, masanting kang lalaki. Eka manga-Pampangan?",
-                    R.drawable.home
+                    R.drawable.clara
                 )
             )
 
@@ -480,7 +484,7 @@ class StoryFragment : Fragment() {
                     true,
                     "Ah. Hindi, eh. Ngayon lang nakarinig.",
                     "Ali, eh. Ngeni kumu daramdaman.",
-                    R.drawable.home
+                    R.drawable.kian
                 )
             )
 
@@ -490,7 +494,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Tara, sama ka sa akin. Tuturuan kita ng kaunti.",
                     "Mekeni, tuki ka kanaku. Turu dakang bagya.",
-                    R.drawable.home
+                    R.drawable.clara
                 )
             )
         }
@@ -522,7 +526,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Hindi ka ba sanay gumising ng maaga?",
                     "E ka sanéng migigising maranon?",
-                    R.drawable.home
+                    R.drawable.marites
                 )
             )
 
@@ -572,7 +576,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Siyanga pala, gumawa na ko ng burong hipon para sa iyo, ilang araw ko nang nasimulang iburo. Masarap na sawsawan ng pritong hito at lagang talong at ampalaya! O, ingat sa mga sasakyan, ha.",
                     "Wa pala, pilan nakung aldong megburung paro, para kng tagilo. Manyaman yang sawsawan kng pritung itú, ligat balasenas ampo kapalya! O, mimingat ko kareng sakén, ne.",
-                    R.drawable.home
+                    R.drawable.marites
                 )
             )
 
@@ -602,7 +606,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Ngayon lang kita nakita, ikaw ba yung pamangkin ni Marites?",
                     "Ngeni daka pa ikit. Ika\'ng paunakan ng Marites?",
-                    R.drawable.home
+                    R.drawable.lourdes
                 )
             )
 
@@ -622,7 +626,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Nabanggit sa akin ni Marites na dumating ka. Ano pala\'ng bibilhin mo?",
                     "Asabi na kakung Marites a dintang ka. Nanung saliwan mu?",
-                    R.drawable.home
+                    R.drawable.lourdes
                 )
             )
 
@@ -642,7 +646,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Ito Iho/Iha, nakalista lahat diyan. ₱750 lahat yan.",
                     "Oyni \'tung, \'nang. Nilista ko ngan ken. Pitung dalan ampo singkwenta pesus (₱750) mu ngan yan.",
-                    R.drawable.home
+                    R.drawable.lourdes
                 )
             )
 
@@ -672,7 +676,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Ano ang iyo?",
                     "Nanu ing keka?",
-                    R.drawable.home
+                    R.drawable.tindero
                 )
             )
 
@@ -680,8 +684,8 @@ class StoryFragment : Fragment() {
                 StoryClass(
                     "Elena",
                     false,
-                    "Isang kahon po mg sansrival. (Nag-abot ng ₱500)",
-                    "Metung pung kahun ning sansribal. (Nag-abot ng ₱500)",
+                    "Isang kahon po mg sansrival.",
+                    "Metung pung kahun ning sansribal.",
                     R.drawable.elena
                 )
             )
@@ -691,8 +695,8 @@ class StoryFragment : Fragment() {
                     "Tindero",
                     false,
                     "Ito ang sukli mo, ₱125..",
-                    "Oyni ing sukli mo, sientu beintisingku. (₱125)",
-                    R.drawable.home
+                    "Oyni ing sukli mo, Sientus bentsingko. (₱125)",
+                    R.drawable.tindero
                 )
             )
 
@@ -827,7 +831,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Kumusta? Saan tayo pupunta?",
                     "Komusta? No\' tamu mumunta?",
-                    R.drawable.home
+                    R.drawable.clara
                 )
             )
 
@@ -858,7 +862,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Malapit lang, tatlong kanto mula rito.",
                     "Malapit mu, atlu mung kantu ibat keni.",
-                    R.drawable.home
+                    R.drawable.clara
                 )
             )
 
@@ -888,7 +892,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Halika na! Baka abutin tayo ng dilim.",
                     "Tara na! Pota mabengi ta pa.",
-                    R.drawable.home
+                    R.drawable.clara
                 )
             )
 
@@ -912,7 +916,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Ang nabago. Ang taas na ng rollercoaster oh.",
                     "Ing bayu.. kátás ning rollercoaster, o!",
-                    R.drawable.home
+                    R.drawable.clara
                 )
             )
 
@@ -942,7 +946,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Bihira ka lang mapunta rito, baka di ka na makauwi.",
                     "Malagad kamu keni, pota e naka miuli.",
-                    R.drawable.home
+                    R.drawable.clara
                 )
             )
 
@@ -972,7 +976,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Sige, tas magrides na tayo. Sulitin natin!",
                     "A wa, kaybat sake tamung rides. Sulitan tamu!",
-                    R.drawable.home
+                    R.drawable.clara
                 )
             )
 
@@ -1002,7 +1006,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Yari, ginabi na tayo ng uwi. Sinulit at nagsaya tayo masyado.",
                     "Aro, mebengi tana. Mipasoso tamu.",
-                    R.drawable.home
+                    R.drawable.clara
                 )
             )
 
@@ -1046,7 +1050,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Nag-alala pa kami kahapon ginabi na kayo ng uwi.",
                     "Miganaka kami napun, mebengi kayung minuli.",
-                    R.drawable.home
+                    R.drawable.marites
                 )
             )
 
@@ -1086,7 +1090,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Oh, siya. Maligo at mag-umagahan na kayo at may pupuntahan tayong kapistahan.",
                     "Dale. Mandilu na kayu, manalmusal, kaybat munta tamu king pyesta.",
-                    R.drawable.home
+                    R.drawable.marites
                 )
             )
 
@@ -1146,7 +1150,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Dinala ako ng Tito mo dyan bago kami ikasal. Pero hindi iyan iyon.",
                     "Dela naku ning bapa mu ken bayu ke mikasal. Pero aliwa pa ita.",
-                    R.drawable.home
+                    R.drawable.marites
                 )
             )
 
@@ -1176,7 +1180,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Lingid sa kaalaman ng iba, marami pang ibang kapistahan sa Pampanga.",
                     "Dakal pang aliwang pyestang Pampanga a ali da balu deng keraklan.",
-                    R.drawable.home
+                    R.drawable.marites
                 )
             )
 
@@ -1196,7 +1200,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Mayroon ding Pyestang Tugak (palaka) kung saan binibigyang pansin ang ‘di pangkaraniwang mga ulam at lutong palaka. Madami kasing palayan lalo na dati sa Pampanga.",
                     "Atin mu namang Piyestang Tugak a papakit do reng miyaliwang lutu kareng tugak, uli dakal tugak kareng masle ning Pampanga.)",
-                    R.drawable.home
+                    R.drawable.marites
                 )
             )
 
@@ -1226,7 +1230,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Sa susunod. Sa ngayon, darayo tayo sa Sinukwan Festival kung saan makikilala niyo si Aring Sinukwan, ang diyos ng mga sinaunang Kapampangan.",
                     "Wa, keng tutuki. Ngeni, munta tamu king Sinukwan Festival nu\' ya karin y Apung Sinukwan, ing guinu dareng minunang Kapampangan.",
-                    R.drawable.home
+                    R.drawable.marites
                 )
             )
 
@@ -1260,7 +1264,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Naririnig niyo ba ang kanta?",
                     "Daramdaman ye ing kanta?",
-                    R.drawable.home
+                    R.drawable.marites
                 )
             )
 
@@ -1310,7 +1314,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Ang singsing na iyon ay simbolo ng Aláya. Ang Aláya ay ang espiritu, kaluluwa, at kaibuturan ng mga Kapampangan.",
                     "Simbulu ne ning Aláya ing singsing. Yapin ing espiritu, kaladwa, ampo kalubluban dareng Kapampangan.",
-                    R.drawable.home
+                    R.drawable.marites
                 )
             )
 
@@ -1416,7 +1420,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Titingnan natin kung hanggang saan tayo aabot. Tanghali palang naman.",
                     "Lawén támu no' támu mírás. Ugtu pamu naman.",
-                    R.drawable.home
+                    R.drawable.marites
                 )
             )
 
@@ -1456,7 +1460,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Anong lugar ba ang una nating pupuntahan?",
                     "Sánu ing múmuna támung puntalán?",
-                    R.drawable.home
+                    R.drawable.marites
                 )
             )
 
@@ -1486,7 +1490,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Maraming nasalanta at maraming nawalan.",
                     "Dakal méte ampo kéwalan.",
-                    R.drawable.home
+                    R.drawable.marites
                 )
             )
 
@@ -1526,7 +1530,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Isa lang yan sa palatandaan kung gaano katindi ang idinulot niyan.",
                     "Metung yamu kareng maragul nang pinsála yan.",
-                    R.drawable.home
+                    R.drawable.marites
                 )
             )
 
@@ -1566,7 +1570,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Angeles lang, medyo malayo ang distansya sa Pinatubo.",
                     "Angeles mu, marayúng bagya kng Pinatúbu.",
-                    R.drawable.home
+                    R.drawable.marites
                 )
             )
 
@@ -1626,7 +1630,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Hindi man halata, dito niyo makikita ang historya ng Pampanga.",
                     "E man ûlatá, karin yu akit ing istorya ning Pampanga.",
-                    R.drawable.home
+                    R.drawable.marites
                 )
             )
 
@@ -1666,7 +1670,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Kung ikukumpara sa ibang mga lugar, hamak bilis ang pag-unlad ng lugar na ito.",
                     "Nung kumpará me kng alíwang lugal, mabilis ya ping minasensú.",
-                    R.drawable.home
+                    R.drawable.marites
                 )
             )
 
@@ -1686,7 +1690,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Ngunit kasabay ng pag-unlad, ay mayroon na ring mga nalilimutan.",
                     "Yamu, kayagnan ning asensú, atin mu ring mengakalingwán.",
-                    R.drawable.home
+                    R.drawable.marites
                 )
             )
 
@@ -1706,7 +1710,7 @@ class StoryFragment : Fragment() {
                     false,
                     "May mga tradisyon na ring hindi nagagawa.",
                     "Atin mu namang tradisyung e na magagawá.",
-                    R.drawable.home
+                    R.drawable.marites
                 )
             )
 
@@ -1774,7 +1778,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Hindi ba kayo gutom? Kumain muna tayo sa sikat na sisigan bago umuwi. Sikat pa naman ang sisig dito.",
                     "E ko maranóp? Mangan tamu ketang Aling Lucing, itang sikàt a sísigán bayu ka múli.",
-                    R.drawable.home
+                    R.drawable.marites
                 )
             )
             storyList.add(
@@ -1953,7 +1957,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Magandang umaga po! Ano po ang hanap n'yo?",
                     "Mayap a abak pu! Na'ng pantunan yu?",
-                    R.drawable.home
+                    R.drawable.tindero
                 )
             )
 
@@ -1973,7 +1977,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Ang Pampanga ay kilala sa mga kakanin na aking binebenta.",
                     "Kilala ya ing Pampanga karening pisasali ku.",
-                    R.drawable.home
+                    R.drawable.tindero
                 )
             )
 
@@ -1993,7 +1997,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Meron po kaming mga bagong luto na suman at espasol. Ilang piraso po ang gusto n'yo?",
                     "Atin keng bayung lutu. Pilan ing buri mu?",
-                    R.drawable.home
+                    R.drawable.tindero
                 )
             )
 
@@ -2013,7 +2017,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Sige po, ito po ang inyong binili.",
                     "Oreni pu deng selinyo.",
-                    R.drawable.home
+                    R.drawable.tindero
                 )
             )
 
@@ -2033,7 +2037,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Ito po ay nagkakahalaga ng isang daan at limampung piso.",
                     "Dinalan ampong singkwenta pesus pu.",
-                    R.drawable.home
+                    R.drawable.tindero
                 )
             )
 
@@ -2053,7 +2057,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Maraming salamat din po! Ingat sa biyahe pauwi.",
                     "Dakal salamat mu naman. Mimingat keng pamanuli mu.",
-                    R.drawable.home
+                    R.drawable.tindero
                 )
             )
 
@@ -2168,7 +2172,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Oo nga, napakabuti mong pamangkin. Sana'y magpatuloy ang iyong tagumpay sa pag-aaral.",
                     "Wapin, maganaka kang paunakan. Samasan me ing kekang pamagaral.",
-                    R.drawable.home
+                    R.drawable.marites
                 )
             )
 
@@ -2212,7 +2216,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Magandang umaga, Kian ! Sigurado akong marami kaming gustong malaman tungkol sa iyong karanasan sa Pampanga. Maaari ba tayong magkaroon ng maliit na Q&A?",
                     "",
-                    R.drawable.home
+                    R.drawable.guro
                 )
             )
 
@@ -2232,7 +2236,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Ano po ang mga sikat na pagkain sa Pampanga?",
                     "",
-                    R.drawable.home
+                    R.drawable.student1
                 )
             )
 
@@ -2252,7 +2256,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Paano po ang mga tradisyon o kultura sa Pampanga?",
                     "",
-                    R.drawable.home
+                    R.drawable.student2
                 )
             )
 
@@ -2272,7 +2276,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Ano po ang mga pampamilyang gawain o kahalagahan ng pamilya sa inyong lugar?",
                     "",
-                    R.drawable.home
+                    R.drawable.student3
                 )
             )
 
@@ -2292,7 +2296,7 @@ class StoryFragment : Fragment() {
                     false,
                     "Salamat sa iyong mga kasagutan, Kian. Tunay na kaakit-akit ang iyong karanasan sa Pampanga at ang iyong pagmamahal sa iyong lugar ng pinagmulan.",
                     "",
-                    R.drawable.home
+                    R.drawable.guro
                 )
             )
 
@@ -2421,6 +2425,7 @@ class StoryFragment : Fragment() {
                     "Mayroon ka bang bagong natutunan sa kanilang kultura?",
                     "",
                     R.drawable.kian
+
                 )
             )
 
@@ -2431,6 +2436,7 @@ class StoryFragment : Fragment() {
                     "*Choose rate 1-5*",
                     "",
                     R.drawable.home
+
                 )
             )
 
@@ -2563,6 +2569,7 @@ class StoryFragment : Fragment() {
                     R.drawable.kian
                 )
             )
+
 
         }
 
