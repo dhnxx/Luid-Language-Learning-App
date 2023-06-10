@@ -19,7 +19,15 @@ import com.google.firebase.auth.FirebaseAuth
 import android.content.SharedPreferences
 import android.graphics.drawable.ColorDrawable
 import android.util.Patterns
+import com.example.luid.classes.User
 import com.example.luid.database.DatabaseBackup
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import java.io.FileOutputStream
+import java.io.IOException
 
 
 class LoginFragment : Fragment() {
@@ -30,6 +38,7 @@ class LoginFragment : Fragment() {
     private lateinit var loginbutton: Button
     private lateinit var guestbutton: Button
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var dbref: DatabaseReference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +48,10 @@ class LoginFragment : Fragment() {
         val registerButton = view.findViewById<TextView>(R.id.registerRedirectText)
         val forgot = view.findViewById<TextView>(R.id.forgot_password)
 
+
         fbauth = FirebaseAuth.getInstance()
+
+
         etemail = view.findViewById(R.id.login_email)
         etpass = view.findViewById(R.id.login_password)
         loginbutton = view.findViewById(R.id.login_button)
@@ -47,13 +59,18 @@ class LoginFragment : Fragment() {
             requireContext().getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
         guestbutton = view.findViewById(R.id.guest_button)
 
-
-        if (isLoggedIn()) {
+// logged in user
+        if (isLoggedIn() && fbauth.currentUser != null) {
             redirectToMain()
             return view
         }
 
-        forgot.setOnClickListener(){
+        guestbutton.setOnClickListener() {
+            checkAndCopyDatabase(requireContext())
+            redirectToMain()
+        }
+
+        forgot.setOnClickListener() {
             val builder = AlertDialog.Builder(requireContext())
             val view2 = layoutInflater.inflate(R.layout.dialog_forgot, null)
             val userEmail = view2.findViewById<EditText>(R.id.editBox)
@@ -66,19 +83,16 @@ class LoginFragment : Fragment() {
             view2.findViewById<Button>(R.id.btnCancel).setOnClickListener {
                 dialog.dismiss()
             }
-            if (dialog.window != null){
+            if (dialog.window != null) {
                 dialog.window!!.setBackgroundDrawable(ColorDrawable(0))
             }
             dialog.show()
 
 
-
         }
 
 
-        guestbutton.setOnClickListener(){
-            redirectToMain()
-        }
+
 
         loginbutton.setOnClickListener() {
             val email = etemail.text.toString()
@@ -88,8 +102,13 @@ class LoginFragment : Fragment() {
                 fbauth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
                     if (it.isSuccessful) {
                         val currentUser = FirebaseAuth.getInstance().currentUser?.uid
-                        if(currentUser != null) {
-                            DatabaseBackup().restore(requireContext(), currentUser)
+                        if (currentUser != null) {
+                            try {
+                                DatabaseBackup().restore(requireContext(), currentUser)
+                            } catch (e: IOException) {
+                                e.printStackTrace()
+                                checkAndCopyDatabase(requireContext())
+                            }
                         }
                         //
                         saveLoginStatus()
@@ -120,7 +139,27 @@ class LoginFragment : Fragment() {
     private fun saveLoginStatus() {
         val editor = sharedPreferences.edit()
         editor.putBoolean("isLoggedIn", true)
-        editor.apply()
+        editor.putString("uid", fbauth.currentUser?.uid.toString())
+        editor.putString("email", fbauth.currentUser?.email.toString())
+
+        val uid = fbauth.currentUser?.uid
+        dbref = FirebaseDatabase.getInstance().getReference("Users/${uid}/")
+
+        dbref.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val user = dataSnapshot.getValue(User::class.java)
+                if (user != null) {
+                    editor.putString("fname", user.fname)
+                    editor.putString("lname", user.lname)
+                    editor.putString("uname", user.uname)
+                    editor.apply()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun redirectToMain() {
@@ -128,6 +167,7 @@ class LoginFragment : Fragment() {
         startActivity(intent)
         requireActivity().finish() // finish the login activity
     }
+
     private fun compareEmail(email: EditText) {
         if (email.text.toString().isEmpty()) {
             return
@@ -138,10 +178,41 @@ class LoginFragment : Fragment() {
         fbauth.sendPasswordResetEmail(email.text.toString())
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(requireContext(), "Check your email", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Check your email", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
     }
 
+    private fun checkAndCopyDatabase(context: Context) {
+        val databasePath = context.getDatabasePath("LuidDB.db")
+
+
+        if (!databasePath.exists()) {
+            // Database file doesn't exist, so copy the template to the user's phone
+            try {
+                val inputStream = context.assets.open("LuidDB.db")
+                val outputStream = FileOutputStream(databasePath)
+                val buffer = ByteArray(1024)
+                var length: Int
+
+                while (inputStream.read(buffer).also { length = it } > 0) {
+                    outputStream.write(buffer, 0, length)
+                }
+
+                outputStream.flush()
+                outputStream.close()
+                inputStream.close()
+            } catch (e: IOException) {
+
+                e.printStackTrace()
+
+
+            }
+        }
+    }
+
 
 }
+
+
