@@ -28,6 +28,7 @@ class LoginFragment : Fragment() {
     private lateinit var etemail: EditText
     private lateinit var etpass: EditText
     private lateinit var loginbutton: Button
+    private lateinit var guestbutton: Button
     private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreateView(
@@ -44,6 +45,8 @@ class LoginFragment : Fragment() {
         loginbutton = view.findViewById(R.id.login_button)
         sharedPreferences =
             requireContext().getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
+        guestbutton = view.findViewById(R.id.guest_button)
+
 
         if (isLoggedIn()) {
             redirectToMain()
@@ -70,6 +73,11 @@ class LoginFragment : Fragment() {
 
 
 
+        }
+
+
+        guestbutton.setOnClickListener(){
+            redirectToMain()
         }
 
         loginbutton.setOnClickListener() {
