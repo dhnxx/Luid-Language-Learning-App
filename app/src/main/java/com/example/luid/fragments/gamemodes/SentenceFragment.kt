@@ -94,6 +94,7 @@ class SentenceFragment : AppCompatActivity() {
         }else if(cursor.count >= 0){
             sm.addSession(context, level, phase)
         }
+        cursor.close()
 
         sm.lifeSpent(context)
         questionList = ArrayList()
