@@ -251,6 +251,16 @@ class SMLeitner() {
         return currentGameSession
     }
 
+    fun getLowestGameSessionNumber(context: Context, level: Int, phase: Int): Int{
+        var db = DBConnect(context).readableDatabase
+        var cursor = db.rawQuery("SELECT MIN(game_session) FROM $questions_tb WHERE level = $level AND phase = $phase", null)
+        var lowestGameSession = 0
+        if(cursor.moveToFirst()){
+            lowestGameSession = cursor.getInt(0)
+        }
+        return lowestGameSession
+    }
+
     // Adds a game session row in user_records table
     fun addSession(context: Context, level: Int, phase: Int) {
         var dbHelper = DBConnect(context)
