@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth
 import android.content.SharedPreferences
 import android.graphics.drawable.ColorDrawable
 import android.util.Patterns
+import com.example.luid.database.DatabaseBackup
 
 
 class LoginFragment : Fragment() {
@@ -78,6 +79,11 @@ class LoginFragment : Fragment() {
             if (email.isNotEmpty() && pass.isNotEmpty()) {
                 fbauth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
                     if (it.isSuccessful) {
+                        val currentUser = FirebaseAuth.getInstance().currentUser?.uid
+                        if(currentUser != null) {
+                            DatabaseBackup().restore(requireContext(), currentUser)
+                        }
+                        //
                         saveLoginStatus()
                         redirectToMain()
                     } else {
