@@ -1,6 +1,7 @@
 package com.example.luid.fragments.gamemodes
 
 import android.app.AlertDialog
+import android.content.ContentValues
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -46,6 +47,7 @@ class SentenceConstruction : AppCompatActivity() {
     private var avgTime = 0
     private var score = 0.0
     private var correctAnswerCounter = 0
+    private var lowestGameSession = 0
 
 
     private val timerRunnable = object : Runnable {
@@ -83,20 +85,28 @@ class SentenceConstruction : AppCompatActivity() {
         var i = 0
         val sm = SMLeitner()
 
+        lowestGameSession = sm.getLowestGameSessionNumber(context, level, phase)
+
         var db = DBConnect(context).writableDatabase
         var cursor = db.rawQuery(
             "SELECT * FROM $user_records_tb WHERE level = $level AND phase = $phase",
             null
         )
 
-        if (cursor.count == 0) {
-            sm.addSession(context, level, phase)
-        }
+        val colScore = cursor.getColumnIndex("score")
+        val colTimeSpent = cursor.getColumnIndex("time_spent")
 
-        if (cursor.count == 0) {
+        if(cursor.count < 1){
             sm.addSession(context, level, phase)
-        } else if (cursor.count >= 0) {
-            sm.addSession(context, level, phase)
+        }else{
+            cursor.moveToLast()
+
+            val currScore = cursor.getInt(colScore)
+            val currTimeSpent = cursor.getInt(colTimeSpent)
+
+            if(!(currScore == 0 && currTimeSpent == 0)){
+                sm.addSession(context, level, phase)
+            }
         }
 
         sm.lifeSpent(context)
@@ -331,6 +341,42 @@ class SentenceConstruction : AppCompatActivity() {
             // Handle the back action here
             super.onBackPressed()
             dialog.dismiss()
+
+            // Resetting of last row in user_records when user closes the game prematurely
+            var ldb = DBConnect(context).writableDatabase
+            var cursor = ldb.rawQuery("SELECT * FROM $user_records_tb WHERE level = $level AND phase = $phase", null)
+            var cv = ContentValues()
+
+            var colId = cursor.getColumnIndex("_id")
+
+            println("COUNT IN DIALOG : ${cursor.count}")
+
+            if(cursor.count > 1){
+                cursor.moveToLast()
+                var id = cursor.getInt(colId)
+                cursor.moveToPrevious()
+                println("PREV ID IN DIALOG : ${id}")
+                cv.put("game_session_number", lowestGameSession)
+                cv.put("score", 0)
+                cv.put("time_spent", 0)
+
+                ldb.update("$user_records_tb", cv, "_id = $id", null)
+
+            }else{
+                cursor.moveToFirst()
+                var id = cursor.getInt(colId)
+                cv.put("game_session_number", lowestGameSession)
+                cv.put("score", 0)
+                cv.put("time_spent", 0)
+
+                ldb.update("$user_records_tb", cv, "_id = $id", null)
+            }
+
+            cv.clear()
+            cursor.close()
+            ldb.close()
+
+
             val intent = Intent(this, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
