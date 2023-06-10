@@ -99,7 +99,7 @@
                     android:layout_height="50dp"
                     android:gravity="center"
                     android:text="Avg. Time"
-                    android:textColor="?attr/colorPrimary"
+                    android:textColor="?attr/colorOnSurface"
                     android:textSize="16sp"
                     android:textStyle="bold">
 
@@ -111,8 +111,8 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="50s"
-                    android:textColor="?attr/colorOnSurface"
-                    android:textSize="40sp"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="40dp"
                     android:textStyle="bold" />
 
 
@@ -139,7 +139,7 @@
                     android:layout_height="50dp"
                     android:gravity="center"
                     android:text="Correct %"
-                    android:textColor="?attr/colorPrimary"
+                    android:textColor="?attr/colorOnSurface"
                     android:textSize="16sp"
                     android:textStyle="bold">
 
@@ -150,9 +150,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="90%"
-                    android:textColor="?attr/colorOnSurface"
-                    android:textSize="40sp"
+                    android:text="100%"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="40dp"
                     android:textStyle="bold" />
 
 
@@ -180,7 +180,7 @@
                     android:layout_height="50dp"
                     android:gravity="center"
                     android:text="Currency"
-                    android:textColor="?attr/colorPrimary"
+                    android:textColor="?attr/colorOnSurface"
                     android:textSize="16sp"
                     android:textStyle="bold">
 
@@ -192,8 +192,8 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="+100"
-                    android:textColor="?attr/colorOnSurface"
-                    android:textSize="40sp"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="40dp"
                     android:textStyle="bold" />
 
 

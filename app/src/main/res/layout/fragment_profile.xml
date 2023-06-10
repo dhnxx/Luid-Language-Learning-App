@@ -27,7 +27,7 @@
             android:layout_gravity="center"
             android:text="@string/profile"
             android:textColor="?attr/colorOnPrimary"
-            android:textSize="20sp"
+            android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
             app:layout_constraintEnd_toEndOf="@+id/toolbar"
@@ -54,7 +54,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardView"
                 android:layout_width="0dp"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 app:cardBackgroundColor="?attr/colorSurface"
                 app:cardCornerRadius="0dp"
                 app:cardElevation="0dp"
@@ -65,8 +65,9 @@
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/toolbar">
 
                     <ImageView
@@ -75,7 +76,7 @@
                         android:layout_height="120dp"
                         android:layout_marginTop="20dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/imageplaceholder"
+                        android:src="@drawable/kian"
                         app:cornerRadius="60dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -88,7 +89,7 @@
                         android:layout_marginTop="20dp"
                         android:text="Guest Mode"
                         android:textColor="?attr/colorOnSurface"
-                        android:textSize="32sp"
+                        android:textSize="32dp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -104,10 +105,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="32dp"
                 android:text="Statistics"
                 android:textColor="?attr/colorOnSurface"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView" />
@@ -171,7 +172,7 @@
                                     android:layout_height="wrap_content"
                                     android:paddingTop="6dp"
                                     android:text="1"
-                                    android:textSize="18sp"
+                                    android:textSize="20dp"
                                     android:textStyle="bold" />
 
                                 <TextView
@@ -180,7 +181,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="Current Level"
                                     android:textColor="?attr/colorOutline"
-                                    android:textSize="14sp" />
+                                    android:textSize="14dp" />
 
                             </LinearLayout>
 
@@ -227,7 +228,7 @@
                                     android:layout_height="wrap_content"
                                     android:paddingTop="6dp"
                                     android:text="100%"
-                                    android:textSize="18sp"
+                                    android:textSize="20dp"
                                     android:textStyle="bold" />
 
                                 <TextView
@@ -236,7 +237,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="Accuracy"
                                     android:textColor="?attr/colorOutline"
-                                    android:textSize="14sp" />
+                                    android:textSize="14dp" />
 
                             </LinearLayout>
 
@@ -284,7 +285,7 @@
                                     android:layout_height="wrap_content"
                                     android:paddingTop="6dp"
                                     android:text="1"
-                                    android:textSize="18sp"
+                                    android:textSize="20dp"
                                     android:textStyle="bold" />
 
                                 <TextView
@@ -293,7 +294,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="Day Streak"
                                     android:textColor="?attr/colorOutline"
-                                    android:textSize="14sp" />
+                                    android:textSize="14dp" />
 
                             </LinearLayout>
 
@@ -315,7 +316,7 @@
                 android:layout_marginTop="35dp"
                 android:text="Achievements"
                 android:textColor="?attr/colorOnSurface"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/materialCardView" />

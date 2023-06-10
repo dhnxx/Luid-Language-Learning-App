@@ -35,10 +35,9 @@
         <Button
             android:id="@+id/startGameButton"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_margin="10dp"
             android:text="Start game"
             android:textSize="16sp">
 

@@ -10,7 +10,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:background="?attr/colorSecondaryContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,8 +22,9 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCardView3"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
             app:cardBackgroundColor="?attr/colorSurface"
             app:cardCornerRadius="16dp"
             app:cardElevation="5dp"
@@ -32,13 +35,14 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+>
 
                 <ImageView
                     android:id="@+id/heart"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_margin="20dp"
+                    android:layout_marginStart="10dp"
                     android:src="@drawable/instagram_like_notification"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +54,6 @@
                     android:id="@+id/textLives"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
                     android:gravity="center"
                     android:text="0"
                     android:textColor="?attr/colorOnPrimary"
@@ -65,7 +68,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
                     android:orientation="horizontal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -87,8 +89,9 @@
                         style="@style/Widget.MaterialComponents.Button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
                         android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
                         android:backgroundTint="?attr/colorPrimary"
                         android:text="Buy ♥"
                         android:textAllCaps="false"
@@ -107,7 +110,7 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             app:cardBackgroundColor="?attr/colorSurface"
             app:cardCornerRadius="16dp"
