@@ -29,7 +29,6 @@ class SentenceConstruction : AppCompatActivity() {
     private lateinit var questionText: TextView
     private lateinit var questionImage: ImageView
     private lateinit var answerLabel: EditText
-    private lateinit var flexboxLayout: com.google.android.flexbox.FlexboxLayout
     private lateinit var clearButton: Button
     private lateinit var submitButton: Button
     private lateinit var nextButton: Button
@@ -77,7 +76,6 @@ class SentenceConstruction : AppCompatActivity() {
         questionText = findViewById(R.id.question)
         questionImage = findViewById(R.id.questionImage)
         answerLabel = findViewById(R.id.answerLabel)
-        flexboxLayout = findViewById(R.id.flexboxLayout)
         clearButton = findViewById(R.id.clearButton)
         submitButton = findViewById(R.id.submitButton)
         nextButton = findViewById(R.id.nextButton)
@@ -142,10 +140,6 @@ class SentenceConstruction : AppCompatActivity() {
 
         clearButton.setOnClickListener {
             answerLabel.text.clear()
-            for (i in 0 until flexboxLayout.childCount) {
-                val child = flexboxLayout.getChildAt(i)
-                child.isEnabled = true
-            }
 
 
         }
@@ -268,7 +262,6 @@ class SentenceConstruction : AppCompatActivity() {
         submitButton.visibility = View.VISIBLE
 
 
-        flexboxLayout.removeAllViews()
 
         //answerLabel.text = ""
 
