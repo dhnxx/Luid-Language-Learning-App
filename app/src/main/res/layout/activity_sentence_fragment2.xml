@@ -45,7 +45,7 @@
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 android:text="00:00"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +64,7 @@
         android:padding="20dp"
         android:text="Translate Malagu in English."
         android:textColor="?attr/colorOnSurface"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -129,6 +129,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginBottom="25dp"
         android:backgroundTint="?attr/colorTertiary"
+        android:textSize="16dp"
         android:text="Clear"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -141,6 +142,7 @@
         android:layout_marginBottom="25dp"
         android:backgroundTint="?attr/colorPrimary"
         android:text="Submit"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -153,6 +155,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="25dp"
         android:backgroundTint="?attr/colorPrimary"
+        android:textSize="16dp"
         android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
