@@ -74,8 +74,7 @@ class RegisterFragment : Fragment() {
                                     }
                                 }
                             }
-                            val intent = Intent(context, LoginRegister::class.java)
-                            startActivity(intent)
+                            Toast.makeText(context, it.exception.toString(), Toast.LENGTH_SHORT).show()
                         } else {
 
                             Toast.makeText(context, it.exception.toString(), Toast.LENGTH_SHORT).show()
@@ -89,6 +88,9 @@ class RegisterFragment : Fragment() {
 
                 Toast.makeText(context, "Fields are empty..", Toast.LENGTH_SHORT).show()
             }
+
+            //val intent = Intent(context, LoginRegister::class.java)
+           // startActivity(intent)
 
         }
 
