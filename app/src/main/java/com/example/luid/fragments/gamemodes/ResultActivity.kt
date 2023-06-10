@@ -17,7 +17,9 @@ import com.example.luid.classes.SMLeitner
 import com.example.luid.database.DBConnect
 import com.example.luid.database.DBConnect.Companion.questions_tb
 import com.example.luid.database.DBConnect.Companion.temp_qstion
+import com.example.luid.database.DatabaseBackup
 import com.example.luid.fragments.mainmenu.MainActivity
+import com.google.firebase.auth.FirebaseAuth
 import org.w3c.dom.Text
 
 
@@ -197,6 +199,11 @@ class ResultActivity : AppCompatActivity() {
     }
 
     private fun end() {
+        //
+        val currentUser = FirebaseAuth.getInstance().currentUser?.uid
+        if(currentUser != null) {
+            DatabaseBackup().backup(this, currentUser)
+        }
         val intent2 = Intent(this, MainActivity::class.java)
         intent2.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent2)
