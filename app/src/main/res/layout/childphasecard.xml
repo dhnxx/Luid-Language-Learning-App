@@ -79,7 +79,7 @@
         <Button
             android:id="@+id/childButton"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="Play"
             app:layout_constraintBottom_toBottomOf="parent"
