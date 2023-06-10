@@ -69,7 +69,7 @@ class ResultActivity : AppCompatActivity() {
         currencyText = findViewById(R.id.currency)
 
         avgTimeText.text = "$avgTime s"
-        correctPercentageText.text = "${String.format("%2f", score).toDouble()}%"
+        correctPercentageText.text = "$score"
         currencyText.text = "$reward"
 
 

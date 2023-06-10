@@ -27,7 +27,7 @@
             android:layout_gravity="center"
             android:text="@string/settings"
             android:textColor="?attr/colorOnPrimary"
-            android:textSize="20sp"
+            android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
             app:layout_constraintEnd_toEndOf="@+id/toolbar"
@@ -38,8 +38,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="36sp"
-        android:layout_marginBottom="36sp"
+        android:layout_marginTop="36dp"
+        android:layout_marginBottom="36dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -48,22 +48,21 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_marginStart="16sp"
+            android:layout_marginStart="16dp"
             android:text="Account"
-            android:textSize="28sp"
+            android:textSize="28dp"
             android:textStyle="bold" />
 
-        <TextView
+        <Button
             android:id="@+id/textButton1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="16sp"
-            android:gravity="end"
+            android:layout_marginEnd="16dp"
             android:text="Logout"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="16sp" />
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="16dp" />
 
     </RelativeLayout>
 
@@ -91,7 +90,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:text="Email:"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textStyle="bold" />
 
 
@@ -104,7 +103,7 @@
                 android:gravity="end"
                 android:text="juandelacruz@email.com"
                 android:textColor="?attr/colorPrimary"
-                android:textSize="16sp" />
+                android:textSize="16dp" />
 
 
         </RelativeLayout>
@@ -126,7 +125,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:text="Name:"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textStyle="bold" />
 
 
@@ -137,7 +136,7 @@
                 android:layout_centerVertical="true"
                 android:text="Juan Dela Cruz"
                 android:textColor="?attr/colorPrimary"
-                android:textSize="16sp" />
+                android:textSize="16dp" />
 
         </RelativeLayout>
 
@@ -158,7 +157,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:text="Change Avatar"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textStyle="bold" />
 
             <ImageView
@@ -187,7 +186,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:text="Change Password"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textStyle="bold" />
 
             <ImageView
@@ -216,7 +215,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:text="Forgot Password"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textStyle="bold" />
 
             <ImageView
@@ -235,8 +234,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="36sp"
-        android:layout_marginBottom="36sp"
+        android:layout_marginTop="36dp"
+        android:layout_marginBottom="36dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -245,9 +244,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_marginStart="16sp"
+            android:layout_marginStart="16dp"
             android:text="Preferences"
-            android:textSize="28sp"
+            android:textSize="28dp"
             android:textStyle="bold" />
 
 
@@ -276,7 +275,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:text="Night Mode"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textStyle="bold" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
@@ -304,13 +303,14 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:text="Manual Data Sync"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textStyle="bold" />
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:text="Save to Cloud"
+                android:textSize="16dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 />

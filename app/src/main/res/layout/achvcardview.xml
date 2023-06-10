@@ -21,7 +21,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
@@ -43,45 +43,45 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="15dp"
                     android:orientation="horizontal">
 
                     <ProgressBar
                         android:id="@+id/achvprogressBar"
                         style="@style/CustomProgressBar"
                         android:layout_width="match_parent"
-                        android:layout_height="10dp"
+                        android:layout_height="15dp"
                         android:progress="28"
                         android:progressBackgroundTint="?attr/colorSurface"
                         android:progressTint="@color/colorPlaceholder2"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <TextView
+                        android:id="@+id/achvprogresstxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1/5"
+                        android:textAlignment="center"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="12dp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/achvprogressBar"
+                        app:layout_constraintEnd_toEndOf="@id/achvprogressBar"
+                        app:layout_constraintStart_toStartOf="@id/achvprogressBar"
+                        app:layout_constraintTop_toTopOf="@id/achvprogressBar" />
 
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:id="@+id/achvprogresstxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="1/5"
-                    android:textAlignment="center"
-                    android:textColor="?attr/colorOnSurface"
-                    android:textSize="10sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
-                />
+
 
                 <TextView
                     android:id="@+id/achvtitle"
@@ -91,6 +91,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="8dp"
                     android:text="Title"
+                    android:textSize="16dp"
                     android:textColor="?attr/colorTertiary"
                     android:textStyle="bold" />
 
@@ -103,7 +104,7 @@
                     android:layout_marginEnd="8dp"
                     android:text="Description"
                     android:textColor="?attr/colorOnSurface"
-                    android:textSize="12sp" />
+                    android:textSize="12dp" />
 
             </LinearLayout>
         </LinearLayout>
