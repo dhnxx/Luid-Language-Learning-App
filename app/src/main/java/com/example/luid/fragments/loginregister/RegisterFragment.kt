@@ -68,10 +68,13 @@ class RegisterFragment : Fragment() {
                                     if(it.isSuccessful){
                                         println("Inside successful setvalueuser")
                                         Toast.makeText(context, "Successfull", Toast.LENGTH_SHORT)
+                                        val intent = Intent(context, LoginRegister::class.java)
+                                        startActivity(intent)
                                     } else{
                                         println("Inside failed setvalueuser")
                                         Toast.makeText(context, "Failed to update profile", Toast.LENGTH_SHORT)
                                     }
+
                                 }
                             }
                             Toast.makeText(context, it.exception.toString(), Toast.LENGTH_SHORT).show()
@@ -89,8 +92,7 @@ class RegisterFragment : Fragment() {
                 Toast.makeText(context, "Fields are empty..", Toast.LENGTH_SHORT).show()
             }
 
-            //val intent = Intent(context, LoginRegister::class.java)
-           // startActivity(intent)
+
 
         }
 
