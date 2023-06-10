@@ -199,6 +199,7 @@ class ResultActivity : AppCompatActivity() {
     }
 
     private fun end() {
+        //
         val currentUser = FirebaseAuth.getInstance().currentUser?.uid
         if(currentUser != null) {
             DatabaseBackup().backup(this, currentUser)

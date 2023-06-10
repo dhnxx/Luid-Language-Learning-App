@@ -83,6 +83,7 @@ class LoginFragment : Fragment() {
                         if(currentUser != null) {
                             DatabaseBackup().restore(requireContext(), currentUser)
                         }
+                        //
                         saveLoginStatus()
                         redirectToMain()
                     } else {
