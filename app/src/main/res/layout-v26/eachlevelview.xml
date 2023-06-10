@@ -26,9 +26,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_min="350dp"
-        app:layout_constraintWidth_max="1000dp"
-        app:layout_constraintHeight_max="600dp"
+        app:layout_constraintWidth_min="300dp"
+        app:layout_constraintHeight_max="500dp"
         app:strokeWidth="0dp">
 
         <LinearLayout
