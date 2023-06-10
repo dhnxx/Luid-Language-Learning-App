@@ -66,8 +66,10 @@ class RegisterFragment : Fragment() {
                                 println("Inside uid != null")
                                 dbref.child(uid).setValue(user).addOnCompleteListener {
                                     if(it.isSuccessful){
+                                        println("Inside successful setvalueuser")
                                         Toast.makeText(context, "Successfull", Toast.LENGTH_SHORT)
                                     } else{
+                                        println("Inside failed setvalueuser")
                                         Toast.makeText(context, "Failed to update profile", Toast.LENGTH_SHORT)
                                     }
                                 }
