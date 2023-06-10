@@ -54,6 +54,7 @@ class HomeFragment : Fragment() {
         bottomNav?.visibility = View.VISIBLE
         val context = requireContext()
 
+
         ////////////////////////LEVEL SELECTION/////////////////////////////
 
 
