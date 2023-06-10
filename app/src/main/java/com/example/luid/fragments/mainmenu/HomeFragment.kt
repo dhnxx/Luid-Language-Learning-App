@@ -19,6 +19,8 @@ import com.example.luid.classes.LevelSelection
 import com.example.luid.database.DBConnect
 import com.example.luid.database.DBConnect.Companion.achievements_tb
 import com.example.luid.database.DBConnect.Companion.questions_tb
+import com.example.luid.database.DatabaseBackup
+import com.google.firebase.auth.FirebaseAuth
 
 
 class HomeFragment : Fragment() {
