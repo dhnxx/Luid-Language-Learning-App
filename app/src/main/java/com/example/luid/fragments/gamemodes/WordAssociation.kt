@@ -20,6 +20,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
 import com.example.luid.R
 import com.example.luid.classes.SMLeitner
 import com.example.luid.classes.WordAssociationClass
@@ -128,7 +129,10 @@ class WordAssociation : AppCompatActivity() {
         lowestGameSession = sm.getLowestGameSessionNumber(context, level, phase)
 
         var db = DBConnect(context).writableDatabase
-        var cursor = db.rawQuery("SELECT * FROM $user_records_tb WHERE level = $level AND phase = $phase", null)
+        var cursor = db.rawQuery(
+            "SELECT * FROM $user_records_tb WHERE level = $level AND phase = $phase",
+            null
+        )
 
         val colScore = cursor.getColumnIndex("score")
         val colTimeSpent = cursor.getColumnIndex("time_spent")
@@ -136,7 +140,7 @@ class WordAssociation : AppCompatActivity() {
         cursor.moveToLast()
         val currScore = cursor.getInt(colScore)
         val currTimeSpent = cursor.getInt(colTimeSpent)
-        if(!(currScore == 0 && currTimeSpent == 0)){
+        if (!(currScore == 0 && currTimeSpent == 0)) {
             sm.addSession(context, level, phase)
         }
 
@@ -192,6 +196,18 @@ class WordAssociation : AppCompatActivity() {
 
     override fun onBackPressed() {
         showConfirmationDialog()
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        lastRowReset()
+        val intent2 = Intent(this, MainActivity::class.java)
+        intent2.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        finish()
+        startActivity(intent2)
+
 
     }
 
@@ -268,6 +284,7 @@ class WordAssociation : AppCompatActivity() {
                     langch = "tagalog"
 
                 }
+
                 2 -> {
                     decoytemp.clear()
                     answerstemp.clear()
@@ -338,7 +355,7 @@ class WordAssociation : AppCompatActivity() {
             val searchimg1 = decoy[1]
             val searchimg2 = decoy[2]
             val cursor1: Cursor = db.rawQuery("SELECT * FROM ${DBConnect.temp_qstion}", null)
-            if(cursor1.moveToFirst()){
+            if (cursor1.moveToFirst()) {
                 do {
                     val ans = cursor1.getString(cursor1.getColumnIndex("$langch"))
                     if (ans.equals(ansimg, ignoreCase = true)) {
@@ -616,44 +633,11 @@ class WordAssociation : AppCompatActivity() {
             super.onBackPressed()
             dialog.dismiss()
 
-            // Resetting of last row in user_records when user closes the game prematurely
-            var ldb = DBConnect(context).writableDatabase
-            var cursor = ldb.rawQuery("SELECT * FROM $user_records_tb WHERE level = $level AND phase = $phase", null)
-            var cv = ContentValues()
 
-            var colId = cursor.getColumnIndex("_id")
-
-            println("COUNT IN DIALOG : ${cursor.count}")
-
-            if(cursor.count > 1){
-                cursor.moveToLast()
-                var id = cursor.getInt(colId)
-                cursor.moveToPrevious()
-                println("PREV ID IN DIALOG : ${id}")
-                cv.put("game_session_number", lowestGameSession)
-                cv.put("score", 0)
-                cv.put("time_spent", 0)
-
-                ldb.update("$user_records_tb", cv, "_id = $id", null)
-
-            }else{
-                cursor.moveToFirst()
-                var id = cursor.getInt(colId)
-                cv.put("game_session_number", lowestGameSession)
-                cv.put("score", 0)
-                cv.put("time_spent", 0)
-
-                ldb.update("$user_records_tb", cv, "_id = $id", null)
-            }
-
-            cv.clear()
-            cursor.close()
-            ldb.close()
-
-
+            lastRowReset()
 
             val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
             finish()
 
@@ -673,5 +657,47 @@ class WordAssociation : AppCompatActivity() {
         choiceTwo.setOnClickListener(null)
         choiceThree.setOnClickListener(null)
         choiceFour.setOnClickListener(null)
+    }
+
+    private fun lastRowReset() {
+
+        // Resetting of last row in user_records when user closes the game prematurely
+        var ldb = DBConnect(context).writableDatabase
+        var cursor = ldb.rawQuery(
+            "SELECT * FROM $user_records_tb WHERE level = $level AND phase = $phase",
+            null
+        )
+        var cv = ContentValues()
+
+        var colId = cursor.getColumnIndex("_id")
+
+        println("COUNT IN DIALOG : ${cursor.count}")
+
+        if (cursor.count > 1) {
+            cursor.moveToLast()
+            var id = cursor.getInt(colId)
+            cursor.moveToPrevious()
+            println("PREV ID IN DIALOG : ${id}")
+            cv.put("game_session_number", lowestGameSession)
+            cv.put("score", 0)
+            cv.put("time_spent", 0)
+
+            ldb.update("$user_records_tb", cv, "_id = $id", null)
+
+        } else {
+            cursor.moveToFirst()
+            var id = cursor.getInt(colId)
+            cv.put("game_session_number", lowestGameSession)
+            cv.put("score", 0)
+            cv.put("time_spent", 0)
+
+            ldb.update("$user_records_tb", cv, "_id = $id", null)
+        }
+
+        cv.clear()
+        cursor.close()
+        ldb.close()
+
+
     }
 }

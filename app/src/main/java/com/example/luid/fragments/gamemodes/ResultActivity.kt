@@ -205,7 +205,7 @@ class ResultActivity : AppCompatActivity() {
             DatabaseBackup().backup(this, currentUser)
         }
         val intent2 = Intent(this, MainActivity::class.java)
-        intent2.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        intent2.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent2)
         finish()
 

@@ -51,7 +51,6 @@ class SentenceFragment : AppCompatActivity() {
     private var lowestGameSession = 0
 
 
-
     private val timerRunnable = object : Runnable {
         override fun run() {
             timeInMilliseconds = SystemClock.uptimeMillis() - startTime
@@ -91,22 +90,25 @@ class SentenceFragment : AppCompatActivity() {
         lowestGameSession = sm.getLowestGameSessionNumber(context, level, phase)
 
         var db = DBConnect(context).writableDatabase
-        var cursor = db.rawQuery("SELECT * FROM $user_records_tb WHERE level = $level AND phase = $phase", null)
+        var cursor = db.rawQuery(
+            "SELECT * FROM $user_records_tb WHERE level = $level AND phase = $phase",
+            null
+        )
 
         val colScore = cursor.getColumnIndex("score")
         val colTimeSpent = cursor.getColumnIndex("time_spent")
 
 
 
-        if(cursor.count < 1){
+        if (cursor.count < 1) {
             sm.addSession(context, level, phase)
-        }else{
+        } else {
             cursor.moveToLast()
 
             val currScore = cursor.getInt(colScore)
             val currTimeSpent = cursor.getInt(colTimeSpent)
 
-            if(!(currScore == 0 && currTimeSpent == 0)){
+            if (!(currScore == 0 && currTimeSpent == 0)) {
                 sm.addSession(context, level, phase)
             }
         }
@@ -137,7 +139,7 @@ class SentenceFragment : AppCompatActivity() {
                 intent2.putExtra("level", level)
                 intent2.putExtra("phase", phase)
                 intent2.putExtra("score", score)
-                intent2.putExtra("totalItems", questionList.size+1)
+                intent2.putExtra("totalItems", questionList.size + 1)
                 intent2.putExtra("totalTime", totalTime)
                 intent2.putExtra("avgTime", avgTime)
                 startActivity(intent2)
@@ -161,6 +163,18 @@ class SentenceFragment : AppCompatActivity() {
         showConfirmationDialog()
     }
 
+    override fun onPause() {
+        super.onPause()
+
+        lastRowReset()
+        val intent2 = Intent(this, MainActivity::class.java)
+        intent2.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        finish()
+        startActivity(intent2)
+
+    }
+
+
     private fun phasetwo() {
         val sm = SMLeitner()
         val ph2 = PhaseTwoClass()
@@ -178,12 +192,12 @@ class SentenceFragment : AppCompatActivity() {
         )
 
 
-        if(cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             var idCol = cursor.getColumnIndex("_id")
-            do{
+            do {
                 var idlist = cursor.getInt(idCol)
                 id.add(idlist)
-            }while (cursor.moveToNext())
+            } while (cursor.moveToNext())
         }
 
         println("COUNT : ${cursor.count}")
@@ -203,7 +217,7 @@ class SentenceFragment : AppCompatActivity() {
         var questions = ArrayList<String>()
 
 
-        for (i in kap){
+        for (i in kap) {
             println(i)
         }
 
@@ -369,7 +383,8 @@ class SentenceFragment : AppCompatActivity() {
         }
 
 
-        }
+    }
+
     private fun showConfirmationDialog() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Confirm")
@@ -378,39 +393,7 @@ class SentenceFragment : AppCompatActivity() {
             // Handle the back action here
             super.onBackPressed()
 
-            // Resetting of last row in user_records when user closes the game prematurely
-            var ldb = DBConnect(context).writableDatabase
-            var cursor = ldb.rawQuery("SELECT * FROM $user_records_tb WHERE level = $level AND phase = $phase", null)
-            var cv = ContentValues()
-
-            var colId = cursor.getColumnIndex("_id")
-
-            println("COUNT IN DIALOG : ${cursor.count}")
-
-            if(cursor.count > 1){
-                cursor.moveToLast()
-                var id = cursor.getInt(colId)
-                cursor.moveToPrevious()
-                cv.put("game_session_number", lowestGameSession)
-                cv.put("score", 0)
-                cv.put("time_spent", 0)
-
-                ldb.update("$user_records_tb", cv, "_id = $id", null)
-
-            }else{
-                cursor.moveToFirst()
-                var id = cursor.getInt(colId)
-                cv.put("game_session_number", 1)
-                cv.put("score", 0)
-                cv.put("time_spent", 0)
-
-                ldb.update("$user_records_tb", cv, "_id = $id", null)
-            }
-
-            cv.clear()
-            cursor.close()
-            ldb.close()
-
+            lastRowReset()
 
             dialog.dismiss()
             val intent = Intent(this, MainActivity::class.java)
@@ -422,5 +405,47 @@ class SentenceFragment : AppCompatActivity() {
             dialog.dismiss()
         }
         builder.show()
+    }
+
+    private fun lastRowReset() {
+
+        // Resetting of last row in user_records when user closes the game prematurely
+        var ldb = DBConnect(context).writableDatabase
+        var cursor = ldb.rawQuery(
+            "SELECT * FROM $user_records_tb WHERE level = $level AND phase = $phase",
+            null
+        )
+        var cv = ContentValues()
+
+        var colId = cursor.getColumnIndex("_id")
+
+        println("COUNT IN DIALOG : ${cursor.count}")
+
+        if (cursor.count > 1) {
+            cursor.moveToLast()
+            var id = cursor.getInt(colId)
+            cursor.moveToPrevious()
+            println("PREV ID IN DIALOG : ${id}")
+            cv.put("game_session_number", lowestGameSession)
+            cv.put("score", 0)
+            cv.put("time_spent", 0)
+
+            ldb.update("$user_records_tb", cv, "_id = $id", null)
+
+        } else {
+            cursor.moveToFirst()
+            var id = cursor.getInt(colId)
+            cv.put("game_session_number", lowestGameSession)
+            cv.put("score", 0)
+            cv.put("time_spent", 0)
+
+            ldb.update("$user_records_tb", cv, "_id = $id", null)
+        }
+
+        cv.clear()
+        cursor.close()
+        ldb.close()
+
+
     }
 }

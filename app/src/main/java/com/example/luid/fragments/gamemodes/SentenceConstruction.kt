@@ -94,15 +94,15 @@ class SentenceConstruction : AppCompatActivity() {
         val colScore = cursor.getColumnIndex("score")
         val colTimeSpent = cursor.getColumnIndex("time_spent")
 
-        if(cursor.count < 1){
+        if (cursor.count < 1) {
             sm.addSession(context, level, phase)
-        }else{
+        } else {
             cursor.moveToLast()
 
             val currScore = cursor.getInt(colScore)
             val currTimeSpent = cursor.getInt(colTimeSpent)
 
-            if(!(currScore == 0 && currTimeSpent == 0)){
+            if (!(currScore == 0 && currTimeSpent == 0)) {
                 sm.addSession(context, level, phase)
             }
         }
@@ -149,6 +149,18 @@ class SentenceConstruction : AppCompatActivity() {
     override fun onBackPressed() {
         showConfirmationDialog()
     }
+
+    override fun onPause() {
+        super.onPause()
+
+        lastRowReset()
+        val intent2 = Intent(this, MainActivity::class.java)
+        intent2.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        finish()
+        startActivity(intent2)
+
+    }
+
 
     private fun phasetwo() {
         val sm = SMLeitner()
@@ -262,7 +274,6 @@ class SentenceConstruction : AppCompatActivity() {
         submitButton.visibility = View.VISIBLE
 
 
-
         //answerLabel.text = ""
 
         answerLabel.setTextColor(Color.parseColor("#1C1B1F"))
@@ -335,40 +346,7 @@ class SentenceConstruction : AppCompatActivity() {
             super.onBackPressed()
             dialog.dismiss()
 
-            // Resetting of last row in user_records when user closes the game prematurely
-            var ldb = DBConnect(context).writableDatabase
-            var cursor = ldb.rawQuery("SELECT * FROM $user_records_tb WHERE level = $level AND phase = $phase", null)
-            var cv = ContentValues()
-
-            var colId = cursor.getColumnIndex("_id")
-
-            println("COUNT IN DIALOG : ${cursor.count}")
-
-            if(cursor.count > 1){
-                cursor.moveToLast()
-                var id = cursor.getInt(colId)
-                cursor.moveToPrevious()
-                println("PREV ID IN DIALOG : ${id}")
-                cv.put("game_session_number", lowestGameSession)
-                cv.put("score", 0)
-                cv.put("time_spent", 0)
-
-                ldb.update("$user_records_tb", cv, "_id = $id", null)
-
-            }else{
-                cursor.moveToFirst()
-                var id = cursor.getInt(colId)
-                cv.put("game_session_number", lowestGameSession)
-                cv.put("score", 0)
-                cv.put("time_spent", 0)
-
-                ldb.update("$user_records_tb", cv, "_id = $id", null)
-            }
-
-            cv.clear()
-            cursor.close()
-            ldb.close()
-
+            lastRowReset()
 
             val intent = Intent(this, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -379,6 +357,47 @@ class SentenceConstruction : AppCompatActivity() {
             dialog.dismiss()
         }
         builder.show()
+    }
+
+    private fun lastRowReset() {
+        // Resetting of last row in user_records when user closes the game prematurely
+        var ldb = DBConnect(context).writableDatabase
+        var cursor = ldb.rawQuery(
+            "SELECT * FROM $user_records_tb WHERE level = $level AND phase = $phase",
+            null
+        )
+        var cv = ContentValues()
+
+        var colId = cursor.getColumnIndex("_id")
+
+        println("COUNT IN DIALOG : ${cursor.count}")
+
+        if (cursor.count > 1) {
+            cursor.moveToLast()
+            var id = cursor.getInt(colId)
+            cursor.moveToPrevious()
+            println("PREV ID IN DIALOG : ${id}")
+            cv.put("game_session_number", lowestGameSession)
+            cv.put("score", 0)
+            cv.put("time_spent", 0)
+
+            ldb.update("$user_records_tb", cv, "_id = $id", null)
+
+        } else {
+            cursor.moveToFirst()
+            var id = cursor.getInt(colId)
+            cv.put("game_session_number", lowestGameSession)
+            cv.put("score", 0)
+            cv.put("time_spent", 0)
+
+            ldb.update("$user_records_tb", cv, "_id = $id", null)
+        }
+
+        cv.clear()
+        cursor.close()
+        ldb.close()
+
+
     }
 }
 
