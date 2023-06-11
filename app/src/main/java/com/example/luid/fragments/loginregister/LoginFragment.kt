@@ -68,22 +68,7 @@ class LoginFragment : Fragment() {
         }
 
         guestbutton.setOnClickListener() {
-/*
-            val inputStream = context.assets.open("LuidDB.db")
-            val outputStream = FileOutputStream(databasePath)
-            val buffer = ByteArray(1024)
-            var length: Int
 
-            while (inputStream.read(buffer).also { length = it } > 0) {
-                outputStream.write(buffer, 0, length)
-            }
-
-            outputStream.flush()
-            outputStream.close()
-            inputStream.close()
-
-
- */
             checkAndCopyDatabase(context)
             redirectToMain()
         }
@@ -123,7 +108,7 @@ class LoginFragment : Fragment() {
                         if (currentUser != null) {
                             try {
                                 DatabaseBackup().restore(requireContext(), currentUser)
-                            } catch (e: IOException) {
+                            } catch (e: Exception) {
                                 checkAndCopyDatabase(requireContext())
                                 println("CREATED NEW DATABASE ✨✨✨✨")
                                 DatabaseBackup().backup(requireContext(), currentUser)

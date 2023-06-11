@@ -1,5 +1,6 @@
 package com.example.luid.fragments.loginregister
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,10 +15,13 @@ import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import com.example.luid.R
 import com.example.luid.classes.User
+import com.example.luid.database.DatabaseBackup
 import com.example.luid.databinding.ActivityLoginRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import java.io.FileOutputStream
+import java.io.IOException
 
 
 class RegisterFragment : Fragment() {
@@ -76,9 +80,21 @@ class RegisterFragment : Fragment() {
                                                     "Successful",
                                                     Toast.LENGTH_SHORT
                                                 )
+                                                checkAndCopyDatabase(requireContext())
+
+                                                val currentUser = FirebaseAuth.getInstance().currentUser?.uid
+                                                if(currentUser != null) {
+                                                    DatabaseBackup().backup(requireContext(), currentUser)
+                                                }
+
+
                                                 val intent =
                                                     Intent(context, LoginRegister::class.java)
                                                 startActivity(intent)
+
+
+
+
                                             } else {
                                                 println("Inside failed setvalueuser")
                                                 Toast.makeText(
@@ -244,6 +260,34 @@ class RegisterFragment : Fragment() {
 
         // Password meets all criteria
         return true
+    }
+
+    private fun checkAndCopyDatabase(context: Context) {
+        val databasePath = context.getDatabasePath("LuidDB.db")
+
+
+        if (!databasePath.exists()) {
+            // Database file doesn't exist, so copy the template to the user's phone
+            try {
+                val inputStream = context.assets.open("LuidDB.db")
+                val outputStream = FileOutputStream(databasePath)
+                val buffer = ByteArray(1024)
+                var length: Int
+
+                while (inputStream.read(buffer).also { length = it } > 0) {
+                    outputStream.write(buffer, 0, length)
+                }
+
+                outputStream.flush()
+                outputStream.close()
+                inputStream.close()
+            } catch (e: IOException) {
+
+                e.printStackTrace()
+
+
+            }
+        }
     }
 
 
