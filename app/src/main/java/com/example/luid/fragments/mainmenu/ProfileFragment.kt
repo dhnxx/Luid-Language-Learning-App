@@ -47,9 +47,9 @@ class ProfileFragment : Fragment() {
          dayStreak()
          accuracy()
 
-        if(isLoggedIn()) {
+      /*  if(isLoggedIn()) {
             displayuname()           // Display Username ..
-        }
+        } */
 
         for (i in 0 until numberOfCards) {
             val cardView = layoutInflater.inflate(R.layout.achvcardview, achvLinearLayout, false)
