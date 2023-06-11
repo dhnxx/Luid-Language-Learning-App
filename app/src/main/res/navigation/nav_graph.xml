@@ -38,7 +38,11 @@
         android:id="@+id/settingsFragment"
         android:name="com.example.luid.fragments.mainmenu.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_loginRegister"
+            app:destination="@id/loginRegister" />
+    </fragment>
     <fragment
         android:id="@+id/about_luid2"
         android:name="com.example.luid.fragments.mainmenu.about_luid"
@@ -72,8 +76,11 @@
             android:name="level"
             app:argType="integer"/>
     </fragment>
-
-
+    <activity
+        android:id="@+id/loginRegister"
+        android:name="com.example.luid.fragments.loginregister.LoginRegister"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
 
 
 </navigation>
