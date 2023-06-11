@@ -81,6 +81,8 @@ class WordAssociation : AppCompatActivity() {
     private var decimg1 = ""
     private var decimg2 = ""
     private var lowestGameSession = 0
+    private var isdone = false
+    private var isBackPressed = false
 
 
     private val timerRunnable = object : Runnable {
@@ -177,7 +179,7 @@ class WordAssociation : AppCompatActivity() {
                 // navigate using navController
                 submit(i)
 
-
+                isdone = true
 
                 avgTime = (totalTime / questionList.size)
                 println("AVG TIME: $avgTime")
@@ -188,6 +190,7 @@ class WordAssociation : AppCompatActivity() {
                 intent1.putExtra("totalTime", totalTime)
                 intent1.putExtra("avgTime", avgTime)
                 startActivity(intent1)
+
             }
         }
 
@@ -196,27 +199,27 @@ class WordAssociation : AppCompatActivity() {
 
     override fun onBackPressed() {
         showConfirmationDialog()
-
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onStop() {
+        super.onStop()
 
-        lastRowReset()
-        val intent2 = Intent(this, MainActivity::class.java)
-        intent2.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-        finish()
-        startActivity(intent2)
-
-
+        if (!isdone && !isBackPressed) {
+            lastRowReset()
+            val intent2 = Intent(this, MainActivity::class.java)
+            intent2.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+            finish()
+            startActivity(intent2)
+        }
     }
+
 
 
     @SuppressLint("Range")
     private fun phaseone() {
         val sm = SMLeitner()
         sm.validateQuestionBank(context, level, phase)
-        var gameSessionNumber = sm.getLatestGameSessionNumber(context, level, phase)
+        var gameSessionNumber = sm.getLowestGameSessionNumber(context, level, phase)
 
         var db = DBConnect(applicationContext).readableDatabase
         println("DB  TEMP NOT CREATED")
@@ -630,18 +633,10 @@ class WordAssociation : AppCompatActivity() {
         builder.setMessage("Are you sure you want to go back? Any unsaved progress will be lost.")
         builder.setPositiveButton("Yes") { dialog: DialogInterface, _: Int ->
             // Handle the back action here
+            isBackPressed = true
             super.onBackPressed()
             dialog.dismiss()
-
-
             lastRowReset()
-
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
-            finish()
-
-
         }
         builder.setNegativeButton("No") { dialog: DialogInterface, _: Int ->
             // Continue the current operation, such as staying on the current screen

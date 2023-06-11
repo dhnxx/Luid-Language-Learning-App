@@ -477,7 +477,7 @@ class SMLeitner() {
 
     fun validateQuestionBank(context: Context, level: Int, phase: Int) {
         var db = DBConnect(context).writableDatabase
-        currentGameSession = getLatestGameSessionNumber(context, level, phase)
+        currentGameSession = getLowestGameSessionNumber(context, level, phase)
         var cursor = db.rawQuery(
             "SELECT * FROM $tQuestions WHERE level = $level AND phase = $phase AND game_session = $currentGameSession",
             null

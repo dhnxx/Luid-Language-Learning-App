@@ -134,7 +134,7 @@ class PhaseFragment : Fragment() {
                     )
 
 
-                    phaseList.add(ParentPhase("Phase 1: Word Association", childPhase0,1,1))
+                    phaseList.add(ParentPhase("Phase 1: Word Association", childPhase0, 1, 1))
 
 
 
@@ -154,11 +154,11 @@ class PhaseFragment : Fragment() {
                             },
 
                             true
-                           // sm.ifPassed(db, 1, 1)
+                            // sm.ifPassed(db, 1, 1)
 
                         )
                     )
-                    phaseList.add(ParentPhase("Phase 2: Sentence Fragments", childPhase1,1,2))
+                    phaseList.add(ParentPhase("Phase 2: Sentence Fragments", childPhase1, 1, 2))
 
 
 
@@ -179,11 +179,11 @@ class PhaseFragment : Fragment() {
                             },
 
 //                            sm.ifPassed(db, 1, 2)
-                        true
+                            true
 
                         )
                     )
-                    phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2,1,3))
+                    phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2, 1, 3))
 
 
                 }
@@ -204,11 +204,11 @@ class PhaseFragment : Fragment() {
                                     )
                                 )
                             },
-                          true
+                            true
                         )
                     )
 
-                    phaseList.add(ParentPhase("Phase 1: Word Association", childPhase0,2,1))
+                    phaseList.add(ParentPhase("Phase 1: Word Association", childPhase0, 2, 1))
 
                     childPhase1.add(
                         ChildPhase(
@@ -227,7 +227,7 @@ class PhaseFragment : Fragment() {
                             sm.ifPassed(db, 2, 1)
                         )
                     )
-                    phaseList.add(ParentPhase("Phase 2: Sentence Fragments", childPhase1,2,2))
+                    phaseList.add(ParentPhase("Phase 2: Sentence Fragments", childPhase1, 2, 2))
 
 
                     childPhase2.add(
@@ -247,7 +247,7 @@ class PhaseFragment : Fragment() {
                             sm.ifPassed(db, 2, 2)
                         )
                     )
-                    phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2,2,3))
+                    phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2, 2, 3))
 
 
                 }
@@ -268,10 +268,10 @@ class PhaseFragment : Fragment() {
                                     )
                                 )
                             },
-                         true
+                            true
                         )
                     )
-                    phaseList.add(ParentPhase("Phase 1: Word Association", childPhase0,3,1))
+                    phaseList.add(ParentPhase("Phase 1: Word Association", childPhase0, 3, 1))
 
                     childPhase1.add(
                         ChildPhase(
@@ -291,7 +291,7 @@ class PhaseFragment : Fragment() {
 
                         )
                     )
-                    phaseList.add(ParentPhase("Phase 2: Sentence Fragments", childPhase1,3,2))
+                    phaseList.add(ParentPhase("Phase 2: Sentence Fragments", childPhase1, 3, 2))
 
 
                     childPhase2.add(
@@ -311,7 +311,7 @@ class PhaseFragment : Fragment() {
                             sm.ifPassed(db, 3, 2)
                         )
                     )
-                    phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2,3,3))
+                    phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2, 3, 3))
 
 
                 }
@@ -332,10 +332,10 @@ class PhaseFragment : Fragment() {
                                     )
                                 )
                             },
-                           true
+                            true
                         )
                     )
-                    phaseList.add(ParentPhase("Phase 1: Word Association", childPhase0,4,1))
+                    phaseList.add(ParentPhase("Phase 1: Word Association", childPhase0, 4, 1))
 
                     childPhase1.add(
                         ChildPhase(
@@ -354,7 +354,7 @@ class PhaseFragment : Fragment() {
                             sm.ifPassed(db, 4, 1)
                         )
                     )
-                    phaseList.add(ParentPhase("Phase 2: Sentence Fragments", childPhase1,4,2))
+                    phaseList.add(ParentPhase("Phase 2: Sentence Fragments", childPhase1, 4, 2))
 
 
                     childPhase2.add(
@@ -374,7 +374,7 @@ class PhaseFragment : Fragment() {
                             sm.ifPassed(db, 4, 2)
                         )
                     )
-                    phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2,4,3))
+                    phaseList.add(ParentPhase("Phase 3: Sentence Construction", childPhase2, 4, 3))
 
 
                 }

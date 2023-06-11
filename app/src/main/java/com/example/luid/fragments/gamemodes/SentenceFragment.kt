@@ -26,7 +26,6 @@ import com.example.luid.fragments.mainmenu.MainActivity
 class SentenceFragment : AppCompatActivity() {
     private lateinit var questionList: ArrayList<SentenceFragment>
     private lateinit var questionText: TextView
-
     private lateinit var questionImage: ImageView
     private lateinit var answerLabel: TextView
     private lateinit var flexboxLayout: com.google.android.flexbox.FlexboxLayout
@@ -49,6 +48,8 @@ class SentenceFragment : AppCompatActivity() {
     private var correctAnswerCounter = 0
     private var id = ArrayList<Int>()
     private var lowestGameSession = 0
+    private var isdone = false
+    private var isBackPressed = false
 
 
     private val timerRunnable = object : Runnable {
@@ -133,6 +134,7 @@ class SentenceFragment : AppCompatActivity() {
                 progressbar.progress = i + 1
             } else {
 
+                isdone = true
                 submit(i)
                 avgTime = (totalTime / questionList.size)
                 println("AVG TIME: $avgTime")
@@ -163,15 +165,16 @@ class SentenceFragment : AppCompatActivity() {
         showConfirmationDialog()
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onStop() {
+        super.onStop()
 
-        lastRowReset()
-        val intent2 = Intent(this, MainActivity::class.java)
-        intent2.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-        finish()
-        startActivity(intent2)
-
+        if (!isdone && !isBackPressed) {
+            lastRowReset()
+            val intent2 = Intent(this, MainActivity::class.java)
+            intent2.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+            finish()
+            startActivity(intent2)
+        }
     }
 
 
@@ -179,7 +182,7 @@ class SentenceFragment : AppCompatActivity() {
         val sm = SMLeitner()
         val ph2 = PhaseTwoClass()
         sm.validateQuestionBank(context, level, phase)
-        var gameSessionNumber = sm.getLatestGameSessionNumber(context, level, phase)
+        var gameSessionNumber = sm.getLowestGameSessionNumber(context, level, phase)
 
         var db = DBConnect(context).writableDatabase
         // CREATE TEMP TABLE QUESTION
@@ -391,14 +394,10 @@ class SentenceFragment : AppCompatActivity() {
         builder.setMessage("Are you sure you want to go back? Any unsaved progress will be lost.")
         builder.setPositiveButton("Yes") { dialog: DialogInterface, _: Int ->
             // Handle the back action here
+            isBackPressed = true
             super.onBackPressed()
-
-            lastRowReset()
-
             dialog.dismiss()
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
+            lastRowReset()
         }
         builder.setNegativeButton("No") { dialog: DialogInterface, _: Int ->
             // Continue the current operation, such as staying on the current screen

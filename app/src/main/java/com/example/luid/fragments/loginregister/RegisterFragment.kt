@@ -15,6 +15,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import com.example.luid.R
 import com.example.luid.classes.User
+import com.example.luid.database.DBConnect
+import com.example.luid.database.DBConnect.Companion.user_records_tb
 import com.example.luid.database.DatabaseBackup
 import com.example.luid.databinding.ActivityLoginRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -82,17 +84,19 @@ class RegisterFragment : Fragment() {
                                                 )
                                                 checkAndCopyDatabase(requireContext())
 
-                                                val currentUser = FirebaseAuth.getInstance().currentUser?.uid
-                                                if(currentUser != null) {
-                                                    DatabaseBackup().backup(requireContext(), currentUser)
+                                                val currentUser =
+                                                    FirebaseAuth.getInstance().currentUser?.uid
+                                                if (currentUser != null) {
+                                                    DatabaseBackup().backup(
+                                                        requireContext(),
+                                                        currentUser
+                                                    )
                                                 }
 
 
                                                 val intent =
                                                     Intent(context, LoginRegister::class.java)
                                                 startActivity(intent)
-
-
 
 
                                             } else {
@@ -266,7 +270,16 @@ class RegisterFragment : Fragment() {
         val databasePath = context.getDatabasePath("LuidDB.db")
 
 
-        if (!databasePath.exists()) {
+        var db = DBConnect(context).readableDatabase
+        var cursor = db.rawQuery("SELECT * FROM $user_records_tb", null)
+        var count = cursor.count
+
+        println("Count: $count \uD83D\uDCB0\uD83D\uDCB0\uD83D\uDCB0\uD83D\uDCB0\uD83D\uDCB0\uD83D\uDCB0 ")
+
+
+
+
+        if (!databasePath.exists() || count == 0) {
             // Database file doesn't exist, so copy the template to the user's phone
             try {
                 val inputStream = context.assets.open("LuidDB.db")
@@ -288,6 +301,10 @@ class RegisterFragment : Fragment() {
 
             }
         }
+
+        cursor.close()
+        db.close()
+
     }
 
 
