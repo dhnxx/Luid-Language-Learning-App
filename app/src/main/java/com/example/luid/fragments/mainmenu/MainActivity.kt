@@ -30,36 +30,9 @@ class MainActivity : AppCompatActivity() {
         setupWithNavController(bottomNav, navController)
         bottomNav.itemIconTintList = null
 
-        checkAndCopyDatabase(applicationContext)
+
     }
 
-    private fun checkAndCopyDatabase(context: Context) {
-        val databasePath = context.getDatabasePath("LuidDB.db")
-
-
-        if (!databasePath.exists()) {
-            // Database file doesn't exist, so copy the template to the user's phone
-            try {
-                val inputStream = context.assets.open("LuidDB.db")
-                val outputStream = FileOutputStream(databasePath)
-                val buffer = ByteArray(1024)
-                var length: Int
-
-                while (inputStream.read(buffer).also { length = it } > 0) {
-                    outputStream.write(buffer, 0, length)
-                }
-
-                outputStream.flush()
-                outputStream.close()
-                inputStream.close()
-            } catch (e: IOException) {
-
-                e.printStackTrace()
-
-
-            }
-        }
-    }
 
 
     }
