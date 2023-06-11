@@ -17,6 +17,7 @@ import com.example.luid.classes.SMLeitner
 import com.example.luid.database.DBConnect
 import com.example.luid.database.DBConnect.Companion.questions_tb
 import com.example.luid.database.DBConnect.Companion.temp_qstion
+import com.example.luid.database.DBConnect.Companion.user_records_tb
 import com.example.luid.database.DatabaseBackup
 import com.example.luid.fragments.mainmenu.MainActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -196,10 +197,27 @@ class ResultActivity : AppCompatActivity() {
             } while (cursor.moveToNext())
         }
 
+
+
+
+
     }
 
     private fun end() {
         //
+        var db = DBConnect(applicationContext).writableDatabase
+        var sm = SMLeitner()
+        var lowestGameSession = sm.getLowestGameSessionNumber(this, level, phase)
+        var cv = ContentValues()
+        var id = 0
+        var cursor2 = db.rawQuery("SELECT * FROM $user_records_tb WHERE level = $level AND phase = $phase", null)
+        var idCol = cursor2.getColumnIndex("_id")
+        if(cursor2.moveToLast()){
+            cv.put("game_session_number", lowestGameSession)
+            id = cursor2.getInt(idCol)
+        }
+        db.update("user_records", cv, "_id = $id", null)
+
         val currentUser = FirebaseAuth.getInstance().currentUser?.uid
         if(currentUser != null) {
             DatabaseBackup().backup(this, currentUser)

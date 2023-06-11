@@ -505,17 +505,16 @@ class SMLeitner() {
             var gameSessionTempVal = cursor.getInt(gameSessionCol)
             var gameSessionValUpd = gameSessionTempVal
             var idVal = cursor.getInt(idCol)
-            currentGameSession = gameSessionValUpd
+            currentGameSession = gameSessionValUpd + 1
 
-            cv.put("game_session_number", gameSessionValUpd)
+            cv.put("game_session_number", currentGameSession)
             db.update("$tUserRecords", cv, "_id = $idVal", null)
             cv.clear()
 
-            cv.put("game_session", gameSessionValUpd)
+            cv.put("game_session", currentGameSession)
 //            db.update("$tTempQuestions", cv, "game_session = $gameSessionTempVal", null)
             db.update(
-                "$tQuestions",
-                cv,
+                "$tQuestions", cv,
                 "game_session = $gameSessionTempVal AND level = $level AND phase = $phase",
                 null
             )
