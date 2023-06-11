@@ -15,11 +15,20 @@ import com.example.luid.R
 import com.example.luid.classes.Achievement
 import com.example.luid.database.DBConnect
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import java.io.File.separator
 
 class ProfileFragment : Fragment() {
     private lateinit var name: TextView
     private lateinit var fbauth: FirebaseAuth
+
+
+    private lateinit var dbref : DatabaseReference
+    private lateinit var textview : TextView
+    private lateinit var textview1 : TextView
+    private lateinit var textview2 : TextView
+    private lateinit var textview3 : TextView
 
 
 
@@ -46,6 +55,18 @@ class ProfileFragment : Fragment() {
         val achvLinearLayout = view.findViewById<LinearLayout>(R.id.achvlinearLayout)
         val numberOfCards = 5
         val achContent = getAchContent()
+        textview = view.findViewById(R.id.textView)
+        textview1 = view.findViewById(R.id.textStats1)
+        textview2 = view.findViewById(R.id.textStats2)
+        textview3 = view.findViewById(R.id.textStats3)
+
+        currentlvl()
+         dayStreak()
+         accuracy()
+
+      /*  if(isLoggedIn()) {
+            displayuname()           // Display Username ..
+        } */
 
         for (i in 0 until numberOfCards) {
             val cardView = layoutInflater.inflate(R.layout.achvcardview, achvLinearLayout, false)
@@ -147,7 +168,69 @@ class ProfileFragment : Fragment() {
         return list
     }
 
+
+    fun isLoggedIn(): Boolean {
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        return currentUser != null
+    }
+    fun currentlvl() {
+        val db = DBConnect(context).readableDatabase
+        val cursor = db.rawQuery("SELECT current_level FROM achievements WHERE _id = 1", null)
+        if (cursor.moveToFirst()) {
+            val currLevel = cursor.getInt(0)
+            textview1.text = currLevel.toString()
+        }
+        cursor.close()
+        db.close()
+    }
+
+    fun dayStreak() {
+        val db = DBConnect(context).readableDatabase
+        val countCursor = db.rawQuery("SELECT COUNT(time_spent) FROM user_records", null)
+        val totalCount = if(countCursor.moveToFirst()) { countCursor.getInt(0) } else{ 0 }
+        countCursor.close()
+
+        val sumCursor = db.rawQuery("SELECT SUM(score) FROM user_records", null)
+        val sum = if(sumCursor.moveToFirst()) { sumCursor.getInt(0) } else { 0 }
+        sumCursor.close()
+
+        var daystreak = 0
+        if (totalCount > 0) { daystreak = sum / totalCount }
+
+        db.close()
+        textview3.text = daystreak.toString()
+    }
+
+    fun accuracy() {
+        val db = DBConnect(context).readableDatabase
+        // Get row count
+        val countQuery = "SELECT COUNT(score) FROM user_records"
+        val countCursor = db.rawQuery(countQuery, null)
+        val totalCount = if (countCursor.moveToFirst()) { countCursor.getInt(0) } else { 0 }
+        countCursor.close()
+
+        // Get sum of the score
+        val sumQuery = "SELECT SUM(score) FROM user_records"
+        val sumCursor = db.rawQuery(sumQuery, null)
+        val sum = if (sumCursor.moveToFirst()) { sumCursor.getInt(0) } else{ 0 }
+        sumCursor.close()
+
+        var accuracy = 0
+        if (totalCount > 0) {
+            accuracy = sum / totalCount
+        }
+
+        db.close()
+        textview2.text = "$accuracy%"
+    }
+
+
+
+
+
 }
+
+
 
 
 
