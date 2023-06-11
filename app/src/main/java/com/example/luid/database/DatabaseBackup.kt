@@ -14,23 +14,33 @@ import java.io.IOException
 
 class DatabaseBackup() {
 
-    fun backup(context: Context, uid: String){
-        val databasePath = context.getDatabasePath("LuidDB.db").absolutePath
-        val backupFile = File(databasePath)
-        val renamedBackupFile = File(context.cacheDir, "user_$uid.db")
+    fun backup(context: Context, uid: String) {
+        val originalDatabasePath = context.getDatabasePath("LuidDB.db").absolutePath
+        val originalDatabaseFile = File(originalDatabasePath)
+
+        // Copy the original database file to a new location
+        val backupDir = context.cacheDir // Choose a suitable backup directory
+        val backupFile = File(backupDir, "LuidDB_backup.db")
+        originalDatabaseFile.copyTo(backupFile, overwrite = true)
+
+        // Rename the copied backup file
+        val renamedBackupFile = File(backupDir, "user_$uid.db")
         backupFile.renameTo(renamedBackupFile)
 
+        // Upload the renamed backup file to Firebase Storage
         val storageRef = FirebaseStorage.getInstance().reference
-        val backupRef = storageRef.child("backups/user_$uid/user_$uid.db")
+        val backupRef = storageRef.child("backups/user_$uid/${renamedBackupFile.name}")
         val uploadTask = backupRef.putFile(Uri.fromFile(renamedBackupFile))
 
         uploadTask.addOnSuccessListener {
-          //  Toast.makeText(context, "uploadTask successful..", Toast.LENGTH_SHORT)
+            // Backup upload successful
+            // Toast.makeText(context, "Backup uploaded successfully.", Toast.LENGTH_SHORT).show()
         }.addOnFailureListener { exception ->
-           // Toast.makeText(context, "uploadTask failed..", Toast.LENGTH_SHORT)
-//
+            // Backup upload failed
+            // Toast.makeText(context, "Backup upload failed.", Toast.LENGTH_SHORT).show()
         }
     }
+
     fun restore(context: Context, uid: String) {
         val databasePath = context.getDatabasePath("LuidDB.db").absolutePath
         val absolutePath = File(databasePath)

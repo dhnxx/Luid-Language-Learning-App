@@ -3,6 +3,10 @@ package com.example.luid.database
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import androidx.test.core.app.ApplicationProvider
+import java.io.FileOutputStream
+import java.io.IOException
+
 class DBConnect(context: Context?) : SQLiteOpenHelper(context, DB_NAME, null, DB_V) {
 
     companion object {
@@ -27,6 +31,7 @@ class DBConnect(context: Context?) : SQLiteOpenHelper(context, DB_NAME, null, DB
         const val level = "level"
 
     }
+
 
     override fun onCreate(db: SQLiteDatabase) {
 
@@ -54,6 +59,36 @@ class DBConnect(context: Context?) : SQLiteOpenHelper(context, DB_NAME, null, DB
                     "description TEXT, current_progress INTEGER DEFAULT 0, current_level INTEGER DEFAULT 0, maximum_value INTEGER )"
         )
 
+/*
+        var cursor = db.rawQuery("SELECT * FROM $questions_tb", null)
+        val databasePath = context.getDatabasePath("LuidDB.db")
+
+        if (cursor.count <= 0 ){
+
+            try {
+                val inputStream = context.assets.open("LuidDB.db")
+                val outputStream = FileOutputStream(databasePath)
+                val buffer = ByteArray(1024)
+                var length: Int
+
+                while (inputStream.read(buffer).also { length = it } > 0) {
+                    outputStream.write(buffer, 0, length)
+                }
+
+                outputStream.flush()
+                outputStream.close()
+                inputStream.close()
+            } catch (e: IOException) {
+
+                e.printStackTrace()
+
+
+            }
+
+        }
+
+*/
+
         // TEMP TABLESZ
 
 
@@ -62,6 +97,8 @@ class DBConnect(context: Context?) : SQLiteOpenHelper(context, DB_NAME, null, DB
         // USER_RECORD TEMP
 
         // ACHIEVEMENTS TEMP
+
+
 
     }
 
