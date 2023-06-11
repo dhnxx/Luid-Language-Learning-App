@@ -197,10 +197,6 @@ class ResultActivity : AppCompatActivity() {
             } while (cursor.moveToNext())
         }
 
-
-
-
-
     }
 
     private fun end() {
@@ -218,6 +214,9 @@ class ResultActivity : AppCompatActivity() {
         }
         db.update("user_records", cv, "_id = $id", null)
 
+        cursor2.close()
+        db.close()
+        
         val currentUser = FirebaseAuth.getInstance().currentUser?.uid
         if(currentUser != null) {
             DatabaseBackup().backup(this, currentUser)

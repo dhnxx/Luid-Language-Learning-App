@@ -47,6 +47,8 @@ class SentenceConstruction : AppCompatActivity() {
     private var score = 0.0
     private var correctAnswerCounter = 0
     private var lowestGameSession = 0
+    private var isdone = false
+    private var isBackPressed = false
 
 
     private val timerRunnable = object : Runnable {
@@ -125,6 +127,7 @@ class SentenceConstruction : AppCompatActivity() {
                 progressbar.progress = i + 1
             } else {
 
+               isdone = true
                 submit(i)
                 avgTime = (totalTime / questionList.size)
                 println("AVG TIME: $avgTime")
@@ -150,22 +153,23 @@ class SentenceConstruction : AppCompatActivity() {
         showConfirmationDialog()
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onStop() {
+        super.onStop()
 
-        lastRowReset()
-        val intent2 = Intent(this, MainActivity::class.java)
-        intent2.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-        finish()
-        startActivity(intent2)
-
+        if (!isdone && !isBackPressed) {
+            lastRowReset()
+            val intent2 = Intent(this, MainActivity::class.java)
+            intent2.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+            finish()
+            startActivity(intent2)
+        }
     }
 
 
     private fun phasetwo() {
         val sm = SMLeitner()
         sm.validateQuestionBank(context, level, phase)
-        var gameSessionNumber = sm.getLatestGameSessionNumber(context, level, phase)
+        var gameSessionNumber = sm.getLowestGameSessionNumber(context, level, phase)
         var db = DBConnect(context).writableDatabase
         // CREATE TEMP TABLE QUESTION
         db.execSQL("DROP TABLE IF EXISTS ${DBConnect.temp_qstion}")
@@ -343,14 +347,10 @@ class SentenceConstruction : AppCompatActivity() {
         builder.setMessage("Are you sure you want to go back? Any unsaved progress will be lost.")
         builder.setPositiveButton("Yes") { dialog: DialogInterface, _: Int ->
             // Handle the back action here
+            isBackPressed = true
             super.onBackPressed()
             dialog.dismiss()
-
             lastRowReset()
-
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
         }
         builder.setNegativeButton("No") { dialog: DialogInterface, _: Int ->
             // Continue the current operation, such as staying on the current screen
@@ -358,7 +358,6 @@ class SentenceConstruction : AppCompatActivity() {
         }
         builder.show()
     }
-
     private fun lastRowReset() {
         // Resetting of last row in user_records when user closes the game prematurely
         var ldb = DBConnect(context).writableDatabase

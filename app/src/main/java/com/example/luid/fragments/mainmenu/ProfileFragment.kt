@@ -169,7 +169,7 @@ class ProfileFragment : Fragment() {
 
     fun currentlvl() {
         val db = DBConnect(context).readableDatabase
-        val cursor = db.rawQuery("SELECT current_level FROM achievements WHERE _id = 1", null)
+        val cursor = db.rawQuery("SELECT current_level FROM achievements WHERE _id = 3", null)
         if (cursor.moveToFirst()) {
             val currLevel = cursor.getInt(0)
             textview1.text = currLevel.toString()
@@ -180,7 +180,7 @@ class ProfileFragment : Fragment() {
 
     fun dayStreak() {
         val db = DBConnect(context).readableDatabase
-        val countCursor = db.rawQuery("SELECT COUNT(time_spent) FROM user_records", null)
+        val countCursor = db.rawQuery("SELECT current_level FROM achievements WHERE _id = 1", null)
         val totalCount = if (countCursor.moveToFirst()) {
             countCursor.getInt(0)
         } else {

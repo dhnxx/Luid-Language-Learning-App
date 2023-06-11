@@ -20,6 +20,7 @@ import android.content.SharedPreferences
 import android.graphics.drawable.ColorDrawable
 import android.util.Patterns
 import com.example.luid.classes.User
+import com.example.luid.database.DBConnect
 import com.example.luid.database.DatabaseBackup
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -194,7 +195,16 @@ class LoginFragment : Fragment() {
         val databasePath = context.getDatabasePath("LuidDB.db")
 
 
-        if (!databasePath.exists()) {
+        var db = DBConnect(context).readableDatabase
+        var cursor = db.rawQuery("SELECT * FROM ${DBConnect.user_records_tb}", null)
+        var count = cursor.count
+
+        println("Count: $count \uD83D\uDCB0\uD83D\uDCB0\uD83D\uDCB0\uD83D\uDCB0\uD83D\uDCB0\uD83D\uDCB0 ")
+
+
+
+
+        if (!databasePath.exists() || count == 0) {
             // Database file doesn't exist, so copy the template to the user's phone
             try {
                 val inputStream = context.assets.open("LuidDB.db")
@@ -216,6 +226,10 @@ class LoginFragment : Fragment() {
 
             }
         }
+
+        cursor.close()
+        db.close()
+
     }
 
 
