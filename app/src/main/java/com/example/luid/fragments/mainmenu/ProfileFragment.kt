@@ -151,7 +151,7 @@ class ProfileFragment : Fragment() {
         return list
     }
 
-    fun displayuname() {
+    fun displayuname() { // display username
         val currentUser = FirebaseAuth.getInstance().currentUser?.uid
         val dbRef = FirebaseDatabase.getInstance().getReference("Users")
 
