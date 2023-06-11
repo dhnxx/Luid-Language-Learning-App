@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import com.example.luid.R
 import com.example.luid.classes.User
@@ -34,7 +35,7 @@ class RegisterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view =  inflater.inflate(R.layout.fragment_register, container, false)
+        val view = inflater.inflate(R.layout.fragment_register, container, false)
         val loginButton = view.findViewById<TextView>(R.id.loginRedirectText)
 
         firebaseAuth = FirebaseAuth.getInstance()
@@ -47,7 +48,7 @@ class RegisterFragment : Fragment() {
         registerButton = view.findViewById(R.id.signup_button)
 
         dbref = FirebaseDatabase.getInstance().getReference("Users")
-        registerButton.setOnClickListener(){
+        registerButton.setOnClickListener() {
             val email = etemail.text.toString()
             val uname = etuname.text.toString()
             val fname = etfname.text.toString()
@@ -55,43 +56,87 @@ class RegisterFragment : Fragment() {
             val pass = etpass.text.toString()
             val confpass = etconpass.text.toString()
 
-            val user = User(uname, fname,lname)
-            if(email.isNotEmpty() && pass.isNotEmpty() && confpass.isNotEmpty() && uname.isNotEmpty() && fname.isNotEmpty() && lname.isNotEmpty()){
-                if(pass == confpass){
-                    firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener{
-                        if(it.isSuccessful){
-                            val uid = firebaseAuth.currentUser?.uid
-                            println(uid)
-                            if(uid != null){
-                                println("Inside uid != null")
-                                dbref.child(uid).setValue(user).addOnCompleteListener {
-                                    if(it.isSuccessful){
-                                        println("Inside successful setvalueuser")
-                                        Toast.makeText(context, "Successfull", Toast.LENGTH_SHORT)
-                                        val intent = Intent(context, LoginRegister::class.java)
-                                        startActivity(intent)
-                                    } else{
-                                        println("Inside failed setvalueuser")
-                                        Toast.makeText(context, "Failed to update profile", Toast.LENGTH_SHORT)
-                                    }
 
+            val user = User(uname, fname, lname)
+            if (email.isNotEmpty() && pass.isNotEmpty() && confpass.isNotEmpty() && uname.isNotEmpty() && fname.isNotEmpty() && lname.isNotEmpty()) {
+                if (isStrongPassword(pass)) {
+                    if (pass == confpass) {
+                        firebaseAuth.createUserWithEmailAndPassword(email, pass)
+                            .addOnCompleteListener {
+                                if (it.isSuccessful) {
+                                    val uid = firebaseAuth.currentUser?.uid
+                                    println(uid)
+                                    if (uid != null) {
+                                        println("Inside uid != null")
+                                        dbref.child(uid).setValue(user).addOnCompleteListener {
+                                            if (it.isSuccessful) {
+                                                println("Inside successful setvalueuser")
+                                                Toast.makeText(
+                                                    context,
+                                                    "Successful",
+                                                    Toast.LENGTH_SHORT
+                                                )
+                                                val intent =
+                                                    Intent(context, LoginRegister::class.java)
+                                                startActivity(intent)
+                                            } else {
+                                                println("Inside failed setvalueuser")
+                                                Toast.makeText(
+                                                    context,
+                                                    "Failed to update profile",
+                                                    Toast.LENGTH_SHORT
+                                                )
+                                            }
+
+                                        }
+                                    }
+                                    Toast.makeText(
+                                        context,
+                                        it.exception.toString(),
+                                        Toast.LENGTH_SHORT
+                                    )
+                                        .show()
+                                } else {
+
+                                    Toast.makeText(
+                                        context,
+                                        it.exception.toString(),
+                                        Toast.LENGTH_SHORT
+                                    )
+                                        .show()
                                 }
                             }
-                            Toast.makeText(context, it.exception.toString(), Toast.LENGTH_SHORT).show()
-                        } else {
+                    } else {
 
-                            Toast.makeText(context, it.exception.toString(), Toast.LENGTH_SHORT).show()
-                        }
+                        Toast.makeText(context, "Password does not match.", Toast.LENGTH_SHORT)
+                            .show()
                     }
-                } else{
+                } else {
+                    Toast.makeText(context, "Password is not strong enough.", Toast.LENGTH_SHORT)
+                        .show()
 
-                    Toast.makeText(context, "Password does not match.", Toast.LENGTH_SHORT).show()
+                    // create a dialog box to show the password requirements
+
+                    val builder = AlertDialog.Builder(requireContext())
+                    builder.setTitle("Password Requirements")
+                    builder.setMessage("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.")
+                    builder.setPositiveButton("OK") { dialog, _ ->
+                        dialog.dismiss()
+                        etpass.setText("")
+                        etconpass.setText("")
+                    }
+
+                    val alertDialog: AlertDialog = builder.create()
+                    alertDialog.show()
+
+
                 }
-            } else{
+
+
+            } else {
 
                 Toast.makeText(context, "Fields are empty..", Toast.LENGTH_SHORT).show()
             }
-
 
 
         }
@@ -101,7 +146,7 @@ class RegisterFragment : Fragment() {
         loginButton.setOnClickListener {
 
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
-            
+
         }
 
 
@@ -109,6 +154,96 @@ class RegisterFragment : Fragment() {
 
 
         return view
+    }
+
+    private fun isStrongPassword(password: String): Boolean {
+        val minLength = 8
+        val minUpperCase = 1
+        val minLowerCase = 1
+        val minDigits = 1
+        val minSpecialChars = 1
+
+        // Check password length
+        if (password.length < minLength) {
+            return false
+        }
+
+        // Check uppercase letters
+        var upperCaseCount = 0
+        for (char in password) {
+            if (char.isUpperCase()) {
+                upperCaseCount++
+            }
+        }
+        if (upperCaseCount < minUpperCase) {
+            return false
+        }
+
+        // Check lowercase letters
+        var lowerCaseCount = 0
+        for (char in password) {
+            if (char.isLowerCase()) {
+                lowerCaseCount++
+            }
+        }
+        if (lowerCaseCount < minLowerCase) {
+            return false
+        }
+
+        // Check digits
+        var digitCount = 0
+        for (char in password) {
+            if (char.isDigit()) {
+                digitCount++
+            }
+        }
+        if (digitCount < minDigits) {
+            return false
+        }
+
+        // Check special characters
+        val specialChars = setOf(
+            '!',
+            '@',
+            '#',
+            '$',
+            '%',
+            '^',
+            '&',
+            '*',
+            '(',
+            ')',
+            '-',
+            '_',
+            '+',
+            '=',
+            '{',
+            '}',
+            '[',
+            ']',
+            '|',
+            '\\',
+            ':',
+            ';',
+            '<',
+            '>',
+            ',',
+            '.',
+            '?',
+            '/'
+        )
+        var specialCharCount = 0
+        for (char in password) {
+            if (specialChars.contains(char)) {
+                specialCharCount++
+            }
+        }
+        if (specialCharCount < minSpecialChars) {
+            return false
+        }
+
+        // Password meets all criteria
+        return true
     }
 
 

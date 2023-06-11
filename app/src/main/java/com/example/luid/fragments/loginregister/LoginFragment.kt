@@ -47,6 +47,8 @@ class LoginFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_login, container, false)
         val registerButton = view.findViewById<TextView>(R.id.registerRedirectText)
         val forgot = view.findViewById<TextView>(R.id.forgot_password)
+        val context = requireContext()
+        val databasePath = context.getDatabasePath("LuidDB.db")
 
 
         fbauth = FirebaseAuth.getInstance()
@@ -59,14 +61,30 @@ class LoginFragment : Fragment() {
             requireContext().getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
         guestbutton = view.findViewById(R.id.guest_button)
 
-// logged in user
+            // logged in user
         if (isLoggedIn() && fbauth.currentUser != null) {
             redirectToMain()
             return view
         }
 
         guestbutton.setOnClickListener() {
-            checkAndCopyDatabase(requireContext())
+/*
+            val inputStream = context.assets.open("LuidDB.db")
+            val outputStream = FileOutputStream(databasePath)
+            val buffer = ByteArray(1024)
+            var length: Int
+
+            while (inputStream.read(buffer).also { length = it } > 0) {
+                outputStream.write(buffer, 0, length)
+            }
+
+            outputStream.flush()
+            outputStream.close()
+            inputStream.close()
+
+
+ */
+            checkAndCopyDatabase(context)
             redirectToMain()
         }
 
@@ -106,15 +124,18 @@ class LoginFragment : Fragment() {
                             try {
                                 DatabaseBackup().restore(requireContext(), currentUser)
                             } catch (e: IOException) {
-                                e.printStackTrace()
                                 checkAndCopyDatabase(requireContext())
+                                println("CREATED NEW DATABASE ✨✨✨✨")
+                                DatabaseBackup().backup(requireContext(), currentUser)
+
                             }
                         }
                         //
                         saveLoginStatus()
                         redirectToMain()
                     } else {
-                        Toast.makeText(context, it.exception.toString(), Toast.LENGTH_SHORT).show()
+                      Toast.makeText(context, it.exception.toString(), Toast.LENGTH_SHORT).show()
+
                     }
                 }
             } else {

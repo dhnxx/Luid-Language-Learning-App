@@ -14,9 +14,13 @@ import androidx.cardview.widget.CardView
 import com.example.luid.R
 import com.example.luid.classes.Achievement
 import com.example.luid.database.DBConnect
+import com.google.firebase.auth.FirebaseAuth
 import java.io.File.separator
 
 class ProfileFragment : Fragment() {
+    private lateinit var name: TextView
+    private lateinit var fbauth: FirebaseAuth
+
 
 
     override fun onCreateView(
@@ -25,6 +29,20 @@ class ProfileFragment : Fragment() {
     ): View? {
         // Dynamic achievements card view code.
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
+
+        fbauth = FirebaseAuth.getInstance()
+        name = view.findViewById(R.id.userName)
+
+        if (fbauth.currentUser != null) {
+            val sharedPref = requireContext().getSharedPreferences("loginPrefs", 0)
+            val fname = sharedPref.getString("fname", "")
+            val lname = sharedPref.getString("lname", "")
+            name.text = "$fname $lname"
+        } else {
+            name.text = "Guest"
+        }
+
+
         val achvLinearLayout = view.findViewById<LinearLayout>(R.id.achvlinearLayout)
         val numberOfCards = 5
         val achContent = getAchContent()

@@ -25,9 +25,9 @@ class DatabaseBackup() {
         val uploadTask = backupRef.putFile(Uri.fromFile(renamedBackupFile))
 
         uploadTask.addOnSuccessListener {
-            Toast.makeText(context, "uploaddTask successful..", Toast.LENGTH_SHORT)
+          //  Toast.makeText(context, "uploadTask successful..", Toast.LENGTH_SHORT)
         }.addOnFailureListener { exception ->
-            Toast.makeText(context, "uploaddTask failed..", Toast.LENGTH_SHORT)
+           // Toast.makeText(context, "uploadTask failed..", Toast.LENGTH_SHORT)
 //
         }
     }
@@ -46,7 +46,7 @@ class DatabaseBackup() {
             // Rename the file
             if (localFile.renameTo(renamedFile)) {
                 // File renamed successfully
-                Toast.makeText(context, "File renamed successfully", Toast.LENGTH_SHORT).show()
+               // Toast.makeText(context, "File renamed successfully", Toast.LENGTH_SHORT).show()
 
                 // Replace the existing database file with the restored file
                 if (absolutePath.exists()) {
@@ -59,10 +59,10 @@ class DatabaseBackup() {
 
             } else {
                 // Failed to rename the file
-                Toast.makeText(context, "Failed to rename the file", Toast.LENGTH_SHORT).show()
+              //  Toast.makeText(context, "Failed to rename the file", Toast.LENGTH_SHORT).show()
             }
         }.addOnFailureListener { exception ->
-            Toast.makeText(context, "Download failed: ${exception.message}", Toast.LENGTH_SHORT).show()
+           // Toast.makeText(context, "Download failed: ${exception.message}", Toast.LENGTH_SHORT).show()
         }
     }
 
