@@ -1,5 +1,6 @@
 package com.example.luid.fragments.mainmenu
 
+import TimerBroadcastReceiver
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
@@ -11,7 +12,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -30,6 +30,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import com.example.luid.database.DBConnect.Companion.user_records_tb
+import android.app.AlarmManager
+import android.app.PendingIntent
 
 class PhaseFragment : Fragment() {
 
@@ -44,7 +46,8 @@ class PhaseFragment : Fragment() {
     private lateinit var button: Button
     private lateinit var livesText: TextView
     private lateinit var timerText: TextView
-
+    private lateinit var alarmManager: AlarmManager
+    private lateinit var alarmIntent: PendingIntent
     private lateinit var builder: AlertDialog.Builder
     private lateinit var timer: CountDownTimer
     private lateinit var currencyText: TextView
@@ -95,7 +98,21 @@ class PhaseFragment : Fragment() {
 
         timerText = view.findViewById(R.id.timerText)
 
-        startTimer(timerText, maxLives, timerDuration, livesText, button)
+        alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmIntent = Intent(context, TimerBroadcastReceiver::class.java).let { intent ->
+            intent.action = "TIMER_ACTION"
+            PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+        }
+
+        // Start or cancel the alarm based on your app's logic
+        if (lives < maxLives) {
+            startTimer(timerText, maxLives, timerDuration, livesText, button)
+            setAlarm(timerDuration) // Set the alarm to trigger when the timer finishes
+        } else {
+            timerText.isVisible = false
+            button.isVisible = false
+            cancelAlarm() // Cancel the alarm if it was previously set
+        }
 
 
 
@@ -498,6 +515,19 @@ class PhaseFragment : Fragment() {
                 }
             }.start()
         }
+    }
+
+    private fun setAlarm(timerDuration: Long) {
+        // Calculate the alarm trigger time (current time + timer duration)
+        val triggerTime = System.currentTimeMillis() + timerDuration
+
+        // Set the alarm using AlarmManager
+        alarmManager.set(AlarmManager.RTC_WAKEUP, triggerTime, alarmIntent)
+    }
+
+    private fun cancelAlarm() {
+        // Cancel the alarm using AlarmManager
+        alarmManager.cancel(alarmIntent)
     }
 
 
