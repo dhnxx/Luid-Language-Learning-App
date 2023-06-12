@@ -2,7 +2,11 @@ package com.example.luid.fragments.mainmenu
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -27,7 +31,10 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import java.io.ByteArrayOutputStream
 import java.util.*
+import android.util.Base64
+
 
 class SettingsFragment : Fragment() {
     private lateinit var fbauth: FirebaseAuth
@@ -70,9 +77,9 @@ class SettingsFragment : Fragment() {
         dataSync.alpha = 1f
         val context = requireContext()
 
-        changeAvatar.isEnabled = false
-        changeAvatar.isClickable = false
-        changeAvatar.alpha = 0.5f
+        changeAvatar.isEnabled = true
+        changeAvatar.isClickable = true
+        changeAvatar.alpha = 1f
 
         // Initialize FirebaseStorage instance
         val storage = FirebaseStorage.getInstance()
@@ -81,7 +88,12 @@ class SettingsFragment : Fragment() {
         val storageRef = FirebaseStorage.getInstance().reference
         val avatarRef = storageRef.child("backups/user_$uid/avatar_$uid.jpg")
 
+        changeAvatar.setOnClickListener{
 
+            openGallery()
+
+            //dito yung code sa change avatar
+        }
         //change auth password (not forgot password) when change password is clicked
         changePassword.setOnClickListener {
 
@@ -99,21 +111,11 @@ class SettingsFragment : Fragment() {
             val change = dialog.findViewById<Button>(R.id.btnReset)
             //when cancel is clicked, dismiss the dialog
 
-            changeAvatar.setOnClickListener{
-
-                openGallery()
-
-            //dito yung code sa change avatar
-            }
-
-
-
-
-
 
             cancel.setOnClickListener {
                 alertDialog.dismiss()
             }
+
             //when change is clicked, change the password if the old password is correct and the new password is strong enough with the istrongpassword function
             change.setOnClickListener {
                 //get the current user
@@ -245,20 +247,20 @@ class SettingsFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_IMAGE_GALLERY && resultCode == Activity.RESULT_OK) {
             val imageUri = data?.data
+            val sharedPreferences = requireContext().getSharedPreferences("sharedpref", Context.MODE_PRIVATE)
             imageUri?.let {
-                // Upload the image to Firebase Storage
-                uploadImageToStorage(it)
+                // Upload image to Firebase Storage
+                uploadImageAndSaveToSharedPreferences(it, sharedPreferences)
             }
         }
     }
 
     private fun getCurrentUserId(): String {
-        val user = FirebaseAuth.getInstance().currentUser
+        val user = FirebaseAuth.getInstance().currentUser   // Get id current user
         return user?.uid ?: ""
     }
 
-    private fun uploadImageToStorage(imageUri: Uri) {
-        avatarImageView = requireView().findViewById(R.id.avatarImage)
+    private fun uploadImageAndSaveToSharedPreferences(imageUri: Uri, sharedPreferences: SharedPreferences) {
         val storageReference = FirebaseStorage.getInstance().getReference("useravatar")
         val avatarRef = storageReference.child(STORAGE_PATH + getCurrentUserId() + ".jpg")
         val uploadTask = avatarRef.putFile(imageUri)
@@ -269,20 +271,32 @@ class SettingsFragment : Fragment() {
             avatarRef.downloadUrl
         }.addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                val downloadUrl = task.result
-                // Save the download URL to the user's profile or wherever you need it
 
-                // Update the ImageView with the new avatar
-                Glide.with(requireContext())
-                    .load(downloadUrl)
-                    .placeholder(R.drawable.home) // Placeholder image while loading
-                    .error(R.drawable.settings) // Error image if the download fails
-                    .into(avatarImageView)
+                // Load the image
+                val bitmap: Bitmap = BitmapFactory.decodeStream(context?.contentResolver?.openInputStream(imageUri))
+
+                // Convert
+                val base64Image: String = bitmapToBase64(bitmap)
+
+
+                val editor = sharedPreferences.edit()
+                editor.putString("imageKey", base64Image)
+                editor.apply()
             } else {
-                // Handle the failure case
+
             }
         }
     }
+
+    // Function to convert a Bitmap to a base64 string
+    private fun bitmapToBase64(bitmap: Bitmap): String {
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+        val byteArray = byteArrayOutputStream.toByteArray()
+        val base64String = Base64.encodeToString(byteArray, Base64.DEFAULT)
+        return base64String.replace("\n", "") // Remove line breaks from the base64 string
+    }
+
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, REQUEST_IMAGE_GALLERY)
