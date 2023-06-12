@@ -64,7 +64,7 @@ class ProfileFragment : Fragment() {
         textview3 = view.findViewById(R.id.textStats3)
         avatarImage = view.findViewById(R.id.avatarImage)
 
-
+//
         currentlvl()
         dayStreak()
         accuracy()
