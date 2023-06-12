@@ -127,7 +127,7 @@ class SentenceConstruction : AppCompatActivity() {
                 progressbar.progress = i + 1
             } else {
 
-               isdone = true
+                isdone = true
                 submit(i)
                 avgTime = (totalTime / questionList.size)
                 println("AVG TIME: $avgTime")
@@ -142,7 +142,7 @@ class SentenceConstruction : AppCompatActivity() {
         }
 
         clearButton.setOnClickListener {
-            answerLabel.text.clear()
+            answerLabel.text = null
 
 
         }
@@ -308,96 +308,109 @@ class SentenceConstruction : AppCompatActivity() {
             time = (elapsedTime / 1000).toInt()
 
             answerLabel.isEnabled = false
-            if (answerLabel.text.replace(
+
+
+            var text = answerLabel.text.toString()
+            question.sentence = question.sentence
+
+            if (text.replace("\\s+".toRegex(), "")
+                == question.sentence.replace(
                     "\\s+".toRegex(),
                     ""
-                ) == question.sentence.replace("\\s+".toRegex(), "")
+                ) || (text.lowercase() == question.sentence.lowercase())
             ) {
                 answerLabel.setTextColor(Color.parseColor("#037d50"))
                 println("CORRECT")
                 correctAnswerCounter++
 
                 sm.smLeitnerCalc(context, questionList[i].id, level, phase, true, time)
-            } else {
-                answerLabel.setTextColor(Color.parseColor("#FF0000"))
-                println("WRONG")
 
-                sm.smLeitnerCalc(context, questionList[i].id, level, phase, false, time)
-            }
-            println(answerLabel.text.replace("\\s+".toRegex(), ""))
-            println(question.sentence.replace("\\s+".toRegex(), ""))
 
-            totalTime += time
-            score = sm.scoreCalc(correctAnswerCounter, questionList.size)
-            println("Score = $score")
-            println("Time = $time")
-            println("Total Time = $totalTime")
-
-            nextButton.visibility = View.VISIBLE
-            nextButton.isEnabled = true
-            submitButton.visibility = View.INVISIBLE
-            submitButton.isEnabled = false
-
-        }
-    }
-
-    private fun showConfirmationDialog() {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Confirm")
-        builder.setMessage("Are you sure you want to go back? Any unsaved progress will be lost.")
-        builder.setPositiveButton("Yes") { dialog: DialogInterface, _: Int ->
-            // Handle the back action here
-            isBackPressed = true
-            super.onBackPressed()
-            dialog.dismiss()
-            lastRowReset()
-        }
-        builder.setNegativeButton("No") { dialog: DialogInterface, _: Int ->
-            // Continue the current operation, such as staying on the current screen
-            dialog.dismiss()
-        }
-        builder.show()
-    }
-    private fun lastRowReset() {
-        // Resetting of last row in user_records when user closes the game prematurely
-        var ldb = DBConnect(context).writableDatabase
-        var cursor = ldb.rawQuery(
-            "SELECT * FROM $user_records_tb WHERE level = $level AND phase = $phase",
-            null
-        )
-        var cv = ContentValues()
-
-        var colId = cursor.getColumnIndex("_id")
-
-        println("COUNT IN DIALOG : ${cursor.count}")
-
-        if (cursor.count > 1) {
-            cursor.moveToLast()
-            var id = cursor.getInt(colId)
-            cursor.moveToPrevious()
-            println("PREV ID IN DIALOG : ${id}")
-            cv.put("game_session_number", lowestGameSession)
-            cv.put("score", 0)
-            cv.put("time_spent", 0)
-
-            ldb.update("$user_records_tb", cv, "_id = $id", null)
 
         } else {
-            cursor.moveToFirst()
-            var id = cursor.getInt(colId)
-            cv.put("game_session_number", lowestGameSession)
-            cv.put("score", 0)
-            cv.put("time_spent", 0)
+            answerLabel.setTextColor(Color.parseColor("#FF0000"))
+            println("WRONG")
 
-            ldb.update("$user_records_tb", cv, "_id = $id", null)
+            sm.smLeitnerCalc(context, questionList[i].id, level, phase, false, time)
         }
 
-        cv.clear()
-        cursor.close()
-        ldb.close()
 
+
+        println(answerLabel.text.replace("\\s+".toRegex(), ""))
+        println(question.sentence.replace("\\s+".toRegex(), ""))
+
+        totalTime += time
+        score = sm.scoreCalc(correctAnswerCounter, questionList.size)
+        println("Score = $score")
+        println("Time = $time")
+        println("Total Time = $totalTime")
+
+        nextButton.visibility = View.VISIBLE
+        nextButton.isEnabled = true
+        submitButton.visibility = View.INVISIBLE
+        submitButton.isEnabled = false
 
     }
+}
+
+private fun showConfirmationDialog() {
+    val builder = AlertDialog.Builder(this)
+    builder.setTitle("Confirm")
+    builder.setMessage("Are you sure you want to go back? Any unsaved progress will be lost.")
+    builder.setPositiveButton("Yes") { dialog: DialogInterface, _: Int ->
+        // Handle the back action here
+        isBackPressed = true
+        super.onBackPressed()
+        dialog.dismiss()
+        lastRowReset()
+    }
+    builder.setNegativeButton("No") { dialog: DialogInterface, _: Int ->
+        // Continue the current operation, such as staying on the current screen
+        dialog.dismiss()
+    }
+    builder.show()
+}
+
+private fun lastRowReset() {
+    // Resetting of last row in user_records when user closes the game prematurely
+    var ldb = DBConnect(context).writableDatabase
+    var cursor = ldb.rawQuery(
+        "SELECT * FROM $user_records_tb WHERE level = $level AND phase = $phase",
+        null
+    )
+    var cv = ContentValues()
+
+    var colId = cursor.getColumnIndex("_id")
+
+    println("COUNT IN DIALOG : ${cursor.count}")
+
+    if (cursor.count > 1) {
+        cursor.moveToLast()
+        var id = cursor.getInt(colId)
+        cursor.moveToPrevious()
+        println("PREV ID IN DIALOG : ${id}")
+        cv.put("game_session_number", lowestGameSession)
+        cv.put("score", 0)
+        cv.put("time_spent", 0)
+
+        ldb.update("$user_records_tb", cv, "_id = $id", null)
+
+    } else {
+        cursor.moveToFirst()
+        var id = cursor.getInt(colId)
+        cv.put("game_session_number", lowestGameSession)
+        cv.put("score", 0)
+        cv.put("time_spent", 0)
+
+        ldb.update("$user_records_tb", cv, "_id = $id", null)
+    }
+
+    cv.clear()
+    cursor.close()
+    ldb.close()
+
+
+}
 }
 
 
