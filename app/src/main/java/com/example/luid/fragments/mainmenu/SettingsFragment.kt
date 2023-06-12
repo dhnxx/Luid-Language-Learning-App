@@ -30,7 +30,6 @@ class SettingsFragment : Fragment() {
     private lateinit var dataSync: RelativeLayout
     private lateinit var name: TextView
     private lateinit var email: TextView
-    private lateinit var nmLayout: RelativeLayout
     private lateinit var changePassword: RelativeLayout
     private lateinit var changeAvatar: RelativeLayout
     private lateinit var saveButton: Button
@@ -53,17 +52,11 @@ class SettingsFragment : Fragment() {
         email = view.findViewById(R.id.email)
         changePassword = view.findViewById(R.id.changePassword)
         changeAvatar = view.findViewById(R.id.changeAvatar)
-        nmLayout = view.findViewById(R.id.nightModeLayout)
         saveButton = view.findViewById(R.id.saveButton)
         accountLayout.alpha = 1f
         dataSync.alpha = 1f
         val context = requireContext()
 
-        //disable nmlayout
-
-        nmLayout.isEnabled = false
-        nmLayout.isClickable = false
-        nmLayout.alpha = 0.5f
         changeAvatar.isEnabled = false
         changeAvatar.isClickable = false
         changeAvatar.alpha = 0.5f
