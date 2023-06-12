@@ -254,7 +254,7 @@ class SettingsFragment : Fragment() {
             }
         }
     }
-
+//
     private fun getCurrentUserId(): String {
         val user = FirebaseAuth.getInstance().currentUser   // Get id current user
         return user?.uid ?: ""
