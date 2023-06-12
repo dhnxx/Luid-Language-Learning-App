@@ -19,6 +19,9 @@ import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import java.io.File
 import java.io.FileOutputStream
+import android.net.Uri
+import com.google.firebase.storage.FirebaseStorage
+import java.util.*
 
 class SettingsFragment : Fragment() {
     private lateinit var fbauth: FirebaseAuth
@@ -61,15 +64,16 @@ class SettingsFragment : Fragment() {
         nmLayout.isEnabled = false
         nmLayout.isClickable = false
         nmLayout.alpha = 0.5f
-        //disable changePassword
-//        changePassword.isEnabled = false
-//        changePassword.isClickable = false
-//        changePassword.alpha = 0.5f
-        //disable changeAvatar
         changeAvatar.isEnabled = false
         changeAvatar.isClickable = false
         changeAvatar.alpha = 0.5f
 
+        // Initialize FirebaseStorage instance
+        val storage = FirebaseStorage.getInstance()
+        val uid = fbauth.currentUser?.uid.toString()
+        // Get a reference to the root of your storage
+        val storageRef = FirebaseStorage.getInstance().reference
+        val avatarRef = storageRef.child("backups/user_$uid/avatar_$uid.jpg")
 
 
         //change auth password (not forgot password) when change password is clicked
@@ -88,6 +92,16 @@ class SettingsFragment : Fragment() {
             val cancel = dialog.findViewById<Button>(R.id.btnCancel)
             val change = dialog.findViewById<Button>(R.id.btnReset)
             //when cancel is clicked, dismiss the dialog
+
+            changeAvatar.setOnClickListener{
+
+
+                //dito yung code sa change avatar
+            }
+
+
+
+
             cancel.setOnClickListener {
                 alertDialog.dismiss()
             }
@@ -113,29 +127,44 @@ class SettingsFragment : Fragment() {
                                 user.updatePassword(newPass).addOnCompleteListener { task ->
                                     if (task.isSuccessful) {
                                         //password changed successfully
-                                        Toast.makeText(context, "Password changed successfully", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(
+                                            context,
+                                            "Password changed successfully",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
                                         alertDialog.dismiss()
                                     } else {
                                         //password change failed
-                                        Toast.makeText(context, "Password change failed", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(
+                                            context,
+                                            "Password change failed",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
                                     }
                                 }
                             } else {
                                 //new password and confirm password do not match
-                                Toast.makeText(context, "New password and confirm password do not match", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    "New password and confirm password do not match",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         } else {
                             //new password is not strong enough
-                            Toast.makeText(context, "New password is not strong enough", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                context,
+                                "New password is not strong enough",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     } else {
                         //old password is incorrect
-                        Toast.makeText(context, "Old password is incorrect", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Old password is incorrect", Toast.LENGTH_SHORT)
+                            .show()
                     }
                 }
             }
-
-
 
 
         }
@@ -190,7 +219,7 @@ class SettingsFragment : Fragment() {
 
             saveButton.setOnClickListener {
                 val currentUser = FirebaseAuth.getInstance().currentUser?.uid
-                if(currentUser != null) {
+                if (currentUser != null) {
                     DatabaseBackup().backup(context, currentUser)
                     Toast.makeText(context, "Data Saved", Toast.LENGTH_SHORT).show()
                 }
@@ -202,6 +231,7 @@ class SettingsFragment : Fragment() {
 
         return view
     }
+
     private fun isStrongPassword(password: String): Boolean {
         val minLength = 8
         val minUpperCase = 1

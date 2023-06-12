@@ -49,7 +49,7 @@ class LoginFragment : Fragment() {
         val registerButton = view.findViewById<TextView>(R.id.registerRedirectText)
         val forgot = view.findViewById<TextView>(R.id.forgot_password)
         val context = requireContext()
-        val databasePath = context.getDatabasePath("LuidDB.db")
+
 
 
         fbauth = FirebaseAuth.getInstance()
@@ -113,12 +113,12 @@ class LoginFragment : Fragment() {
                                 checkAndCopyDatabase(requireContext())
                                 println("CREATED NEW DATABASE ✨✨✨✨")
                                 DatabaseBackup().backup(requireContext(), currentUser)
-
+                                saveLoginStatus()
+                                redirectToMain()
+                                //dito yung Avatar
                             }
                         }
-                        //
-                        saveLoginStatus()
-                        redirectToMain()
+
                     } else {
                       Toast.makeText(context, it.exception.toString(), Toast.LENGTH_SHORT).show()
 

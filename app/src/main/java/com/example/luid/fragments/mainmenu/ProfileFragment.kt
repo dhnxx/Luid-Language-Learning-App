@@ -29,6 +29,7 @@ class ProfileFragment : Fragment() {
     private lateinit var textview1: TextView
     private lateinit var textview2: TextView
     private lateinit var textview3: TextView
+    private lateinit var avatarImage: ImageView
 
 
     override fun onCreateView(
@@ -58,6 +59,8 @@ class ProfileFragment : Fragment() {
         textview1 = view.findViewById(R.id.textStats1)
         textview2 = view.findViewById(R.id.textStats2)
         textview3 = view.findViewById(R.id.textStats3)
+        avatarImage = view.findViewById(R.id.avatarImage)
+
 
         currentlvl()
         dayStreak()
