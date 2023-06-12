@@ -15,6 +15,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.view.isVisible
 import com.example.luid.R
 import com.example.luid.classes.PhaseTwoClass
 import com.example.luid.classes.SMLeitner
@@ -286,6 +287,8 @@ class SentenceFragment : AppCompatActivity() {
 
 
 
+        clearButton.isVisible = true
+        clearButton.isEnabled = true
 
         flexboxLayout.removeAllViews()
         answerLabel.text = ""
@@ -351,6 +354,10 @@ class SentenceFragment : AppCompatActivity() {
             handler?.removeCallbacks(timerRunnable)
 
             time = (elapsedTime / 1000).toInt()
+
+            clearButton.isVisible = false
+            clearButton.isEnabled = false
+
 
             if (answerLabel.text.replace(
                     "\\s+".toRegex(),

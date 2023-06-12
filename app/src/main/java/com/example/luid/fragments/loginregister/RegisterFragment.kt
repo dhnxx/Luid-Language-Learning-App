@@ -73,10 +73,8 @@ class RegisterFragment : Fragment() {
                                     val uid = firebaseAuth.currentUser?.uid
                                     println(uid)
                                     if (uid != null) {
-                                        println("Inside uid != null")
                                         dbref.child(uid).setValue(user).addOnCompleteListener {
                                             if (it.isSuccessful) {
-                                                println("Inside successful setvalueuser")
                                                 Toast.makeText(
                                                     context,
                                                     "Successful",
@@ -110,12 +108,7 @@ class RegisterFragment : Fragment() {
 
                                         }
                                     }
-                                    Toast.makeText(
-                                        context,
-                                        it.exception.toString(),
-                                        Toast.LENGTH_SHORT
-                                    )
-                                        .show()
+
                                 } else {
 
                                     Toast.makeText(
