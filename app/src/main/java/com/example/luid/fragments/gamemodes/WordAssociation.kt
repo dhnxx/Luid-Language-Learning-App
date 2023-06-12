@@ -514,11 +514,20 @@ class WordAssociation : AppCompatActivity() {
 
     // hello
     private fun clear() {
-        choiceOne.setCardBackgroundColor(Color.parseColor("#FFFBFF"))
-        choiceTwo.setCardBackgroundColor(Color.parseColor("#FFFBFF"))
-        choiceThree.setCardBackgroundColor(Color.parseColor("#FFFBFF"))
-        choiceFour.setCardBackgroundColor(Color.parseColor("#FFFBFF"))
+        val currentNightMode = resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK
+        if (currentNightMode == android.content.res.Configuration.UI_MODE_NIGHT_YES) {
+            choiceOne.setCardBackgroundColor(Color.parseColor("#1C1B1E"))
+            choiceTwo.setCardBackgroundColor(Color.parseColor("#1C1B1E"))
+            choiceThree.setCardBackgroundColor(Color.parseColor("#1C1B1E"))
+            choiceFour.setCardBackgroundColor(Color.parseColor("#1C1B1E"))
 
+        }else {
+            choiceOne.setCardBackgroundColor(Color.parseColor("#FFFBFF"))
+            choiceTwo.setCardBackgroundColor(Color.parseColor("#FFFBFF"))
+            choiceThree.setCardBackgroundColor(Color.parseColor("#FFFBFF"))
+            choiceFour.setCardBackgroundColor(Color.parseColor("#FFFBFF"))
+
+        }
     }
 
     private fun selectAnswer() {
