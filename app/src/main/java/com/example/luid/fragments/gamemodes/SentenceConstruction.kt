@@ -16,6 +16,8 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import com.example.luid.R
 import com.example.luid.classes.PhaseTwoClass
 import com.example.luid.classes.SMLeitner
@@ -268,8 +270,10 @@ class SentenceConstruction : AppCompatActivity() {
         handler = Handler()
         handler?.postDelayed(timerRunnable, 0)
         questionText.text = questionList[i].question
-
+        clearButton.isVisible = true
         answerLabel.text.clear()
+
+
         answerLabel.isEnabled = true
 
         nextButton.isEnabled = false
@@ -279,8 +283,16 @@ class SentenceConstruction : AppCompatActivity() {
 
 
         //answerLabel.text = ""
+        answerLabel.setBackgroundResource(R.drawable.rounded_corner)
+        val currentNightMode = resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK
 
-        answerLabel.setTextColor(Color.parseColor("#1C1B1F"))
+        if (currentNightMode == android.content.res.Configuration.UI_MODE_NIGHT_YES) {
+            answerLabel.setTextColor(Color.WHITE)
+            answerLabel.setHintTextColor(Color.WHITE)
+        } else {
+            answerLabel.setTextColor(Color.BLACK)
+            answerLabel.setHintTextColor(Color.BLACK)
+        }
 
         val question = questionList[i]
         val deconstructedWords = question.getDeconstructedSentence()
@@ -308,6 +320,14 @@ class SentenceConstruction : AppCompatActivity() {
             time = (elapsedTime / 1000).toInt()
 
             answerLabel.isEnabled = false
+            clearButton.isVisible = false
+
+
+
+          //set constraint top to bottom of answer label
+            val params = nextButton.layoutParams as ConstraintLayout.LayoutParams
+            params.topMargin = 20
+            params.topToBottom = R.id.answerLabel
 
 
             var text = answerLabel.text.toString()
@@ -319,98 +339,118 @@ class SentenceConstruction : AppCompatActivity() {
                     ""
                 ) || (text.lowercase() == question.sentence.lowercase())
             ) {
-                answerLabel.setTextColor(Color.parseColor("#037d50"))
+
+
+                answerLabel.setBackgroundColor(Color.parseColor("#CFFFD5"))
+                val currentNightMode =
+                    resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK
+                if (currentNightMode == android.content.res.Configuration.UI_MODE_NIGHT_YES) {
+                    answerLabel.setTextColor(Color.BLACK)
+                    answerLabel.setHintTextColor(Color.BLACK)
+                } else {
+                    answerLabel.setTextColor(Color.WHITE)
+                    answerLabel.setHintTextColor(Color.WHITE)
+                }
+
                 println("CORRECT")
                 correctAnswerCounter++
 
                 sm.smLeitnerCalc(context, questionList[i].id, level, phase, true, time)
 
 
+            } else {
+                answerLabel.setBackgroundColor(Color.parseColor("#FFB6C1"))
+                val currentNightMode =
+                    resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK
+                if (currentNightMode == android.content.res.Configuration.UI_MODE_NIGHT_YES) {
+                    answerLabel.setTextColor(Color.BLACK)
+                    answerLabel.setHintTextColor(Color.BLACK)
+                } else {
+                    answerLabel.setTextColor(Color.WHITE)
+                    answerLabel.setHintTextColor(Color.WHITE)
+                }
+                println("WRONG")
+
+                sm.smLeitnerCalc(context, questionList[i].id, level, phase, false, time)
+            }
+
+
+
+            println(answerLabel.text.replace("\\s+".toRegex(), ""))
+            println(question.sentence.replace("\\s+".toRegex(), ""))
+
+            totalTime += time
+            score = sm.scoreCalc(correctAnswerCounter, questionList.size)
+            println("Score = $score")
+            println("Time = $time")
+            println("Total Time = $totalTime")
+
+            nextButton.visibility = View.VISIBLE
+            nextButton.isEnabled = true
+            submitButton.visibility = View.INVISIBLE
+            submitButton.isEnabled = false
+
+        }
+    }
+
+    private fun showConfirmationDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Confirm")
+        builder.setMessage("Are you sure you want to go back? Any unsaved progress will be lost.")
+        builder.setPositiveButton("Yes") { dialog: DialogInterface, _: Int ->
+            // Handle the back action here
+            isBackPressed = true
+            super.onBackPressed()
+            dialog.dismiss()
+            lastRowReset()
+        }
+        builder.setNegativeButton("No") { dialog: DialogInterface, _: Int ->
+            // Continue the current operation, such as staying on the current screen
+            dialog.dismiss()
+        }
+        builder.show()
+    }
+
+    private fun lastRowReset() {
+        // Resetting of last row in user_records when user closes the game prematurely
+        var ldb = DBConnect(context).writableDatabase
+        var cursor = ldb.rawQuery(
+            "SELECT * FROM $user_records_tb WHERE level = $level AND phase = $phase",
+            null
+        )
+        var cv = ContentValues()
+
+        var colId = cursor.getColumnIndex("_id")
+
+        println("COUNT IN DIALOG : ${cursor.count}")
+
+        if (cursor.count > 1) {
+            cursor.moveToLast()
+            var id = cursor.getInt(colId)
+            cursor.moveToPrevious()
+            println("PREV ID IN DIALOG : ${id}")
+            cv.put("game_session_number", lowestGameSession)
+            cv.put("score", 0)
+            cv.put("time_spent", 0)
+
+            ldb.update("$user_records_tb", cv, "_id = $id", null)
 
         } else {
-            answerLabel.setTextColor(Color.parseColor("#FF0000"))
-            println("WRONG")
+            cursor.moveToFirst()
+            var id = cursor.getInt(colId)
+            cv.put("game_session_number", lowestGameSession)
+            cv.put("score", 0)
+            cv.put("time_spent", 0)
 
-            sm.smLeitnerCalc(context, questionList[i].id, level, phase, false, time)
+            ldb.update("$user_records_tb", cv, "_id = $id", null)
         }
 
+        cv.clear()
+        cursor.close()
+        ldb.close()
 
-
-        println(answerLabel.text.replace("\\s+".toRegex(), ""))
-        println(question.sentence.replace("\\s+".toRegex(), ""))
-
-        totalTime += time
-        score = sm.scoreCalc(correctAnswerCounter, questionList.size)
-        println("Score = $score")
-        println("Time = $time")
-        println("Total Time = $totalTime")
-
-        nextButton.visibility = View.VISIBLE
-        nextButton.isEnabled = true
-        submitButton.visibility = View.INVISIBLE
-        submitButton.isEnabled = false
 
     }
-}
-
-private fun showConfirmationDialog() {
-    val builder = AlertDialog.Builder(this)
-    builder.setTitle("Confirm")
-    builder.setMessage("Are you sure you want to go back? Any unsaved progress will be lost.")
-    builder.setPositiveButton("Yes") { dialog: DialogInterface, _: Int ->
-        // Handle the back action here
-        isBackPressed = true
-        super.onBackPressed()
-        dialog.dismiss()
-        lastRowReset()
-    }
-    builder.setNegativeButton("No") { dialog: DialogInterface, _: Int ->
-        // Continue the current operation, such as staying on the current screen
-        dialog.dismiss()
-    }
-    builder.show()
-}
-
-private fun lastRowReset() {
-    // Resetting of last row in user_records when user closes the game prematurely
-    var ldb = DBConnect(context).writableDatabase
-    var cursor = ldb.rawQuery(
-        "SELECT * FROM $user_records_tb WHERE level = $level AND phase = $phase",
-        null
-    )
-    var cv = ContentValues()
-
-    var colId = cursor.getColumnIndex("_id")
-
-    println("COUNT IN DIALOG : ${cursor.count}")
-
-    if (cursor.count > 1) {
-        cursor.moveToLast()
-        var id = cursor.getInt(colId)
-        cursor.moveToPrevious()
-        println("PREV ID IN DIALOG : ${id}")
-        cv.put("game_session_number", lowestGameSession)
-        cv.put("score", 0)
-        cv.put("time_spent", 0)
-
-        ldb.update("$user_records_tb", cv, "_id = $id", null)
-
-    } else {
-        cursor.moveToFirst()
-        var id = cursor.getInt(colId)
-        cv.put("game_session_number", lowestGameSession)
-        cv.put("score", 0)
-        cv.put("time_spent", 0)
-
-        ldb.update("$user_records_tb", cv, "_id = $id", null)
-    }
-
-    cv.clear()
-    cursor.close()
-    ldb.close()
-
-
-}
 }
 
 

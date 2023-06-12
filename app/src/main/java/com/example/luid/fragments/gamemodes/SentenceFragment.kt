@@ -53,6 +53,7 @@ class SentenceFragment : AppCompatActivity() {
     private var isBackPressed = false
 
 
+
     private val timerRunnable = object : Runnable {
         override fun run() {
             timeInMilliseconds = SystemClock.uptimeMillis() - startTime
@@ -85,6 +86,7 @@ class SentenceFragment : AppCompatActivity() {
         clearButton = findViewById(R.id.clearButton)
         submitButton = findViewById(R.id.submitButton)
         nextButton = findViewById(R.id.nextButton)
+
 
         var i = 0
         val sm = SMLeitner()
@@ -292,7 +294,22 @@ class SentenceFragment : AppCompatActivity() {
 
         flexboxLayout.removeAllViews()
         answerLabel.text = ""
-        answerLabel.setTextColor(Color.parseColor("#1C1B1F"))
+
+
+
+        // if dark mode then change the color of the text to white, create a dark mode function
+
+        val currentNightMode = resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK
+
+        if (currentNightMode == android.content.res.Configuration.UI_MODE_NIGHT_YES) {
+            answerLabel.setTextColor(Color.WHITE)
+            answerLabel.setHintTextColor(Color.WHITE)
+        } else {
+            answerLabel.setTextColor(Color.BLACK)
+            answerLabel.setHintTextColor(Color.BLACK)
+        }
+
+        answerLabel.setBackgroundResource(R.drawable.rounded_corner)
 
         val question = questionList[i]
         val deconstructedWords = question.getDeconstructedSentence()
@@ -348,7 +365,7 @@ class SentenceFragment : AppCompatActivity() {
     private fun submit(i: Int) {
         val sm = SMLeitner()
         val question = questionList[i]
-
+        answerLabel.setBackgroundResource(R.drawable.rounded_corner)
 
         submitButton.setOnClickListener {
             handler?.removeCallbacks(timerRunnable)
@@ -364,13 +381,33 @@ class SentenceFragment : AppCompatActivity() {
                     ""
                 ) == question.sentence.replace("\\s+".toRegex(), "")
             ) {
-                answerLabel.setTextColor(Color.parseColor("#037d50"))
+
+                answerLabel.setBackgroundResource(R.drawable.rounded_corner)
+                answerLabel.setBackgroundColor(Color.parseColor("#CFFFD5"))
+                val currentNightMode = resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK
+                if (currentNightMode == android.content.res.Configuration.UI_MODE_NIGHT_YES) {
+                    answerLabel.setTextColor(Color.WHITE)
+                    answerLabel.setHintTextColor(Color.WHITE)
+                } else {
+                    answerLabel.setTextColor(Color.BLACK)
+                    answerLabel.setHintTextColor(Color.BLACK)
+                }
+
                 println("CORRECT")
                 correctAnswerCounter++
 
                 sm.smLeitnerCalc(context, questionList[i].id, level, phase, true, time)
             } else {
-                answerLabel.setTextColor(Color.parseColor("#FF0000"))
+                answerLabel.setBackgroundResource(R.drawable.rounded_corner)
+                answerLabel.setBackgroundColor(Color.parseColor("#FFB6C1"))
+                val currentNightMode = resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK
+                if (currentNightMode == android.content.res.Configuration.UI_MODE_NIGHT_YES) {
+                    answerLabel.setTextColor(Color.WHITE)
+                    answerLabel.setHintTextColor(Color.WHITE)
+                } else {
+                    answerLabel.setTextColor(Color.BLACK)
+                    answerLabel.setHintTextColor(Color.BLACK)
+                }
                 println("WRONG")
 
                 sm.smLeitnerCalc(context, questionList[i].id, level, phase, false, time)
