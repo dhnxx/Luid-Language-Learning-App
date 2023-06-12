@@ -1,6 +1,8 @@
 package com.example.luid.fragments.mainmenu
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -20,7 +22,11 @@ import com.google.firebase.auth.FirebaseAuth
 import java.io.File
 import java.io.FileOutputStream
 import android.net.Uri
+import android.provider.MediaStore
+import android.widget.ImageView
+import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import java.util.*
 
 class SettingsFragment : Fragment() {
@@ -34,6 +40,12 @@ class SettingsFragment : Fragment() {
     private lateinit var changePassword: RelativeLayout
     private lateinit var changeAvatar: RelativeLayout
     private lateinit var saveButton: Button
+    private lateinit var avatarImageView: ImageView
+
+    companion object {
+        private const val REQUEST_IMAGE_GALLERY = 1
+        private const val STORAGE_PATH = "avatars/"
+    }
 
 
     @SuppressLint("SetTextI18n")
@@ -41,6 +53,7 @@ class SettingsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
 
@@ -95,9 +108,12 @@ class SettingsFragment : Fragment() {
 
             changeAvatar.setOnClickListener{
 
+                openGallery()
 
-                //dito yung code sa change avatar
+            //dito yung code sa change avatar
             }
+
+
 
 
 
@@ -230,6 +246,53 @@ class SettingsFragment : Fragment() {
 
 
         return view
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_IMAGE_GALLERY && resultCode == Activity.RESULT_OK) {
+            val imageUri = data?.data
+            imageUri?.let {
+                // Upload the image to Firebase Storage
+                uploadImageToStorage(it)
+            }
+        }
+    }
+
+    private fun getCurrentUserId(): String {
+        val user = FirebaseAuth.getInstance().currentUser
+        return user?.uid ?: ""
+    }
+
+    private fun uploadImageToStorage(imageUri: Uri) {
+        avatarImageView = requireView().findViewById(R.id.avatarImage)
+        val storageReference = FirebaseStorage.getInstance().getReference("useravatar")
+        val avatarRef = storageReference.child(STORAGE_PATH + getCurrentUserId() + ".jpg")
+        val uploadTask = avatarRef.putFile(imageUri)
+        uploadTask.continueWithTask { task ->
+            if (!task.isSuccessful) {
+                task.exception?.let { throw it }
+            }
+            avatarRef.downloadUrl
+        }.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val downloadUrl = task.result
+                // Save the download URL to the user's profile or wherever you need it
+
+                // Update the ImageView with the new avatar
+                Glide.with(requireContext())
+                    .load(downloadUrl)
+                    .placeholder(R.drawable.home) // Placeholder image while loading
+                    .error(R.drawable.settings) // Error image if the download fails
+                    .into(avatarImageView)
+            } else {
+                // Handle the failure case
+            }
+        }
+    }
+    private fun openGallery() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(intent, REQUEST_IMAGE_GALLERY)
     }
 
     private fun isStrongPassword(password: String): Boolean {
