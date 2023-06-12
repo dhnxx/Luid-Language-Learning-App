@@ -4,18 +4,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:layout_gravity="center">
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal">
 
     <com.google.android.material.card.MaterialCardView
 
         android:id="@+id/cardView"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="550dp"
         android:layout_marginTop="50dp"
-        android:layout_marginBottom="50dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginStart="0dp"
+        android:layout_marginBottom="50dp"
         android:clickable="false"
         android:focusable="false"
         android:foreground="?attr/selectableItemBackground"
@@ -24,10 +23,10 @@
         app:cardElevation="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_max="500dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_min="300dp"
-        app:layout_constraintHeight_max="500dp"
         app:strokeWidth="0dp">
 
         <LinearLayout
@@ -83,7 +82,7 @@
             <TextView
                 android:id="@+id/level_description"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="100dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
@@ -92,7 +91,6 @@
                 android:textColor="?attr/colorOnSurface"
                 android:textSize="16dp" />
 
-
             <Button
                 android:id="@+id/levelButton"
                 android:layout_width="match_parent"
@@ -100,8 +98,8 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
-                android:textSize="16dp"
-                android:text="Play">
+                android:text="Play"
+                android:textSize="16dp">
 
 
             </Button>
