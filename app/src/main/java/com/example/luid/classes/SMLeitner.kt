@@ -21,10 +21,17 @@ class SMLeitner() {
     var currentGameSession = 0
 
 
-    //FORMULA for Leitner
+    //FORMULA for SuperMemo Algorithm
     //# EF'= EF+(0.1-((5-q)*0.08)-((5-q)0.02))
+
+    //CATEGORIZING using Leitner System
+    //EF' < 1.30 -> 2
+    //EF' in 1.30..1.50 -> 2
+    //EF' in 1.51..2.14 -> 1
+    //else -> 0
+
     //FORMULA for Interval
-    //# I = EF * (d + n - 1)
+    //# I = EF * (df + n - 1)
     fun smLeitnerCalc(
         context: Context,
         qId: Int,
