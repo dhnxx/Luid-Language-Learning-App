@@ -555,7 +555,7 @@ class SMLeitner() {
         var mainEFCol = 0
 
         do {
-            cursorMain = db.rawQuery("SELECT * FROM $temp_qstion WHERE _id = $idTemp", null)
+            cursorMain = db.rawQuery("SELECT * FROM $questions_tb WHERE _id = $idTemp", null)
             cursorMain.moveToFirst()
             mainEFCol = cursorMain.getColumnIndex("easiness_factor")
 
@@ -620,20 +620,19 @@ class SMLeitner() {
             }while (cursor.moveToPrevious())
         }
 
-
-
-        when (currProg) {
-            in 1..2 -> currLevel = 1
-            in 3..4 -> currLevel = 2
-            in 5..6 -> currLevel = 3
-            else -> currLevel = 4
-        }
-
         if (tempCurrProg == 0){
             currProg = 0
             currLevel = 0
         }else{
             currProg = tempCurrProg
+
+            when (currProg) {
+                in 1..2 -> currLevel = 1
+                in 3..4 -> currLevel = 2
+                in 5..6 -> currLevel = 3
+                else -> currLevel = 4
+            }
+
         }
 
         cv.put("current_level", "$currLevel")
