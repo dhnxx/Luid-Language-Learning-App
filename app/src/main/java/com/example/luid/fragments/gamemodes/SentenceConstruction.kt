@@ -342,15 +342,10 @@ class SentenceConstruction : AppCompatActivity() {
 
 
                 answerLabel.setBackgroundColor(Color.parseColor("#CFFFD5"))
-                val currentNightMode =
-                    resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK
-                if (currentNightMode == android.content.res.Configuration.UI_MODE_NIGHT_YES) {
+
                     answerLabel.setTextColor(Color.BLACK)
                     answerLabel.setHintTextColor(Color.BLACK)
-                } else {
-                    answerLabel.setTextColor(Color.WHITE)
-                    answerLabel.setHintTextColor(Color.WHITE)
-                }
+
 
                 println("CORRECT")
                 correctAnswerCounter++
@@ -360,15 +355,11 @@ class SentenceConstruction : AppCompatActivity() {
 
             } else {
                 answerLabel.setBackgroundColor(Color.parseColor("#FFB6C1"))
-                val currentNightMode =
-                    resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK
-                if (currentNightMode == android.content.res.Configuration.UI_MODE_NIGHT_YES) {
+
+
                     answerLabel.setTextColor(Color.BLACK)
                     answerLabel.setHintTextColor(Color.BLACK)
-                } else {
-                    answerLabel.setTextColor(Color.WHITE)
-                    answerLabel.setHintTextColor(Color.WHITE)
-                }
+
                 println("WRONG")
 
                 sm.smLeitnerCalc(context, questionList[i].id, level, phase, false, time)
