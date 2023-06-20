@@ -170,8 +170,8 @@ class PhaseFragment : Fragment() {
                                 )
                             },
 
-                            true
-                            // sm.ifPassed(db, 1, 1)
+
+                         true
 
                         )
                     )
@@ -195,8 +195,8 @@ class PhaseFragment : Fragment() {
 
                             },
 
-//                            sm.ifPassed(db, 1, 2)
-                            true
+                          true
+
 
                         )
                     )
@@ -221,7 +221,7 @@ class PhaseFragment : Fragment() {
                                     )
                                 )
                             },
-                            true
+                           true
                         )
                     )
 
