@@ -139,16 +139,28 @@ class ProfileFragment : Fragment() {
         super.onResume()
 
         // retrieve image from shared pref
-        val sharedPreferences = requireContext().getSharedPreferences("sharedpref", Context.MODE_PRIVATE)
+
+        val sharedPreferences =
+            requireContext().getSharedPreferences("sharedpref", Context.MODE_PRIVATE)
         val base64Image = sharedPreferences.getString("imageKey", "")
 
-        // Convert the base64-encoded string to a Bitmap
-        val decodedByteArray = Base64.decode(base64Image, Base64.DEFAULT)
-        val bitmap = BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.size)
 
-        // Set the retrieved bitmap as the image for the avatarImage ImageView
-        avatarImage.setImageBitmap(bitmap)
+        if (base64Image == "") {
+            avatarImage.setImageResource(R.drawable.kian)
+        } else {
+
+            // Convert the base64-encoded string to a Bitmap
+            val decodedByteArray = Base64.decode(base64Image, Base64.DEFAULT)
+            val bitmap = BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.size)
+
+            // Set the retrieved bitmap as the image for the avatarImage ImageView
+            avatarImage.setImageBitmap(bitmap)
+
+            // if the shared pref is empty, set the image to the default avatar
+        }
     }
+
+
 
     fun getAchContent(): List<Achievement> {
         val list = mutableListOf<Achievement>()
