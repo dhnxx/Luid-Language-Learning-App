@@ -44,9 +44,8 @@ class ProfileFragment : Fragment() {
 
         if (fbauth.currentUser != null) {
             val sharedPref = requireContext().getSharedPreferences("loginPrefs", 0)
-            val fname = sharedPref.getString("fname", "")
-            val lname = sharedPref.getString("lname", "")
-            name.text = "$fname $lname"
+            val uname = sharedPref.getString("uname", "")
+            name.text = "$uname"
         } else {
             name.text = "Guest"
         }
