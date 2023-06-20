@@ -212,14 +212,18 @@ class SettingsFragment : Fragment() {
             name.text = "$fname $lname"
             email.text = emailPref
 
+
             button.setOnClickListener {
                 //logout current user
                 fbauth.signOut()
                 findNavController().navigate(R.id.action_settingsFragment_to_loginRegister)
                 //delete shared preferences
                 val editor = requireContext().getSharedPreferences("loginPrefs", 0).edit()
+                val editor2 = requireContext().getSharedPreferences("sharedpref", 0).edit()
                 editor.clear()
+                editor.putString("imageKey", "")
                 editor.apply()
+                editor2.apply()
 
                 // Clear database path
                 val databasePath = context.getDatabasePath("LuidDB.db").absolutePath
