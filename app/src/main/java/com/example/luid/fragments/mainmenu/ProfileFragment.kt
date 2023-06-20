@@ -1,7 +1,10 @@
 package com.example.luid.fragments.mainmenu
 
+import android.content.Context
 import android.database.Cursor
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -60,11 +63,10 @@ class ProfileFragment : Fragment() {
         textview3 = view.findViewById(R.id.textStats3)
         avatarImage = view.findViewById(R.id.avatarImage)
 
-
+//
         currentlvl()
         dayStreak()
         accuracy()
-
 
 
         for (i in 0 until numberOfCards) {
@@ -125,6 +127,27 @@ class ProfileFragment : Fragment() {
             achvLinearLayout.addView(cardView)
         }
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        avatarImage = view.findViewById(R.id.avatarImage)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // retrieve image from shared pref
+        val sharedPreferences = requireContext().getSharedPreferences("sharedpref", Context.MODE_PRIVATE)
+        val base64Image = sharedPreferences.getString("imageKey", "")
+
+        // Convert the base64-encoded string to a Bitmap
+        val decodedByteArray = Base64.decode(base64Image, Base64.DEFAULT)
+        val bitmap = BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.size)
+
+        // Set the retrieved bitmap as the image for the avatarImage ImageView
+        avatarImage.setImageBitmap(bitmap)
     }
 
     fun getAchContent(): List<Achievement> {
