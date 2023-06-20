@@ -533,32 +533,20 @@ class WordAssociation : AppCompatActivity() {
     private fun selectAnswer() {
 
         //create a listener for all of the cards and change the color of the card to purple
-        choiceOne.setOnClickListener {
-            clear()
-            choiceOne.setCardBackgroundColor(Color.parseColor("#E9DDFF"))
-            tempAnswer = choices[0].text
+        val choiceButtons = arrayOf(choiceOne, choiceTwo, choiceThree, choiceFour)
+        val currentNightMode = resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK
+        for (i in choiceButtons.indices) {
+            choiceButtons[i].setOnClickListener {
+                clear()
+                if (currentNightMode == android.content.res.Configuration.UI_MODE_NIGHT_YES) {
+                    choiceButtons[i].setCardBackgroundColor(Color.parseColor("#4F378A"))
+                }else {
+                    choiceButtons[i].setCardBackgroundColor(Color.parseColor("#E9DDFF"))
+                }
+                tempAnswer = choices[i].text
 
-        }
 
-        choiceTwo.setOnClickListener {
-            clear()
-            choiceTwo.setCardBackgroundColor(Color.parseColor("#E9DDFF"))
-            tempAnswer = choices[1].text
-
-        }
-
-        choiceThree.setOnClickListener {
-            clear()
-            choiceThree.setCardBackgroundColor(Color.parseColor("#E9DDFF"))
-            tempAnswer = choices[2].text
-
-        }
-
-        choiceFour.setOnClickListener {
-            clear()
-            choiceFour.setCardBackgroundColor(Color.parseColor("#E9DDFF"))
-            tempAnswer = choices[3].text
-
+            }
         }
 
 
