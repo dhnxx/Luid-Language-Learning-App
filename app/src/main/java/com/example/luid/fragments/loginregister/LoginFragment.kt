@@ -49,7 +49,6 @@ class LoginFragment : Fragment() {
         val registerButton = view.findViewById<TextView>(R.id.registerRedirectText)
         val forgot = view.findViewById<TextView>(R.id.forgot_password)
         val context = requireContext()
-        val databasePath = context.getDatabasePath("LuidDB.db")
 
 
         fbauth = FirebaseAuth.getInstance()
@@ -94,9 +93,6 @@ class LoginFragment : Fragment() {
 
 
         }
-
-
-
 
         loginbutton.setOnClickListener() {
             val email = etemail.text.toString()
@@ -198,11 +194,6 @@ class LoginFragment : Fragment() {
         var db = DBConnect(context).readableDatabase
         var cursor = db.rawQuery("SELECT * FROM ${DBConnect.user_records_tb}", null)
         var count = cursor.count
-
-        println("Count: $count \uD83D\uDCB0\uD83D\uDCB0\uD83D\uDCB0\uD83D\uDCB0\uD83D\uDCB0\uD83D\uDCB0 ")
-
-
-
 
         if (!databasePath.exists() || count == 0) {
             // Database file doesn't exist, so copy the template to the user's phone
