@@ -31,10 +31,12 @@ WIP
 
 ## License
 
-This project is licensed under the [License Name] - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the [MIT LICENSE] - see the [LICENSE](LICENSE) file for details.
 
 ## Author/s
 
 Contributor/s names and contact info:
 
 Dhanco Mendoza [@dhnxx](https://github.com/dhnxx)
+
+WIP
