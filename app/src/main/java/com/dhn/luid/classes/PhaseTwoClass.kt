@@ -1,11 +1,7 @@
-package com.example.luid.classes
+package com.dhn.luid.classes
 
-import android.content.ContentValues
 import android.content.Context
-import android.database.Cursor
-import androidx.core.util.lruCache
-import com.example.luid.database.DBConnect
-import kotlinx.coroutines.currentCoroutineContext
+import com.dhn.luid.database.DBConnect
 
 class PhaseTwoClass {
     fun getTagalog(context: Context, level : Int, phase : Int) : ArrayList<String>{

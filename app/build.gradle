@@ -6,18 +6,27 @@ plugins {
 }
 
 android {
-    namespace 'com.example.luid'
-    compileSdk 33
+    namespace 'com.dhn.luid'
+    compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.luid"
-        minSdk 24
-        targetSdk 33
-        versionCode 1
+        applicationId "com.dhn.luid"
+        minSdk 34
+        targetSdk 34
+        versionCode 2
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+    }
+
+    signingConfigs {
+        release {
+            keyAlias 'key0'
+            keyPassword 'Lolfacebook123!'
+            storeFile file('D:\\Files\\dev\\luid-key\\key.jks')
+            storePassword 'Lolfacebook123!'
+        }
     }
 
     buildTypes {

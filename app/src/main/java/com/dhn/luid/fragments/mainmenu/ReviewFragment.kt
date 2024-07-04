@@ -1,4 +1,4 @@
-package com.example.luid.fragments.mainmenu
+package com.dhn.luid.fragments.mainmenu
 
 import android.database.Cursor
 import android.os.Bundle
@@ -9,20 +9,19 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.luid.R
-import com.example.luid.adapters.ParentPhaseAdapter
-import com.example.luid.adapters.ReviewAdapter
-import com.example.luid.adapters.LevelSwitchStateViewModel
-import com.example.luid.classes.ParentPhase
-import com.example.luid.classes.Review
-import com.example.luid.database.DBConnect
-import com.example.luid.database.DBConnect.Companion.diffs
-import com.example.luid.database.DBConnect.Companion.engWord
-import com.example.luid.database.DBConnect.Companion.kapWord
-import com.example.luid.database.DBConnect.Companion.level
-import com.example.luid.database.DBConnect.Companion.questions_tb
-import com.example.luid.database.DBConnect.Companion.tagWord
-import com.example.luid.database.DBConnect.Companion.vsbty
+import com.dhn.luid.R
+import com.dhn.luid.adapters.ReviewAdapter
+import com.dhn.luid.adapters.LevelSwitchStateViewModel
+import com.dhn.luid.classes.ParentPhase
+import com.dhn.luid.classes.Review
+import com.dhn.luid.database.DBConnect
+import com.dhn.luid.database.DBConnect.Companion.diffs
+import com.dhn.luid.database.DBConnect.Companion.engWord
+import com.dhn.luid.database.DBConnect.Companion.kapWord
+import com.dhn.luid.database.DBConnect.Companion.level
+import com.dhn.luid.database.DBConnect.Companion.questions_tb
+import com.dhn.luid.database.DBConnect.Companion.tagWord
+import com.dhn.luid.database.DBConnect.Companion.vsbty
 
 
 // import com.example.luid.database.DBHelper

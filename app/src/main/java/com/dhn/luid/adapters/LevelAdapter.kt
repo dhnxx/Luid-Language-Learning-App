@@ -1,4 +1,4 @@
-package com.example.luid.adapters
+package com.dhn.luid.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,10 +9,10 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.luid.classes.LevelSelection
-import com.example.luid.R
-import com.example.luid.classes.SMLeitner
-import com.example.luid.database.DBConnect
+import com.dhn.luid.classes.LevelSelection
+import com.dhn.luid.R
+import com.dhn.luid.classes.SMLeitner
+import com.dhn.luid.database.DBConnect
 
 
 class LevelAdapter(private val levelList: List<LevelSelection>, private val contextExt: Context) :

@@ -1,4 +1,4 @@
-package com.example.luid.fragments.mainmenu
+package com.dhn.luid.fragments.mainmenu
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -19,18 +19,15 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.example.luid.R
-import com.example.luid.database.DatabaseBackup
+import com.dhn.luid.R
+import com.dhn.luid.database.DatabaseBackup
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import java.io.File
-import java.io.FileOutputStream
 import android.net.Uri
 import android.provider.MediaStore
 import android.widget.ImageView
-import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import java.io.ByteArrayOutputStream
 import java.util.*
 import android.util.Base64

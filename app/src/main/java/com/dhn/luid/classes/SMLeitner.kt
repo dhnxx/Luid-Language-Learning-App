@@ -1,13 +1,13 @@
-package com.example.luid.classes
+package com.dhn.luid.classes
 
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import com.example.luid.database.DBConnect
-import com.example.luid.database.DBConnect.Companion.questions_tb
-import com.example.luid.database.DBConnect.Companion.temp_qstion
-import com.example.luid.database.DBConnect.Companion.user_records_tb
+import com.dhn.luid.database.DBConnect
+import com.dhn.luid.database.DBConnect.Companion.questions_tb
+import com.dhn.luid.database.DBConnect.Companion.temp_qstion
+import com.dhn.luid.database.DBConnect.Companion.user_records_tb
 import java.lang.IndexOutOfBoundsException
 import java.util.Calendar
 

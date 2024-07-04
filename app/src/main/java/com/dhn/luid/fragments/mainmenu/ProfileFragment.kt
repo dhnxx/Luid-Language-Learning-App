@@ -1,4 +1,4 @@
-package com.example.luid.fragments.mainmenu
+package com.dhn.luid.fragments.mainmenu
 
 import android.content.Context
 import android.database.Cursor
@@ -13,14 +13,11 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.cardview.widget.CardView
-import com.example.luid.R
-import com.example.luid.classes.Achievement
-import com.example.luid.database.DBConnect
+import com.dhn.luid.R
+import com.dhn.luid.classes.Achievement
+import com.dhn.luid.database.DBConnect
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import java.io.File.separator
 
 class ProfileFragment : Fragment() {
     private lateinit var name: TextView

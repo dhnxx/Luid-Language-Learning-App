@@ -1,4 +1,4 @@
-package com.example.luid.adapters
+package com.dhn.luid.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,10 +6,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.luid.R
-import com.example.luid.classes.StoryClass
+import com.dhn.luid.R
+import com.dhn.luid.classes.StoryClass
 
 class StoryAdapter(private val storyList: List<StoryClass>) :
     RecyclerView.Adapter<StoryAdapter.ViewHolder>() {

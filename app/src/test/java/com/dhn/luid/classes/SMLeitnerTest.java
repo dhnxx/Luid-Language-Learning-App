@@ -1,6 +1,5 @@
-package com.example.luid.classes;
+package com.dhn.luid.classes;
 
-import static org.junit.Assert.*;
 public class SMLeitnerTest {
 
 }

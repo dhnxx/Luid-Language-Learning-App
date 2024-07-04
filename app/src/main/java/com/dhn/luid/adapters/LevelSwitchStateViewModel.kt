@@ -1,4 +1,4 @@
-package com.example.luid.adapters
+package com.dhn.luid.adapters
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

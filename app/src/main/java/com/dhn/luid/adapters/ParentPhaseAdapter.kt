@@ -1,7 +1,6 @@
-package com.example.luid.adapters
+package com.dhn.luid.adapters
 
 import android.database.sqlite.SQLiteDatabase
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +9,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.luid.R
-import com.example.luid.classes.ParentPhase
-import com.example.luid.classes.SMLeitner
+import com.dhn.luid.R
+import com.dhn.luid.classes.ParentPhase
+import com.dhn.luid.classes.SMLeitner
 
 
 class ParentPhaseAdapter(

@@ -1,4 +1,4 @@
-package com.example.luid.fragments.mainmenu
+package com.dhn.luid.fragments.mainmenu
 
 import android.content.Context
 import android.content.Intent
@@ -8,16 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import com.example.luid.R
+import com.dhn.luid.R
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.luid.adapters.StoryAdapter
-import com.example.luid.classes.SMLeitner
-import com.example.luid.classes.StoryClass
-import com.example.luid.fragments.gamemodes.WordAssociation
-import com.example.luid.fragments.gamemodes.*
-import java.net.SocketTimeoutException
+import com.dhn.luid.adapters.StoryAdapter
+import com.dhn.luid.classes.SMLeitner
+import com.dhn.luid.classes.StoryClass
+import com.dhn.luid.fragments.gamemodes.WordAssociation
+import com.dhn.luid.fragments.gamemodes.*
 
 
 class StoryFragment : Fragment() {

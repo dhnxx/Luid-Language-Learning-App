@@ -1,4 +1,4 @@
-package com.example.luid
+package com.dhn.luid
 
 import org.junit.Test
 

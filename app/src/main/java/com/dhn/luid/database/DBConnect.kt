@@ -1,11 +1,8 @@
-package com.example.luid.database
+package com.dhn.luid.database
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import androidx.test.core.app.ApplicationProvider
-import java.io.FileOutputStream
-import java.io.IOException
 
 class DBConnect(context: Context?) : SQLiteOpenHelper(context, DB_NAME, null, DB_V) {
 

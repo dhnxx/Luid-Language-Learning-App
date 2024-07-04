@@ -1,4 +1,4 @@
-package com.example.luid.fragments.loginregister
+package com.dhn.luid.fragments.loginregister
 
 import android.app.AlertDialog
 import android.content.Context
@@ -13,15 +13,15 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.example.luid.R
-import com.example.luid.fragments.mainmenu.MainActivity
+import com.dhn.luid.R
+import com.dhn.luid.fragments.mainmenu.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import android.content.SharedPreferences
 import android.graphics.drawable.ColorDrawable
 import android.util.Patterns
-import com.example.luid.classes.User
-import com.example.luid.database.DBConnect
-import com.example.luid.database.DatabaseBackup
+import com.dhn.luid.classes.User
+import com.dhn.luid.database.DBConnect
+import com.dhn.luid.database.DatabaseBackup
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference

@@ -1,16 +1,8 @@
-package com.example.luid.database
-import android.app.ProgressDialog
+package com.dhn.luid.database
 import android.content.Context
 import android.net.Uri
-import android.os.AsyncTask
-import android.util.Log
-import android.widget.Toast
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.storage.FirebaseStorage
 import java.io.File
-import java.io.FileInputStream
-import java.io.IOException
 
 class DatabaseBackup() {
 

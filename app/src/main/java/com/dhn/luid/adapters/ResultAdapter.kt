@@ -1,4 +1,4 @@
-package com.example.luid.adapters
+package com.dhn.luid.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.luid.R
-import com.example.luid.classes.ResultScreen
+import com.dhn.luid.R
+import com.dhn.luid.classes.ResultScreen
 
 class ResultAdapter(private val resultList: ArrayList<ResultScreen>) :
     RecyclerView.Adapter<ResultAdapter.ResultViewHolder>() {

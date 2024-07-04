@@ -1,4 +1,4 @@
-package com.example.luid.fragments.gamemodes
+package com.dhn.luid.fragments.gamemodes
 
 import android.app.AlertDialog
 import android.content.ContentValues
@@ -18,13 +18,13 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
-import com.example.luid.R
-import com.example.luid.classes.PhaseTwoClass
-import com.example.luid.classes.SMLeitner
-import com.example.luid.classes.SentenceFragment
-import com.example.luid.database.DBConnect
-import com.example.luid.database.DBConnect.Companion.user_records_tb
-import com.example.luid.fragments.mainmenu.MainActivity
+import com.dhn.luid.R
+import com.dhn.luid.classes.PhaseTwoClass
+import com.dhn.luid.classes.SMLeitner
+import com.dhn.luid.classes.SentenceFragment
+import com.dhn.luid.database.DBConnect
+import com.dhn.luid.database.DBConnect.Companion.user_records_tb
+import com.dhn.luid.fragments.mainmenu.MainActivity
 
 class SentenceConstruction : AppCompatActivity() {
     private lateinit var questionList: ArrayList<SentenceFragment>
