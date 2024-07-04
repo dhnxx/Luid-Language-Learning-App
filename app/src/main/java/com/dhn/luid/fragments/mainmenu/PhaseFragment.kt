@@ -1,4 +1,4 @@
-package com.example.luid.fragments.mainmenu
+package com.dhn.luid.fragments.mainmenu
 
 import TimerBroadcastReceiver
 import android.content.ContentValues
@@ -17,19 +17,16 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.luid.R
-import com.example.luid.adapters.LevelSwitchStateViewModel
-import com.example.luid.adapters.*
-import com.example.luid.classes.ChildPhase
-import com.example.luid.classes.ParentPhase
-import com.example.luid.classes.SMLeitner
-import com.example.luid.database.DBConnect
+import com.dhn.luid.R
+import com.dhn.luid.adapters.LevelSwitchStateViewModel
+import com.dhn.luid.adapters.*
+import com.dhn.luid.classes.ChildPhase
+import com.dhn.luid.classes.ParentPhase
+import com.dhn.luid.classes.SMLeitner
+import com.dhn.luid.database.DBConnect
 import com.google.android.material.snackbar.Snackbar
-import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.navigation.findNavController
-import com.example.luid.database.DBConnect.Companion.user_records_tb
+import com.dhn.luid.database.DBConnect.Companion.user_records_tb
 import android.app.AlarmManager
 import android.app.PendingIntent
 

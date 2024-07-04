@@ -1,4 +1,4 @@
-package com.example.luid.classes
+package com.dhn.luid.classes
 
 data class WordAssociationClass(
     val id : Int,

@@ -1,10 +1,10 @@
-package com.example.luid.fragments.loginregister
+package com.dhn.luid.fragments.loginregister
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import com.example.luid.R
+import com.dhn.luid.R
 
 class LoginRegister : AppCompatActivity() {
 

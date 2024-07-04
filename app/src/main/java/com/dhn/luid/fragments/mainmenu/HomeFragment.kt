@@ -1,26 +1,21 @@
-package com.example.luid.fragments.mainmenu
+package com.dhn.luid.fragments.mainmenu
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.example.luid.R
-import com.example.luid.adapters.*
-import com.example.luid.classes.LevelSelection
-import com.example.luid.database.DBConnect
-import com.example.luid.database.DBConnect.Companion.achievements_tb
-import com.example.luid.database.DBConnect.Companion.questions_tb
-import com.example.luid.database.DatabaseBackup
-import com.google.firebase.auth.FirebaseAuth
+import com.dhn.luid.R
+import com.dhn.luid.adapters.*
+import com.dhn.luid.classes.LevelSelection
+import com.dhn.luid.database.DBConnect
+import com.dhn.luid.database.DBConnect.Companion.achievements_tb
 
 
 class HomeFragment : Fragment() {

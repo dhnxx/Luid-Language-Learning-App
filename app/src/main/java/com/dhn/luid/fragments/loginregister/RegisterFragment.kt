@@ -1,4 +1,4 @@
-package com.example.luid.fragments.loginregister
+package com.dhn.luid.fragments.loginregister
 
 import android.content.Context
 import android.content.Intent
@@ -13,12 +13,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
-import com.example.luid.R
-import com.example.luid.classes.User
-import com.example.luid.database.DBConnect
-import com.example.luid.database.DBConnect.Companion.user_records_tb
-import com.example.luid.database.DatabaseBackup
-import com.example.luid.databinding.ActivityLoginRegisterBinding
+import com.dhn.luid.R
+import com.dhn.luid.classes.User
+import com.dhn.luid.database.DBConnect
+import com.dhn.luid.database.DBConnect.Companion.user_records_tb
+import com.dhn.luid.database.DatabaseBackup
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase

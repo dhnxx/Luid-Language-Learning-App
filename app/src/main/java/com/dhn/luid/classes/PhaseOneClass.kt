@@ -1,4 +1,4 @@
-package com.example.luid.classes
+package com.dhn.luid.classes
 
 import android.database.Cursor
 

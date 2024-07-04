@@ -1,4 +1,4 @@
-package com.example.luid.adapters
+package com.dhn.luid.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,9 +7,8 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.luid.R
-import com.example.luid.classes.ChildPhase
-import org.w3c.dom.Text
+import com.dhn.luid.R
+import com.dhn.luid.classes.ChildPhase
 
 class ChildPhaseAdapter(private val childList: List<ChildPhase>): RecyclerView.Adapter<ChildPhaseAdapter.ChildViewHolder>() {
 

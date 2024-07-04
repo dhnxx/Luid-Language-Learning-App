@@ -1,4 +1,4 @@
-package com.example.luid.fragments.gamemodes
+package com.dhn.luid.fragments.gamemodes
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
@@ -8,8 +8,6 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.database.Cursor
 import android.graphics.Color
-import android.graphics.drawable.Drawable
-import android.media.Image
 import android.os.Bundle
 import android.os.Handler
 import android.os.SystemClock
@@ -20,14 +18,12 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import com.example.luid.R
-import com.example.luid.classes.SMLeitner
-import com.example.luid.classes.WordAssociationClass
-import com.example.luid.database.DBConnect
-import com.example.luid.database.DBConnect.Companion.temp_userrec
-import com.example.luid.database.DBConnect.Companion.user_records_tb
-import com.example.luid.fragments.mainmenu.MainActivity
+import com.dhn.luid.R
+import com.dhn.luid.classes.SMLeitner
+import com.dhn.luid.classes.WordAssociationClass
+import com.dhn.luid.database.DBConnect
+import com.dhn.luid.database.DBConnect.Companion.user_records_tb
+import com.dhn.luid.fragments.mainmenu.MainActivity
 import com.google.android.material.card.MaterialCardView
 
 

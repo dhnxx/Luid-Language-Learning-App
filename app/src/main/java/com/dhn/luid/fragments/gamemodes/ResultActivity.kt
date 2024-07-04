@@ -1,4 +1,4 @@
-package com.example.luid.fragments.gamemodes
+package com.dhn.luid.fragments.gamemodes
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
@@ -10,18 +10,17 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.luid.R
-import com.example.luid.adapters.ResultAdapter
-import com.example.luid.classes.ResultScreen
-import com.example.luid.classes.SMLeitner
-import com.example.luid.database.DBConnect
-import com.example.luid.database.DBConnect.Companion.questions_tb
-import com.example.luid.database.DBConnect.Companion.temp_qstion
-import com.example.luid.database.DBConnect.Companion.user_records_tb
-import com.example.luid.database.DatabaseBackup
-import com.example.luid.fragments.mainmenu.MainActivity
+import com.dhn.luid.R
+import com.dhn.luid.adapters.ResultAdapter
+import com.dhn.luid.classes.ResultScreen
+import com.dhn.luid.classes.SMLeitner
+import com.dhn.luid.database.DBConnect
+import com.dhn.luid.database.DBConnect.Companion.questions_tb
+import com.dhn.luid.database.DBConnect.Companion.temp_qstion
+import com.dhn.luid.database.DBConnect.Companion.user_records_tb
+import com.dhn.luid.database.DatabaseBackup
+import com.dhn.luid.fragments.mainmenu.MainActivity
 import com.google.firebase.auth.FirebaseAuth
-import org.w3c.dom.Text
 
 
 class ResultActivity : AppCompatActivity() {

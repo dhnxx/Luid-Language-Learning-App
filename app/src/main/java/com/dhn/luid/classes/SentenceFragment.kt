@@ -1,4 +1,4 @@
-package com.example.luid.classes
+package com.dhn.luid.classes
 
 data class SentenceFragment(val id : Int, val question: String, var sentence: String, val sentenceImage: Int) {
 
